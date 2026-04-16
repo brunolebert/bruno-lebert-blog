@@ -37,6 +37,32 @@
       color: white;
       padding: 84px 0 96px;
     }
+        .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 420px);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      min-width: 0;
+    }
+
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-photo {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+      background: rgba(255,255,255,0.04);
+    }
     .pill {
       display: inline-block;
       border: 1px solid rgba(255,255,255,0.2);
@@ -178,28 +204,41 @@
       font-size: 14px;
       text-align: center;
     }
-    @media (max-width: 900px) {
+        @media (max-width: 900px) {
       .grid-3, .grid-2 { grid-template-columns: 1fr; }
       .hero { padding: 64px 0 72px; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-copy { order: 2; }
+      .hero-photo-wrap { order: 1; }
       .soft-box, .cta, .card { padding: 24px; }
     }
-  </style>
-</head>
-<body>
   <header class="hero">
-    <div class="container">
-      <span class="pill">Marseille • Immobilier • Cadrage • Orientation</span>
-      <h1>Bruno Lebert</h1>
-      <p class="hero-subtitle">Interlocuteur de confiance à Marseille pour clarifier un projet immobilier avant décision.</p>
-      <p class="hero-text">J’interviens en amont pour lire une situation, cadrer un achat, une vente ou une estimation, puis orienter vers le bon relais opérationnel si nécessaire. Mon approche repose sur l’ancrage local, la méthode, la clarté et la qualité d’exécution.</p>
-      <div class="tags">
-        <span class="tag">Achat</span>
-        <span class="tag">Vente</span>
-        <span class="tag">Estimation</span>
-        <span class="tag">Arbitrage</span>
-        <span class="tag">Cadrage</span>
-        <span class="tag">Orientation</span>
+        <div class="container">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="pill">Marseille • Immobilier • Cadrage • Orientation</span>
+          <h1>Bruno Lebert</h1>
+          <p class="hero-subtitle">Interlocuteur de confiance à Marseille pour clarifier un projet immobilier avant décision.</p>
+          <p class="hero-text">J’interviens en amont pour lire une situation, cadrer un achat, une vente ou une estimation, puis orienter vers le bon relais opérationnel si nécessaire. Mon approche repose sur l’ancrage local, la méthode, la clarté et la qualité d’exécution.</p>
+          <div class="tags">
+            <span class="tag">Achat</span>
+            <span class="tag">Vente</span>
+            <span class="tag">Estimation</span>
+            <span class="tag">Arbitrage</span>
+            <span class="tag">Cadrage</span>
+            <span class="tag">Orientation</span>
+          </div>
+        </div>
+
+        <div class="hero-photo-wrap">
+          <img
+            src="bruno-lebert-conseil-immobilier-marseille.png"
+            alt="Portrait de Bruno Lebert, conseil immobilier à Marseille"
+            class="hero-photo"
+          />
+        </div>
       </div>
+    </div>
     </div>
   </header>
 
