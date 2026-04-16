@@ -103,6 +103,27 @@
     .contact-button:hover {
       background: #f8fafc;
     }
+        .bottom-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .secondary-button {
+      display: inline-block;
+      padding: 14px 22px;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #475569;
+      font-weight: bold;
+      background: #ffffff;
+    }
+
+    .secondary-button:hover {
+      background: #f8fafc;
+    }
 
     @media (max-width: 640px) {
       h1 {
@@ -207,7 +228,10 @@
         Pour un achat, une vente, une estimation ou un arbitrage dans le 5e à Marseille,
         un premier échange peut aider à relire la situation avec plus de finesse.
       </p>
-      <a href="mailto:lebertbruno@gmail.com" class="contact-button">Me contacter</a>
+            <div class="bottom-links">
+        <a href="mailto:lebertbruno@gmail.com" class="contact-button">Me contacter</a>
+        <a href="index.html" class="secondary-button">Retour à l’accueil</a>
+      </div>
     </div>
   </div>
 </body>
