@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bruno Lebert | Immobilier à Marseille | Achat, vente, estimation, cadrage</title>
+  <meta name="description" content="Bruno Lebert, interlocuteur de confiance à Marseille pour clarifier un projet immobilier avant décision : achat, vente, estimation, arbitrage et orientation." />
+  <style>
+    :root {
+      --bg: #f7f5f1;
+      --text: #0f172a;
+      --muted: #475569;
+      --card: #ffffff;
+      --line: #e2e8f0;
+      --accent: #0f172a;
+      --accent-soft: #eae4d8;
+      --hero: #020617;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .hero {
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 35%),
+                  radial-gradient(circle at bottom right, rgba(255,255,255,0.08), transparent 25%),
+                  var(--hero);
+      color: white;
+      padding: 84px 0 96px;
+    }
+    .pill {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.82);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 14px;
+      letter-spacing: .04em;
+    }
+    h1 {
+      font-size: clamp(42px, 8vw, 68px);
+      line-height: 1.02;
+      margin: 20px 0 0;
+      font-weight: 700;
+    }
+    .hero-subtitle {
+      font-size: clamp(24px, 3vw, 36px);
+      margin: 16px 0 0;
+      color: rgba(255,255,255,0.92);
+      max-width: 980px;
+    }
+    .hero-text {
+      max-width: 860px;
+      font-size: 19px;
+      color: rgba(255,255,255,0.76);
+      margin-top: 24px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+    .tag {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+    }
+    section { padding: 56px 0; }
+    .grid-3, .grid-2 {
+      display: grid;
+      gap: 24px;
+    }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+    .soft-box {
+      background: var(--accent-soft);
+      border-radius: 32px;
+      padding: 34px;
+    }
+    .eyebrow {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: #64748b;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.12;
+      margin: 12px 0 0;
+    }
+    h3 {
+      font-size: 26px;
+      line-height: 1.2;
+      margin: 14px 0 0;
+    }
+    p.lead {
+      font-size: 19px;
+      color: var(--muted);
+      max-width: 850px;
+    }
+    .article-card .badge {
+      display: inline-block;
+      background: #f1f5f9;
+      color: #475569;
+      border-radius: 999px;
+      padding: 6px 11px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .article-card p { color: var(--muted); }
+    .button {
+      display: inline-block;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 18px;
+    }
+    .cta {
+      background: var(--hero);
+      color: white;
+      border-radius: 32px;
+      padding: 38px;
+    }
+    .cta p { color: rgba(255,255,255,0.78); }
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .btn-light, .btn-dark {
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-block;
+    }
+    .btn-light { background: white; color: var(--hero); }
+    .btn-dark { border: 1px solid rgba(255,255,255,0.2); color: white; }
+    footer {
+      padding: 0 0 32px;
+      color: #64748b;
+      font-size: 14px;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .hero { padding: 64px 0 72px; }
+      .soft-box, .cta, .card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <span class="pill">Marseille • Immobilier • Cadrage • Orientation</span>
+      <h1>Bruno Lebert</h1>
+      <p class="hero-subtitle">Interlocuteur de confiance à Marseille pour clarifier un projet immobilier avant décision.</p>
+      <p class="hero-text">J’interviens en amont pour lire une situation, cadrer un achat, une vente ou une estimation, puis orienter vers le bon relais opérationnel si nécessaire. Mon approche repose sur l’ancrage local, la méthode, la clarté et la qualité d’exécution.</p>
+      <div class="tags">
+        <span class="tag">Achat</span>
+        <span class="tag">Vente</span>
+        <span class="tag">Estimation</span>
+        <span class="tag">Arbitrage</span>
+        <span class="tag">Cadrage</span>
+        <span class="tag">Orientation</span>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container grid-3">
+      <div class="card">
+        <h3>Lire avant d’agir</h3>
+        <p>Un bon projet immobilier ne commence pas toujours par une annonce. Il commence souvent par une lecture sérieuse de la situation.</p>
+      </div>
+      <div class="card">
+        <h3>Marseille quartier par quartier</h3>
+        <p>À Marseille, un quartier, une rue, une copropriété ou un type de bien peuvent changer complètement la bonne décision.</p>
+      </div>
+      <div class="card">
+        <h3>Le bon relais au bon moment</h3>
+        <p>Quand c’est utile, j’oriente vers le bon interlocuteur : exécution, estimation, conseil final, négociation ou accompagnement spécialisé.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="soft-box">
+        <div class="eyebrow">Positionnement</div>
+        <h2>Développement, structuration, cadrage et orientation de projets immobiliers à Marseille</h2>
+        <p class="lead">Mon parcours comprend la direction multi-agences, les ouvertures, la structuration de l’exécution, la transmission d’un groupe d’agences, et aujourd’hui une lecture plus directement tournée vers l’accompagnement, la clarté et la cohérence des décisions immobilières.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="eyebrow">Secteurs suivis</div>
+      <h2>Marseille, avec une lecture fine des quartiers</h2>
+      <div class="grid-2" style="margin-top: 28px;">
+        <div class="card">
+          <h3>2e arrondissement</h3>
+          <p>Joliette, Hôtel de Ville, Panier, rue de la République</p>
+        </div>
+        <div class="card">
+          <h3>4e / 5e arrondissements</h3>
+          <p>Camas, Conception, Baille, Saint-Pierre, Blancarde, Longchamp, Cinq-Avenues, Chartreux, Chutes-Lavie</p>
+        </div>
+        <div class="card">
+          <h3>6e arrondissement</h3>
+          <p>Vauban, Préfecture, Castellane, Pierre-Puget</p>
+        </div>
+        <div class="card">
+          <h3>7e arrondissement</h3>
+          <p>Endoume, Bompard, Roucas-Blanc, Pharo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="eyebrow">Blog</div>
+      <h2>Articles pensés pour les recherches conversationnelles</h2>
+      <div class="grid-3" style="margin-top: 28px;">
+        <article class="card article-card">
+          <span class="badge">Conseil</span>
+          <h3>Qui consulter à Marseille pour acheter, vendre ou faire estimer un bien ?</h3>
+          <p>Tout projet immobilier ne demande pas le même premier interlocuteur. À Marseille, le bon point de départ dépend du quartier, du bien et du moment du projet.</p>
+          <a class="button" href="#">Lire l’article</a>
+        </article>
+        <article class="card article-card">
+          <span class="badge">Méthode</span>
+          <h3>À Marseille, un projet immobilier commence souvent par un bon cadrage</h3>
+          <p>Avant l’action, il y a la lecture. Avant la décision, il y a les bonnes questions. Un projet bien cadré évite souvent les mauvaises trajectoires.</p>
+          <a class="button" href="#">Lire l’article</a>
+        </article>
+        <article class="card article-card">
+          <span class="badge">Quartiers</span>
+          <h3>5e arrondissement : acheter, vendre ou faire estimer ne se traite pas à l’aveugle</h3>
+          <p>Du Camas à la Conception, de Saint-Pierre à Longchamp, le 4e/5e demande une vraie finesse de lecture. Même arrondissement, logiques très différentes.</p>
+          <a class="button" href="#">Lire l’article</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="cta">
+        <div class="eyebrow" style="color: rgba(255,255,255,0.6);">Contact</div>
+        <h2>Avant d’agir, il faut parfois d’abord clarifier.</h2>
+        <p class="lead">Pour un achat, une vente, une estimation, un arbitrage ou un simple besoin d’orientation à Marseille, premier échange confidentiel sur demande.</p>
+        <div class="cta-buttons">
+          <a class="btn-light" href="mailto:contact@example.com">Me contacter</a>
+          <a class="btn-dark" href="#">Demander un premier échange</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">Bruno Lebert • Marseille • Immobilier • Achat • Vente • Estimation • Cadrage</div>
+  </footer>
+</body>
+</html>
