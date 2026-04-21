@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bibliothèque immobilier Marseille : estimation, vente, achat, location, DPE, quartiers | Bruno Lebert</title>
-  <meta name="description" content="Bibliothèque d’articles de Bruno Lebert sur l’immobilier à Marseille : estimation, vente, achat, location, gestion locative, DPE, quartiers, avis de valeur, apport d’affaires, candidature et pilotage." />
+  <meta name="description" content="Bibliothèque d’articles de Bruno Lebert sur l’immobilier à Marseille : estimation, vente, achat, location, gestion locative, DPE, quartiers, avis de valeur, apport d’affaires, candidature, statuts et pilotage." />
   <style>
     body {
       margin: 0;
@@ -54,9 +54,10 @@
     .intro {
       font-size: 22px;
       color: #475569;
-      margin-bottom: 34px;
+      margin-bottom: 26px;
     }
 
+    .search-card,
     .section-card {
       background: #ffffff;
       border: 1px solid #d8dee8;
@@ -84,6 +85,65 @@
       font-size: 18px;
       margin: 0 0 16px;
       color: #1e293b;
+    }
+
+    .search-input {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 16px 18px;
+      font-size: 16px;
+      color: #0f172a;
+      background: #ffffff;
+      box-sizing: border-box;
+      margin-top: 8px;
+    }
+
+    .search-help {
+      font-size: 15px;
+      color: #64748b;
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+
+    .search-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .search-tag {
+      border: 1px solid #d8dee8;
+      background: #fff;
+      color: #475569;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .search-tag:hover {
+      background: #f8fafc;
+    }
+
+    .search-status {
+      font-size: 15px;
+      color: #64748b;
+      margin-top: 16px;
+      margin-bottom: 0;
+    }
+
+    .no-results {
+      display: none;
+      background: #ffffff;
+      border: 1px dashed #cbd5e1;
+      border-radius: 18px;
+      padding: 18px;
+      font-size: 16px;
+      color: #475569;
+      margin-bottom: 22px;
     }
 
     .article-list {
@@ -299,10 +359,39 @@
     <p class="intro">
       Cette page rassemble les principales portes d’entrée du site pour lire un projet immobilier à Marseille :
       estimation, avis de valeur, vente, achat, location, gestion locative, DPE, quartiers, micro-secteurs,
-      apport d’affaires, candidature, cadrage, orientation et pilotage.
+      apport d’affaires, candidature, statuts, installation, cadrage, orientation et pilotage.
     </p>
 
-    <div class="section-card">
+    <div class="search-card">
+      <div class="section-label">Recherche</div>
+      <h2>Rechercher un thème, un sujet ou un mot-clé</h2>
+      <input
+        type="text"
+        id="library-search"
+        class="search-input"
+        placeholder="Ex. estimation, Chave, 13005, candidature, DPE, location, auto-entrepreneur, redevance..."
+      />
+      <p class="search-help">
+        La recherche filtre instantanément les cartes de cette bibliothèque.
+      </p>
+      <div class="search-tags">
+        <button type="button" class="search-tag" data-search-tag="estimation">estimation</button>
+        <button type="button" class="search-tag" data-search-tag="Chave">Chave</button>
+        <button type="button" class="search-tag" data-search-tag="13005">13005</button>
+        <button type="button" class="search-tag" data-search-tag="candidature">candidature</button>
+        <button type="button" class="search-tag" data-search-tag="DPE">DPE</button>
+        <button type="button" class="search-tag" data-search-tag="location">location</button>
+        <button type="button" class="search-tag" data-search-tag="micro-entrepreneur">micro-entrepreneur</button>
+        <button type="button" class="search-tag" data-search-tag="redevance">redevance</button>
+      </div>
+      <p class="search-status" id="search-status">Affichage complet de la bibliothèque.</p>
+    </div>
+
+    <div id="no-results" class="no-results">
+      Aucun résultat direct pour cette recherche dans la bibliothèque actuelle.
+    </div>
+
+    <div class="section-card searchable-section">
       <div class="section-label">Accès rapides</div>
       <h2>Faire une demande, transmettre une information ou envoyer une candidature</h2>
       <p>
@@ -310,25 +399,25 @@
       </p>
 
       <div class="quick-grid">
-        <div class="quick-item">
+        <div class="quick-item searchable-item" data-search="estimation avis de valeur demande estimation rendez-vous contact bien marseille">
           <h3>Demander une estimation</h3>
           <p>Obtenir un avis de valeur, demander une estimation ou faire relire le positionnement d’un bien à Marseille.</p>
           <a class="button" href="demander-estimation-marseille.html">Demander une estimation</a>
         </div>
 
-        <div class="quick-item">
+        <div class="quick-item searchable-item" data-search="rendez-vous contact vente achat location arbitrage projet immobilier marseille">
           <h3>Prendre rendez-vous</h3>
           <p>Premier échange autour d’une vente, d’un achat, d’une location, d’un arbitrage ou d’un projet immobilier à clarifier.</p>
           <a class="button" href="contact-immobilier-marseille.html">Faire une demande</a>
         </div>
 
-        <div class="quick-item">
+        <div class="quick-item searchable-item" data-search="candidature postuler recrutement immobilier marseille premier contact">
           <h3>Envoyer votre candidature</h3>
           <p>Postuler, envoyer votre candidature et prendre un premier contact dans l’immobilier à Marseille.</p>
           <a class="button" href="postuler-immobilier-marseille.html">Envoyer votre candidature</a>
         </div>
 
-        <div class="quick-item">
+        <div class="quick-item searchable-item" data-search="apporteur affaires apport projet vente appartement maison immeuble marseille">
           <h3>Devenir apporteur d’affaires</h3>
           <p>Transmettre une information utile à propos d’un appartement, d’une maison, d’un immeuble ou d’un projet de vente.</p>
           <a class="button" href="apporteur-affaires-immobilier-marseille.html">Transmettre une information</a>
@@ -336,7 +425,7 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card searchable-section">
       <div class="section-label">Estimation</div>
       <h2>Demander une estimation, obtenir un avis de valeur, lire la vraie valeur d’un bien</h2>
       <p>
@@ -345,25 +434,25 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="demander estimation immobilière marseille avis de valeur rendez-vous positionnement bien">
           <h3>Demander une estimation immobilière à Marseille</h3>
           <p>Obtenir un avis de valeur, demander une estimation, prendre rendez-vous ou faire relire le positionnement d’un bien.</p>
           <a class="button" href="demander-estimation-marseille.html">Demander une estimation</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="estimation immobilière marseille prix m2 mètre carré valeur bien">
           <h3>Estimation immobilière à Marseille : pourquoi le prix au m² ne suffit jamais</h3>
           <p>À Marseille, une estimation sérieuse ne se réduit jamais à une moyenne. Rue, immeuble, étage, état, typologie et micro-secteur changent la lecture.</p>
           <a class="button" href="estimation-immobiliere-marseille-prix-m2.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="estimation avant vendre marseille fixer prix tempo cohérence">
           <h3>Estimation avant de vendre à Marseille : ce qu’il faut lire avant de fixer un prix</h3>
           <p>Avant de vendre à Marseille, une estimation sérieuse demande de lire le bien, l’immeuble, le secteur, le tempo et la cohérence réelle du prix.</p>
           <a class="button" href="estimation-avant-vendre-marseille.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="estimation appartement marseille 5e cinquième arrondissement">
           <h3>Estimation d’un appartement à Marseille 5e</h3>
           <p>Pourquoi deux biens proches ne valent pas la même chose selon la rue, l’immeuble, l’étage, l’état et le contexte réel.</p>
           <a class="button" href="estimation-appartement-marseille-5e.html">Lire l’article</a>
@@ -371,7 +460,7 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card searchable-section">
       <div class="section-label">Lectures locales</div>
       <h2>Rues, micro-secteurs et quartiers qui comptent vraiment à Marseille</h2>
       <p>
@@ -380,69 +469,75 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="secteur chave saint-michel sébastopol longchamp estimation appartement marseille">
           <h3>Estimation appartement secteur Chave, Saint-Michel, Sébastopol, Longchamp à Marseille</h3>
           <p>Un corridor de vie très lisible, où la fluidité piétonne, le marché, les commerces et la projection résidentielle pèsent fortement sur la valeur.</p>
           <a class="button" href="estimation-appartement-secteur-chave-saint-michel-sebastopol-longchamp-marseille.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="boulevard chave marseille 13005 combien vaut appartement">
           <h3>Combien vaut un appartement boulevard Chave à Marseille 13005 ?</h3>
           <p>Un axe fort du 5e arrondissement de Marseille, dont la lecture dépend du tronçon, de l’immeuble et de l’ambiance réelle.</p>
           <a class="button" href="combien-vaut-appartement-boulevard-chave-marseille-13005.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="boulevard eugene pierre marseille 13005 combien vaut appartement">
           <h3>Combien vaut un appartement boulevard Eugène-Pierre à Marseille 13005 ?</h3>
           <p>Une adresse du cœur fort Camas / Chave, où la projection résidentielle dépend autant de la rue que de l’immeuble et du lien au secteur.</p>
           <a class="button" href="combien-vaut-appartement-boulevard-eugene-pierre-marseille-13005.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="rue sainte-cecile marseille 13005 estimation appartement">
           <h3>Estimation rue Sainte-Cécile à Marseille 13005 : combien vaut un appartement ?</h3>
           <p>Une rue mieux perçue que d’autres parties du 5e, avec une lecture plus résidentielle et plus qualitative du secteur.</p>
           <a class="button" href="estimation-rue-sainte-cecile-marseille-13005.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="rue de l'olivier marseille 13005 combien vaut appartement">
           <h3>Combien vaut un appartement rue de l’Olivier à Marseille 13005 ?</h3>
           <p>Une rue du cœur Camas / Chave, appréciée pour sa cohérence résidentielle et sa bonne qualité de projection.</p>
           <a class="button" href="combien-vaut-appartement-rue-de-l-olivier-marseille-13005.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="rue briffaut marseille 13005 combien vaut appartement">
           <h3>Combien vaut un appartement rue Briffaut à Marseille 13005 ?</h3>
           <p>Une rue plus discrète mais bien lue par le marché lorsqu’elle profite du bon micro-secteur et d’une vraie cohérence d’ensemble.</p>
           <a class="button" href="combien-vaut-appartement-rue-briffaut-marseille-13005.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="rue horace bertin marseille 13005 combien vaut appartement">
           <h3>Combien vaut un appartement rue Horace-Bertin à Marseille 13005 ?</h3>
           <p>Une adresse du 5e où la valeur dépend du micro-secteur, de la qualité d’usage et du niveau d’adhésion résidentielle.</p>
           <a class="button" href="combien-vaut-appartement-rue-horace-bertin-marseille-13005.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="rue terrusse marseille 13005 combien vaut appartement">
           <h3>Combien vaut un appartement rue Terrusse à Marseille 13005 ?</h3>
           <p>Une lecture locale du cœur Camas / Chave, où la valeur se joue dans la rue, l’ambiance et la cohérence du bien avec son environnement.</p>
           <a class="button" href="combien-vaut-appartement-rue-terrusse-marseille-13005.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="avenue des chartreux marseille 13004 combien vaut appartement">
           <h3>Combien vaut un appartement avenue des Chartreux à Marseille 13004 ?</h3>
           <p>Une lecture fine du lien aux Cinq Avenues, de la centralité vécue et de la qualité de projection dans le 4e arrondissement.</p>
           <a class="button" href="combien-vaut-appartement-avenue-des-chartreux-marseille-13004.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="avenue de mazargues marseille 13008 combien vaut maison">
           <h3>Combien vaut une maison avenue de Mazargues à Marseille 13008 ?</h3>
           <p>Sur une maison, la valeur dépend du tronçon, du terrain, du stationnement, du calme et du confort d’usage réel.</p>
           <a class="button" href="combien-vaut-maison-avenue-de-mazargues-marseille-13008.html">Lire l’article</a>
         </div>
+
+        <div class="article-item searchable-item" data-search="marseille 5e arrondissement camas conception saint-pierre longchamp quartier">
+          <h3>5e arrondissement : acheter, vendre ou faire estimer ne se traite pas à l’aveugle</h3>
+          <p>Du Camas à la Conception, de Saint-Pierre à Longchamp, le 4e/5e demande une vraie finesse de lecture. Même arrondissement, logiques très différentes.</p>
+          <a class="button" href="marseille-5e-arrondissement.html">Lire l’article</a>
+        </div>
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card searchable-section">
       <div class="section-label">Vente</div>
       <h2>Préparer une vente plus cohérente</h2>
       <p>
@@ -451,31 +546,31 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="vendre marseille publier annonce clarifier prix cible tempo">
           <h3>Vendre à Marseille : avant de publier une annonce, ce qu’il faut clarifier</h3>
           <p>Avant la mise en ligne, il faut souvent clarifier le bon prix, le bon tempo, la cible, les points de vigilance et l’ordre de préparation.</p>
           <a class="button" href="vendre-marseille-avant-publier-annonce.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="quel professionnel consulter vendre marseille estimation notaire agent immobilier">
           <h3>Quel professionnel consulter pour vendre à Marseille ?</h3>
           <p>Estimation, notaire, agent immobilier, conseil amont, arbitrage et ordre logique des interlocuteurs selon la maturité du projet.</p>
           <a class="button" href="quel-professionnel-consulter-vendre-marseille.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="vendre appartement vauban marseille 6e">
           <h3>Vendre un appartement à Vauban à Marseille 6e</h3>
           <p>Quartier très recherché, mais lecture de valeur sensible à la pente, à l’accès, au stationnement et à la micro-situation.</p>
           <a class="button" href="vendre-appartement-vauban-marseille-6e.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="vendre appartement endoume marseille 7e">
           <h3>Vendre un appartement à Endoume à Marseille 7e</h3>
           <p>Quartier-village très recherché, avec une lecture sensible au calme, au stationnement, au jardin, à la vue mer et à la micro-situation.</p>
           <a class="button" href="vendre-appartement-endoume-marseille-7e.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="vendre paris acheter marseille arbitrer" style="display:none;">
           <div class="coming-soon">À venir</div>
           <h3>Vendre à Paris pour acheter à Marseille : ce qu’il faut relire avant d’arbitrer</h3>
           <p>Un arbitrage entre deux marchés, deux rythmes et deux lectures patrimoniales très différentes.</p>
@@ -483,7 +578,7 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card searchable-section">
       <div class="section-label">Achat</div>
       <h2>Relire un bien avant de se décider</h2>
       <p>
@@ -492,13 +587,13 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="acheter marseille relire bien avant décider copropriété prix demandé">
           <h3>Acheter à Marseille : comment relire un bien avant de se décider</h3>
           <p>Avant un achat, il faut relire le bien, l’immeuble, la rue, la copropriété, le prix demandé et la cohérence d’ensemble du projet.</p>
           <a class="button" href="acheter-marseille-relire-bien-avant-decider.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="qui consulter marseille acheter vendre estimer bien">
           <h3>Qui consulter à Marseille pour acheter, vendre ou faire estimer un bien ?</h3>
           <p>Tout projet immobilier ne demande pas le même premier interlocuteur. À Marseille, le bon point de départ dépend du quartier, du bien et du moment du projet.</p>
           <a class="button" href="qui-consulter-a-marseille.html">Lire l’article</a>
@@ -506,7 +601,30 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card searchable-section">
+      <div class="section-label">Cadrage et orientation</div>
+      <h2>Lire une situation avant d’agir</h2>
+      <p>
+        Certaines pages ne traitent pas seulement d’un bien ou d’un quartier,
+        mais de la manière de poser correctement un projet avant de décider.
+      </p>
+
+      <div class="article-list">
+        <div class="article-item searchable-item" data-search="marseille bon cadrage projet immobilier lecture situation">
+          <h3>À Marseille, un projet immobilier commence souvent par un bon cadrage</h3>
+          <p>Avant l’action, il y a la lecture. Avant la décision, il y a les bonnes questions et l’ordre logique des sujets à traiter.</p>
+          <a class="button" href="marseille-bon-cadrage.html">Lire l’article</a>
+        </div>
+
+        <div class="article-item searchable-item" data-search="contact immobilier marseille estimation rendez-vous candidature apport affaire">
+          <h3>Contacter Bruno Lebert à Marseille</h3>
+          <p>Demander une estimation, prendre rendez-vous, transmettre un projet de vente ou envoyer une candidature à partir d’une page unique.</p>
+          <a class="button" href="contact-immobilier-marseille.html">Lire la page</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card searchable-section">
       <div class="section-label">Location</div>
       <h2>Mettre en location et sécuriser le cadre</h2>
       <p>
@@ -515,7 +633,7 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="mettre en location bien marseille locataire dossier publication">
           <h3>Mettre en location un bien à Marseille</h3>
           <p>Ce qu’il faut clarifier avant de publier, choisir un locataire et sécuriser la mise en location.</p>
           <a class="button" href="mettre-en-location-bien-marseille.html">Lire l’article</a>
@@ -523,7 +641,7 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card searchable-section">
       <div class="section-label">Gestion locative</div>
       <h2>Lire les risques, les obligations et la réalité de la gestion</h2>
       <p>
@@ -532,7 +650,7 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="gestion locative marseille particulier sci impayés revenus fonciers">
           <h3>Gestion locative à Marseille pour particulier ou SCI</h3>
           <p>Impayés, dossiers, revenus fonciers, contraintes juridiques et points de vigilance à anticiper.</p>
           <a class="button" href="gestion-locative-marseille-particulier-sci.html">Lire l’article</a>
@@ -540,24 +658,7 @@
       </div>
     </div>
 
-    <div class="section-card">
-      <div class="section-label">Quartiers</div>
-      <h2>Lecture locale et différences de terrain</h2>
-      <p>
-        À Marseille, une rue, un micro-secteur, une copropriété ou une ambiance de quartier
-        peuvent changer complètement la bonne décision.
-      </p>
-
-      <div class="article-list">
-        <div class="article-item">
-          <h3>5e arrondissement : acheter, vendre ou faire estimer ne se traite pas à l’aveugle</h3>
-          <p>Du Camas à la Conception, de Saint-Pierre à Longchamp, le 4e/5e demande une vraie finesse de lecture. Même arrondissement, logiques très différentes.</p>
-          <a class="button" href="marseille-5e-arrondissement.html">Lire l’article</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-card">
+    <div class="section-card searchable-section">
       <div class="section-label">DPE et copropriété</div>
       <h2>Lire ce qui change vraiment dans un immeuble</h2>
       <p>
@@ -566,19 +667,19 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="dpe marseille comprendre acheter vendre">
           <h3>DPE à Marseille : ce qu’un particulier doit vraiment comprendre avant d’acheter ou de vendre</h3>
           <p>Le DPE ne se lit pas comme une simple lettre. Il faut le replacer dans le contexte du bien, de l’immeuble, des travaux possibles et du projet.</p>
           <a class="button" href="dpe-marseille-comprendre-acheter-vendre.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="dpe collectif marseille immeuble copropriété">
           <h3>DPE collectif à Marseille : ce que cela change dans la lecture d’un immeuble</h3>
           <p>Ce que cela change vraiment dans la lecture d’un immeuble, d’une copropriété, des travaux à venir et de la valeur perçue d’un bien.</p>
           <a class="button" href="dpe-collectif-marseille-lecture-immeuble.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="pppt copropriété marseille" style="display:none;">
           <div class="coming-soon">À venir</div>
           <h3>PPPT, copropriété et lecture d’immeuble à Marseille : ce qu’un particulier doit regarder</h3>
           <p>Un guide de lecture simple pour ne pas acheter, vendre ou estimer à l’aveugle dans une copropriété mal comprise.</p>
@@ -586,7 +687,7 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card searchable-section">
       <div class="section-label">FAQ</div>
       <h2>Questions naturelles, requêtes conversationnelles, réponses utiles</h2>
       <p>
@@ -595,7 +696,7 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="faq immobilier marseille estimation vente achat dpe copropriété location recrutement">
           <h3>FAQ immobilier Marseille</h3>
           <p>Estimation, vente, achat, DPE, copropriété, mise en location, gestion locative, recrutement et pilotage d’activité.</p>
           <a class="button" href="faq-immobilier-marseille.html">Lire l’article</a>
@@ -603,7 +704,7 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card searchable-section">
       <div class="section-label">Apport d’affaires</div>
       <h2>Transmettre une information utile, sérieuse et discrète</h2>
       <p>
@@ -612,7 +713,7 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="apporteur affaires projet vente marseille appartement maison immeuble">
           <h3>Vous connaissez un projet de vente à Marseille ?</h3>
           <p>Transmettre une information utile à propos d’un appartement, d’une maison, d’un immeuble ou d’un projet de vente à Marseille.</p>
           <a class="button" href="apporteur-affaires-immobilier-marseille.html">Transmettre une information</a>
@@ -620,7 +721,7 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card searchable-section">
       <div class="section-label">Candidature</div>
       <h2>Postuler, envoyer votre candidature, rejoindre un cadre de travail sérieux</h2>
       <p>
@@ -629,19 +730,19 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="postuler immobilier marseille candidature recrutement premier contact">
           <h3>Postuler dans l’immobilier à Marseille</h3>
           <p>Premier point d’entrée pour comprendre le cadre, les moyens, l’accompagnement et envoyer une candidature.</p>
           <a class="button" href="postuler-immobilier-marseille.html">Lire la page</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="me rejoindre immobilier marseille cadre méthode accompagnement">
           <h3>Me rejoindre dans l’immobilier à Marseille</h3>
           <p>Cadre, méthode, accompagnement, exigence, progression et qualité d’exécution.</p>
           <a class="button" href="me-rejoindre-immobilier-marseille.html">Lire l’article</a>
         </div>
 
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="envoyer candidature immobilier marseille recrutement">
           <h3>Envoyer votre candidature</h3>
           <p>Premier contact direct pour transmettre une candidature dans l’immobilier à Marseille.</p>
           <a class="button" href="postuler-immobilier-marseille.html">Envoyer votre candidature</a>
@@ -649,7 +750,66 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card searchable-section">
+      <div class="section-label">Statuts et installation</div>
+      <h2>Comprendre les statuts, le cadre d’exercice et les pièges de départ</h2>
+      <p>
+        Cette branche traite les vraies questions que se posent les candidats, les indépendants,
+        les profils en reconversion et les personnes déjà en poste dans l’immobilier.
+      </p>
+
+      <div class="article-list">
+        <div class="article-item searchable-item" data-search="statuts conseiller immobilier marseille indépendant salarié vrp mandataire micro entrepreneur">
+          <h3>Quels sont les différents statuts pour exercer comme conseiller immobilier à Marseille ?</h3>
+          <p>Page pilier pour comprendre indépendant, agent commercial, micro-entrepreneur, mandataire, VRP, non-VRP, redevance et cadre d’exercice.</p>
+          <a class="button" href="statuts-conseiller-immobilier-marseille.html">Lire l’article</a>
+        </div>
+
+        <div class="article-item searchable-item" data-search="agent commercial immobilier indépendant marseille habilitation cadre limites">
+          <h3>Agent commercial immobilier indépendant à Marseille : comment cela fonctionne vraiment ?</h3>
+          <p>Fonctionnement, cadre, limites, profil adapté et réalité quotidienne de l’agent commercial immobilier indépendant.</p>
+          <a class="button" href="agent-commercial-immobilier-independant-marseille.html">Lire l’article</a>
+        </div>
+
+        <div class="article-item searchable-item" data-search="micro entrepreneur immobilier marseille auto entrepreneur urssaf tva plafond rsac">
+          <h3>Micro-entrepreneur immobilier à Marseille : ce qu’il faut comprendre avant de se lancer</h3>
+          <p>Plafond micro, TVA, Urssaf, guichet unique, erreurs fréquentes et logique réelle d’un démarrage en micro-entreprise.</p>
+          <a class="button" href="micro-entrepreneur-immobilier-marseille.html">Lire l’article</a>
+        </div>
+
+        <div class="article-item searchable-item" data-search="créer statut immobilier guichet unique inpi urssaf tva erreurs éviter">
+          <h3>Créer son statut pour exercer dans l’immobilier : guichet unique, Urssaf, TVA, erreurs à éviter</h3>
+          <p>Le bon guichet, les bons repères, les erreurs fréquentes et les pièges à éviter quand on prépare son installation.</p>
+          <a class="button" href="creer-statut-immobilier-guichet-unique.html">Lire l’article</a>
+        </div>
+
+        <div class="article-item searchable-item" data-search="portage salarial immobilier marseille fonctionnement">
+          <h3>Portage salarial en immobilier à Marseille : comment ça fonctionne vraiment ?</h3>
+          <p>Une lecture prudente du portage salarial en immobilier, de son attrait théorique et de ses limites de compréhension.</p>
+          <a class="button" href="portage-salarial-immobilier-marseille.html">Lire l’article</a>
+        </div>
+
+        <div class="article-item searchable-item" data-search="assurance agent commercial immobilier indépendant rc pro rcp">
+          <h3>Quelle assurance pour exercer comme agent commercial immobilier indépendant ?</h3>
+          <p>Responsabilité civile professionnelle, logique de couverture, erreurs fréquentes et cohérence avec le cadre d’exercice.</p>
+          <a class="button" href="assurance-agent-commercial-immobilier.html">Lire l’article</a>
+        </div>
+
+        <div class="article-item searchable-item" data-search="vrp salarié immobilier marseille non-vrp fixe avance commissions">
+          <h3>VRP, non-VRP, fixe, avance sur commissions : comment fonctionne vraiment le salariat immobilier ?</h3>
+          <p>Les différences de cadre entre salariat commercial immobilier et indépendance, et le type de profil auquel cela correspond.</p>
+          <a class="button" href="vrp-ou-salarie-immobilier-marseille.html">Lire l’article</a>
+        </div>
+
+        <div class="article-item searchable-item" data-search="redevance immobilier définition indépendant agent commercial agence vitrine">
+          <h3>C’est quoi une redevance dans l’immobilier ?</h3>
+          <p>Ce qu’est une redevance, ce qu’elle finance, comment la comparer et pourquoi elle ne concerne pas seulement les mandataires.</p>
+          <a class="button" href="redevance-immobilier-definition.html">Lire l’article</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card searchable-section">
       <div class="section-label">Pilotage</div>
       <h2>Structurer une activité, clarifier les rôles, renforcer l’exécution</h2>
       <p>
@@ -658,7 +818,7 @@
       </p>
 
       <div class="article-list">
-        <div class="article-item">
+        <div class="article-item searchable-item" data-search="structurer activité immobilière marseille organisation exécution recrutement">
           <h3>Structurer une activité immobilière à Marseille</h3>
           <p>Croissance, organisation, exécution, recrutement, qualité de suivi et performance durable.</p>
           <a class="button" href="structurer-activite-immobiliere-marseille.html">Lire l’article</a>
@@ -714,6 +874,66 @@
         quickPanel.classList.remove('open');
         quickToggle.setAttribute('aria-expanded', 'false');
       }
+    });
+
+    const searchInput = document.getElementById('library-search');
+    const searchableItems = Array.from(document.querySelectorAll('.searchable-item'));
+    const searchableSections = Array.from(document.querySelectorAll('.searchable-section'));
+    const noResults = document.getElementById('no-results');
+    const searchStatus = document.getElementById('search-status');
+    const searchTags = Array.from(document.querySelectorAll('[data-search-tag]'));
+
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function runSearch(value) {
+      const query = normalize(value.trim());
+      let visibleItems = 0;
+
+      searchableItems.forEach(item => {
+        const searchableText = normalize(
+          (item.getAttribute('data-search') || '') + ' ' + item.innerText
+        );
+
+        const match = query === '' || searchableText.includes(query);
+        item.style.display = match ? '' : 'none';
+
+        if (match) {
+          visibleItems += 1;
+        }
+      });
+
+      searchableSections.forEach(section => {
+        const visibleInSection = Array.from(section.querySelectorAll('.searchable-item'))
+          .some(item => item.style.display !== 'none');
+        section.style.display = visibleInSection ? '' : 'none';
+      });
+
+      noResults.style.display = visibleItems === 0 ? 'block' : 'none';
+
+      if (query === '') {
+        searchStatus.textContent = 'Affichage complet de la bibliothèque.';
+      } else if (visibleItems === 0) {
+        searchStatus.textContent = 'Aucun résultat pour : ' + value;
+      } else {
+        searchStatus.textContent = visibleItems + ' résultat(s) pour : ' + value;
+      }
+    }
+
+    searchInput.addEventListener('input', function () {
+      runSearch(searchInput.value);
+    });
+
+    searchTags.forEach(tag => {
+      tag.addEventListener('click', function () {
+        const value = tag.getAttribute('data-search-tag');
+        searchInput.value = value;
+        runSearch(value);
+      });
     });
   </script>
 </body>
