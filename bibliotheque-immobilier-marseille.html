@@ -382,7 +382,7 @@
         <div class="quick-item searchable-item" data-search="estimation avis de valeur demande estimation rendez-vous contact bien marseille">
           <h3>Demander une estimation</h3>
           <p>Obtenir un avis de valeur, demander une estimation ou faire relire le positionnement d’un bien à Marseille.</p>
-          <a class="button" href="contact-immobilier-marseille.html">Demander une estimation</a>
+          <a class="button" href="contact-immobilier-marseille.html">Passer par le formulaire</a>
         </div>
 
         <div class="quick-item searchable-item" data-search="rendez-vous contact vente achat location arbitrage projet immobilier marseille">
@@ -549,12 +549,6 @@
           <p>Quartier-village très recherché, avec une lecture sensible au calme, au stationnement, au jardin, à la vue mer et à la micro-situation.</p>
           <a class="button" href="vendre-appartement-endoume-marseille-7e.html">Lire l’article</a>
         </div>
-
-        <div class="article-item searchable-item" data-search="vendre paris acheter marseille arbitrer" style="display:none;">
-          <div class="coming-soon">À venir</div>
-          <h3>Vendre à Paris pour acheter à Marseille : ce qu’il faut relire avant d’arbitrer</h3>
-          <p>Un arbitrage entre deux marchés, deux rythmes et deux lectures patrimoniales très différentes.</p>
-        </div>
       </div>
     </div>
 
@@ -657,12 +651,6 @@
           <h3>DPE collectif à Marseille : ce que cela change dans la lecture d’un immeuble</h3>
           <p>Ce que cela change vraiment dans la lecture d’un immeuble, d’une copropriété, des travaux à venir et de la valeur perçue d’un bien.</p>
           <a class="button" href="dpe-collectif-marseille-lecture-immeuble.html">Lire l’article</a>
-        </div>
-
-        <div class="article-item searchable-item" data-search="pppt copropriété marseille" style="display:none;">
-          <div class="coming-soon">À venir</div>
-          <h3>PPPT, copropriété et lecture d’immeuble à Marseille : ce qu’un particulier doit regarder</h3>
-          <p>Un guide de lecture simple pour ne pas acheter, vendre ou estimer à l’aveugle dans une copropriété mal comprise.</p>
         </div>
       </div>
     </div>
@@ -979,6 +967,15 @@
         runSearch(value);
       });
     });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialQuery = urlParams.get('q');
+
+    if (initialQuery) {
+      searchInput.value = initialQuery;
+      runSearch(initialQuery);
+      openPanel(searchPanel, searchToggle);
+    }
   </script>
 </body>
 </html>
