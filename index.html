@@ -195,41 +195,87 @@
       border: 1px solid rgba(255,255,255,0.2);
       color: white;
     }
-    .cta-links {
-      margin-top: 16px;
-      font-size: 14px;
-      color: rgba(255,255,255,0.72);
-    }
-    .cta-links a {
-      color: rgba(255,255,255,0.88);
-      text-decoration: underline;
-    }
-    .floating-contact {
+
+    .quick-sticky {
       position: fixed;
       right: 16px;
       bottom: 16px;
       z-index: 1000;
     }
-    .floating-contact a {
-      display: inline-block;
+    .quick-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: #0f172a;
       color: #ffffff;
-      text-decoration: none;
+      border: none;
+      cursor: pointer;
       font-weight: bold;
       font-size: 14px;
       padding: 14px 18px;
       border-radius: 999px;
       box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
     }
-    .floating-contact a:hover {
+    .quick-toggle:hover {
       background: #1e293b;
     }
+    .quick-panel {
+      position: absolute;
+      right: 0;
+      bottom: 64px;
+      width: min(320px, calc(100vw - 32px));
+      background: #ffffff;
+      border: 1px solid #d8dee8;
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+      padding: 16px;
+      display: none;
+    }
+    .quick-panel.open {
+      display: block;
+    }
+    .quick-panel-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 10px;
+    }
+    .quick-link {
+      display: block;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      margin-bottom: 10px;
+    }
+    .quick-link:last-child {
+      margin-bottom: 0;
+    }
+    .quick-link strong {
+      display: block;
+      font-size: 15px;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .quick-link span {
+      display: block;
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.4;
+    }
+    .quick-link:hover {
+      background: #f8fafc;
+    }
+
     footer {
       padding: 0 0 32px;
       color: #64748b;
       font-size: 14px;
       text-align: center;
     }
+
     @media (max-width: 900px) {
       .grid-3, .grid-2 { grid-template-columns: 1fr; }
       .hero { padding: 64px 0 72px; }
@@ -237,6 +283,21 @@
       .hero-copy { order: 2; }
       .hero-photo-wrap { order: 1; }
       .soft-box, .cta, .card { padding: 24px; }
+    }
+
+    @media (max-width: 640px) {
+      .quick-sticky {
+        right: 12px;
+        bottom: 12px;
+      }
+      .quick-toggle {
+        font-size: 13px;
+        padding: 13px 16px;
+      }
+      .quick-panel {
+        bottom: 58px;
+        width: min(320px, calc(100vw - 24px));
+      }
     }
   </style>
 </head>
@@ -252,7 +313,7 @@
 
           <div class="hero-buttons">
             <a class="btn-light" href="demander-estimation-marseille.html">Demander une estimation</a>
-            <a class="btn-dark" href="mailto:lebertbruno@gmail.com?subject=Prise%20de%20rendez-vous%20immobilier%20%C3%A0%20Marseille">Prendre rendez-vous</a>
+            <a class="btn-dark" href="contact-immobilier-marseille.html">Faire une demande</a>
           </div>
 
           <div class="tags">
@@ -351,10 +412,10 @@
         </article>
 
         <article class="card article-card">
-          <span class="badge">Apport d’affaires</span>
-          <h3>Vous connaissez un projet de vente à Marseille ?</h3>
-          <p>Transmettre une information utile, sérieuse et discrète à propos d’un appartement, d’une maison, d’un immeuble ou d’un projet de vente.</p>
-          <a class="button" href="apporteur-affaires-immobilier-marseille.html">Transmettre une information</a>
+          <span class="badge">Candidature</span>
+          <h3>Postuler dans l’immobilier à Marseille</h3>
+          <p>Envoyer votre candidature, prendre contact et comprendre plus clairement le cadre, les moyens et la réalité du travail.</p>
+          <a class="button" href="postuler-immobilier-marseille.html">Envoyer votre candidature</a>
         </article>
       </div>
     </div>
@@ -391,67 +452,71 @@
 
   <section>
     <div class="container">
-      <div class="eyebrow">Lectures locales</div>
-      <h2>Rues, secteurs et quartiers déjà traités</h2>
-      <div class="grid-2" style="margin-top: 28px;">
-        <article class="card article-card">
-          <span class="badge">13005</span>
-          <h3>Estimation d’un appartement à Marseille 5e</h3>
-          <p>Pourquoi deux biens proches ne valent pas la même chose selon la rue, l’immeuble, l’étage, l’état et le contexte réel.</p>
-          <a class="button" href="estimation-appartement-marseille-5e.html">Lire l’article</a>
-        </article>
-
-        <article class="card article-card">
-          <span class="badge">13005</span>
-          <h3>Combien vaut un appartement boulevard Chave à Marseille 13005 ?</h3>
-          <p>Un axe fort du 5e arrondissement de Marseille, mais dont la lecture dépend du tronçon, de l’immeuble et de l’ambiance réelle.</p>
-          <a class="button" href="combien-vaut-appartement-boulevard-chave-marseille-13005.html">Lire l’article</a>
-        </article>
-
-        <article class="card article-card">
-          <span class="badge">13004</span>
-          <h3>Combien vaut un appartement avenue des Chartreux à Marseille 13004 ?</h3>
-          <p>Une lecture fine du lien aux Cinq Avenues, de la centralité vécue et de la qualité de projection dans le 4e arrondissement.</p>
-          <a class="button" href="combien-vaut-appartement-avenue-des-chartreux-marseille-13004.html">Lire l’article</a>
-        </article>
-
-        <article class="card article-card">
-          <span class="badge">13008</span>
-          <h3>Combien vaut une maison avenue de Mazargues à Marseille 13008 ?</h3>
-          <p>Sur une maison, la valeur dépend du tronçon, du terrain, du stationnement, du calme et du confort d’usage réel.</p>
-          <a class="button" href="combien-vaut-maison-avenue-de-mazargues-marseille-13008.html">Lire l’article</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
       <div class="cta">
         <div class="eyebrow" style="color: rgba(255,255,255,0.6);">Premier échange</div>
         <h2>Demander une estimation, un avis de valeur ou un rendez-vous à Marseille</h2>
         <p class="lead">Pour une vente, un achat, une estimation, une location, une gestion locative, un arbitrage ou un projet à clarifier à Marseille, premier échange confidentiel sur demande.</p>
         <div class="cta-buttons">
           <a class="btn-light" href="demander-estimation-marseille.html">Demander une estimation</a>
-          <a class="btn-dark" href="mailto:lebertbruno@gmail.com?subject=Prise%20de%20rendez-vous%20immobilier%20%C3%A0%20Marseille">Prendre rendez-vous</a>
+          <a class="btn-dark" href="contact-immobilier-marseille.html">Faire une demande</a>
           <a class="btn-dark" href="apporteur-affaires-immobilier-marseille.html">Transmettre un projet de vente</a>
-        </div>
-        <div class="cta-links">
-          Voir aussi mon profil pro sur
-          <a href="https://gensdeconfiance.com/fr/ui/profiles/bec17058-b550-41df-8cd4-8e2ddc050d1d" target="_blank" rel="noopener noreferrer">Gens de Confiance</a>
-          et mon
-          <a href="https://www.linkedin.com/in/bruno-lebert-9322805a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="floating-contact">
-    <a href="demander-estimation-marseille.html">Demander une estimation</a>
+  <div class="quick-sticky">
+    <div id="quick-panel" class="quick-panel">
+      <div class="quick-panel-title">Accès rapide</div>
+
+      <a class="quick-link" href="demander-estimation-marseille.html">
+        <strong>Demander une estimation</strong>
+        <span>Obtenir un avis de valeur ou une première lecture d’un bien.</span>
+      </a>
+
+      <a class="quick-link" href="contact-immobilier-marseille.html">
+        <strong>Prendre rendez-vous</strong>
+        <span>Premier échange pour clarifier une vente, un achat ou une situation immobilière.</span>
+      </a>
+
+      <a class="quick-link" href="postuler-immobilier-marseille.html">
+        <strong>Envoyer votre candidature</strong>
+        <span>Postuler et prendre contact dans le cadre d’un projet immobilier à Marseille.</span>
+      </a>
+
+      <a class="quick-link" href="apporteur-affaires-immobilier-marseille.html">
+        <strong>Transmettre un projet de vente</strong>
+        <span>Faire remonter une information utile de manière simple et discrète.</span>
+      </a>
+    </div>
+
+    <button id="quick-toggle" class="quick-toggle" type="button" aria-expanded="false" aria-controls="quick-panel">
+      Accès rapide
+    </button>
   </div>
 
   <footer>
     <div class="container">Bruno Lebert • Marseille • Immobilier • Estimation • Vente • Achat • Avis de valeur • Location • Gestion locative</div>
   </footer>
+
+  <script>
+    const quickToggle = document.getElementById('quick-toggle');
+    const quickPanel = document.getElementById('quick-panel');
+
+    quickToggle.addEventListener('click', function () {
+      const isOpen = quickPanel.classList.toggle('open');
+      quickToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', function (event) {
+      const clickedInsidePanel = quickPanel.contains(event.target);
+      const clickedToggle = quickToggle.contains(event.target);
+
+      if (!clickedInsidePanel && !clickedToggle) {
+        quickPanel.classList.remove('open');
+        quickToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
 </body>
 </html>
