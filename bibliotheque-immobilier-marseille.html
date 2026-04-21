@@ -17,7 +17,7 @@
     .container {
       max-width: 980px;
       margin: 0 auto;
-      padding: 32px 20px 80px;
+      padding: 32px 20px 100px;
     }
 
     .back-link {
@@ -57,7 +57,6 @@
       margin-bottom: 26px;
     }
 
-    .search-card,
     .section-card {
       background: #ffffff;
       border: 1px solid #d8dee8;
@@ -85,65 +84,6 @@
       font-size: 18px;
       margin: 0 0 16px;
       color: #1e293b;
-    }
-
-    .search-input {
-      width: 100%;
-      border: 1px solid #cbd5e1;
-      border-radius: 16px;
-      padding: 16px 18px;
-      font-size: 16px;
-      color: #0f172a;
-      background: #ffffff;
-      box-sizing: border-box;
-      margin-top: 8px;
-    }
-
-    .search-help {
-      font-size: 15px;
-      color: #64748b;
-      margin-top: 12px;
-      margin-bottom: 0;
-    }
-
-    .search-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .search-tag {
-      border: 1px solid #d8dee8;
-      background: #fff;
-      color: #475569;
-      border-radius: 999px;
-      padding: 9px 13px;
-      font-size: 13px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .search-tag:hover {
-      background: #f8fafc;
-    }
-
-    .search-status {
-      font-size: 15px;
-      color: #64748b;
-      margin-top: 16px;
-      margin-bottom: 0;
-    }
-
-    .no-results {
-      display: none;
-      background: #ffffff;
-      border: 1px dashed #cbd5e1;
-      border-radius: 18px;
-      padding: 18px;
-      font-size: 16px;
-      color: #475569;
-      margin-bottom: 22px;
     }
 
     .article-list {
@@ -222,14 +162,18 @@
       margin-bottom: 8px;
     }
 
-    .quick-sticky {
+    .floating-stack {
       position: fixed;
       right: 16px;
       bottom: 16px;
       z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
     }
 
-    .quick-toggle {
+    .floating-button {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -244,15 +188,12 @@
       box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
     }
 
-    .quick-toggle:hover {
+    .floating-button:hover {
       background: #1e293b;
     }
 
-    .quick-panel {
-      position: absolute;
-      right: 0;
-      bottom: 64px;
-      width: min(320px, calc(100vw - 32px));
+    .floating-panel {
+      width: min(360px, calc(100vw - 32px));
       background: #ffffff;
       border: 1px solid #d8dee8;
       border-radius: 22px;
@@ -261,17 +202,70 @@
       display: none;
     }
 
-    .quick-panel.open {
+    .floating-panel.open {
       display: block;
     }
 
-    .quick-panel-title {
+    .panel-title {
       font-size: 14px;
       font-weight: 700;
       color: #64748b;
       text-transform: uppercase;
       letter-spacing: .06em;
       margin-bottom: 10px;
+    }
+
+    .search-title {
+      font-size: 20px;
+      line-height: 1.25;
+      margin: 0 0 10px;
+      color: #0f172a;
+    }
+
+    .search-subtitle {
+      font-size: 14px;
+      color: #475569;
+      margin: 0 0 14px;
+    }
+
+    .search-input {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 15px 16px;
+      font-size: 16px;
+      color: #0f172a;
+      background: #ffffff;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+    }
+
+    .search-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .search-tag {
+      border: 1px solid #d8dee8;
+      background: #fff;
+      color: #475569;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .search-tag:hover {
+      background: #f8fafc;
+    }
+
+    .search-status {
+      font-size: 14px;
+      color: #64748b;
+      margin: 0;
     }
 
     .quick-link {
@@ -281,6 +275,7 @@
       border: 1px solid #e2e8f0;
       background: #ffffff;
       margin-bottom: 10px;
+      text-decoration: none;
     }
 
     .quick-link:last-child {
@@ -305,9 +300,20 @@
       background: #f8fafc;
     }
 
+    .no-results {
+      display: none;
+      background: #ffffff;
+      border: 1px dashed #cbd5e1;
+      border-radius: 18px;
+      padding: 18px;
+      font-size: 16px;
+      color: #475569;
+      margin-bottom: 22px;
+    }
+
     @media (max-width: 640px) {
       .container {
-        padding: 24px 16px 90px;
+        padding: 24px 16px 100px;
       }
 
       h1 {
@@ -331,19 +337,18 @@
         grid-template-columns: 1fr;
       }
 
-      .quick-sticky {
+      .floating-stack {
         right: 12px;
         bottom: 12px;
       }
 
-      .quick-toggle {
+      .floating-button {
         font-size: 13px;
         padding: 13px 16px;
       }
 
-      .quick-panel {
-        bottom: 58px;
-        width: min(320px, calc(100vw - 24px));
+      .floating-panel {
+        width: min(360px, calc(100vw - 24px));
       }
     }
   </style>
@@ -362,31 +367,6 @@
       apport d’affaires, candidature, statuts, installation, cadrage, orientation et pilotage.
     </p>
 
-    <div class="search-card">
-      <div class="section-label">Recherche</div>
-      <h2>Rechercher un thème, un sujet ou un mot-clé</h2>
-      <input
-        type="text"
-        id="library-search"
-        class="search-input"
-        placeholder="Ex. estimation, Chave, 13005, candidature, DPE, location, auto-entrepreneur, redevance..."
-      />
-      <p class="search-help">
-        La recherche filtre instantanément les cartes de cette bibliothèque.
-      </p>
-      <div class="search-tags">
-        <button type="button" class="search-tag" data-search-tag="estimation">estimation</button>
-        <button type="button" class="search-tag" data-search-tag="Chave">Chave</button>
-        <button type="button" class="search-tag" data-search-tag="13005">13005</button>
-        <button type="button" class="search-tag" data-search-tag="candidature">candidature</button>
-        <button type="button" class="search-tag" data-search-tag="DPE">DPE</button>
-        <button type="button" class="search-tag" data-search-tag="location">location</button>
-        <button type="button" class="search-tag" data-search-tag="micro-entrepreneur">micro-entrepreneur</button>
-        <button type="button" class="search-tag" data-search-tag="redevance">redevance</button>
-      </div>
-      <p class="search-status" id="search-status">Affichage complet de la bibliothèque.</p>
-    </div>
-
     <div id="no-results" class="no-results">
       Aucun résultat direct pour cette recherche dans la bibliothèque actuelle.
     </div>
@@ -402,7 +382,7 @@
         <div class="quick-item searchable-item" data-search="estimation avis de valeur demande estimation rendez-vous contact bien marseille">
           <h3>Demander une estimation</h3>
           <p>Obtenir un avis de valeur, demander une estimation ou faire relire le positionnement d’un bien à Marseille.</p>
-          <a class="button" href="demander-estimation-marseille.html">Demander une estimation</a>
+          <a class="button" href="contact-immobilier-marseille.html">Demander une estimation</a>
         </div>
 
         <div class="quick-item searchable-item" data-search="rendez-vous contact vente achat location arbitrage projet immobilier marseille">
@@ -437,7 +417,7 @@
         <div class="article-item searchable-item" data-search="demander estimation immobilière marseille avis de valeur rendez-vous positionnement bien">
           <h3>Demander une estimation immobilière à Marseille</h3>
           <p>Obtenir un avis de valeur, demander une estimation, prendre rendez-vous ou faire relire le positionnement d’un bien.</p>
-          <a class="button" href="demander-estimation-marseille.html">Demander une estimation</a>
+          <a class="button" href="demander-estimation-marseille.html">Lire l’article</a>
         </div>
 
         <div class="article-item searchable-item" data-search="estimation immobilière marseille prix m2 mètre carré valeur bien">
@@ -827,11 +807,40 @@
     </div>
   </div>
 
-  <div class="quick-sticky">
-    <div id="quick-panel" class="quick-panel">
-      <div class="quick-panel-title">Accès rapide</div>
+  <div class="floating-stack">
+    <div id="search-panel" class="floating-panel">
+      <div class="panel-title">Recherche</div>
+      <h3 class="search-title">Rechercher un thème, une rue ou un sujet</h3>
+      <p class="search-subtitle">
+        Exemples : estimation, Chave, 13005, candidature, DPE, location, auto-entrepreneur, redevance.
+      </p>
+      <input
+        type="text"
+        id="library-search"
+        class="search-input"
+        placeholder="Rechercher dans la bibliothèque..."
+      />
+      <div class="search-tags">
+        <button type="button" class="search-tag" data-search-tag="estimation">estimation</button>
+        <button type="button" class="search-tag" data-search-tag="Chave">Chave</button>
+        <button type="button" class="search-tag" data-search-tag="13005">13005</button>
+        <button type="button" class="search-tag" data-search-tag="candidature">candidature</button>
+        <button type="button" class="search-tag" data-search-tag="DPE">DPE</button>
+        <button type="button" class="search-tag" data-search-tag="location">location</button>
+        <button type="button" class="search-tag" data-search-tag="micro-entrepreneur">micro-entrepreneur</button>
+        <button type="button" class="search-tag" data-search-tag="redevance">redevance</button>
+      </div>
+      <p class="search-status" id="search-status">Affichage complet de la bibliothèque.</p>
+    </div>
 
-      <a class="quick-link" href="demander-estimation-marseille.html">
+    <button id="search-toggle" class="floating-button" type="button" aria-expanded="false" aria-controls="search-panel">
+      🔎 Recherche
+    </button>
+
+    <div id="quick-panel" class="floating-panel">
+      <div class="panel-title">Accès rapide</div>
+
+      <a class="quick-link" href="contact-immobilier-marseille.html">
         <strong>Demander une estimation</strong>
         <span>Obtenir un avis de valeur ou une première lecture d’un bien.</span>
       </a>
@@ -852,7 +861,7 @@
       </a>
     </div>
 
-    <button id="quick-toggle" class="quick-toggle" type="button" aria-expanded="false" aria-controls="quick-panel">
+    <button id="quick-toggle" class="floating-button" type="button" aria-expanded="false" aria-controls="quick-panel">
       Accès rapide
     </button>
   </div>
@@ -860,19 +869,54 @@
   <script>
     const quickToggle = document.getElementById('quick-toggle');
     const quickPanel = document.getElementById('quick-panel');
+    const searchToggle = document.getElementById('search-toggle');
+    const searchPanel = document.getElementById('search-panel');
+
+    function closePanel(panel, button) {
+      panel.classList.remove('open');
+      button.setAttribute('aria-expanded', 'false');
+    }
+
+    function openPanel(panel, button) {
+      panel.classList.add('open');
+      button.setAttribute('aria-expanded', 'true');
+    }
 
     quickToggle.addEventListener('click', function () {
-      const isOpen = quickPanel.classList.toggle('open');
-      quickToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      const isOpen = quickPanel.classList.contains('open');
+      closePanel(searchPanel, searchToggle);
+      if (isOpen) {
+        closePanel(quickPanel, quickToggle);
+      } else {
+        openPanel(quickPanel, quickToggle);
+      }
+    });
+
+    searchToggle.addEventListener('click', function () {
+      const isOpen = searchPanel.classList.contains('open');
+      closePanel(quickPanel, quickToggle);
+      if (isOpen) {
+        closePanel(searchPanel, searchToggle);
+      } else {
+        openPanel(searchPanel, searchToggle);
+        setTimeout(() => {
+          document.getElementById('library-search').focus();
+        }, 50);
+      }
     });
 
     document.addEventListener('click', function (event) {
-      const clickedInsidePanel = quickPanel.contains(event.target);
-      const clickedToggle = quickToggle.contains(event.target);
+      const clickedQuickPanel = quickPanel.contains(event.target);
+      const clickedQuickToggle = quickToggle.contains(event.target);
+      const clickedSearchPanel = searchPanel.contains(event.target);
+      const clickedSearchToggle = searchToggle.contains(event.target);
 
-      if (!clickedInsidePanel && !clickedToggle) {
-        quickPanel.classList.remove('open');
-        quickToggle.setAttribute('aria-expanded', 'false');
+      if (!clickedQuickPanel && !clickedQuickToggle) {
+        closePanel(quickPanel, quickToggle);
+      }
+
+      if (!clickedSearchPanel && !clickedSearchToggle) {
+        closePanel(searchPanel, searchToggle);
       }
     });
 
