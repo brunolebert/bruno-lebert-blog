@@ -17,6 +17,10 @@
     "image": "https://brunolebert.github.io/bruno-lebert-blog/bruno-lebert-conseil-immobilier-marseille.png",
     "jobTitle": "Conseil immobilier à Marseille",
     "description": "Interlocuteur de confiance à Marseille pour demander une estimation, obtenir un avis de valeur et clarifier un projet immobilier avant décision.",
+    "sameAs": [
+      "https://www.linkedin.com/in/bruno-lebert-9322805a/?skipRedirect=true",
+      "https://gensdeconfiance.com/fr/ui/profiles/bec17058-b550-41df-8cd4-8e2ddc050d1d"
+    ],
     "knowsAbout": [
       "estimation immobilière à Marseille",
       "avis de valeur",
@@ -24,8 +28,8 @@
       "achat immobilier à Marseille",
       "location à Marseille",
       "gestion locative à Marseille",
-      "DPE",
       "quartiers de Marseille",
+      "micro-secteurs immobiliers à Marseille",
       "statuts dans l'immobilier"
     ]
   }
@@ -54,13 +58,10 @@
       --line: #e2e8f0;
       --accent-soft: #eae4d8;
       --hero: #020617;
-      --hero-soft: #0f172a;
       --soft-white: rgba(255,255,255,0.86);
-      --shadow: 0 20px 50px rgba(0,0,0,0.18);
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -74,74 +75,67 @@
     a { color: inherit; text-decoration: none; }
 
     .container {
-      max-width: 1180px;
+      max-width: 1160px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
     .hero {
-      position: relative;
-      overflow: hidden;
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(255,255,255,0.08), transparent 25%),
+        radial-gradient(circle at top left, rgba(255,255,255,0.10), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 25%),
         var(--hero);
       color: white;
-      padding: 84px 0 120px;
+      padding: 84px 0 92px;
     }
 
     .hero-inner {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 440px);
-      gap: 54px;
+      grid-template-columns: minmax(0, 1.12fr) minmax(300px, 390px);
+      gap: 44px;
       align-items: center;
-      position: relative;
-      z-index: 2;
     }
 
     .hero-copy { min-width: 0; }
 
     .hero-photo-wrap {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      position: relative;
-    }
-
-    .hero-photo-frame {
-      position: relative;
-      width: 100%;
-      max-width: 410px;
-      padding: 18px;
-      border-radius: 38px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 25px 70px rgba(0,0,0,0.24);
-      transform: translateY(18px);
+      justify-content: center;
+      gap: 16px;
     }
 
     .hero-photo {
       width: 100%;
-      display: block;
+      max-width: 360px;
       aspect-ratio: 4 / 5;
       object-fit: cover;
-      border-radius: 26px;
-      box-shadow: var(--shadow);
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
       background: rgba(255,255,255,0.04);
+      display: block;
     }
 
-    .hero-photo-note {
-      position: absolute;
-      left: -18px;
-      bottom: 28px;
-      background: rgba(255,255,255,0.96);
-      color: var(--text);
-      border-radius: 18px;
-      padding: 12px 14px;
-      font-size: 13px;
-      line-height: 1.35;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.14);
-      max-width: 220px;
+    .hero-profile-link {
+      display: inline-block;
+      background: rgba(255,255,255,0.98);
+      color: var(--hero);
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+    }
+
+    .hero-profile-link small {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+      margin-top: 2px;
     }
 
     .pill {
@@ -155,7 +149,7 @@
     }
 
     h1 {
-      font-size: clamp(42px, 8vw, 70px);
+      font-size: clamp(42px, 8vw, 68px);
       line-height: 1.02;
       margin: 20px 0 0;
       font-weight: 700;
@@ -164,14 +158,14 @@
     .hero-subtitle {
       font-size: clamp(24px, 3vw, 36px);
       margin: 16px 0 0;
-      color: rgba(255,255,255,0.94);
+      color: rgba(255,255,255,0.92);
       max-width: 980px;
     }
 
     .hero-text {
-      max-width: 850px;
+      max-width: 860px;
       font-size: 19px;
-      color: rgba(255,255,255,0.78);
+      color: rgba(255,255,255,0.76);
       margin-top: 24px;
     }
 
@@ -190,11 +184,7 @@
       display: inline-block;
     }
 
-    .btn-light {
-      background: white;
-      color: var(--hero);
-    }
-
+    .btn-light { background: white; color: var(--hero); }
     .btn-dark {
       border: 1px solid rgba(255,255,255,0.2);
       color: white;
@@ -322,7 +312,7 @@
     .card p,
     .hub-card p,
     .trust-card p,
-    .bio-card p {
+    .geo-card p {
       color: var(--muted);
     }
 
@@ -362,7 +352,7 @@
 
     .bio-grid {
       display: grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.15fr .85fr;
       gap: 24px;
       margin-top: 28px;
     }
@@ -440,6 +430,21 @@
       background: #f8fafc;
     }
 
+    .geo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .geo-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
     .trust-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -463,7 +468,7 @@
     }
 
     .cta {
-      background: var(--hero);
+      background: #020617;
       color: white;
       border-radius: 32px;
       padding: 38px;
@@ -643,8 +648,9 @@
     }
 
     @media (max-width: 980px) {
-      .hero {
-        padding: 64px 0 76px;
+      .hero,
+      section {
+        padding-top: 52px;
       }
 
       .hero-inner,
@@ -652,26 +658,26 @@
       .grid-3,
       .grid-2,
       .hub-grid,
-      .trust-grid {
+      .trust-grid,
+      .geo-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-photo-frame {
-        max-width: 360px;
-        transform: none;
+      .hero-photo-wrap {
+        order: 2;
       }
 
-      .hero-photo-note {
-        left: 14px;
-        bottom: 14px;
-        max-width: 210px;
+      .hero-copy {
+        order: 1;
+      }
+
+      .hero-photo {
+        max-width: 320px;
       }
     }
 
     @media (max-width: 640px) {
-      .container {
-        padding: 0 18px;
-      }
+      .container { padding: 0 18px; }
 
       .floating-stack {
         right: 12px;
@@ -696,12 +702,6 @@
       .footer-links a::after {
         content: "";
         margin: 0;
-      }
-
-      .hero-photo-note {
-        position: static;
-        margin-top: 12px;
-        max-width: none;
       }
     }
   </style>
@@ -740,16 +740,15 @@
         </div>
 
         <div class="hero-photo-wrap">
-          <div class="hero-photo-frame">
-            <img
-              src="bruno-lebert-conseil-immobilier-marseille.png"
-              alt="Portrait de Bruno Lebert, conseil immobilier à Marseille"
-              class="hero-photo"
-            />
-            <div class="hero-photo-note">
-              Lecture locale, cadrage, estimation, vente, achat, location et arbitrage à Marseille.
-            </div>
-          </div>
+          <img
+            src="bruno-lebert-conseil-immobilier-marseille.png"
+            alt="Portrait de Bruno Lebert, conseil immobilier à Marseille"
+            class="hero-photo"
+          />
+          <a class="hero-profile-link" href="#qui-est-bruno-lebert">
+            Qui est Bruno Lebert ?
+            <small>Parcours, posture, crédibilité</small>
+          </a>
         </div>
       </div>
     </div>
@@ -800,45 +799,52 @@
           </div>
 
           <div class="quote-card">
-            <div class="eyebrow">Position</div>
+            <div class="eyebrow">Pourquoi consulter Bruno Lebert ?</div>
             <p class="quote-text">Avant de vendre, acheter, louer, arbitrer ou faire estimer, il faut souvent d’abord relire la situation avec quelqu’un capable de la cadrer proprement.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section aria-labelledby="positionnement">
+    <section aria-labelledby="lecture-marseille">
       <div class="container">
         <div class="soft-box">
-          <div class="eyebrow">Positionnement</div>
-          <h2 id="positionnement">Estimation, cadrage, orientation et lecture fine des projets immobiliers à Marseille</h2>
-          <p class="lead">Le site a été pensé pour aider à clarifier une décision avant passage à l’action : vente, achat, estimation, location, gestion locative, lecture de secteur, statuts ou candidature dans l’immobilier.</p>
+          <div class="eyebrow">Lecture de Marseille</div>
+          <h2 id="lecture-marseille">Marseille au sens large, avec des lectures plus fines sur certains quartiers, rues et micro-secteurs</h2>
+          <p class="lead">Le site ne se limite pas à quelques arrondissements. Il a vocation à traiter Marseille largement, y compris des secteurs parfois moins travaillés par les agences, avec des analyses plus détaillées sur certaines rues, certains quartiers, certains parcours résidentiels et certains arbitrages locaux.</p>
         </div>
       </div>
     </section>
 
-    <section aria-labelledby="secteurs-suivis">
+    <section aria-labelledby="portes-geographiques">
       <div class="container">
-        <div class="eyebrow">Secteurs suivis</div>
-        <h2 id="secteurs-suivis">Marseille, avec une lecture fine des quartiers et micro-secteurs</h2>
-        <p class="subline">Le site traite Marseille quartier par quartier, rue par rue, et aborde estimation, vente, achat, location, gestion locative et arbitrages immobiliers.</p>
+        <div class="eyebrow">Entrées géographiques</div>
+        <h2 id="portes-geographiques">Entrer dans Marseille par quartier, rue, besoin ou arbitrage</h2>
+        <p class="subline">Le site a vocation à couvrir largement Marseille, y compris des arrondissements parfois négligés, tout en développant progressivement des lectures plus fines selon les opportunités, les secteurs et les projets.</p>
 
-        <div class="grid-2" style="margin-top: 28px;">
-          <div class="card">
-            <h3>2e arrondissement de Marseille</h3>
-            <p>Joliette, Hôtel de Ville, Panier, rue de la République.</p>
+        <div class="geo-grid">
+          <div class="geo-card">
+            <h3>Estimer un bien à Marseille</h3>
+            <p>Pour entrer par la valeur, le prix au m², l’avis de valeur, les rues, les micro-secteurs et les logiques de positionnement.</p>
+            <a class="button" href="demander-estimation-marseille.html">Demander une estimation immobilière à Marseille</a>
           </div>
-          <div class="card">
-            <h3>4e et 5e arrondissements de Marseille</h3>
-            <p>Camas, Conception, Baille, Saint-Pierre, Blancarde, Longchamp, Cinq-Avenues, Chartreux, Chutes-Lavie.</p>
+
+          <div class="geo-card">
+            <h3>Lire Marseille par quartiers, rues et micro-secteurs</h3>
+            <p>Pour parcourir le site par arrondissements, quartiers, rues, dynamiques locales et lectures plus fines du marché.</p>
+            <a class="button" href="bibliotheque-immobilier-marseille.html">Explorer la bibliothèque immobilière à Marseille</a>
           </div>
-          <div class="card">
-            <h3>6e arrondissement de Marseille</h3>
-            <p>Vauban, Préfecture, Castellane, Pierre-Puget.</p>
+
+          <div class="geo-card">
+            <h3>Préparer une vente, un achat ou un arbitrage</h3>
+            <p>Pour clarifier un projet résidentiel, un déplacement d’un arrondissement à l’autre, un changement de quartier ou un arbitrage plus large sur Marseille.</p>
+            <a class="button" href="qui-consulter-a-marseille.html">Lire la page sur qui consulter à Marseille avant une décision immobilière</a>
           </div>
-          <div class="card">
-            <h3>7e arrondissement de Marseille</h3>
-            <p>Endoume, Bompard, Roucas-Blanc, Pharo.</p>
+
+          <div class="geo-card">
+            <h3>Explorer aussi les secteurs souvent moins traités</h3>
+            <p>Le site a aussi vocation à travailler des secteurs parfois délaissés ou moins représentés, dès lors qu’il y a du mouvement, des opportunités et du vrai besoin de lecture locale.</p>
+            <a class="button" href="bibliotheque-immobilier-marseille.html">Parcourir les entrées locales dans la bibliothèque</a>
           </div>
         </div>
       </div>
@@ -879,7 +885,7 @@
       <div class="container">
         <div class="eyebrow">Navigation par besoin</div>
         <h2 id="titre-besoins">Estimation, vente, achat, location, gestion locative et statuts dans l’immobilier</h2>
-        <p class="subline">Des accès plus clairs, plus visibles et plus directs vers les grandes familles de contenus du site.</p>
+        <p class="subline">Des accès clairs vers les grandes familles de contenus du site, sans transformer la page d’accueil en catalogue confus.</p>
 
         <div class="hub-grid">
           <article class="hub-card">
@@ -903,37 +909,17 @@
           </article>
 
           <article class="hub-card">
-            <span class="mini-badge">Vente</span>
-            <h3>Vendre un bien à Marseille</h3>
-            <p>Préparer une vente, clarifier le tempo et éviter une mise en marché mal cadrée.</p>
+            <span class="mini-badge">Vente / Achat</span>
+            <h3>Préparer une vente ou un achat à Marseille</h3>
+            <p>Clarifier le tempo, le bon niveau de prix et la cohérence globale d’un projet résidentiel.</p>
             <div class="hub-card-links">
               <a class="hub-link" href="vendre-marseille-avant-publier-annonce.html">
                 Lire la page sur la vente à Marseille avant publication d’annonce
                 <small>Préparer correctement une vente avant diffusion.</small>
               </a>
-              <a class="hub-link" href="vendre-appartement-vauban-marseille-6e.html">
-                Lire la page sur la vente d’un appartement à Vauban Marseille 6e
-                <small>Entrée locale sur le secteur Vauban.</small>
-              </a>
-              <a class="hub-link" href="vendre-appartement-endoume-marseille-7e.html">
-                Lire la page sur la vente d’un appartement à Endoume Marseille 7e
-                <small>Entrée locale sur le secteur Endoume.</small>
-              </a>
-            </div>
-          </article>
-
-          <article class="hub-card">
-            <span class="mini-badge">Achat</span>
-            <h3>Acheter à Marseille avec une lecture plus claire</h3>
-            <p>Relire un bien, mieux cadrer un achat et éviter les décisions trop rapides.</p>
-            <div class="hub-card-links">
               <a class="hub-link" href="acheter-marseille-relire-bien-avant-decider.html">
                 Lire la page sur acheter à Marseille et relire un bien avant de décider
-                <small>Relire un bien avant décision et éviter les angles morts.</small>
-              </a>
-              <a class="hub-link" href="qui-consulter-a-marseille.html">
-                Lire la page sur qui consulter à Marseille avant achat, vente ou estimation
-                <small>Clarifier le bon interlocuteur avant de lancer le projet.</small>
+                <small>Éviter les angles morts avant une acquisition.</small>
               </a>
               <a class="hub-link" href="marseille-bon-cadrage.html">
                 Lire la page sur le bon cadrage immobilier à Marseille
@@ -980,13 +966,6 @@
                 <small>Comparer portage, indépendance et autres cadres d’exercice.</small>
               </a>
             </div>
-          </article>
-
-          <article class="hub-card">
-            <span class="mini-badge">Accès global</span>
-            <h3>Bibliothèque immobilière complète</h3>
-            <p>Point d’entrée large pour parcourir estimation, vente, achat, DPE, quartiers, rues, location, gestion locative et sujets métiers.</p>
-            <a class="button" href="bibliotheque-immobilier-marseille.html">Ouvrir la bibliothèque immobilière à Marseille</a>
           </article>
         </div>
       </div>
@@ -1062,14 +1041,14 @@
             <span class="mini-badge">LinkedIn</span>
             <h3>Consulter ma page LinkedIn</h3>
             <p>Pour découvrir mon parcours, ma lecture du métier, mes prises de position et ma manière d’aborder l’immobilier, le recrutement et la structuration d’activité.</p>
-            <a class="button" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">Consulter ma page LinkedIn</a>
+            <a class="button" href="https://www.linkedin.com/in/bruno-lebert-9322805a/?skipRedirect=true" target="_blank" rel="noopener noreferrer">Consulter ma page LinkedIn</a>
           </div>
 
           <div class="trust-card">
             <span class="mini-badge">Gens de Confiance</span>
             <h3>Consulter mon profil Gens de Confiance</h3>
             <p>Pour prolonger cette logique de confiance, de recommandation, de discrétion et de relation qualitative avant mise en relation ou prise de contact.</p>
-            <a class="button" href="https://www.gensdeconfiance.com" target="_blank" rel="noopener noreferrer">Consulter mon profil Gens de Confiance</a>
+            <a class="button" href="https://gensdeconfiance.com/fr/ui/profiles/bec17058-b550-41df-8cd4-8e2ddc050d1d" target="_blank" rel="noopener noreferrer">Consulter mon profil Gens de Confiance</a>
           </div>
         </div>
       </div>
