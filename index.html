@@ -60,7 +60,6 @@
       --hero: #142235;
       --hero-soft: #1e3148;
       --accent: #b8825a;
-      --accent-soft: #efe3d7;
       --white-soft: rgba(255,255,255,0.88);
     }
 
@@ -318,10 +317,10 @@
       border: 1px solid #cfd9e4;
       border-radius: 999px;
       padding: 12px 18px;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 14px;
       margin-top: 18px;
-      background: #fff;
+      background: #ffffff;
     }
 
     .button:hover {
@@ -330,7 +329,7 @@
 
     .compact-grid {
       display: grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1fr;
       gap: 24px;
       margin-top: 26px;
     }
@@ -343,20 +342,6 @@
 
     .compact-card li + li {
       margin-top: 8px;
-    }
-
-    .quote-card {
-      background: linear-gradient(180deg, #ffffff, #fcfcfc);
-      border: 1px solid var(--line);
-      border-radius: 26px;
-      padding: 26px;
-    }
-
-    .quote-text {
-      font-size: 22px;
-      line-height: 1.42;
-      color: var(--text);
-      margin: 8px 0 0;
     }
 
     .geo-grid {
@@ -661,17 +646,23 @@
     .footer-links a {
       color: #475569;
       font-weight: 600;
+      position: relative;
+      padding-right: 18px;
     }
 
     .footer-links a::after {
       content: "•";
-      margin-left: 18px;
+      position: absolute;
+      right: 0;
       color: #94a3b8;
+    }
+
+    .footer-links a:last-child {
+      padding-right: 0;
     }
 
     .footer-links a:last-child::after {
       content: "";
-      margin: 0;
     }
 
     @media (max-width: 980px) {
@@ -680,7 +671,6 @@
       }
 
       .hero-inner,
-      .compact-grid,
       .grid-3,
       .grid-2,
       .geo-grid,
@@ -725,9 +715,17 @@
         gap: 10px;
       }
 
+      .footer-links {
+        display: grid;
+        gap: 10px;
+      }
+
+      .footer-links a {
+        padding-right: 0;
+      }
+
       .footer-links a::after {
         content: "";
-        margin: 0;
       }
     }
   </style>
@@ -748,7 +746,6 @@
           </div>
 
           <div class="hero-mini-nav">
-            <a class="hero-mini-link" href="#qui-est-bruno-lebert">Qui est Bruno Lebert ?</a>
             <a class="hero-mini-link" href="#entrees-principales">Entrées principales</a>
             <a class="hero-mini-link" href="#navigation-besoin">Navigation par besoin</a>
             <a class="hero-mini-link" href="#confiance-externe">Profils et confiance</a>
@@ -810,12 +807,8 @@
               <li>Lecture concrète des ventes, achats, estimations, locations et arbitrages immobiliers.</li>
               <li>Ancrage marseillais et lecture fine des quartiers, rues, immeubles et micro-secteurs.</li>
               <li>Capacité à remettre de l’ordre, du tempo et de la cohérence dans une décision immobilière.</li>
+              <li>Avant de vendre, acheter, louer, arbitrer ou faire estimer, il faut souvent d’abord relire la situation avec quelqu’un capable de la cadrer proprement.</li>
             </ul>
-          </div>
-
-          <div class="quote-card">
-            <div class="eyebrow">Pourquoi consulter Bruno Lebert ?</div>
-            <p class="quote-text">Avant de vendre, acheter, louer, arbitrer ou faire estimer, il faut souvent d’abord relire la situation avec quelqu’un capable de la cadrer proprement.</p>
           </div>
         </div>
       </div>
@@ -859,7 +852,7 @@
           <div class="geo-card">
             <h3>Explorer aussi les secteurs parfois moins traités</h3>
             <p>Le site a aussi vocation à travailler des secteurs moins représentés, dès lors qu’il y a du mouvement, des opportunités et un vrai besoin de lecture locale.</p>
-            <a class="button" href="bibliotheque-immobilier-marseille.html">Parcourir les entrées locales dans la bibliothèque</a>
+            <a class="button" href="bibliotheque-immobilier-marseille.html#rues-quartiers">Parcourir les entrées locales dans la bibliothèque</a>
           </div>
         </div>
       </div>
@@ -1073,7 +1066,7 @@
           <a href="demander-estimation-marseille.html">Estimation</a>
           <a href="estimation-immobiliere-marseille-prix-m2.html">Prix au m²</a>
           <a href="bibliotheque-immobilier-marseille.html">Quartiers</a>
-          <a href="bibliotheque-immobilier-marseille.html">Rues</a>
+          <a href="bibliotheque-immobilier-marseille.html#rues-quartiers">Rue</a>
           <a href="vendre-marseille-avant-publier-annonce.html">Vente</a>
           <a href="acheter-marseille-relire-bien-avant-decider.html">Achat</a>
           <a href="mettre-en-location-bien-marseille.html">Location</a>
@@ -1125,6 +1118,11 @@
       <a class="quick-link" href="contact-immobilier-marseille.html">
         <strong>Prendre rendez-vous pour un projet immobilier</strong>
         <span>Premier échange pour clarifier une vente, un achat, une location ou une situation immobilière.</span>
+      </a>
+
+      <a class="quick-link" href="bibliotheque-immobilier-marseille.html">
+        <strong>Explorer la bibliothèque</strong>
+        <span>Parcourir les articles par thème, rue, quartier, métier ou besoin.</span>
       </a>
 
       <a class="quick-link" href="postuler-immobilier-marseille.html">
