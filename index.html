@@ -209,6 +209,16 @@
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
     }
 
+    .card.equal-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card.equal-card .button {
+      margin-top: auto;
+    }
+
     .soft-box {
       background: var(--accent-soft);
       border-radius: 32px;
@@ -262,7 +272,8 @@
     }
 
     .article-card p,
-    .card p {
+    .card p,
+    .hub-card p {
       color: var(--muted);
     }
 
@@ -312,20 +323,42 @@
       border: 1px solid var(--line);
       border-radius: 24px;
       padding: 24px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
     }
 
-    .hub-card ul {
-      margin: 16px 0 0;
-      padding-left: 18px;
+    .hub-card-links {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .hub-link {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .hub-link small {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      line-height: 1.4;
       color: var(--muted);
+      font-weight: 500;
     }
 
-    .hub-card li + li {
-      margin-top: 8px;
+    .hub-link:hover {
+      background: #f8fafc;
     }
 
     .hub-card .button {
-      margin-top: 16px;
+      margin-top: auto;
     }
 
     .cta {
@@ -361,16 +394,6 @@
     .btn-dark {
       border: 1px solid rgba(255,255,255,0.2);
       color: white;
-    }
-
-    .simple-list {
-      margin: 18px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-    }
-
-    .simple-list li + li {
-      margin-top: 8px;
     }
 
     .floating-stack {
@@ -526,6 +549,29 @@
       font-weight: 600;
     }
 
+    .footer-links a::after {
+      content: "•";
+      margin-left: 18px;
+      color: #94a3b8;
+    }
+
+    .footer-links a:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    .footer-social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-top: 14px;
+    }
+
+    .footer-social a {
+      color: #475569;
+      font-weight: 600;
+    }
+
     @media (max-width: 900px) {
       .grid-3,
       .grid-2,
@@ -572,6 +618,11 @@
       .cta-buttons {
         gap: 10px;
       }
+
+      .footer-links a::after {
+        content: "";
+        margin: 0;
+      }
     }
   </style>
 </head>
@@ -587,7 +638,7 @@
 
           <div class="hero-buttons">
             <a class="btn-light" href="contact-immobilier-marseille.html">Demander une estimation immobilière à Marseille</a>
-            <a class="btn-dark" href="contact-immobilier-marseille.html">Faire une demande immobilière à Marseille</a>
+            <a class="btn-dark" href="contact-immobilier-marseille.html">Formulaire de contact immobilier à Marseille</a>
           </div>
 
           <nav class="anchor-nav" aria-label="Accès rapides vers les grandes entrées du site">
@@ -622,21 +673,21 @@
   <main>
     <section aria-labelledby="actions-rapides">
       <div class="container grid-3">
-        <div class="card">
+        <div class="card equal-card">
           <span class="mini-badge">Estimation</span>
           <h2 id="actions-rapides" style="font-size: 28px; margin-top: 14px;">Demander une estimation immobilière</h2>
           <p>Appartement, maison, immeuble, bien locatif : demander un avis de valeur ou une première lecture de positionnement à Marseille.</p>
           <a class="button" href="contact-immobilier-marseille.html">Passer par le formulaire de demande d’estimation</a>
         </div>
 
-        <div class="card">
+        <div class="card equal-card">
           <span class="mini-badge">Conseil immobilier</span>
           <h3>Lire avant d’agir à Marseille</h3>
           <p>Un bon projet immobilier ne commence pas toujours par une annonce. Il commence souvent par une lecture sérieuse de la situation, du secteur, du tempo et des arbitrages possibles.</p>
           <a class="button" href="qui-consulter-a-marseille.html">Lire la page sur qui consulter à Marseille avant une décision immobilière</a>
         </div>
 
-        <div class="card">
+        <div class="card equal-card">
           <span class="mini-badge">Apport d’affaires</span>
           <h3>Transmettre un projet de vente</h3>
           <p>Un proche, un voisin, un artisan, un contact vous parle d’un bien à vendre à Marseille : transmettez l’information simplement.</p>
@@ -689,21 +740,21 @@
         <p class="subline">Le site est structuré pour aider à demander une estimation, préparer une vente, relire un achat, clarifier une location ou comprendre certains statuts dans l’immobilier.</p>
 
         <div class="grid-3" style="margin-top: 28px;">
-          <article class="card article-card">
+          <article class="card article-card equal-card">
             <span class="badge">Estimation</span>
             <h3>Demander une estimation immobilière à Marseille</h3>
             <p>Obtenir un avis de valeur, demander une estimation, prendre rendez-vous ou faire relire le positionnement d’un bien.</p>
             <a class="button" href="demander-estimation-marseille.html">Lire la page pour demander une estimation immobilière à Marseille</a>
           </article>
 
-          <article class="card article-card">
+          <article class="card article-card equal-card">
             <span class="badge">Bibliothèque</span>
             <h3>Explorer les articles immobiliers à Marseille</h3>
             <p>Estimation, vente, achat, location, gestion locative, DPE, quartiers, statuts, candidature et portes d’entrée locales.</p>
             <a class="button" href="bibliotheque-immobilier-marseille.html">Explorer la bibliothèque immobilière à Marseille</a>
           </article>
 
-          <article class="card article-card">
+          <article class="card article-card equal-card">
             <span class="badge">Candidature</span>
             <h3>Postuler dans l’immobilier à Marseille</h3>
             <p>Envoyer votre candidature, prendre un premier contact et comprendre plus clairement le cadre, les moyens et la réalité du travail.</p>
@@ -723,55 +774,100 @@
             <span class="mini-badge">Estimation</span>
             <h3>Estimation immobilière à Marseille</h3>
             <p>Pages utiles pour demander une estimation, comprendre un avis de valeur, lire un prix au m² ou travailler par rue et par micro-secteur.</p>
-            <ul>
-              <li><a href="demander-estimation-marseille.html">Demander une estimation immobilière à Marseille</a></li>
-              <li><a href="estimation-avant-vendre-marseille.html">Lire la page sur l’estimation avant de vendre à Marseille</a></li>
-              <li><a href="estimation-immobiliere-marseille-prix-m2.html">Lire la page sur l’estimation immobilière à Marseille et le prix au m²</a></li>
-            </ul>
+            <div class="hub-card-links">
+              <a class="hub-link" href="demander-estimation-marseille.html">
+                Demander une estimation immobilière à Marseille
+                <small>Accéder à la page dédiée à la demande d’estimation.</small>
+              </a>
+              <a class="hub-link" href="estimation-avant-vendre-marseille.html">
+                Lire la page sur l’estimation avant de vendre à Marseille
+                <small>Comprendre pourquoi le bon prix se prépare avant mise en vente.</small>
+              </a>
+              <a class="hub-link" href="estimation-immobiliere-marseille-prix-m2.html">
+                Lire la page sur l’estimation immobilière à Marseille et le prix au m²
+                <small>Comprendre pourquoi la moyenne au m² ne suffit jamais.</small>
+              </a>
+            </div>
           </article>
 
           <article class="hub-card">
             <span class="mini-badge">Vente</span>
             <h3>Vendre un bien à Marseille</h3>
             <p>Préparer une vente, clarifier le tempo, vérifier le bon niveau de prix et éviter une mise en marché mal cadrée.</p>
-            <ul>
-              <li><a href="vendre-marseille-avant-publier-annonce.html">Lire la page sur la vente à Marseille avant publication d’annonce</a></li>
-              <li><a href="vendre-appartement-vauban-marseille-6e.html">Lire la page sur la vente d’un appartement à Vauban Marseille 6e</a></li>
-              <li><a href="vendre-appartement-endoume-marseille-7e.html">Lire la page sur la vente d’un appartement à Endoume Marseille 7e</a></li>
-            </ul>
+            <div class="hub-card-links">
+              <a class="hub-link" href="vendre-marseille-avant-publier-annonce.html">
+                Lire la page sur la vente à Marseille avant publication d’annonce
+                <small>Préparer correctement une vente avant diffusion.</small>
+              </a>
+              <a class="hub-link" href="vendre-appartement-vauban-marseille-6e.html">
+                Lire la page sur la vente d’un appartement à Vauban Marseille 6e
+                <small>Entrée locale sur le secteur Vauban.</small>
+              </a>
+              <a class="hub-link" href="vendre-appartement-endoume-marseille-7e.html">
+                Lire la page sur la vente d’un appartement à Endoume Marseille 7e
+                <small>Entrée locale sur le secteur Endoume.</small>
+              </a>
+            </div>
           </article>
 
           <article class="hub-card">
             <span class="mini-badge">Achat</span>
             <h3>Acheter à Marseille avec une lecture plus claire</h3>
             <p>Relire un bien, mieux cadrer un achat et éviter les décisions trop rapides sur un dossier mal compris.</p>
-            <ul>
-              <li><a href="acheter-marseille-relire-bien-avant-decider.html">Lire la page sur acheter à Marseille et relire un bien avant de décider</a></li>
-              <li><a href="qui-consulter-a-marseille.html">Lire la page sur qui consulter à Marseille avant achat, vente ou estimation</a></li>
-              <li><a href="marseille-bon-cadrage.html">Lire la page sur le bon cadrage immobilier à Marseille</a></li>
-            </ul>
+            <div class="hub-card-links">
+              <a class="hub-link" href="acheter-marseille-relire-bien-avant-decider.html">
+                Lire la page sur acheter à Marseille et relire un bien avant de décider
+                <small>Relire un bien avant décision et éviter les angles morts.</small>
+              </a>
+              <a class="hub-link" href="qui-consulter-a-marseille.html">
+                Lire la page sur qui consulter à Marseille avant achat, vente ou estimation
+                <small>Clarifier le bon interlocuteur avant de lancer le projet.</small>
+              </a>
+              <a class="hub-link" href="marseille-bon-cadrage.html">
+                Lire la page sur le bon cadrage immobilier à Marseille
+                <small>Structurer la réflexion avant passage à l’action.</small>
+              </a>
+            </div>
           </article>
 
           <article class="hub-card">
             <span class="mini-badge">Location</span>
             <h3>Location et gestion locative à Marseille</h3>
             <p>Mise en location, gestion locative, lecture d’un bien locatif, arbitrages particuliers ou SCI.</p>
-            <ul>
-              <li><a href="mettre-en-location-bien-marseille.html">Lire la page sur la mise en location d’un bien à Marseille</a></li>
-              <li><a href="gestion-locative-marseille-particulier-sci.html">Lire la page sur la gestion locative à Marseille pour particulier ou SCI</a></li>
-              <li><a href="contact-immobilier-marseille.html">Faire une demande liée à une location ou une gestion locative à Marseille</a></li>
-            </ul>
+            <div class="hub-card-links">
+              <a class="hub-link" href="mettre-en-location-bien-marseille.html">
+                Lire la page sur la mise en location d’un bien à Marseille
+                <small>Préparer la mise en location d’un appartement ou d’une maison.</small>
+              </a>
+              <a class="hub-link" href="gestion-locative-marseille-particulier-sci.html">
+                Lire la page sur la gestion locative à Marseille pour particulier ou SCI
+                <small>Comprendre les enjeux de gestion locative et d’organisation.</small>
+              </a>
+              <a class="hub-link" href="contact-immobilier-marseille.html">
+                Faire une demande liée à une location ou une gestion locative à Marseille
+                <small>Passer par le formulaire pour clarifier la situation.</small>
+              </a>
+            </div>
           </article>
 
           <article class="hub-card">
             <span class="mini-badge">Statuts</span>
             <h3>Statuts et métiers dans l’immobilier</h3>
             <p>Conseiller immobilier, agent commercial, mandataire, micro-entrepreneur, portage salarial, VRP, assurance, redevance.</p>
-            <ul>
-              <li><a href="statuts-conseiller-immobilier-marseille.html">Lire la page sur les statuts de conseiller immobilier à Marseille</a></li>
-              <li><a href="agent-commercial-immobilier-independant-marseille.html">Lire la page sur l’agent commercial immobilier indépendant à Marseille</a></li>
-              <li><a href="portage-salarial-immobilier-marseille.html">Lire la page sur le portage salarial dans l’immobilier</a></li>
-            </ul>
+            <div class="hub-card-links">
+              <a class="hub-link" href="statuts-conseiller-immobilier-marseille.html">
+                Lire la page sur les statuts de conseiller immobilier à Marseille
+                <small>Vue d’ensemble sur les principaux cadres d’exercice.</small>
+              </a>
+              <a class="hub-link" href="agent-commercial-immobilier-independant-marseille.html">
+                Lire la page sur l’agent commercial immobilier indépendant à Marseille
+                <small>Comprendre le statut indépendant en transaction immobilière.</small>
+              </a>
+              <a class="hub-link" href="portage-salarial-immobilier-marseille.html">
+                Lire la page sur le portage salarial dans l’immobilier
+                <small>Comparer portage, indépendance et autres cadres d’exercice.</small>
+              </a>
+            </div>
           </article>
 
           <article class="hub-card">
@@ -791,21 +887,21 @@
         <p class="subline">Trois lectures de départ pour comprendre la logique du site et entrer rapidement dans les sujets estimation, prix, secteurs et cohérence d’un projet immobilier.</p>
 
         <div class="grid-3" style="margin-top: 28px;">
-          <article class="card article-card">
+          <article class="card article-card equal-card">
             <span class="badge">Estimation</span>
             <h3>Estimation avant de vendre à Marseille</h3>
             <p>Pourquoi une estimation sérieuse demande de lire le bien, l’immeuble, le secteur, le tempo et la cohérence réelle du prix.</p>
             <a class="button" href="estimation-avant-vendre-marseille.html">Lire l’article sur l’estimation avant de vendre à Marseille</a>
           </article>
 
-          <article class="card article-card">
+          <article class="card article-card equal-card">
             <span class="badge">Prix</span>
             <h3>Estimation immobilière à Marseille : pourquoi le prix au m² ne suffit jamais</h3>
             <p>À Marseille, une estimation sérieuse ne se réduit jamais à une moyenne. Rue, immeuble, étage, état et micro-secteur changent la lecture.</p>
             <a class="button" href="estimation-immobiliere-marseille-prix-m2.html">Lire l’article sur l’estimation immobilière à Marseille et le prix au m²</a>
           </article>
 
-          <article class="card article-card">
+          <article class="card article-card equal-card">
             <span class="badge">Micro-secteur</span>
             <h3>Estimation appartement secteur Chave, Saint-Michel, Sébastopol, Longchamp</h3>
             <p>Un corridor de vie très lisible à Marseille, où la fluidité piétonne, l’ambiance et la projection résidentielle pèsent fortement sur la valeur.</p>
@@ -927,6 +1023,10 @@
         <a href="gestion-locative-marseille-particulier-sci.html">Gestion locative à Marseille pour particulier ou SCI</a>
         <a href="postuler-immobilier-marseille.html">Postuler dans l’immobilier à Marseille</a>
         <a href="contact-immobilier-marseille.html">Contact immobilier à Marseille</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.gensdeconfiance.com" target="_blank" rel="noopener noreferrer">Gens de Confiance</a>
       </div>
     </div>
   </footer>
