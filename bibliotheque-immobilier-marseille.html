@@ -26,7 +26,7 @@
 
     body {
       margin: 0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-family: Inter, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
@@ -189,11 +189,6 @@
       margin: 0 0 14px;
     }
 
-    .summary-item .button,
-    .quick-item .button {
-      margin-top: 0;
-    }
-
     .article-list {
       display: grid;
       gap: 14px;
@@ -233,22 +228,6 @@
 
     .button:hover {
       background: #f8fbfd;
-    }
-
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .coming-soon {
-      font-size: 14px;
-      color: #64748b;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 8px;
     }
 
     .floating-stack {
@@ -400,31 +379,6 @@
       margin-bottom: 22px;
     }
 
-    .bottom-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .bottom-nav a,
-    .bottom-nav button {
-      display: inline-block;
-      border: 1px solid #cfd9e4;
-      border-radius: 999px;
-      padding: 12px 18px;
-      background: #ffffff;
-      color: var(--text);
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .bottom-nav a:hover,
-    .bottom-nav button:hover {
-      background: #f8fbfd;
-    }
-
     @media (max-width: 700px) {
       .container {
         padding: 0 16px 110px;
@@ -474,7 +428,6 @@
     <div class="container" style="padding-bottom: 0;">
       <div class="hero-top">
         <a href="index.html" class="back-link">← Retour à l’accueil</a>
-        <a href="#bottom-nav" class="top-link">↓ Aller en bas</a>
       </div>
 
       <div class="page-tag">Bibliothèque</div>
@@ -629,11 +582,6 @@
         À Marseille, une rue, un axe, un tronçon ou une continuité de quartier peuvent changer complètement
         la lecture de valeur, la désirabilité et la projection acquéreur.
       </p>
-
-      <div class="button-row">
-        <a class="button" href="bibliotheque-immobilier-marseille.html#rues-quartiers">Rester sur les lectures locales</a>
-        <a class="button" href="marseille-5e-arrondissement.html">Lire l’article sur Marseille 5e</a>
-      </div>
 
       <div class="article-list">
         <div class="article-item searchable-item" data-search="secteur chave saint-michel sébastopol longchamp estimation appartement marseille">
@@ -823,8 +771,7 @@
       <div class="section-label">DPE et copropriété</div>
       <h2>Lire ce qui change vraiment dans un immeuble</h2>
       <p class="section-intro">
-        DPE, DPE collectif, PPPT, copropriété, qualité d’immeuble : autant de sujets qui
-        comptent dans la décision, la projection et la lecture de valeur.
+        DPE, DPE collectif, PPPT, copropriété, qualité d’immeuble : autant de sujets qui comptent dans la décision, la projection et la lecture de valeur.
       </p>
 
       <div class="article-list">
@@ -980,21 +927,6 @@
         </div>
       </div>
     </div>
-
-    <div id="bottom-nav" class="section-card">
-      <div class="section-label">Navigation de fin</div>
-      <h2>Retour, suite et navigation rapide</h2>
-      <p class="section-intro">
-        Si vous êtes arrivé en bas, vous pouvez revenir à l’accueil, remonter en haut ou continuer via la recherche et les accès rapides.
-      </p>
-
-      <div class="bottom-nav">
-        <a href="index.html">← Retour à l’accueil</a>
-        <button type="button" id="bottom-top-button">↑ Retour vers le haut</button>
-        <a href="#acces-rapides">Accès rapides</a>
-        <a href="#rues-quartiers">Rues et quartiers</a>
-      </div>
-    </div>
   </div>
 
   <div class="floating-stack">
@@ -1040,6 +972,11 @@
         <span>Premier échange pour clarifier une vente, un achat ou une situation immobilière.</span>
       </a>
 
+      <a class="quick-link" href="bibliotheque-immobilier-marseille.html">
+        <strong>Explorer la bibliothèque</strong>
+        <span>Parcourir les contenus par thème, rue, quartier ou besoin.</span>
+      </a>
+
       <a class="quick-link" href="postuler-immobilier-marseille.html">
         <strong>Envoyer votre candidature</strong>
         <span>Postuler et prendre un premier contact dans l’immobilier à Marseille.</span>
@@ -1076,7 +1013,6 @@
     const searchPanel = document.getElementById('search-panel');
     const topToggle = document.getElementById('top-toggle');
     const homeToggle = document.getElementById('home-toggle');
-    const bottomTopButton = document.getElementById('bottom-top-button');
 
     function closePanel(panel, button) {
       panel.classList.remove('open');
@@ -1112,10 +1048,6 @@
     });
 
     topToggle.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    bottomTopButton.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
