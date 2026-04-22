@@ -54,15 +54,14 @@
       --line: #e2e8f0;
       --accent-soft: #eae4d8;
       --hero: #020617;
+      --hero-soft: #0f172a;
       --soft-white: rgba(255,255,255,0.86);
-      --soft-dark: #f8fafc;
+      --shadow: 0 20px 50px rgba(0,0,0,0.18);
     }
 
     * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -75,25 +74,29 @@
     a { color: inherit; text-decoration: none; }
 
     .container {
-      max-width: 1160px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
     .hero {
+      position: relative;
+      overflow: hidden;
       background:
         radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 35%),
         radial-gradient(circle at bottom right, rgba(255,255,255,0.08), transparent 25%),
         var(--hero);
       color: white;
-      padding: 84px 0 96px;
+      padding: 84px 0 120px;
     }
 
     .hero-inner {
       display: grid;
-      grid-template-columns: minmax(0, 1.18fr) minmax(320px, 420px);
-      gap: 48px;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 440px);
+      gap: 54px;
       align-items: center;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-copy { min-width: 0; }
@@ -101,17 +104,44 @@
     .hero-photo-wrap {
       display: flex;
       justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-photo-frame {
+      position: relative;
+      width: 100%;
+      max-width: 410px;
+      padding: 18px;
+      border-radius: 38px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 25px 70px rgba(0,0,0,0.24);
+      transform: translateY(18px);
     }
 
     .hero-photo {
       width: 100%;
-      max-width: 400px;
+      display: block;
       aspect-ratio: 4 / 5;
       object-fit: cover;
-      border-radius: 32px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
       background: rgba(255,255,255,0.04);
+    }
+
+    .hero-photo-note {
+      position: absolute;
+      left: -18px;
+      bottom: 28px;
+      background: rgba(255,255,255,0.96);
+      color: var(--text);
+      border-radius: 18px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.35;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.14);
+      max-width: 220px;
     }
 
     .pill {
@@ -125,7 +155,7 @@
     }
 
     h1 {
-      font-size: clamp(42px, 8vw, 68px);
+      font-size: clamp(42px, 8vw, 70px);
       line-height: 1.02;
       margin: 20px 0 0;
       font-weight: 700;
@@ -134,31 +164,15 @@
     .hero-subtitle {
       font-size: clamp(24px, 3vw, 36px);
       margin: 16px 0 0;
-      color: rgba(255,255,255,0.92);
+      color: rgba(255,255,255,0.94);
       max-width: 980px;
     }
 
     .hero-text {
-      max-width: 860px;
+      max-width: 850px;
       font-size: 19px;
-      color: rgba(255,255,255,0.76);
+      color: rgba(255,255,255,0.78);
       margin-top: 24px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 34px;
-    }
-
-    .tag {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 999px;
-      padding: 9px 14px;
-      font-size: 14px;
-      color: rgba(255,255,255,0.9);
     }
 
     .hero-buttons {
@@ -166,6 +180,24 @@
       flex-wrap: wrap;
       gap: 14px;
       margin-top: 28px;
+    }
+
+    .btn-light, .btn-dark {
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--hero);
+    }
+
+    .btn-dark {
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
     }
 
     .anchor-nav {
@@ -190,10 +222,25 @@
       background: rgba(255,255,255,0.08);
     }
 
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .tag {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+    }
+
     section { padding: 56px 0; }
 
-    .grid-3,
-    .grid-2 {
+    .grid-3, .grid-2 {
       display: grid;
       gap: 24px;
     }
@@ -209,13 +256,13 @@
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
     }
 
-    .card.equal-card {
+    .equal-card {
       display: flex;
       flex-direction: column;
-      height: 100%;
+      min-height: 100%;
     }
 
-    .card.equal-card .button {
+    .equal-card .button {
       margin-top: auto;
     }
 
@@ -240,7 +287,7 @@
     }
 
     h3 {
-      font-size: 26px;
+      font-size: 24px;
       line-height: 1.2;
       margin: 14px 0 0;
     }
@@ -249,7 +296,7 @@
       margin: 12px 0 0;
       font-size: 17px;
       color: var(--muted);
-      max-width: 900px;
+      max-width: 920px;
     }
 
     p.lead {
@@ -273,7 +320,9 @@
 
     .article-card p,
     .card p,
-    .hub-card p {
+    .hub-card p,
+    .trust-card p,
+    .bio-card p {
       color: var(--muted);
     }
 
@@ -311,6 +360,38 @@
       background: #f8fafc;
     }
 
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .bio-card ul {
+      margin: 18px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .bio-card li + li {
+      margin-top: 8px;
+    }
+
+    .quote-card {
+      background: linear-gradient(180deg, #ffffff, #fbfbfb);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .quote-text {
+      font-size: 22px;
+      line-height: 1.45;
+      color: var(--text);
+      margin: 10px 0 0;
+    }
+
     .hub-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -322,7 +403,7 @@
       background: #ffffff;
       border: 1px solid var(--line);
       border-radius: 24px;
-      padding: 24px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
       min-height: 100%;
@@ -330,18 +411,20 @@
 
     .hub-card-links {
       display: grid;
-      gap: 12px;
-      margin-top: 18px;
+      gap: 10px;
+      margin-top: 16px;
     }
 
     .hub-link {
       display: block;
-      padding: 14px 16px;
-      border-radius: 18px;
+      padding: 12px 14px;
+      border-radius: 16px;
       border: 1px solid #e2e8f0;
       background: #fff;
       font-weight: 600;
       color: var(--text);
+      font-size: 14px;
+      line-height: 1.45;
     }
 
     .hub-link small {
@@ -357,7 +440,25 @@
       background: #f8fafc;
     }
 
-    .hub-card .button {
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .trust-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .trust-card .button {
       margin-top: auto;
     }
 
@@ -375,25 +476,6 @@
       flex-wrap: wrap;
       gap: 14px;
       margin-top: 24px;
-    }
-
-    .btn-light,
-    .btn-dark {
-      border-radius: 999px;
-      padding: 14px 20px;
-      font-size: 14px;
-      font-weight: 700;
-      display: inline-block;
-    }
-
-    .btn-light {
-      background: white;
-      color: var(--hero);
-    }
-
-    .btn-dark {
-      border: 1px solid rgba(255,255,255,0.2);
-      color: white;
     }
 
     .floating-stack {
@@ -560,45 +642,37 @@
       margin: 0;
     }
 
-    .footer-social {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 18px;
-      margin-top: 14px;
-    }
+    @media (max-width: 980px) {
+      .hero {
+        padding: 64px 0 76px;
+      }
 
-    .footer-social a {
-      color: #475569;
-      font-weight: 600;
-    }
-
-    @media (max-width: 900px) {
+      .hero-inner,
+      .bio-grid,
       .grid-3,
       .grid-2,
-      .hub-grid {
+      .hub-grid,
+      .trust-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        padding: 64px 0 72px;
+      .hero-photo-frame {
+        max-width: 360px;
+        transform: none;
       }
 
-      .hero-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-copy { order: 2; }
-      .hero-photo-wrap { order: 1; }
-
-      .soft-box,
-      .cta,
-      .card,
-      .hub-card {
-        padding: 24px;
+      .hero-photo-note {
+        left: 14px;
+        bottom: 14px;
+        max-width: 210px;
       }
     }
 
     @media (max-width: 640px) {
+      .container {
+        padding: 0 18px;
+      }
+
       .floating-stack {
         right: 12px;
         bottom: 12px;
@@ -623,11 +697,17 @@
         content: "";
         margin: 0;
       }
+
+      .hero-photo-note {
+        position: static;
+        margin-top: 12px;
+        max-width: none;
+      }
     }
   </style>
 </head>
 <body>
-  <header class="hero">
+  <header class="hero" id="top">
     <div class="container">
       <div class="hero-inner">
         <div class="hero-copy">
@@ -642,10 +722,10 @@
           </div>
 
           <nav class="anchor-nav" aria-label="Accès rapides vers les grandes entrées du site">
+            <a class="anchor-link" href="#qui-est-bruno-lebert">Qui est Bruno Lebert ?</a>
             <a class="anchor-link" href="#entrees-principales">Entrées principales</a>
-            <a class="anchor-link" href="#estimation-vente-achat-location">Estimation, vente, achat, location</a>
-            <a class="anchor-link" href="#articles-a-la-une">Articles à la une</a>
-            <a class="anchor-link" href="bibliotheque-immobilier-marseille.html">Bibliothèque immobilière à Marseille</a>
+            <a class="anchor-link" href="#navigation-besoin">Navigation par besoin</a>
+            <a class="anchor-link" href="#confiance-externe">Profils et confiance</a>
           </nav>
 
           <div class="tags">
@@ -660,11 +740,16 @@
         </div>
 
         <div class="hero-photo-wrap">
-          <img
-            src="bruno-lebert-conseil-immobilier-marseille.png"
-            alt="Portrait de Bruno Lebert, conseil immobilier à Marseille"
-            class="hero-photo"
-          />
+          <div class="hero-photo-frame">
+            <img
+              src="bruno-lebert-conseil-immobilier-marseille.png"
+              alt="Portrait de Bruno Lebert, conseil immobilier à Marseille"
+              class="hero-photo"
+            />
+            <div class="hero-photo-note">
+              Lecture locale, cadrage, estimation, vente, achat, location et arbitrage à Marseille.
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -688,10 +773,36 @@
         </div>
 
         <div class="card equal-card">
-          <span class="mini-badge">Apport d’affaires</span>
-          <h3>Transmettre un projet de vente</h3>
-          <p>Un proche, un voisin, un artisan, un contact vous parle d’un bien à vendre à Marseille : transmettez l’information simplement.</p>
-          <a class="button" href="apporteur-affaires-immobilier-marseille.html">Transmettre un projet de vente à Marseille</a>
+          <span class="mini-badge">Recommandation</span>
+          <h3>Signaler un projet immobilier à Marseille</h3>
+          <p>Un proche, un voisin, un artisan, un contact vous parle d’un projet immobilier à Marseille : vous pouvez le signaler simplement et proprement.</p>
+          <a class="button" href="apporteur-affaires-immobilier-marseille.html">Signaler un projet immobilier à Marseille</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="qui-est-bruno-lebert" aria-labelledby="titre-qui-est-bruno">
+      <div class="container">
+        <div class="eyebrow">Parcours et posture</div>
+        <h2 id="titre-qui-est-bruno">Qui est Bruno Lebert ?</h2>
+        <p class="subline">Un professionnel de l’immobilier marseillais qui s’appuie sur l’expérience de direction, le terrain, la structuration et une lecture fine des projets avant décision.</p>
+
+        <div class="bio-grid">
+          <div class="card bio-card">
+            <h3>Un parcours construit dans l’immobilier, la direction et le terrain</h3>
+            <p>Bruno Lebert a construit son parcours dans l’immobilier avec une lecture à la fois opérationnelle, commerciale et managériale. Direction multi-agences, structuration, accompagnement d’équipes, exécution, transmission, lecture du marché local : cette expérience nourrit aujourd’hui une approche plus utile, plus claire et plus solide pour aider à cadrer un projet avant d’agir.</p>
+            <ul>
+              <li>Lecture concrète des ventes, achats, estimations, locations et arbitrages immobiliers.</li>
+              <li>Ancrage marseillais et lecture fine des quartiers, rues, immeubles et micro-secteurs.</li>
+              <li>Capacité à remettre de l’ordre, du tempo et de la cohérence dans une décision immobilière.</li>
+              <li>Approche fondée sur la confiance, la clarté, la méthode et la qualité d’exécution.</li>
+            </ul>
+          </div>
+
+          <div class="quote-card">
+            <div class="eyebrow">Position</div>
+            <p class="quote-text">Avant de vendre, acheter, louer, arbitrer ou faire estimer, il faut souvent d’abord relire la situation avec quelqu’un capable de la cadrer proprement.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -701,7 +812,7 @@
         <div class="soft-box">
           <div class="eyebrow">Positionnement</div>
           <h2 id="positionnement">Estimation, cadrage, orientation et lecture fine des projets immobiliers à Marseille</h2>
-          <p class="lead">Mon parcours comprend la direction multi-agences, les ouvertures, la structuration de l’exécution, la transmission d’un groupe d’agences, et aujourd’hui une lecture plus directement tournée vers l’accompagnement, la clarté et la cohérence des décisions immobilières.</p>
+          <p class="lead">Le site a été pensé pour aider à clarifier une décision avant passage à l’action : vente, achat, estimation, location, gestion locative, lecture de secteur, statuts ou candidature dans l’immobilier.</p>
         </div>
       </div>
     </section>
@@ -715,19 +826,19 @@
         <div class="grid-2" style="margin-top: 28px;">
           <div class="card">
             <h3>2e arrondissement de Marseille</h3>
-            <p>Joliette, Hôtel de Ville, Panier, rue de la République</p>
+            <p>Joliette, Hôtel de Ville, Panier, rue de la République.</p>
           </div>
           <div class="card">
             <h3>4e et 5e arrondissements de Marseille</h3>
-            <p>Camas, Conception, Baille, Saint-Pierre, Blancarde, Longchamp, Cinq-Avenues, Chartreux, Chutes-Lavie</p>
+            <p>Camas, Conception, Baille, Saint-Pierre, Blancarde, Longchamp, Cinq-Avenues, Chartreux, Chutes-Lavie.</p>
           </div>
           <div class="card">
             <h3>6e arrondissement de Marseille</h3>
-            <p>Vauban, Préfecture, Castellane, Pierre-Puget</p>
+            <p>Vauban, Préfecture, Castellane, Pierre-Puget.</p>
           </div>
           <div class="card">
             <h3>7e arrondissement de Marseille</h3>
-            <p>Endoume, Bompard, Roucas-Blanc, Pharo</p>
+            <p>Endoume, Bompard, Roucas-Blanc, Pharo.</p>
           </div>
         </div>
       </div>
@@ -737,7 +848,7 @@
       <div class="container">
         <div class="eyebrow">Entrées principales</div>
         <h2 id="titre-entrees-principales">Les portes d’entrée les plus utiles du site</h2>
-        <p class="subline">Le site est structuré pour aider à demander une estimation, préparer une vente, relire un achat, clarifier une location ou comprendre certains statuts dans l’immobilier.</p>
+        <p class="subline">Estimation, bibliothèque, candidature, lecture de projet, mise en relation ou navigation par grands besoins.</p>
 
         <div class="grid-3" style="margin-top: 28px;">
           <article class="card article-card equal-card">
@@ -764,16 +875,17 @@
       </div>
     </section>
 
-    <section id="estimation-vente-achat-location" aria-labelledby="titre-besoins">
+    <section id="navigation-besoin" aria-labelledby="titre-besoins">
       <div class="container">
         <div class="eyebrow">Navigation par besoin</div>
         <h2 id="titre-besoins">Estimation, vente, achat, location, gestion locative et statuts dans l’immobilier</h2>
+        <p class="subline">Des accès plus clairs, plus visibles et plus directs vers les grandes familles de contenus du site.</p>
 
         <div class="hub-grid">
           <article class="hub-card">
             <span class="mini-badge">Estimation</span>
             <h3>Estimation immobilière à Marseille</h3>
-            <p>Pages utiles pour demander une estimation, comprendre un avis de valeur, lire un prix au m² ou travailler par rue et par micro-secteur.</p>
+            <p>Demande d’estimation, avis de valeur, prix au m², lecture par rue ou micro-secteur.</p>
             <div class="hub-card-links">
               <a class="hub-link" href="demander-estimation-marseille.html">
                 Demander une estimation immobilière à Marseille
@@ -781,11 +893,11 @@
               </a>
               <a class="hub-link" href="estimation-avant-vendre-marseille.html">
                 Lire la page sur l’estimation avant de vendre à Marseille
-                <small>Comprendre pourquoi le bon prix se prépare avant mise en vente.</small>
+                <small>Préparer le bon prix avant mise en vente.</small>
               </a>
               <a class="hub-link" href="estimation-immobiliere-marseille-prix-m2.html">
                 Lire la page sur l’estimation immobilière à Marseille et le prix au m²
-                <small>Comprendre pourquoi la moyenne au m² ne suffit jamais.</small>
+                <small>Comprendre pourquoi la moyenne ne suffit pas.</small>
               </a>
             </div>
           </article>
@@ -793,7 +905,7 @@
           <article class="hub-card">
             <span class="mini-badge">Vente</span>
             <h3>Vendre un bien à Marseille</h3>
-            <p>Préparer une vente, clarifier le tempo, vérifier le bon niveau de prix et éviter une mise en marché mal cadrée.</p>
+            <p>Préparer une vente, clarifier le tempo et éviter une mise en marché mal cadrée.</p>
             <div class="hub-card-links">
               <a class="hub-link" href="vendre-marseille-avant-publier-annonce.html">
                 Lire la page sur la vente à Marseille avant publication d’annonce
@@ -813,7 +925,7 @@
           <article class="hub-card">
             <span class="mini-badge">Achat</span>
             <h3>Acheter à Marseille avec une lecture plus claire</h3>
-            <p>Relire un bien, mieux cadrer un achat et éviter les décisions trop rapides sur un dossier mal compris.</p>
+            <p>Relire un bien, mieux cadrer un achat et éviter les décisions trop rapides.</p>
             <div class="hub-card-links">
               <a class="hub-link" href="acheter-marseille-relire-bien-avant-decider.html">
                 Lire la page sur acheter à Marseille et relire un bien avant de décider
@@ -880,6 +992,34 @@
       </div>
     </section>
 
+    <section aria-labelledby="lectures-cles">
+      <div class="container">
+        <div class="eyebrow">Lectures clés</div>
+        <h2 id="lectures-cles">Lectures clés pour estimer, vendre ou rejoindre l’immobilier à Marseille</h2>
+        <div class="grid-2" style="margin-top: 28px;">
+          <div class="card">
+            <h3>Pages estimation, valeur, prix et avis de valeur</h3>
+            <div class="link-list">
+              <a href="demander-estimation-marseille.html">Demander une estimation immobilière à Marseille</a>
+              <a href="estimation-immobiliere-marseille-prix-m2.html">Comprendre l’estimation immobilière à Marseille et le prix au m²</a>
+              <a href="estimation-appartement-marseille-5e.html">Lire la page sur l’estimation d’un appartement à Marseille 5e</a>
+              <a href="estimation-rue-sainte-cecile-marseille-13005.html">Lire la page sur l’estimation rue Sainte-Cécile Marseille 13005</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Pages métiers, candidature et statuts immobiliers</h3>
+            <div class="link-list">
+              <a href="postuler-immobilier-marseille.html">Postuler dans l’immobilier à Marseille</a>
+              <a href="me-rejoindre-immobilier-marseille.html">Lire la page me rejoindre dans l’immobilier à Marseille</a>
+              <a href="micro-entrepreneur-immobilier-marseille.html">Lire la page sur le micro-entrepreneur dans l’immobilier</a>
+              <a href="assurance-agent-commercial-immobilier.html">Lire la page sur l’assurance de l’agent commercial immobilier</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="articles-a-la-une" aria-labelledby="titre-articles-une">
       <div class="container">
         <div class="eyebrow">Articles à la une</div>
@@ -911,29 +1051,25 @@
       </div>
     </section>
 
-    <section aria-labelledby="pages-prioritaires">
+    <section id="confiance-externe" aria-labelledby="titre-confiance-externe">
       <div class="container">
-        <div class="eyebrow">Pages prioritaires</div>
-        <h2 id="pages-prioritaires">Premières portes d’entrée à fort enjeu d’indexation</h2>
-        <div class="grid-2" style="margin-top: 28px;">
-          <div class="card">
-            <h3>Pages estimation, valeur, prix et avis de valeur</h3>
-            <div class="link-list">
-              <a href="demander-estimation-marseille.html">Demander une estimation immobilière à Marseille</a>
-              <a href="estimation-immobiliere-marseille-prix-m2.html">Comprendre l’estimation immobilière à Marseille et le prix au m²</a>
-              <a href="estimation-appartement-marseille-5e.html">Lire la page sur l’estimation d’un appartement à Marseille 5e</a>
-              <a href="estimation-rue-sainte-cecile-marseille-13005.html">Lire la page sur l’estimation rue Sainte-Cécile Marseille 13005</a>
-            </div>
+        <div class="eyebrow">Profils et confiance</div>
+        <h2 id="titre-confiance-externe">Consulter mes profils et points d’appui de confiance</h2>
+        <p class="subline">Avant de prendre contact, vous pouvez aussi consulter mes profils externes pour mieux situer mon parcours, ma présence et mon univers professionnel.</p>
+
+        <div class="trust-grid">
+          <div class="trust-card">
+            <span class="mini-badge">LinkedIn</span>
+            <h3>Consulter ma page LinkedIn</h3>
+            <p>Pour découvrir mon parcours, ma lecture du métier, mes prises de position et ma manière d’aborder l’immobilier, le recrutement et la structuration d’activité.</p>
+            <a class="button" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">Consulter ma page LinkedIn</a>
           </div>
 
-          <div class="card">
-            <h3>Pages métiers, candidature et statuts immobiliers</h3>
-            <div class="link-list">
-              <a href="postuler-immobilier-marseille.html">Postuler dans l’immobilier à Marseille</a>
-              <a href="me-rejoindre-immobilier-marseille.html">Lire la page me rejoindre dans l’immobilier à Marseille</a>
-              <a href="micro-entrepreneur-immobilier-marseille.html">Lire la page sur le micro-entrepreneur dans l’immobilier</a>
-              <a href="assurance-agent-commercial-immobilier.html">Lire la page sur l’assurance de l’agent commercial immobilier</a>
-            </div>
+          <div class="trust-card">
+            <span class="mini-badge">Gens de Confiance</span>
+            <h3>Consulter mon profil Gens de Confiance</h3>
+            <p>Pour prolonger cette logique de confiance, de recommandation, de discrétion et de relation qualitative avant mise en relation ou prise de contact.</p>
+            <a class="button" href="https://www.gensdeconfiance.com" target="_blank" rel="noopener noreferrer">Consulter mon profil Gens de Confiance</a>
           </div>
         </div>
       </div>
@@ -947,7 +1083,7 @@
           <p class="lead">Pour une vente, un achat, une estimation, une location, une gestion locative, un arbitrage ou un projet à clarifier à Marseille, premier échange confidentiel sur demande.</p>
           <div class="cta-buttons">
             <a class="btn-light" href="contact-immobilier-marseille.html">Passer par le formulaire immobilier à Marseille</a>
-            <a class="btn-dark" href="apporteur-affaires-immobilier-marseille.html">Transmettre un projet de vente à Marseille</a>
+            <a class="btn-dark" href="apporteur-affaires-immobilier-marseille.html">Signaler un projet immobilier à Marseille</a>
             <a class="btn-dark" href="bibliotheque-immobilier-marseille.html">Explorer la bibliothèque immobilière à Marseille</a>
           </div>
         </div>
@@ -959,9 +1095,7 @@
     <div id="search-panel" class="floating-panel">
       <div class="panel-title">Recherche</div>
       <h3 class="search-title">Rechercher un thème, une rue ou un sujet</h3>
-      <p class="search-subtitle">
-        Cette recherche ouvre directement la bibliothèque avec le bon filtre.
-      </p>
+      <p class="search-subtitle">Cette recherche ouvre directement la bibliothèque avec le bon filtre.</p>
       <input
         type="text"
         id="home-search"
@@ -1003,13 +1137,17 @@
       </a>
 
       <a class="quick-link" href="apporteur-affaires-immobilier-marseille.html">
-        <strong>Transmettre un projet de vente à Marseille</strong>
+        <strong>Signaler un projet immobilier à Marseille</strong>
         <span>Faire remonter une information utile de manière simple et discrète.</span>
       </a>
     </div>
 
     <button id="quick-toggle" class="floating-button" type="button" aria-expanded="false" aria-controls="quick-panel">
       Accès rapide
+    </button>
+
+    <button id="top-toggle" class="floating-button" type="button" aria-label="Revenir en haut de page">
+      ↑ Haut de page
     </button>
   </div>
 
@@ -1024,10 +1162,6 @@
         <a href="postuler-immobilier-marseille.html">Postuler dans l’immobilier à Marseille</a>
         <a href="contact-immobilier-marseille.html">Contact immobilier à Marseille</a>
       </div>
-      <div class="footer-social">
-        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://www.gensdeconfiance.com" target="_blank" rel="noopener noreferrer">Gens de Confiance</a>
-      </div>
     </div>
   </footer>
 
@@ -1036,6 +1170,7 @@
     const quickPanel = document.getElementById('quick-panel');
     const searchToggle = document.getElementById('search-toggle');
     const searchPanel = document.getElementById('search-panel');
+    const topToggle = document.getElementById('top-toggle');
     const homeSearch = document.getElementById('home-search');
     const homeSearchTags = Array.from(document.querySelectorAll('[data-home-search-tag]'));
 
@@ -1079,6 +1214,10 @@
           homeSearch.focus();
         }, 50);
       }
+    });
+
+    topToggle.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     document.addEventListener('click', function (event) {
