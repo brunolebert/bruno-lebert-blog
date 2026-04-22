@@ -1,1 +1,4 @@
-Add robots.txt for indexing
+User-agent: *
+Allow: /
+
+Sitemap: https://brunolebert.github.io/bruno-lebert-blog/sitemap.xml
