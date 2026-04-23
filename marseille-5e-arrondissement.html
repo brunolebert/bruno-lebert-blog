@@ -3,84 +3,187 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5e arrondissement : acheter, vendre ou faire estimer ne se traite pas à l’aveugle | Bruno Lebert</title>
-  <meta name="description" content="Dans le 5e arrondissement de Marseille, acheter, vendre ou faire estimer un bien demande une lecture fine des micro-secteurs, des rues, des immeubles et des équilibres locaux." />
+  <title>Marseille 5e 13005 : acheter, vendre ou faire estimer un bien dans le 5e arrondissement</title>
+  <meta name="description" content="Dans le 5e arrondissement de Marseille 13005, acheter, vendre ou faire estimer un bien demande une lecture fine des quartiers, rues, immeubles, micro-secteurs et écarts de désirabilité." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://brunolebert.github.io/bruno-lebert-blog/marseille-5e-arrondissement.html" />
+
   <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #ffffff;
+      --surface-soft: #f5efe5;
+      --text: #132238;
+      --muted: #56657a;
+      --line: #dbe3ec;
+      --hero: #142235;
+      --hero-soft: #1e3148;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f5f2;
-      color: #0f172a;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.7;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.10), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 24%),
+        linear-gradient(180deg, var(--hero), var(--hero-soft));
+      color: #ffffff;
+      padding: 40px 0 44px;
+      margin-bottom: 26px;
+    }
+
     .container {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 40px 20px 60px;
+      padding: 0 20px 90px;
+    }
+
+    .hero-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
     }
 
     .back-link {
       display: inline-block;
-      margin-bottom: 32px;
-      color: #475569;
-      text-decoration: none;
-      font-size: 15px;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
+      background: rgba(255,255,255,0.96);
+      color: var(--hero);
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .tag {
       display: inline-block;
-      background: #e9edf3;
-      color: #475569;
+      background: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.88);
       font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 0.04em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       padding: 10px 16px;
       border-radius: 999px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
     }
 
     h1 {
-      font-size: 44px;
-      line-height: 1.15;
-      margin: 0 0 24px;
+      font-size: clamp(34px, 5vw, 50px);
+      line-height: 1.08;
+      margin: 0 0 18px;
     }
 
     .intro {
-      font-size: 24px;
-      color: #475569;
-      margin-bottom: 40px;
+      font-size: 22px;
+      color: rgba(255,255,255,0.82);
+      margin: 0;
+      max-width: 860px;
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
     h2 {
       font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 14px;
+    }
+
+    h3 {
+      font-size: 21px;
       line-height: 1.25;
-      margin-top: 48px;
-      margin-bottom: 16px;
+      margin: 22px 0 10px;
     }
 
     p {
-      font-size: 20px;
-      margin-bottom: 22px;
+      font-size: 18px;
+      margin: 0 0 16px;
       color: #1e293b;
     }
 
-    .contact-box {
-      margin-top: 56px;
-      padding: 28px;
+    .lead {
+      color: var(--muted);
+      max-width: 860px;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .info-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px 16px;
       background: #ffffff;
-      border: 1px solid #d8dee8;
-      border-radius: 20px;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .link-list a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 17px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .link-list a:hover {
+      background: #f8fbfd;
+    }
+
+    .contact-box {
+      margin-top: 8px;
+      padding: 28px;
+      background: var(--surface-soft);
+      border: 1px solid #eadfce;
+      border-radius: 22px;
     }
 
     .contact-box h3 {
-      margin-top: 0;
-      margin-bottom: 14px;
+      margin: 0 0 12px;
       font-size: 24px;
     }
 
@@ -89,49 +192,184 @@
       margin-bottom: 18px;
     }
 
-    .contact-button {
-      display: inline-block;
-      padding: 14px 22px;
-      border: 1px solid #cbd5e1;
-      border-radius: 999px;
-      text-decoration: none;
-      color: #0f172a;
-      font-weight: bold;
-      background: #ffffff;
-    }
-
-    .contact-button:hover {
-      background: #f8fafc;
-    }
-        .bottom-links {
+    .bottom-links {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
       margin-top: 18px;
     }
 
+    .contact-button,
     .secondary-button {
       display: inline-block;
       padding: 14px 22px;
-      border: 1px solid #cbd5e1;
       border-radius: 999px;
       text-decoration: none;
-      color: #475569;
-      font-weight: bold;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .contact-button {
+      background: #0f172a;
+      color: #ffffff;
+      border: 1px solid #0f172a;
+    }
+
+    .contact-button:hover {
+      background: #1e293b;
+    }
+
+    .secondary-button {
       background: #ffffff;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
     }
 
     .secondary-button:hover {
       background: #f8fafc;
     }
 
+    .floating-stack {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    .floating-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #152438;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+    }
+
+    .floating-button:hover {
+      background: #223652;
+    }
+
+    .floating-panel {
+      width: min(360px, calc(100vw - 32px));
+      background: #ffffff;
+      border: 1px solid #d8dee8;
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+      padding: 16px;
+      display: none;
+    }
+
+    .floating-panel.open {
+      display: block;
+    }
+
+    .panel-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 10px;
+    }
+
+    .search-title {
+      font-size: 20px;
+      line-height: 1.25;
+      margin: 0 0 10px;
+      color: var(--text);
+    }
+
+    .search-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+
+    .search-input {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 15px 16px;
+      font-size: 16px;
+      color: var(--text);
+      background: #ffffff;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+    }
+
+    .search-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .search-tag {
+      border: 1px solid #d8dee8;
+      background: #fff;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .search-tag:hover {
+      background: #f8fbfd;
+    }
+
+    .quick-link {
+      display: block;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .quick-link:last-child {
+      margin-bottom: 0;
+    }
+
+    .quick-link strong {
+      display: block;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .quick-link span {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .quick-link:hover {
+      background: #f8fbfd;
+    }
+
     @media (max-width: 640px) {
+      .container {
+        padding: 0 16px 100px;
+      }
+
       h1 {
         font-size: 34px;
       }
 
       .intro {
-        font-size: 21px;
+        font-size: 20px;
       }
 
       h2 {
@@ -139,100 +377,308 @@
       }
 
       p {
-        font-size: 18px;
+        font-size: 17px;
+      }
+
+      .floating-stack {
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .floating-button {
+        font-size: 13px;
+        padding: 13px 16px;
+      }
+
+      .floating-panel {
+        width: min(360px, calc(100vw - 24px));
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a href="index.html" class="back-link">← Retour à l’accueil</a>
+  <header class="hero" id="top">
+    <div class="container" style="padding-bottom: 0;">
+      <div class="hero-top">
+        <a href="index.html" class="back-link">← Retour à l’accueil</a>
+      </div>
 
-    <div class="tag">Quartiers</div>
+      <div class="tag">Quartier / Marseille 5e / 13005</div>
 
-    <h1>5e arrondissement : acheter, vendre ou faire estimer ne se traite pas à l’aveugle</h1>
+      <h1>Marseille 5e 13005 : acheter, vendre ou faire estimer un bien dans le 5e arrondissement</h1>
 
-    <p class="intro">
-      Du Camas à la Conception, de Baille à Saint-Pierre, le 5e arrondissement de Marseille
-      demande une lecture fine. Même secteur administratif, logiques de marché très différentes.
-    </p>
-
-    <p>
-      À Marseille, le 5e arrondissement peut donner une impression de cohérence vue de loin.
-      En réalité, acheter, vendre ou faire estimer un bien dans ce secteur suppose de regarder
-      de beaucoup plus près la rue, l’ambiance du micro-secteur, la typologie du bien et la qualité de l’immeuble.
-    </p>
-
-    <p>
-      C’est un arrondissement vivant, recherché, souvent dense, avec des profils d’acquéreurs variés
-      et des écarts parfois importants entre deux zones pourtant proches sur une carte.
-    </p>
-
-    <h2>Le 5e n’est pas un bloc uniforme</h2>
-
-    <p>
-      Le Camas, la Conception, Baille, Saint-Pierre ou les lisières vers Longchamp ne se lisent pas
-      de la même manière. Les usages, la perception des rues, la qualité résidentielle, la tension locative
-      ou la facilité de projection peuvent changer sensiblement.
-    </p>
-
-    <p>
-      Pour un particulier, cela veut dire qu’un prix, une estimation ou un projet d’achat ne peuvent pas
-      être construits sérieusement sur la seule base du “5e arrondissement”. Il faut descendre d’un niveau.
-    </p>
-
-    <h2>Un même type de bien ne produit pas la même lecture partout</h2>
-
-    <p>
-      Un T2 ancien, un T3 familial, un rez-de-chaussée, un étage élevé sans ascenseur,
-      un bien à rénover ou un appartement avec extérieur ne se comportent pas de la même façon
-      selon la rue, la copropriété et le contexte immédiat.
-    </p>
-
-    <p>
-      Dans certains secteurs, la demande soutient bien la projection. Dans d’autres, l’immeuble,
-      la circulation, le vis-à-vis, la qualité des parties communes ou l’environnement direct
-      pèsent beaucoup plus lourd dans la décision.
-    </p>
-
-    <h2>Lire un projet dans le 5e, c’est aussi lire l’immeuble</h2>
-
-    <p>
-      Dans l’ancien marseillais, la qualité d’un immeuble compte souvent autant que l’adresse.
-      Une copropriété lisible, des charges cohérentes, une bonne tenue générale ou au contraire
-      des fragilités techniques à moyen terme peuvent changer complètement la pertinence d’un achat
-      ou la crédibilité d’un prix de vente.
-    </p>
-
-    <p>
-      C’est précisément dans ce type de secteur qu’une lecture trop rapide peut fausser une estimation
-      ou donner une impression trompeuse de sécurité.
-    </p>
-
-    <h2>Acheter, vendre ou faire estimer dans le 5e demande donc de la finesse</h2>
-
-    <p>
-      Ce n’est pas un arrondissement que l’on traite à l’aveugle. Il demande un minimum de hiérarchie
-      dans les critères, une lecture de terrain, et une capacité à distinguer ce qui relève du quartier,
-      de la rue, du bien et de l’immeuble.
-    </p>
-
-    <p>
-      Pour un projet sérieux, la bonne question n’est pas seulement “combien vaut ce bien ?”
-      mais aussi “dans quel environnement précis se situe-t-il, et comment ce contexte modifie-t-il la décision ?”
-    </p>
-
-    <div class="contact-box">
-      <h3>Clarifier un projet dans le 5e arrondissement</h3>
-      <p>
-        Pour un achat, une vente, une estimation ou un arbitrage dans le 5e à Marseille,
-        un premier échange peut aider à relire la situation avec plus de finesse.
+      <p class="intro">
+        Du Camas à la Conception, de Baille à Saint-Pierre, le 5e arrondissement de Marseille, code postal 13005, demande une lecture fine. Même secteur administratif, logiques de marché très différentes selon les rues, les immeubles, les ambiances et les micro-secteurs.
       </p>
-            <div class="bottom-links">
-        <a href="mailto:lebertbruno@gmail.com" class="contact-button">Me contacter</a>
-        <a href="index.html" class="secondary-button">Retour à l’accueil</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section-card">
+      <div class="section-label">Lecture générale</div>
+      <h2>Le 5e arrondissement de Marseille 13005 ne se traite pas à l’aveugle</h2>
+      <p class="lead">
+        À Marseille, le 5e arrondissement peut donner une impression de cohérence vue de loin. En réalité, acheter, vendre ou faire estimer un bien dans ce secteur suppose de regarder de beaucoup plus près la rue, l’ambiance du micro-secteur, la typologie du bien et la qualité de l’immeuble.
+      </p>
+      <p>
+        C’est un arrondissement vivant, recherché, souvent dense, avec des profils d’acquéreurs variés et des écarts parfois importants entre deux zones pourtant proches sur une carte. Le 13005 ne peut donc pas être lu comme un bloc homogène.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Sous-secteurs</div>
+      <h2>Le 13005 n’est pas uniforme</h2>
+      <p>
+        Le Camas, Chave, la Conception, Baille, Saint-Pierre ou les lisières vers Longchamp ne se lisent pas de la même manière. Les usages, la perception des rues, la qualité résidentielle, la tension locative ou la facilité de projection changent sensiblement.
+      </p>
+      <p>
+        Pour un particulier, cela veut dire qu’un prix, une estimation ou un projet d’achat ne peuvent pas être construits sérieusement sur la seule base du “5e arrondissement”. Il faut descendre d’un niveau et lire le 13005 par quartier, par rue et par ambiance réelle.
+      </p>
+
+      <div class="info-list">
+        <div class="info-item">Camas</div>
+        <div class="info-item">Chave</div>
+        <div class="info-item">Conception</div>
+        <div class="info-item">Baille</div>
+        <div class="info-item">Saint-Pierre</div>
+        <div class="info-item">Secteurs en lien avec Longchamp et les Cinq-Avenues</div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Valeur et marché</div>
+      <h2>Un même type de bien ne produit pas la même lecture partout dans le 13005</h2>
+      <p>
+        Un T2 ancien, un T3 familial, un rez-de-chaussée, un étage élevé sans ascenseur, un bien à rénover ou un appartement avec extérieur ne se comportent pas de la même façon selon la rue, la copropriété et le contexte immédiat.
+      </p>
+      <p>
+        Dans certains secteurs du 5e, la demande soutient bien la projection. Dans d’autres, l’immeuble, la circulation, le vis-à-vis, la qualité des parties communes ou l’environnement direct pèsent beaucoup plus lourd dans la décision. C’est précisément ce qui explique les écarts de valeur dans le 13005.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Immeuble et lecture fine</div>
+      <h2>Lire un projet dans le 5e, c’est aussi lire l’immeuble</h2>
+      <p>
+        Dans l’ancien marseillais, la qualité d’un immeuble compte souvent autant que l’adresse. Une copropriété lisible, des charges cohérentes, une bonne tenue générale ou au contraire des fragilités techniques à moyen terme peuvent changer complètement la pertinence d’un achat ou la crédibilité d’un prix de vente.
+      </p>
+      <p>
+        C’est précisément dans ce type de secteur qu’une lecture trop rapide peut fausser une estimation ou donner une impression trompeuse de sécurité.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Décision</div>
+      <h2>Acheter, vendre ou faire estimer dans le 5e demande de la finesse</h2>
+      <p>
+        Ce n’est pas un arrondissement que l’on traite à l’aveugle. Il demande un minimum de hiérarchie dans les critères, une lecture de terrain, et une capacité à distinguer ce qui relève du quartier, de la rue, du bien et de l’immeuble.
+      </p>
+      <p>
+        Pour un projet sérieux, la bonne question n’est pas seulement “combien vaut ce bien ?” mais aussi “dans quel environnement précis se situe-t-il, et comment ce contexte modifie-t-il la décision ?”
+      </p>
+
+      <div class="link-list">
+        <a href="estimation-appartement-marseille-5e.html">Lire la page sur l’estimation d’un appartement à Marseille 5e 13005</a>
+        <a href="demander-estimation-marseille.html">Demander une estimation immobilière à Marseille</a>
+        <a href="estimation-immobiliere-marseille-prix-m2.html">Lire la page sur l’estimation immobilière à Marseille et le prix au m²</a>
+        <a href="bibliotheque-immobilier-marseille.html#rues-quartiers">Explorer les rues, quartiers et micro-secteurs à Marseille</a>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Questions fréquentes</div>
+      <h2>Questions fréquentes sur Marseille 5e 13005</h2>
+
+      <h3>Le 5e arrondissement de Marseille 13005 se vend-il au même niveau partout ?</h3>
+      <p>
+        Non. Le Camas, Chave, Baille, la Conception et Saint-Pierre n’offrent pas la même lecture résidentielle, ni la même désirabilité, ni la même qualité de projection.
+      </p>
+
+      <h3>Peut-on estimer un appartement dans le 13005 avec un simple prix moyen ?</h3>
+      <p>
+        Non. Une estimation sérieuse dans le 5e arrondissement doit tenir compte du quartier, de la rue, de l’immeuble, de l’ambiance et des usages réels.
+      </p>
+
+      <h3>Pourquoi la rue compte-t-elle autant dans le 5e ?</h3>
+      <p>
+        Parce que dans le 13005, quelques rues peuvent suffire à modifier la perception résidentielle, la tension de la demande et la capacité de projection acquéreur.
+      </p>
+
+      <h3>À quoi sert une lecture fine du 5e avant de vendre ?</h3>
+      <p>
+        Elle permet de mieux comprendre la valeur défendable du bien, d’éviter un prix décalé et de préparer plus proprement une vente ou un arbitrage.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Rues stratégiques du 13005</div>
+      <h2>Premières rues et axes utiles à lire dans le 5e arrondissement</h2>
+      <div class="link-list">
+        <a href="combien-vaut-appartement-boulevard-chave-marseille-13005.html">Combien vaut un appartement boulevard Chave à Marseille 13005 ?</a>
+        <a href="combien-vaut-appartement-boulevard-eugene-pierre-marseille-13005.html">Combien vaut un appartement boulevard Eugène-Pierre à Marseille 13005 ?</a>
+        <a href="estimation-rue-sainte-cecile-marseille-13005.html">Estimation rue Sainte-Cécile à Marseille 13005</a>
+        <a href="combien-vaut-appartement-rue-de-l-olivier-marseille-13005.html">Combien vaut un appartement rue de l’Olivier à Marseille 13005 ?</a>
+        <a href="combien-vaut-appartement-rue-briffaut-marseille-13005.html">Combien vaut un appartement rue Briffaut à Marseille 13005 ?</a>
+        <a href="combien-vaut-appartement-rue-horace-bertin-marseille-13005.html">Combien vaut un appartement rue Horace-Bertin à Marseille 13005 ?</a>
+        <a href="combien-vaut-appartement-rue-terrusse-marseille-13005.html">Combien vaut un appartement rue Terrusse à Marseille 13005 ?</a>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Passage à l’action</div>
+      <div class="contact-box">
+        <h3>Clarifier un projet dans le 5e arrondissement de Marseille 13005</h3>
+        <p>
+          Pour un achat, une vente, une estimation ou un arbitrage dans le 5e à Marseille, code postal 13005, un premier échange peut aider à relire la situation avec plus de finesse.
+        </p>
+        <div class="bottom-links">
+          <a href="demander-estimation-marseille.html" class="contact-button">Demander une estimation immobilière à Marseille</a>
+          <a href="index.html" class="secondary-button">Retour à l’accueil</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="floating-stack">
+    <div id="search-panel" class="floating-panel">
+      <div class="panel-title">Recherche</div>
+      <h3 class="search-title">Rechercher un thème, une rue ou un sujet</h3>
+      <p class="search-subtitle">Cette recherche ouvre directement la bibliothèque avec le bon filtre.</p>
+      <input
+        type="text"
+        id="article-search"
+        class="search-input"
+        placeholder="Ex. 13005, Camas, Chave, estimation..."
+      />
+      <div class="search-tags">
+        <button type="button" class="search-tag" data-article-search-tag="13005">13005</button>
+        <button type="button" class="search-tag" data-article-search-tag="Camas">Camas</button>
+        <button type="button" class="search-tag" data-article-search-tag="Chave">Chave</button>
+        <button type="button" class="search-tag" data-article-search-tag="Saint-Pierre">Saint-Pierre</button>
+        <button type="button" class="search-tag" data-article-search-tag="estimation">estimation</button>
       </div>
     </div>
+
+    <button id="search-toggle" class="floating-button" type="button" aria-expanded="false" aria-controls="search-panel">
+      🔎 Recherche
+    </button>
+
+    <div id="quick-panel" class="floating-panel">
+      <div class="panel-title">Accès rapide</div>
+
+      <a class="quick-link" href="index.html">
+        <strong>Retour à l’accueil</strong>
+        <span>Revenir directement à la page d’accueil du site.</span>
+      </a>
+
+      <a class="quick-link" href="demander-estimation-marseille.html">
+        <strong>Demander une estimation</strong>
+        <span>Obtenir un avis de valeur ou une première lecture d’un bien à Marseille.</span>
+      </a>
+
+      <a class="quick-link" href="estimation-appartement-marseille-5e.html">
+        <strong>Estimation appartement Marseille 5e 13005</strong>
+        <span>Accéder à la page estimation dédiée au 5e arrondissement.</span>
+      </a>
+
+      <a class="quick-link" href="bibliotheque-immobilier-marseille.html#rues-quartiers">
+        <strong>Rues, quartiers et micro-secteurs</strong>
+        <span>Accéder directement aux lectures locales de la bibliothèque.</span>
+      </a>
+    </div>
+
+    <button id="quick-toggle" class="floating-button" type="button" aria-expanded="false" aria-controls="quick-panel">
+      Accès rapide
+    </button>
+
+    <button id="top-toggle" class="floating-button" type="button" aria-label="Revenir en haut de page">
+      ↑ Haut de page
+    </button>
   </div>
+
+  <script>
+    const quickToggle = document.getElementById('quick-toggle');
+    const quickPanel = document.getElementById('quick-panel');
+    const searchToggle = document.getElementById('search-toggle');
+    const searchPanel = document.getElementById('search-panel');
+    const topToggle = document.getElementById('top-toggle');
+    const articleSearch = document.getElementById('article-search');
+    const articleSearchTags = Array.from(document.querySelectorAll('[data-article-search-tag]'));
+
+    function closePanel(panel, button) {
+      panel.classList.remove('open');
+      button.setAttribute('aria-expanded', 'false');
+    }
+
+    function openPanel(panel, button) {
+      panel.classList.add('open');
+      button.setAttribute('aria-expanded', 'true');
+    }
+
+    function goToLibrarySearch(value) {
+      const query = value.trim();
+      if (query === '') {
+        window.location.href = 'bibliotheque-immobilier-marseille.html';
+      } else {
+        window.location.href = 'bibliotheque-immobilier-marseille.html?q=' + encodeURIComponent(query);
+      }
+    }
+
+    quickToggle.addEventListener('click', function () {
+      const isOpen = quickPanel.classList.contains('open');
+      closePanel(searchPanel, searchToggle);
+      if (isOpen) {
+        closePanel(quickPanel, quickToggle);
+      } else {
+        openPanel(quickPanel, quickToggle);
+      }
+    });
+
+    searchToggle.addEventListener('click', function () {
+      const isOpen = searchPanel.classList.contains('open');
+      closePanel(quickPanel, quickToggle);
+      if (isOpen) {
+        closePanel(searchPanel, searchToggle);
+      } else {
+        openPanel(searchPanel, searchToggle);
+        setTimeout(() => {
+          articleSearch.focus();
+        }, 50);
+      }
+    });
+
+    topToggle.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.addEventListener('click', function (event) {
+      const clickedQuickPanel = quickPanel.contains(event.target);
+      const clickedQuickToggle = quickToggle.contains(event.target);
+      const clickedSearchPanel = searchPanel.contains(event.target);
+      const clickedSearchToggle = searchToggle.contains(event.target);
+
+      if (!clickedQuickPanel && !clickedQuickToggle) {
+        closePanel(quickPanel, quickToggle);
+      }
+
+      if (!clickedSearchPanel && !clickedSearchToggle) {
+        closePanel(searchPanel, searchToggle);
+      }
+    });
+
+    articleSearch.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        goToLibrarySearch(articleSearch.value);
+      }
+    });
+
+    articleSearchTags.forEach(tag => {
+      tag.addEventListener('click', function () {
+        const value = tag.getAttribute('data-article-search-tag');
+        goToLibrarySearch(value);
+      });
+    });
+  </script>
 </body>
 </html>
