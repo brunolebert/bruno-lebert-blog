@@ -3,105 +3,193 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Estimation immobilière à Marseille : pourquoi le prix au m² ne suffit jamais | Bruno Lebert</title>
-  <meta name="description" content="À Marseille, une estimation immobilière sérieuse ne se réduit jamais à un prix au m². Rue, immeuble, étage, typologie, état et micro-secteur changent la lecture." />
+  <title>Estimation immobilière à Marseille et prix au m² : pourquoi une moyenne ne suffit pas</title>
+  <meta name="description" content="À Marseille, une estimation immobilière sérieuse ne se réduit jamais à un prix au m². Rue, immeuble, étage, état, typologie, quartier et micro-secteur changent la valeur d’un bien." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://brunolebert.github.io/bruno-lebert-blog/estimation-immobiliere-marseille-prix-m2.html" />
+
   <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #ffffff;
+      --surface-soft: #f5efe5;
+      --text: #132238;
+      --muted: #56657a;
+      --line: #dbe3ec;
+      --hero: #142235;
+      --hero-soft: #1e3148;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f5f2;
-      color: #0f172a;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.7;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.10), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 24%),
+        linear-gradient(180deg, var(--hero), var(--hero-soft));
+      color: #ffffff;
+      padding: 40px 0 44px;
+      margin-bottom: 26px;
+    }
+
     .container {
-      max-width: 860px;
+      max-width: 880px;
       margin: 0 auto;
-      padding: 40px 20px 60px;
+      padding: 0 20px 80px;
+    }
+
+    .hero-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
     }
 
     .back-link {
       display: inline-block;
-      margin-bottom: 32px;
-      color: #475569;
-      text-decoration: none;
-      font-size: 15px;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
+      background: rgba(255,255,255,0.96);
+      color: var(--hero);
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .tag {
       display: inline-block;
-      background: #e9edf3;
-      color: #475569;
+      background: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.88);
       font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 0.04em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       padding: 10px 16px;
       border-radius: 999px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
     }
 
     h1 {
-      font-size: 44px;
-      line-height: 1.15;
-      margin: 0 0 24px;
+      font-size: clamp(34px, 5vw, 50px);
+      line-height: 1.08;
+      margin: 0 0 18px;
     }
 
     .intro {
-      font-size: 24px;
-      color: #475569;
-      margin-bottom: 40px;
+      font-size: 22px;
+      color: rgba(255,255,255,0.82);
+      margin: 0;
+      max-width: 860px;
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
     h2 {
       font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 14px;
+    }
+
+    h3 {
+      font-size: 21px;
       line-height: 1.25;
-      margin-top: 48px;
-      margin-bottom: 16px;
+      margin: 22px 0 10px;
     }
 
     p {
-      font-size: 20px;
-      margin-bottom: 22px;
+      font-size: 18px;
+      margin: 0 0 16px;
       color: #1e293b;
     }
 
-    .contact-box {
-      margin-top: 56px;
-      padding: 28px;
+    .lead {
+      color: var(--muted);
+      max-width: 860px;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .link-list a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 17px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .link-list a:hover {
+      background: #f8fbfd;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .info-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px 16px;
       background: #ffffff;
-      border: 1px solid #d8dee8;
-      border-radius: 20px;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .contact-box {
+      margin-top: 8px;
+      padding: 28px;
+      background: var(--surface-soft);
+      border: 1px solid #eadfce;
+      border-radius: 22px;
     }
 
     .contact-box h3 {
-      margin-top: 0;
-      margin-bottom: 14px;
+      margin: 0 0 12px;
       font-size: 24px;
     }
 
     .contact-box p {
       font-size: 18px;
       margin-bottom: 18px;
-    }
-
-    .contact-button {
-      display: inline-block;
-      padding: 14px 22px;
-      border: 1px solid #cbd5e1;
-      border-radius: 999px;
-      text-decoration: none;
-      color: #0f172a;
-      font-weight: bold;
-      background: #ffffff;
-    }
-
-    .contact-button:hover {
-      background: #f8fafc;
     }
 
     .bottom-links {
@@ -111,15 +199,30 @@
       margin-top: 18px;
     }
 
+    .contact-button,
     .secondary-button {
       display: inline-block;
       padding: 14px 22px;
-      border: 1px solid #cbd5e1;
       border-radius: 999px;
       text-decoration: none;
-      color: #475569;
-      font-weight: bold;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .contact-button {
+      background: #0f172a;
+      color: #ffffff;
+      border: 1px solid #0f172a;
+    }
+
+    .contact-button:hover {
+      background: #1e293b;
+    }
+
+    .secondary-button {
       background: #ffffff;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
     }
 
     .secondary-button:hover {
@@ -127,12 +230,16 @@
     }
 
     @media (max-width: 640px) {
+      .container {
+        padding: 0 16px 80px;
+      }
+
       h1 {
         font-size: 34px;
       }
 
       .intro {
-        font-size: 21px;
+        font-size: 20px;
       }
 
       h2 {
@@ -140,139 +247,136 @@
       }
 
       p {
-        font-size: 18px;
+        font-size: 17px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a href="index.html" class="back-link">← Retour à l’accueil</a>
-
-    <div class="tag">Estimation</div>
-
-    <h1>Estimation immobilière à Marseille : pourquoi le prix au m² ne suffit jamais</h1>
-
-    <p class="intro">
-      À Marseille, une estimation sérieuse ne se réduit jamais à une moyenne.
-      Rue, immeuble, étage, état, typologie et micro-secteur changent profondément la lecture.
-    </p>
-
-    <p>
-      Beaucoup de particuliers commencent par chercher un prix moyen au mètre carré.
-      Ce réflexe est compréhensible, mais il devient vite trompeur dès qu’il s’agit d’estimer un bien réel.
-    </p>
-
-    <p>
-      À Marseille, un prix au m² peut donner un repère de départ.
-      Il ne permet pas, à lui seul, de comprendre la vraie valeur d’un appartement ou d’une maison.
-    </p>
-
-    <h2>Le prix au m² donne une tendance, pas une estimation fiable</h2>
-
-    <p>
-      Une moyenne n’est jamais une lecture complète.
-      Elle agrège des biens très différents, dans des rues différentes, avec des immeubles différents,
-      des expositions différentes, des étages différents et des qualités d’usage qui ne se valent pas.
-    </p>
-
-    <p>
-      Or, à Marseille, ces écarts comptent énormément.
-      Deux biens situés dans le même arrondissement peuvent être lus de façon très différente par le marché.
-    </p>
-
-    <h2>À Marseille, la rue et le micro-secteur changent déjà beaucoup de choses</h2>
-
-    <p>
-      On ne lit pas de la même manière un bien à Vauban, au Camas, à Endoume, à la Joliette,
-      à Bompard, autour de la rue de la République ou dans certains secteurs du 5e arrondissement.
-    </p>
-
-    <p>
-      Même dans un quartier cohérent en apparence, quelques rues peuvent suffire à modifier
-      la perception résidentielle, la tension de la demande, la cible acquéreur ou la facilité de projection.
-    </p>
-
-    <p>
-      Une estimation utile doit donc descendre en finesse :
-      quartier, sous-secteur, rue, ambiance immédiate, desserte, qualité de l’environnement proche.
-    </p>
-
-    <h2>L’immeuble compte souvent presque autant que le bien</h2>
-
-    <p>
-      À Marseille, la qualité d’un immeuble pèse lourd dans la perception de valeur.
-      Une copropriété saine, lisible, tenue, avec des charges cohérentes et peu d’incertitudes,
-      ne sera pas lue comme une copropriété fatiguée, opaque ou fragilisée.
-    </p>
-
-    <p>
-      Le marché regarde aussi :
-      l’état des parties communes, l’allure générale, la cohérence de l’ensemble,
-      les signes de travaux à venir, ou encore la qualité de la gestion.
-    </p>
-
-    <p>
-      C’est pour cela qu’un simple prix moyen au m² peut donner une illusion de précision
-      là où il faudrait en réalité une vraie lecture d’immeuble.
-    </p>
-
-    <h2>Étage, lumière, extérieur, distribution : la valeur n’est jamais abstraite</h2>
-
-    <p>
-      Une estimation sérieuse ne repose pas uniquement sur une surface.
-      Elle repose aussi sur la manière dont le bien est vécu et perçu.
-    </p>
-
-    <p>
-      L’étage, la présence ou non d’un ascenseur, la luminosité, le vis-à-vis,
-      l’existence d’un extérieur, la circulation intérieure, l’état général, la qualité des volumes
-      ou la cohérence de la distribution changent concrètement la valeur défendable.
-    </p>
-
-    <p>
-      Deux appartements de surface proche peuvent ainsi produire une lecture de marché très différente.
-    </p>
-
-    <h2>Une estimation doit éclairer une décision, pas simplement produire un chiffre</h2>
-
-    <p>
-      Un chiffre seul peut flatter, rassurer ou inquiéter.
-      Mais sans contexte, il aide mal à décider.
-    </p>
-
-    <p>
-      Une bonne estimation doit permettre de répondre à des questions plus utiles :
-      faut-il vendre maintenant ou attendre,
-      faut-il faire certains travaux,
-      faut-il viser une commercialisation rapide ou plus sélective,
-      comment le marché local peut-il lire le bien,
-      et quelle marge de cohérence existe réellement.
-    </p>
-
-    <h2>À Marseille, estimer sérieusement demande une lecture locale, structurée et intelligible</h2>
-
-    <p>
-      Estimer un bien, ce n’est pas appliquer mécaniquement un chiffre au mètre carré.
-      C’est relire une situation dans son environnement réel.
-    </p>
-
-    <p>
-      C’est précisément ce qui permet ensuite d’éviter les décalages de prix,
-      les attentes mal calibrées, les mauvais tempos, ou les trajectoires de vente mal engagées.
-    </p>
-
-    <div class="contact-box">
-      <h3>Relire une estimation à Marseille</h3>
-      <p>
-        Pour une vente, un arbitrage ou une simple relecture de valeur à Marseille,
-        un premier échange peut aider à clarifier ce qu’un bien vaut vraiment dans son contexte réel.
-      </p>
-      <div class="bottom-links">
-        <a href="mailto:lebertbruno@gmail.com" class="contact-button">Me contacter</a>
-        <a href="index.html" class="secondary-button">Retour à l’accueil</a>
+  <header class="hero">
+    <div class="container" style="padding-bottom: 0;">
+      <div class="hero-top">
+        <a href="index.html" class="back-link">← Retour à l’accueil</a>
       </div>
+
+      <div class="tag">Estimation / Prix au m² / Marseille</div>
+
+      <h1>Estimation immobilière à Marseille et prix au m² : pourquoi une moyenne ne suffit pas</h1>
+
+      <p class="intro">
+        À Marseille, une estimation immobilière sérieuse ne se réduit jamais à une moyenne. Rue, immeuble, étage, état, typologie, quartier et micro-secteur changent profondément la lecture de valeur d’un appartement ou d’une maison.
+      </p>
     </div>
-  </div>
+  </header>
+
+  <main class="container">
+    <section class="section-card">
+      <div class="section-label">Point de départ</div>
+      <h2>Le prix au m² donne une tendance, pas une estimation immobilière fiable</h2>
+      <p class="lead">
+        Beaucoup de particuliers commencent par chercher un prix moyen au mètre carré à Marseille. Ce réflexe est compréhensible, mais il devient vite trompeur dès qu’il s’agit d’estimer un bien réel. Un prix au m² donne un repère de départ. Il ne permet pas, à lui seul, de comprendre la vraie valeur d’un appartement, d’une maison ou d’un immeuble.
+      </p>
+      <p>
+        Une moyenne agrège des biens très différents, dans des rues différentes, avec des immeubles différents, des expositions différentes, des étages différents et des qualités d’usage qui ne se valent pas. Or, à Marseille, ces écarts comptent énormément.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Lecture locale</div>
+      <h2>À Marseille, la rue, le quartier et le micro-secteur changent déjà beaucoup de choses</h2>
+      <p>
+        On ne lit pas de la même manière un bien à Vauban, au Camas, à Endoume, à la Joliette, à Bompard, autour de la rue de la République ou dans certains secteurs du 5e arrondissement. Même dans un quartier cohérent en apparence, quelques rues peuvent suffire à modifier la perception résidentielle, la tension de la demande, la cible acquéreur ou la facilité de projection.
+      </p>
+      <p>
+        Une estimation utile doit donc descendre en finesse : quartier, sous-secteur, rue, ambiance immédiate, desserte, qualité de l’environnement proche. C’est précisément pour cela qu’une estimation immobilière à Marseille demande autre chose qu’un simple calcul automatique.
+      </p>
+
+      <div class="link-list">
+        <a href="bibliotheque-immobilier-marseille.html#rues-quartiers">Explorer les rues, quartiers et micro-secteurs à Marseille</a>
+        <a href="estimation-appartement-marseille-5e.html">Lire la page sur l’estimation d’un appartement à Marseille 5e</a>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Immeuble et usage</div>
+      <h2>L’immeuble compte souvent presque autant que le bien</h2>
+      <p>
+        À Marseille, la qualité d’un immeuble pèse lourd dans la perception de valeur. Une copropriété saine, lisible, tenue, avec des charges cohérentes et peu d’incertitudes, ne sera pas lue comme une copropriété fatiguée, opaque ou fragilisée.
+      </p>
+      <p>
+        Le marché regarde aussi l’état des parties communes, l’allure générale, la cohérence de l’ensemble, les signes de travaux à venir, ou encore la qualité de la gestion. C’est pour cela qu’un simple prix moyen au m² peut donner une illusion de précision là où il faudrait en réalité une vraie lecture d’immeuble.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Caractéristiques du bien</div>
+      <h2>Étage, lumière, extérieur, distribution : la valeur n’est jamais abstraite</h2>
+      <p>
+        Une estimation sérieuse ne repose pas uniquement sur une surface. Elle repose aussi sur la manière dont le bien est vécu et perçu. L’étage, la présence ou non d’un ascenseur, la luminosité, le vis-à-vis, l’existence d’un extérieur, la circulation intérieure, l’état général, la qualité des volumes ou la cohérence de la distribution changent concrètement la valeur défendable.
+      </p>
+      <p>
+        Deux appartements de surface proche peuvent ainsi produire une lecture de marché très différente. C’est vrai dans le 5e arrondissement, dans le 6e, dans le 7e, mais aussi dans les secteurs plus larges de Marseille où la qualité d’usage fait varier la demande.
+      </p>
+
+      <div class="info-list">
+        <div class="info-item">Étage et présence ou non d’ascenseur</div>
+        <div class="info-item">Luminosité, vis-à-vis, vue, calme</div>
+        <div class="info-item">Extérieur, balcon, terrasse, jardin</div>
+        <div class="info-item">Distribution intérieure et qualité des volumes</div>
+        <div class="info-item">État général du bien et travaux éventuels</div>
+        <div class="info-item">Stationnement et confort d’usage réel</div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Décision</div>
+      <h2>Une estimation immobilière doit éclairer une décision, pas simplement produire un chiffre</h2>
+      <p>
+        Un chiffre seul peut flatter, rassurer ou inquiéter. Mais sans contexte, il aide mal à décider. Une bonne estimation doit permettre de répondre à des questions plus utiles : faut-il vendre maintenant ou attendre, faut-il faire certains travaux, faut-il viser une commercialisation rapide ou plus sélective, comment le marché local peut-il lire le bien, et quelle marge de cohérence existe réellement.
+      </p>
+      <p>
+        À Marseille, estimer sérieusement demande une lecture locale, structurée et intelligible. Estimer un bien, ce n’est pas appliquer mécaniquement un chiffre au mètre carré. C’est relire une situation dans son environnement réel.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Questions fréquentes</div>
+      <h2>Questions fréquentes sur le prix au m² et l’estimation immobilière à Marseille</h2>
+
+      <h3>Le prix au m² suffit-il pour estimer un bien à Marseille ?</h3>
+      <p>
+        Non. Le prix au m² donne un repère, mais il ne suffit pas à lui seul pour estimer sérieusement un appartement, une maison ou un immeuble à Marseille.
+      </p>
+
+      <h3>Pourquoi deux appartements proches peuvent-ils avoir une valeur différente ?</h3>
+      <p>
+        Parce que la rue, l’immeuble, l’étage, la luminosité, l’état général, la copropriété et la qualité d’usage changent la lecture réelle du marché.
+      </p>
+
+      <h3>Une estimation immobilière à Marseille doit-elle tenir compte du quartier ?</h3>
+      <p>
+        Oui, mais aussi du micro-secteur, de la rue, du tronçon, de l’environnement immédiat et de la qualité de projection résidentielle.
+      </p>
+
+      <h3>À quoi sert un avis de valeur avant une vente ?</h3>
+      <p>
+        Un avis de valeur permet d’éviter un prix de départ incohérent, de préparer plus proprement une vente et de mieux comprendre la lecture probable du marché.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Passage à l’action</div>
+      <div class="contact-box">
+        <h3>Relire une estimation à Marseille</h3>
+        <p>
+          Pour une vente, un arbitrage ou une simple relecture de valeur à Marseille, un premier échange peut aider à clarifier ce qu’un bien vaut vraiment dans son contexte réel.
+        </p>
+        <div class="bottom-links">
+          <a href="demander-estimation-marseille.html" class="contact-button">Demander une estimation immobilière à Marseille</a>
+          <a href="estimation-avant-vendre-marseille.html" class="secondary-button">Lire la page sur l’estimation avant de vendre</a>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
