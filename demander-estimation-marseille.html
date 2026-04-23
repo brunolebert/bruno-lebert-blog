@@ -3,78 +3,182 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Demander une estimation immobilière à Marseille | Bruno Lebert</title>
-  <meta name="description" content="Demander une estimation immobilière à Marseille, obtenir un avis de valeur, prendre rendez-vous ou faire relire le positionnement d’un bien avant vente, location ou arbitrage." />
+  <title>Demander une estimation immobilière à Marseille | Avis de valeur appartement, maison, immeuble</title>
+  <meta name="description" content="Demander une estimation immobilière à Marseille pour un appartement, une maison ou un immeuble. Obtenir un avis de valeur, relire le positionnement d’un bien et clarifier un projet de vente." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://brunolebert.github.io/bruno-lebert-blog/demander-estimation-marseille.html" />
+
   <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #ffffff;
+      --surface-soft: #f5efe5;
+      --text: #132238;
+      --muted: #56657a;
+      --line: #dbe3ec;
+      --hero: #142235;
+      --hero-soft: #1e3148;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f5f2;
-      color: #0f172a;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.7;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.10), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 24%),
+        linear-gradient(180deg, var(--hero), var(--hero-soft));
+      color: #ffffff;
+      padding: 40px 0 44px;
+      margin-bottom: 26px;
+    }
+
     .container {
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 0 20px 90px;
+    }
+
+    .hero-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
     }
 
     .back-link {
       display: inline-block;
-      margin-bottom: 28px;
-      color: #475569;
-      text-decoration: none;
-      font-size: 15px;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
+      background: rgba(255,255,255,0.96);
+      color: var(--hero);
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .tag {
       display: inline-block;
-      background: #e9edf3;
-      color: #475569;
+      background: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.88);
       font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 0.04em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       padding: 10px 16px;
       border-radius: 999px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
     }
 
     h1 {
-      font-size: 44px;
-      line-height: 1.12;
-      margin: 0 0 20px;
+      font-size: clamp(34px, 5vw, 50px);
+      line-height: 1.08;
+      margin: 0 0 18px;
     }
 
     .intro {
-      font-size: 23px;
-      color: #475569;
-      margin-bottom: 36px;
+      font-size: 22px;
+      color: rgba(255,255,255,0.82);
+      margin: 0;
+      max-width: 860px;
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
     h2 {
       font-size: 28px;
       line-height: 1.2;
-      margin-top: 46px;
-      margin-bottom: 14px;
+      margin: 0 0 14px;
+    }
+
+    h3 {
+      font-size: 21px;
+      line-height: 1.25;
+      margin: 22px 0 10px;
     }
 
     p {
-      font-size: 19px;
-      margin: 0 0 18px;
+      font-size: 18px;
+      margin: 0 0 16px;
       color: #1e293b;
     }
 
-    .cta-box {
-      margin-top: 34px;
-      padding: 28px;
+    .lead {
+      color: var(--muted);
+      max-width: 860px;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .info-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px 16px;
       background: #ffffff;
-      border: 1px solid #d8dee8;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .link-list a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 17px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .link-list a:hover {
+      background: #f8fbfd;
+    }
+
+    .cta-box {
+      margin-top: 8px;
+      padding: 28px;
+      background: var(--surface-soft);
+      border: 1px solid #eadfce;
       border-radius: 22px;
     }
 
@@ -96,7 +200,7 @@
       padding: 14px 22px;
       border-radius: 999px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 700;
       font-size: 15px;
     }
 
@@ -120,14 +224,6 @@
       background: #f8fafc;
     }
 
-    .info-list {
-      margin-top: 12px;
-    }
-
-    .info-list p {
-      margin-bottom: 10px;
-    }
-
     .floating-contact {
       position: fixed;
       right: 16px;
@@ -137,10 +233,10 @@
 
     .floating-contact a {
       display: inline-block;
-      background: #0f172a;
+      background: #152438;
       color: #ffffff;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 700;
       font-size: 14px;
       padding: 14px 18px;
       border-radius: 999px;
@@ -148,12 +244,12 @@
     }
 
     .floating-contact a:hover {
-      background: #1e293b;
+      background: #223652;
     }
 
     @media (max-width: 640px) {
       .container {
-        padding: 32px 16px 96px;
+        padding: 0 16px 100px;
       }
 
       h1 {
@@ -169,7 +265,11 @@
       }
 
       p {
-        font-size: 18px;
+        font-size: 17px;
+      }
+
+      .cta-actions {
+        gap: 10px;
       }
 
       .floating-contact {
@@ -185,76 +285,133 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <a href="index.html" class="back-link">← Retour à l’accueil</a>
-
-    <div class="tag">Estimation / Avis de valeur / Marseille</div>
-
-    <h1>Demander une estimation immobilière à Marseille</h1>
-
-    <p class="intro">
-      Vendre, arbitrer, mettre en location ou simplement situer correctement un bien
-      commence souvent par une lecture claire de sa valeur réelle.
-      Pas seulement un prix affiché.
-      Une vraie lecture du bien, de l’immeuble, de la rue, du quartier et du moment de marché.
-    </p>
-
-    <p>
-      Cette page permet de demander un premier échange pour :
-      une estimation,
-      un avis de valeur,
-      une relecture de positionnement avant vente,
-      ou un rendez-vous autour d’un projet immobilier à Marseille.
-    </p>
-
-    <h2>Ce qui peut être abordé</h2>
-
-    <div class="info-list">
-      <p>• estimation d’un appartement ou d’une maison à Marseille</p>
-      <p>• avis de valeur avant mise en vente</p>
-      <p>• relecture d’un prix affiché ou d’une fourchette de marché</p>
-      <p>• arbitrage vente / location / attente / travaux</p>
-      <p>• lecture d’une rue, d’un micro-secteur, d’un immeuble ou d’un quartier</p>
-      <p>• première lecture d’un projet de vente, succession, séparation ou arbitrage patrimonial</p>
-    </div>
-
-    <h2>Pourquoi demander un avis de valeur</h2>
-
-    <p>
-      Un bien ne vaut pas seulement un prix moyen au m².
-      À Marseille, la rue, la portion, l’immeuble, la lumière, le calme,
-      le stationnement, la qualité d’usage et la désirabilité réelle
-      font souvent varier fortement la lecture du marché.
-    </p>
-
-    <p>
-      L’objectif d’un premier échange n’est pas de produire un chiffre automatique,
-      mais de replacer le bien dans sa vraie géographie et dans sa vraie logique de marché.
-    </p>
-
-    <div class="cta-box">
-      <h3>Demander une estimation ou prendre rendez-vous</h3>
-      <p>
-        Pour un premier contact, le plus simple est d’envoyer un message avec :
-        l’adresse du bien, le type de bien, la surface, l’étage si besoin, et l’objet de la demande.
-      </p>
-      <div class="cta-actions">
-        <a class="primary-button" href="mailto:lebertbruno@gmail.com?subject=Demande%20d%27estimation%20immobili%C3%A8re%20%C3%A0%20Marseille">Demander une estimation</a>
-        <a class="secondary-button" href="mailto:lebertbruno@gmail.com?subject=Prise%20de%20rendez-vous%20immobilier%20%C3%A0%20Marseille">Prendre rendez-vous</a>
+  <header class="hero">
+    <div class="container" style="padding-bottom: 0;">
+      <div class="hero-top">
+        <a href="index.html" class="back-link">← Retour à l’accueil</a>
       </div>
-    </div>
 
-    <h2>Informations utiles à transmettre</h2>
+      <div class="tag">Estimation / Avis de valeur / Marseille</div>
 
-    <div class="info-list">
-      <p>• adresse précise</p>
-      <p>• appartement ou maison</p>
-      <p>• surface</p>
-      <p>• étage / extérieur / stationnement</p>
-      <p>• état général</p>
-      <p>• projet : vente, location, arbitrage, succession, autre</p>
+      <h1>Demander une estimation immobilière à Marseille</h1>
+
+      <p class="intro">
+        Vous souhaitez demander une estimation immobilière à Marseille pour un appartement, une maison, un immeuble ou un bien locatif. Cette demande peut permettre d’obtenir un avis de valeur, de relire le positionnement d’un bien, de préparer une vente et de mieux comprendre la cohérence du prix dans son quartier, sa rue ou son micro-secteur.
+      </p>
     </div>
-  </div>
+  </header>
+
+  <main class="container">
+    <section class="section-card">
+      <div class="section-label">Premier niveau de lecture</div>
+      <h2>Pourquoi demander une estimation immobilière à Marseille ?</h2>
+      <p class="lead">
+        Une estimation immobilière à Marseille ne se résume pas à une moyenne de prix au mètre carré. Elle dépend du quartier, de la rue, de l’immeuble, de l’étage, de l’état du bien, de la vue, du stationnement, de la copropriété, du niveau de demande et de la qualité de projection résidentielle. Demander une estimation permet d’obtenir une lecture plus sérieuse avant de vendre, d’arbitrer ou de fixer un prix.
+      </p>
+      <p>
+        Cette page permet de demander un premier échange pour une estimation, un avis de valeur, une relecture de positionnement avant vente, ou un rendez-vous autour d’un projet immobilier à Marseille.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Types de biens</div>
+      <h2>Appartement, maison, immeuble, bien locatif : quels biens peuvent être estimés ?</h2>
+      <p>
+        Une demande d’estimation immobilière à Marseille peut concerner un appartement, une maison, un immeuble, un bien locatif, un logement détenu en SCI ou un bien à arbitrer avant vente. L’objectif n’est pas seulement d’obtenir un chiffre, mais une lecture cohérente de la valeur probable du bien et de son positionnement dans le marché.
+      </p>
+
+      <div class="info-list">
+        <div class="info-item">Appartement à Marseille</div>
+        <div class="info-item">Maison à Marseille</div>
+        <div class="info-item">Immeuble ou ensemble immobilier</div>
+        <div class="info-item">Bien locatif ou logement occupé</div>
+        <div class="info-item">Bien détenu en SCI</div>
+        <div class="info-item">Bien à arbitrer avant vente, location ou travaux</div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Lecture locale</div>
+      <h2>Estimation immobilière à Marseille par quartier, arrondissement, rue et micro-secteur</h2>
+      <p>
+        À Marseille, deux biens proches peuvent avoir des valeurs différentes selon leur arrondissement, leur quartier, leur rue, leur tronçon ou leur micro-secteur. Une estimation dans le 5e arrondissement, à Vauban, à Endoume, aux Chartreux, à Mazargues ou dans le cœur Camas / Chave ne se lit pas de la même manière. La lecture locale joue directement sur la valeur et sur la cohérence du prix de mise en vente.
+      </p>
+
+      <div class="link-list">
+        <a href="estimation-immobiliere-marseille-prix-m2.html">Lire la page sur l’estimation immobilière à Marseille et le prix au m²</a>
+        <a href="estimation-avant-vendre-marseille.html">Lire la page sur l’estimation avant de vendre à Marseille</a>
+        <a href="bibliotheque-immobilier-marseille.html#rues-quartiers">Explorer les rues, quartiers et micro-secteurs à Marseille</a>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Avant la vente</div>
+      <h2>Demander un avis de valeur avant de vendre</h2>
+      <p>
+        Demander un avis de valeur à Marseille permet souvent de préparer plus proprement une vente, d’éviter un prix de départ incohérent, de mieux comprendre la lecture du marché et de clarifier les arbitrages avant publication d’annonce. C’est souvent une étape utile avant toute mise en vente sérieuse.
+      </p>
+      <p>
+        Selon le contexte, cela peut aussi servir à préparer une succession, une séparation, une indivision, une réflexion patrimoniale ou un arbitrage entre vente, conservation, location ou travaux.
+      </p>
+
+      <div class="link-list">
+        <a href="qui-consulter-a-marseille.html">Lire la page sur qui consulter à Marseille avant une décision immobilière</a>
+        <a href="quel-professionnel-consulter-vendre-marseille.html">Lire la page sur le professionnel à consulter pour vendre à Marseille</a>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Questions fréquentes</div>
+      <h2>Questions fréquentes sur l’estimation immobilière à Marseille</h2>
+
+      <h3>Comment demander une estimation immobilière à Marseille ?</h3>
+      <p>
+        Il suffit de transmettre les premières informations utiles sur le bien, sa localisation, son type, son état et l’objectif du projet afin de permettre une première lecture.
+      </p>
+
+      <h3>Quelle est la différence entre une estimation immobilière et un avis de valeur ?</h3>
+      <p>
+        Dans l’usage courant, les deux expressions sont proches. Elles renvoient à une lecture du positionnement probable d’un bien sur son marché.
+      </p>
+
+      <h3>Peut-on demander une estimation pour un appartement à Marseille ?</h3>
+      <p>
+        Oui, que ce soit pour un appartement dans le 5e, le 6e, le 7e, le 8e ou un autre arrondissement, la demande peut porter sur un appartement occupé, vide, à rénover ou déjà loué.
+      </p>
+
+      <h3>Le prix au mètre carré suffit-il pour estimer un bien à Marseille ?</h3>
+      <p>
+        Non. Le prix au mètre carré donne un repère, mais il ne suffit jamais à lui seul pour lire sérieusement la valeur d’un bien à Marseille.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Passage à l’action</div>
+      <div class="cta-box">
+        <h3>Demander une estimation ou prendre rendez-vous</h3>
+        <p>
+          Pour un premier contact, le plus simple est d’envoyer un message avec l’adresse du bien, le type de bien, la surface, l’étage si besoin, et l’objet de la demande.
+        </p>
+        <div class="cta-actions">
+          <a class="primary-button" href="mailto:lebertbruno@gmail.com?subject=Demande%20d%27estimation%20immobili%C3%A8re%20%C3%A0%20Marseille">Demander une estimation</a>
+          <a class="secondary-button" href="mailto:lebertbruno@gmail.com?subject=Prise%20de%20rendez-vous%20immobilier%20%C3%A8%20Marseille">Prendre rendez-vous</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Informations utiles</div>
+      <h2>Informations utiles à transmettre</h2>
+      <div class="info-list">
+        <div class="info-item">Adresse précise du bien</div>
+        <div class="info-item">Appartement, maison, immeuble ou autre</div>
+        <div class="info-item">Surface approximative</div>
+        <div class="info-item">Étage, extérieur, stationnement, vue</div>
+        <div class="info-item">État général et éventuels travaux</div>
+        <div class="info-item">Projet : vente, location, arbitrage, succession, autre</div>
+      </div>
+    </section>
+  </main>
 
   <div class="floating-contact">
     <a href="demander-estimation-marseille.html">Demander une estimation</a>
