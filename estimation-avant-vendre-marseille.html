@@ -3,105 +3,193 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Estimation avant de vendre à Marseille : ce qu’il faut lire avant de fixer un prix | Bruno Lebert</title>
-  <meta name="description" content="Avant de vendre à Marseille, une estimation sérieuse demande de lire le bien, l’immeuble, le secteur, le tempo et la vraie cohérence du prix." />
+  <title>Estimation avant de vendre à Marseille | Avis de valeur avant fixation du prix de vente</title>
+  <meta name="description" content="Avant de vendre à Marseille, une estimation sérieuse permet de fixer un prix cohérent, d’obtenir un avis de valeur et de relire le bien, l’immeuble, le secteur et le tempo du marché." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://brunolebert.github.io/bruno-lebert-blog/estimation-avant-vendre-marseille.html" />
+
   <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #ffffff;
+      --surface-soft: #f5efe5;
+      --text: #132238;
+      --muted: #56657a;
+      --line: #dbe3ec;
+      --hero: #142235;
+      --hero-soft: #1e3148;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f5f2;
-      color: #0f172a;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.7;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.10), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 24%),
+        linear-gradient(180deg, var(--hero), var(--hero-soft));
+      color: #ffffff;
+      padding: 40px 0 44px;
+      margin-bottom: 26px;
+    }
+
     .container {
-      max-width: 860px;
+      max-width: 880px;
       margin: 0 auto;
-      padding: 40px 20px 60px;
+      padding: 0 20px 80px;
+    }
+
+    .hero-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
     }
 
     .back-link {
       display: inline-block;
-      margin-bottom: 32px;
-      color: #475569;
-      text-decoration: none;
-      font-size: 15px;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
+      background: rgba(255,255,255,0.96);
+      color: var(--hero);
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .tag {
       display: inline-block;
-      background: #e9edf3;
-      color: #475569;
+      background: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.88);
       font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 0.04em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       padding: 10px 16px;
       border-radius: 999px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
     }
 
     h1 {
-      font-size: 44px;
-      line-height: 1.15;
-      margin: 0 0 24px;
+      font-size: clamp(34px, 5vw, 50px);
+      line-height: 1.08;
+      margin: 0 0 18px;
     }
 
     .intro {
-      font-size: 24px;
-      color: #475569;
-      margin-bottom: 40px;
+      font-size: 22px;
+      color: rgba(255,255,255,0.82);
+      margin: 0;
+      max-width: 860px;
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
     h2 {
       font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 14px;
+    }
+
+    h3 {
+      font-size: 21px;
       line-height: 1.25;
-      margin-top: 48px;
-      margin-bottom: 16px;
+      margin: 22px 0 10px;
     }
 
     p {
-      font-size: 20px;
-      margin-bottom: 22px;
+      font-size: 18px;
+      margin: 0 0 16px;
       color: #1e293b;
     }
 
-    .contact-box {
-      margin-top: 56px;
-      padding: 28px;
+    .lead {
+      color: var(--muted);
+      max-width: 860px;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .info-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px 16px;
       background: #ffffff;
-      border: 1px solid #d8dee8;
-      border-radius: 20px;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .link-list a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 17px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .link-list a:hover {
+      background: #f8fbfd;
+    }
+
+    .contact-box {
+      margin-top: 8px;
+      padding: 28px;
+      background: var(--surface-soft);
+      border: 1px solid #eadfce;
+      border-radius: 22px;
     }
 
     .contact-box h3 {
-      margin-top: 0;
-      margin-bottom: 14px;
+      margin: 0 0 12px;
       font-size: 24px;
     }
 
     .contact-box p {
       font-size: 18px;
       margin-bottom: 18px;
-    }
-
-    .contact-button {
-      display: inline-block;
-      padding: 14px 22px;
-      border: 1px solid #cbd5e1;
-      border-radius: 999px;
-      text-decoration: none;
-      color: #0f172a;
-      font-weight: bold;
-      background: #ffffff;
-    }
-
-    .contact-button:hover {
-      background: #f8fafc;
     }
 
     .bottom-links {
@@ -111,15 +199,30 @@
       margin-top: 18px;
     }
 
+    .contact-button,
     .secondary-button {
       display: inline-block;
       padding: 14px 22px;
-      border: 1px solid #cbd5e1;
       border-radius: 999px;
       text-decoration: none;
-      color: #475569;
-      font-weight: bold;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .contact-button {
+      background: #0f172a;
+      color: #ffffff;
+      border: 1px solid #0f172a;
+    }
+
+    .contact-button:hover {
+      background: #1e293b;
+    }
+
+    .secondary-button {
       background: #ffffff;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
     }
 
     .secondary-button:hover {
@@ -127,12 +230,16 @@
     }
 
     @media (max-width: 640px) {
+      .container {
+        padding: 0 16px 80px;
+      }
+
       h1 {
         font-size: 34px;
       }
 
       .intro {
-        font-size: 21px;
+        font-size: 20px;
       }
 
       h2 {
@@ -140,126 +247,144 @@
       }
 
       p {
-        font-size: 18px;
+        font-size: 17px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a href="index.html" class="back-link">← Retour à l’accueil</a>
-
-    <div class="tag">Estimation</div>
-
-    <h1>Estimation avant de vendre à Marseille : ce qu’il faut lire avant de fixer un prix</h1>
-
-    <p class="intro">
-      Avant de fixer un prix de vente à Marseille, il faut souvent lire plus que la surface ou le prix au m².
-      Une estimation sérieuse suppose de comprendre le bien, l’immeuble, le secteur, le tempo et la vraie lecture du marché.
-    </p>
-
-    <p>
-      Beaucoup de vendeurs commencent par chercher un chiffre.
-      C’est normal. Mais avant de fixer un prix, la vraie question n’est pas seulement “combien vaut mon bien ?”.
-      La vraie question est souvent : “comment ce bien sera-t-il réellement lu par le marché ?”
-    </p>
-
-    <p>
-      À Marseille, une estimation utile ne consiste pas seulement à produire une valeur théorique.
-      Elle sert à préparer une vente cohérente, à éviter les décalages de prix et à poser le bon point de départ.
-    </p>
-
-    <h2>Fixer un prix trop vite peut fausser toute la trajectoire de vente</h2>
-
-    <p>
-      Un prix n’est pas seulement une donnée technique.
-      C’est le point de départ d’une lecture par les acquéreurs, les intermédiaires et le marché.
-    </p>
-
-    <p>
-      S’il est mal posé, trop haut, trop bas ou simplement mal justifié, tout le reste peut se dérégler :
-      perception du bien, rythme de diffusion, qualité des contacts, négociation et crédibilité globale.
-    </p>
-
-    <h2>Une estimation sérieuse ne se limite jamais à un prix au m²</h2>
-
-    <p>
-      Le prix au m² donne un repère.
-      Il ne suffit pas à lui seul pour fixer un prix de vente défendable.
-    </p>
-
-    <p>
-      À Marseille, la lecture réelle dépend aussi de la rue, du micro-secteur, de l’immeuble,
-      de l’étage, de la lumière, de l’état général, de la typologie du bien, de la qualité de la copropriété
-      et de la manière dont un acquéreur peut se projeter.
-    </p>
-
-    <h2>Avant de vendre, il faut aussi relire l’immeuble et le contexte</h2>
-
-    <p>
-      Un appartement ne se vend pas seul.
-      Il se vend aussi avec un immeuble, une ambiance, des parties communes, des charges,
-      un niveau de tenue générale et parfois des fragilités à moyen terme.
-    </p>
-
-    <p>
-      À Marseille, ces éléments comptent énormément dans la perception de valeur.
-      Deux biens proches sur le papier peuvent ne pas produire du tout la même lecture selon l’immeuble et son environnement.
-    </p>
-
-    <h2>Le bon prix dépend aussi du tempo et du projet vendeur</h2>
-
-    <p>
-      Une estimation utile doit aussi tenir compte du moment.
-      Faut-il vendre vite, attendre, faire certains ajustements, préparer davantage le dossier,
-      tester une ambition de prix ou partir sur une logique plus fluide ?
-    </p>
-
-    <p>
-      Un prix cohérent n’est pas le même selon que l’on cherche une vente rapide,
-      une vente patrimoniale plus sélective ou un arbitrage plus stratégique.
-    </p>
-
-    <h2>Une bonne estimation sert à décider, pas seulement à afficher</h2>
-
-    <p>
-      Estimer avant de vendre, ce n’est pas chercher un chiffre flatteur.
-      C’est poser une base de décision sérieuse.
-    </p>
-
-    <p>
-      Cela permet de mieux comprendre :
-      ce que le bien vaut réellement dans son contexte,
-      ce qui soutient sa valeur,
-      ce qui la fragilise,
-      et comment engager ensuite la vente dans de bonnes conditions.
-    </p>
-
-    <h2>À Marseille, une estimation utile demande une lecture locale, structurée et défendable</h2>
-
-    <p>
-      Avant de fixer un prix, il faut donc souvent relire plus finement le bien et son environnement.
-      C’est ce qui permet d’éviter les mauvaises trajectoires :
-      prix décalé, mise en vente trop rapide, fatigue du bien sur le marché ou négociation subie.
-    </p>
-
-    <p>
-      Une estimation bien pensée ne donne pas seulement un chiffre.
-      Elle aide à vendre de manière plus cohérente.
-    </p>
-
-    <div class="contact-box">
-      <h3>Relire une estimation avant de vendre à Marseille</h3>
-      <p>
-        Pour une vente en préparation à Marseille,
-        un premier échange peut aider à relire le bien, son contexte
-        et la cohérence du prix avant mise sur le marché.
-      </p>
-      <div class="bottom-links">
-        <a href="mailto:lebertbruno@gmail.com" class="contact-button">Me contacter</a>
-        <a href="index.html" class="secondary-button">Retour à l’accueil</a>
+  <header class="hero">
+    <div class="container" style="padding-bottom: 0;">
+      <div class="hero-top">
+        <a href="index.html" class="back-link">← Retour à l’accueil</a>
       </div>
+
+      <div class="tag">Estimation / Vente / Marseille</div>
+
+      <h1>Estimation avant de vendre à Marseille</h1>
+
+      <p class="intro">
+        Avant de fixer un prix de vente à Marseille, il faut souvent lire plus que la surface ou le prix au m². Une estimation sérieuse suppose de comprendre le bien, l’immeuble, le secteur, le tempo et la vraie lecture du marché avant mise en vente.
+      </p>
     </div>
-  </div>
+  </header>
+
+  <main class="container">
+    <section class="section-card">
+      <div class="section-label">Avant le prix</div>
+      <h2>Avant de vendre, la vraie question n’est pas seulement “combien vaut mon bien ?”</h2>
+      <p class="lead">
+        Beaucoup de vendeurs commencent par chercher un chiffre. C’est normal. Mais avant de fixer un prix, la vraie question n’est pas seulement “combien vaut mon bien ?”. La vraie question est souvent : “comment ce bien sera-t-il réellement lu par le marché ?”
+      </p>
+      <p>
+        À Marseille, une estimation utile ne consiste pas seulement à produire une valeur théorique. Elle sert à préparer une vente cohérente, à éviter les décalages de prix et à poser un point de départ défendable avant mise sur le marché.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Trajectoire de vente</div>
+      <h2>Fixer un prix trop vite peut fausser toute la trajectoire de vente</h2>
+      <p>
+        Un prix n’est pas seulement une donnée technique. C’est le point de départ d’une lecture par les acquéreurs, les intermédiaires et le marché. S’il est mal posé, trop haut, trop bas ou simplement mal justifié, tout le reste peut se dérégler : perception du bien, rythme de diffusion, qualité des contacts, négociation et crédibilité globale.
+      </p>
+      <p>
+        Une estimation avant vente permet justement d’éviter ce décalage initial. Elle aide à positionner le bien de manière plus cohérente, plus lisible et plus soutenable dans le temps.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Prix au m² et limites</div>
+      <h2>Une estimation sérieuse avant de vendre ne se limite jamais à un prix au m²</h2>
+      <p>
+        Le prix au m² donne un repère. Il ne suffit pas à lui seul pour fixer un prix de vente défendable. À Marseille, la lecture réelle dépend aussi de la rue, du micro-secteur, de l’immeuble, de l’étage, de la lumière, de l’état général, de la typologie du bien, de la qualité de la copropriété et de la manière dont un acquéreur peut se projeter.
+      </p>
+      <p>
+        C’est pour cela qu’avant de vendre, il est souvent utile de croiser l’avis de valeur, la lecture locale, la tension du marché et la qualité du bien dans son environnement réel.
+      </p>
+
+      <div class="link-list">
+        <a href="estimation-immobiliere-marseille-prix-m2.html">Lire la page sur l’estimation immobilière à Marseille et le prix au m²</a>
+        <a href="bibliotheque-immobilier-marseille.html#rues-quartiers">Explorer les rues, quartiers et micro-secteurs à Marseille</a>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Immeuble et contexte</div>
+      <h2>Avant de vendre, il faut aussi relire l’immeuble et le contexte</h2>
+      <p>
+        Un appartement ne se vend pas seul. Il se vend aussi avec un immeuble, une ambiance, des parties communes, des charges, un niveau de tenue générale et parfois des fragilités à moyen terme. À Marseille, ces éléments comptent énormément dans la perception de valeur.
+      </p>
+      <p>
+        Deux biens proches sur le papier peuvent ne pas produire du tout la même lecture selon l’immeuble, la rue et l’environnement immédiat. Une estimation avant vente doit donc intégrer le contexte réel, pas seulement les caractéristiques brutes du bien.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Tempo vendeur</div>
+      <h2>Le bon prix dépend aussi du tempo et du projet vendeur</h2>
+      <p>
+        Une estimation utile doit aussi tenir compte du moment. Faut-il vendre vite, attendre, faire certains ajustements, préparer davantage le dossier, tester une ambition de prix ou partir sur une logique plus fluide ? Un prix cohérent n’est pas le même selon que l’on cherche une vente rapide, une vente patrimoniale plus sélective ou un arbitrage plus stratégique.
+      </p>
+
+      <div class="info-list">
+        <div class="info-item">Vente rapide</div>
+        <div class="info-item">Vente patrimoniale plus sélective</div>
+        <div class="info-item">Arbitrage entre vente, location ou attente</div>
+        <div class="info-item">Travaux éventuels avant mise sur le marché</div>
+        <div class="info-item">Projet de succession, séparation ou indivision</div>
+        <div class="info-item">Recherche d’un positionnement plus défendable</div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Décision</div>
+      <h2>Une bonne estimation avant de vendre sert à décider, pas seulement à afficher</h2>
+      <p>
+        Estimer avant de vendre, ce n’est pas chercher un chiffre flatteur. C’est poser une base de décision sérieuse. Cela permet de mieux comprendre ce que le bien vaut réellement dans son contexte, ce qui soutient sa valeur, ce qui la fragilise, et comment engager ensuite la vente dans de bonnes conditions.
+      </p>
+      <p>
+        À Marseille, une estimation utile demande une lecture locale, structurée et défendable. C’est ce qui permet d’éviter les mauvaises trajectoires : prix décalé, mise en vente trop rapide, fatigue du bien sur le marché ou négociation subie.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Questions fréquentes</div>
+      <h2>Questions fréquentes sur l’estimation avant de vendre à Marseille</h2>
+
+      <h3>Pourquoi faire une estimation avant de vendre un bien à Marseille ?</h3>
+      <p>
+        Parce qu’une estimation permet de fixer un prix plus cohérent, d’éviter une mauvaise trajectoire de vente et de mieux comprendre la lecture probable du marché.
+      </p>
+
+      <h3>Peut-on vendre avec un prix fixé uniquement au mètre carré ?</h3>
+      <p>
+        Non. Le prix au m² donne un repère, mais il ne suffit pas pour positionner sérieusement un appartement ou une maison à Marseille.
+      </p>
+
+      <h3>Qu’est-ce qu’un avis de valeur avant vente ?</h3>
+      <p>
+        Un avis de valeur est une lecture du positionnement probable d’un bien sur son marché, utile pour préparer une vente, arbitrer ou vérifier la cohérence d’un prix.
+      </p>
+
+      <h3>Une estimation avant vente doit-elle tenir compte du quartier et de la rue ?</h3>
+      <p>
+        Oui. À Marseille, la rue, le micro-secteur, l’immeuble et l’environnement immédiat peuvent faire varier fortement la perception de valeur.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Passage à l’action</div>
+      <div class="contact-box">
+        <h3>Relire une estimation avant de vendre à Marseille</h3>
+        <p>
+          Pour une vente en préparation à Marseille, un premier échange peut aider à relire le bien, son contexte et la cohérence du prix avant mise sur le marché.
+        </p>
+        <div class="bottom-links">
+          <a href="demander-estimation-marseille.html" class="contact-button">Demander une estimation immobilière à Marseille</a>
+          <a href="qui-consulter-a-marseille.html" class="secondary-button">Lire la page sur qui consulter à Marseille</a>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
