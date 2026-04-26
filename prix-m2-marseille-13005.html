@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prix m2 Marseille 13005 : comment lire vraiment le 5e arrondissement ?</title>
-  <meta name="description" content="Prix m2 Marseille 13005 : comment lire vraiment le 5e arrondissement ? Camas, Chave, Baille, Conception, Saint-Pierre, rues, micro-secteurs, immeubles et vraie logique de valeur." />
+  <title>Prix m2 Marseille 13005 : vraie lecture du 5e arrondissement, rues et micro-secteurs</title>
+  <meta name="description" content="Prix m2 Marseille 13005 : page pilier pour lire le 5e arrondissement rue par rue, avec hiérarchie locale, bâti, ambiance, maisons rares, opportunités avec travaux et limites du prix moyen." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://brunolebert.github.io/bruno-lebert-blog/prix-m2-marseille-13005.html" />
 
@@ -18,6 +18,7 @@
       --line: #dbe3ec;
       --hero: #142235;
       --hero-soft: #1e3148;
+      --accent: #e9d8bd;
     }
 
     * { box-sizing: border-box; }
@@ -42,14 +43,14 @@
         radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 24%),
         linear-gradient(180deg, var(--hero), var(--hero-soft));
       color: #ffffff;
-      padding: 40px 0 44px;
+      padding: 40px 0 48px;
       margin-bottom: 26px;
     }
 
     .container {
-      max-width: 980px;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 0 20px 90px;
+      padding: 0 20px 96px;
     }
 
     .hero-top {
@@ -85,7 +86,7 @@
     }
 
     h1 {
-      font-size: clamp(34px, 5vw, 52px);
+      font-size: clamp(34px, 5vw, 54px);
       line-height: 1.08;
       margin: 0 0 18px;
     }
@@ -94,7 +95,24 @@
       font-size: 22px;
       color: rgba(255,255,255,0.82);
       margin: 0;
-      max-width: 900px;
+      max-width: 930px;
+    }
+
+    .hero-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .hero-nav a {
+      display: inline-block;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: rgba(255,255,255,0.88);
+      font-size: 13px;
+      font-weight: 700;
     }
 
     .section-card {
@@ -104,6 +122,11 @@
       padding: 26px;
       margin-bottom: 24px;
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .section-card.strong {
+      background: var(--surface-soft);
+      border-color: #eadfce;
     }
 
     .section-label {
@@ -122,7 +145,7 @@
     }
 
     h3 {
-      font-size: 22px;
+      font-size: 21px;
       line-height: 1.25;
       margin: 22px 0 10px;
     }
@@ -135,32 +158,59 @@
 
     .lead {
       color: var(--muted);
-      max-width: 900px;
+      max-width: 920px;
     }
 
-    .grid-2 {
+    .grid-2,
+    .grid-3 {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      gap: 16px;
       margin-top: 18px;
     }
 
-    .mini-card {
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .mini-card,
+    .street-card,
+    .source-card {
       border: 1px solid #e2e8f0;
       border-radius: 18px;
       padding: 18px;
       background: #fff;
     }
 
-    .mini-card h3 {
+    .mini-card h3,
+    .street-card h3,
+    .source-card h3 {
       margin-top: 0;
       font-size: 20px;
     }
 
-    .mini-card p {
+    .mini-card p,
+    .street-card p,
+    .source-card p {
       font-size: 16px;
       color: var(--muted);
       margin-bottom: 0;
+    }
+
+    .street-card strong {
+      color: var(--text);
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      background: #fffaf2;
+      border-radius: 16px;
+      padding: 18px 18px 18px 20px;
+      margin: 18px 0;
+    }
+
+    .note p {
+      margin-bottom: 0;
+      color: #334155;
+      font-size: 17px;
     }
 
     .link-list {
@@ -175,7 +225,7 @@
       border-radius: 17px;
       border: 1px solid #e2e8f0;
       background: #fff;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text);
       font-size: 15px;
     }
@@ -184,7 +234,7 @@
       background: #f8fbfd;
     }
 
-    .contact-box {
+    .cta-box {
       margin-top: 8px;
       padding: 28px;
       background: var(--surface-soft);
@@ -192,14 +242,9 @@
       border-radius: 22px;
     }
 
-    .contact-box h3 {
+    .cta-box h3 {
       margin: 0 0 12px;
       font-size: 24px;
-    }
-
-    .contact-box p {
-      font-size: 18px;
-      margin-bottom: 18px;
     }
 
     .bottom-links {
@@ -225,18 +270,10 @@
       border: 1px solid #0f172a;
     }
 
-    .contact-button:hover {
-      background: #1e293b;
-    }
-
     .secondary-button {
       background: #ffffff;
       color: #0f172a;
       border: 1px solid #cbd5e1;
-    }
-
-    .secondary-button:hover {
-      background: #f8fafc;
     }
 
     .floating-stack {
@@ -265,150 +302,19 @@
       box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
     }
 
-    .floating-button:hover {
-      background: #223652;
-    }
-
-    .floating-panel {
-      width: min(360px, calc(100vw - 32px));
-      background: #ffffff;
-      border: 1px solid #d8dee8;
-      border-radius: 22px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
-      padding: 16px;
-      display: none;
-    }
-
-    .floating-panel.open {
-      display: block;
-    }
-
-    .panel-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-bottom: 10px;
-    }
-
-    .search-title {
-      font-size: 20px;
-      line-height: 1.25;
-      margin: 0 0 10px;
-      color: var(--text);
-    }
-
-    .search-subtitle {
-      font-size: 14px;
-      color: var(--muted);
-      margin: 0 0 14px;
-    }
-
-    .search-input {
-      width: 100%;
-      border: 1px solid #cbd5e1;
-      border-radius: 16px;
-      padding: 15px 16px;
-      font-size: 16px;
-      color: var(--text);
-      background: #ffffff;
-      box-sizing: border-box;
-      margin-bottom: 12px;
-    }
-
-    .search-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .search-tag {
-      border: 1px solid #d8dee8;
-      background: #fff;
-      color: var(--muted);
-      border-radius: 999px;
-      padding: 9px 13px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .search-tag:hover {
-      background: #f8fbfd;
-    }
-
-    .quick-link {
-      display: block;
-      padding: 14px 14px;
-      border-radius: 16px;
-      border: 1px solid #e2e8f0;
-      background: #ffffff;
-      margin-bottom: 10px;
-    }
-
-    .quick-link:last-child {
-      margin-bottom: 0;
-    }
-
-    .quick-link strong {
-      display: block;
-      font-size: 15px;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .quick-link span {
-      display: block;
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    .quick-link:hover {
-      background: #f8fbfd;
-    }
-
-    @media (max-width: 800px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 860px) {
+      .grid-2,
+      .grid-3 { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
-      .container {
-        padding: 0 16px 100px;
-      }
-
-      h1 {
-        font-size: 34px;
-      }
-
-      .intro {
-        font-size: 20px;
-      }
-
-      h2 {
-        font-size: 24px;
-      }
-
-      p {
-        font-size: 17px;
-      }
-
-      .floating-stack {
-        right: 12px;
-        bottom: 12px;
-      }
-
-      .floating-button {
-        font-size: 13px;
-        padding: 13px 16px;
-      }
-
-      .floating-panel {
-        width: min(360px, calc(100vw - 24px));
-      }
+      .container { padding: 0 16px 104px; }
+      h1 { font-size: 34px; }
+      .intro { font-size: 20px; }
+      h2 { font-size: 24px; }
+      p { font-size: 17px; }
+      .floating-stack { right: 12px; bottom: 12px; }
+      .floating-button { font-size: 13px; padding: 13px 16px; }
     }
   </style>
 </head>
@@ -421,93 +327,173 @@
 
       <div class="tag">Prix m2 / Marseille 13005 / 5e arrondissement</div>
 
-      <h1>Prix m2 Marseille 13005 : comment lire vraiment le 5e arrondissement ?</h1>
+      <h1>Prix m2 Marseille 13005 : lire vraiment le 5e arrondissement, rue par rue</h1>
 
       <p class="intro">
-        Le prix mètre carré à Marseille 13005 ne suffit jamais à lui seul pour comprendre la vraie valeur d’un appartement ou d’une maison. Dans le 5e arrondissement, Camas, Chave, Baille, Conception, Saint-Pierre, les rues, les micro-secteurs et les immeubles changent fortement la lecture.
+        Le prix m2 à Marseille 13005 n’est pas une réponse. C’est un point de départ. Dans le 5e arrondissement, le prix au mètre carré dépend de la rue, du micro-secteur, de l’immeuble, de l’ambiance, du type de bâti, de la désirabilité réelle et de la projection que le bien provoque chez les acquéreurs.
       </p>
+
+      <nav class="hero-nav" aria-label="Sommaire de la page prix m2 Marseille 13005">
+        <a href="#prix-moyen">Prix moyen</a>
+        <a href="#donnees-officielles">Données officielles</a>
+        <a href="#hierarchie">Hiérarchie des rues</a>
+        <a href="#bati">Bâti et typologie</a>
+        <a href="#halo">Image et valeur réelle</a>
+        <a href="#cluster">Pages rues</a>
+        <a href="#estimation">Estimation</a>
+      </nav>
     </div>
   </header>
 
   <main class="container">
-    <section class="section-card">
+    <section id="prix-moyen" class="section-card strong">
       <div class="section-label">Lecture générale</div>
-      <h2>Le prix m2 à Marseille 13005 est un repère, pas une estimation fiable</h2>
+      <h2>Le prix m2 Marseille 13005 ne suffit pas pour estimer un bien</h2>
       <p class="lead">
-        Beaucoup de particuliers commencent par chercher un prix moyen au mètre carré dans le 13005. C’est un réflexe logique. Mais dans le 5e arrondissement de Marseille, ce repère reste trop large pour produire une estimation sérieuse.
+        Chercher un prix moyen au mètre carré dans le 13005 est logique. Mais ce prix moyen mélange des appartements anciens, des biens avec travaux, quelques maisons rares, des immeubles semi-récents, des rues très désirables, des axes plus circulants, des secteurs proches des hôpitaux et des adresses dont l’image est parfois plus forte que la valeur réelle.
       </p>
       <p>
-        Le 13005 ne se traite pas comme un bloc uniforme. La rue, le tronçon, l’ambiance, l’immeuble, la lumière, la qualité d’usage et la désirabilité réelle changent directement la valeur perçue par le marché.
+        Dans le 5e arrondissement, deux biens situés à quelques rues d’écart peuvent provoquer une réaction très différente. Le marché ne lit pas seulement une surface. Il lit une rue, un quartier, un immeuble, une ambiance, une facilité d’usage, un niveau de calme, une lumière, une copropriété et une projection de vie.
       </p>
+      <div class="note">
+        <p>Une page sérieuse sur le prix m2 Marseille 13005 doit donc dépasser la moyenne brute. Elle doit expliquer pourquoi le prix au mètre carré peut aider à cadrer une estimation, mais jamais remplacer la lecture locale.</p>
+      </div>
     </section>
 
-    <section class="section-card">
-      <div class="section-label">Quartiers et sous-zones</div>
-      <h2>Dans le 5e arrondissement, tous les secteurs ne se lisent pas au même niveau</h2>
+    <section id="donnees-officielles" class="section-card">
+      <div class="section-label">Données officielles</div>
+      <h2>Ce que les données DVF permettent de comprendre, et ce qu’elles ne disent pas</h2>
       <p>
-        Quand on parle du prix m2 Marseille 13005, il faut immédiatement descendre d’un cran. Camas, Chave, Baille, la Conception ou Saint-Pierre ne produisent pas la même projection résidentielle, ni la même tension, ni la même hiérarchie de valeur.
+        Les données officielles de Demandes de valeurs foncières, publiées en open data, recensent les mutations immobilières réalisées sur les cinq dernières années. Elles permettent d’identifier des ventes, des natures de biens, des surfaces, des prix déclarés et des tendances de fond. Elles sont utiles pour objectiver une partie du marché et éviter une lecture purement impressionniste.
       </p>
       <p>
-        Certaines zones du 13005 bénéficient d’une lecture plus forte, plus agréable, plus résidentielle et plus recherchée. D’autres sont plus mixtes, plus circulantes, plus hospitalières ou moins homogènes dans leur capacité à susciter l’envie.
+        Mais pour Marseille 13005, elles ne suffisent pas à produire seules une estimation de terrain. Une mutation officielle ne dit pas toujours ce que l’acquéreur a réellement payé dans son esprit : l’envie créée par la rue, la qualité de l’immeuble, l’état des parties communes, l’odeur d’un hall, la lumière du salon, la facilité de stationnement, le bruit, le vis-à-vis ou la sensation de quartier.
+      </p>
+      <div class="grid-3">
+        <div class="source-card">
+          <h3>Ce que DVF objectivise</h3>
+          <p>Transactions, prix déclarés, surfaces, nature de bien, dispersion des mutations, différence entre appartements et maisons.</p>
+        </div>
+        <div class="source-card">
+          <h3>Ce que DVF confirme</h3>
+          <p>Le marché du 13005 est dominé par l’appartement ; les maisons existent mais restent rares et se lisent à part.</p>
+        </div>
+        <div class="source-card">
+          <h3>Ce que DVF ne remplace pas</h3>
+          <p>La lecture du bâti, de l’ambiance, de la désirabilité, du micro-secteur et de la projection acquéreur.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="hierarchie" class="section-card">
+      <div class="section-label">Hiérarchie terrain</div>
+      <h2>La vraie hiérarchie du 13005 se joue rue par rue</h2>
+      <p>
+        Pour lire correctement le prix m2 Marseille 13005, il faut distinguer les rues qui tirent la valeur, les rues fortes mais plus nuancées, les adresses discrètes qui peuvent être sous-cotées, et les zones plus faibles où la projection résidentielle est moins évidente.
       </p>
 
       <div class="grid-2">
-        <div class="mini-card">
-          <h3>Cœur fort Camas / Chave</h3>
-          <p>Zone la plus recherchée, portée par le tramway, les commerces, la promenade, les habitudes de quartier et la qualité de projection résidentielle.</p>
+        <div class="street-card">
+          <h3>Cœur fort absolu</h3>
+          <p><strong>Boulevard Chave, rue Horace-Bertin, rue de Verdun, rue Abbé-de-l’Épée, rue Jaubert, rue Monte-Cristo, rue du Camas, rue Georges, square Sidi-Brahim, rue Terrusse.</strong> Ce sont les adresses où la projection résidentielle peut être très forte, mais jamais sans lecture du tronçon et de l’immeuble.</p>
         </div>
-        <div class="mini-card">
-          <h3>Eugène-Pierre et rues proches</h3>
-          <p>Lecture fine, souvent forte, avec des écarts importants selon la rue, le tronçon, l’immeuble et le niveau réel d’adhésion.</p>
+        <div class="street-card">
+          <h3>Forts mais plus nuancés</h3>
+          <p><strong>Rue Saint-Savournin, cours Franklin Roosevelt, rue Jean-Martin, rue Madon, rue Crillon, rue Louis-Astruc, rue Gilibert, rue Ferrari, rue Saint-Pierre, rue François-Arago, rue Virgile-Marron, rue Jules-Gontard, boulevard Docteur-David-Olmer, rue Locarno.</strong> Bons repères, mais la valeur dépend beaucoup de l’ambiance exacte.</p>
         </div>
-        <div class="mini-card">
-          <h3>Conception / Baille / Saint-Pierre</h3>
-          <p>Lectures plus variables, parfois plus circulantes ou plus mixtes, avec une hiérarchie de valeur différente selon les usages et le cadre de vie.</p>
+        <div class="street-card">
+          <h3>Discrètes ou sous-cotées</h3>
+          <p><strong>Cité des Platanes, rue Locarno, partie discrète du Docteur-Simone-Sedan.</strong> Ces adresses peuvent offrir une meilleure cohérence que leur visibilité spontanée ne le laisse penser.</p>
         </div>
-        <div class="mini-card">
-          <h3>Micro-secteurs et rues discrètes</h3>
-          <p>Dans le 13005, certaines petites rues peuvent mieux tenir la valeur que des axes plus connus mais plus bruyants ou moins cohérents.</p>
+        <div class="street-card">
+          <h3>Plus faibles ou moins désirables</h3>
+          <p>Les secteurs plus circulants, plus proches des hôpitaux, moins commerçants ou moins faciles à projeter peuvent vendre correctement, mais ils demandent souvent un prix plus cohérent et une présentation plus précise.</p>
         </div>
       </div>
     </section>
 
-    <section class="section-card">
-      <div class="section-label">Pourquoi les écarts existent</div>
-      <h2>Pourquoi deux biens proches dans le 13005 peuvent ne pas valoir la même chose</h2>
+    <section id="bati" class="section-card">
+      <div class="section-label">Bâti et typologie</div>
+      <h2>Le 13005 mélange ancien marseillais, semi-récent, récent et très peu de maisons</h2>
       <p>
-        Le prix au m² Marseille 13005 ne dit pas tout. Deux appartements proches peuvent diverger fortement si l’un est dans une rue plus agréable, dans un immeuble plus cohérent, avec plus de lumière, un meilleur plan, un balcon, moins de vis-à-vis ou une meilleure qualité de vie au quotidien.
+        Le prix au mètre carré lit mal la typologie de bâti. Dans Marseille 13005, beaucoup de biens relèvent de l’ancien marseillais : volumes, hauteur sous plafond, charme, distribution parfois imparfaite, copropriétés inégales, travaux possibles. Cet ancien peut créer une forte adhésion quand il est lumineux, bien tenu et cohérent avec la rue.
       </p>
       <p>
-        À Marseille 5e, la valeur dépend beaucoup de la projection. Les acquéreurs n’achètent pas seulement une surface. Ils achètent aussi une ambiance, une rue, un usage, une respiration, un immeuble et une certaine manière d’habiter le quartier.
+        À côté de cet ancien, certaines rues comportent du semi-récent ou du récent. Ces immeubles peuvent apporter ascenseur, stationnement, extérieur, terrasse, copropriété plus rationnelle ou meilleur confort d’usage. Mais ils ne produisent pas automatiquement plus de désirabilité : certains biens récents peuvent être plus pratiques, tout en étant moins charmants ou moins incarnés qu’un bel ancien bien placé.
+      </p>
+      <p>
+        Les maisons sont rares dans le 5e arrondissement. Quand elles existent, elles ne se lisent pas comme des appartements. Terrain, extérieur, calme, stationnement, intimité et rareté changent la logique de valeur. Elles peuvent être très recherchées, mais leur estimation demande une lecture spécifique, distincte des moyennes d’appartements.
+      </p>
+      <div class="note">
+        <p>Le 13005 garde aussi de vraies opportunités avec travaux. Mais une opportunité n’est pas seulement un prix bas : c’est un bien dont la rue, l’immeuble, le plan et le potentiel permettent encore une revalorisation crédible.</p>
+      </div>
+    </section>
+
+    <section id="halo" class="section-card">
+      <div class="section-label">Image et valeur réelle</div>
+      <h2>Certaines rues sont valorisées par halo, pas toujours par valeur brute</h2>
+      <p>
+        Une erreur fréquente consiste à appliquer mécaniquement le prestige d’un secteur à toutes les adresses qui l’entourent. Dans le 13005, le halo Camas / Chave peut tirer certaines rues vers le haut dans l’imaginaire. Mais l’imaginaire ne suffit pas à vendre un bien au bon prix si l’ambiance réelle, le tronçon ou l’immeuble ne suivent pas.
+      </p>
+      <p>
+        Boulevard Eugène-Pierre, rue Georges, rue Terrusse, rue Abbé-de-l’Épée ou rue Saint-Savournin doivent être traités avec nuance. Ces adresses peuvent être fortes, mais elles peuvent aussi être plus valorisées dans le récit que dans la réalité brute du bien. Le bon prix dépend toujours de la cohérence entre image, usage et valeur perçue.
       </p>
     </section>
 
     <section class="section-card">
-      <div class="section-label">Rues déjà traitées</div>
-      <h2>Premières rues du 13005 déjà analysées</h2>
+      <div class="section-label">Ce que le prix moyen lit mal</div>
+      <h2>Pourquoi deux appartements proches peuvent avoir deux valeurs différentes</h2>
       <p>
-        Pour sortir d’une lecture trop abstraite du prix m2 Marseille 13005, plusieurs rues ont déjà été traitées individuellement. C’est là que l’on voit le mieux comment une rue, un tronçon ou un micro-secteur changent la valeur réelle.
+        Dans Marseille 13005, la différence ne se voit pas toujours sur une carte. Elle se voit dans la rue, dans l’entrée de l’immeuble, dans la lumière, dans le bruit, dans la largeur du trottoir, dans les commerces à proximité, dans la qualité de voisinage et dans la facilité de se projeter.
+      </p>
+      <div class="grid-3">
+        <div class="mini-card">
+          <h3>Rue</h3>
+          <p>Un même quartier peut contenir une rue calme, une rue passante, une rue pratique mais moins charmante, ou une rue très désirable.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Immeuble</h3>
+          <p>Parties communes, étage, ascenseur, structure, copropriété, façade et entretien changent directement la valeur.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Projection</h3>
+          <p>La vraie question est : un acquéreur a-t-il envie d’habiter là, à ce prix, dans ce bien précis ?</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cluster" class="section-card">
+      <div class="section-label">Cluster 13005</div>
+      <h2>Lire les rues déjà publiées du 13005</h2>
+      <p>
+        Cette page sert de pilier au cluster 13005. Elle redistribue vers les analyses de rues déjà publiées pour sortir d’une vision abstraite du prix m2 Marseille 13005 et entrer dans une lecture concrète : adresse, ambiance, immeuble, désirabilité, projection.
       </p>
 
       <div class="link-list">
-        <a href="combien-vaut-appartement-boulevard-chave-marseille-13005.html">Combien vaut un appartement boulevard Chave à Marseille 13005 ?</a>
-        <a href="combien-vaut-appartement-boulevard-eugene-pierre-marseille-13005.html">Combien vaut un appartement boulevard Eugène-Pierre à Marseille 13005 ?</a>
-        <a href="estimation-rue-sainte-cecile-marseille-13005.html">Estimation rue Sainte-Cécile à Marseille 13005</a>
-        <a href="combien-vaut-appartement-rue-de-l-olivier-marseille-13005.html">Combien vaut un appartement rue de l’Olivier à Marseille 13005 ?</a>
-        <a href="combien-vaut-appartement-rue-briffaut-marseille-13005.html">Combien vaut un appartement rue Briffaut à Marseille 13005 ?</a>
-        <a href="combien-vaut-appartement-rue-horace-bertin-marseille-13005.html">Combien vaut un appartement rue Horace-Bertin à Marseille 13005 ?</a>
-        <a href="combien-vaut-appartement-rue-terrusse-marseille-13005.html">Combien vaut un appartement rue Terrusse à Marseille 13005 ?</a>
+        <a href="combien-vaut-appartement-boulevard-chave-marseille-13005.html">Boulevard Chave : axe fort, vie de quartier, tramway, désirabilité élevée</a>
+        <a href="combien-vaut-appartement-boulevard-eugene-pierre-marseille-13005.html">Boulevard Eugène-Pierre : cœur Camas / Chave, fort mais à nuancer par tronçon</a>
+        <a href="estimation-rue-sainte-cecile-marseille-13005.html">Rue Sainte-Cécile : lecture plus résidentielle et qualitative</a>
+        <a href="combien-vaut-appartement-rue-de-l-olivier-marseille-13005.html">Rue de l’Olivier : cohérence résidentielle du cœur Camas / Chave</a>
+        <a href="combien-vaut-appartement-rue-briffaut-marseille-13005.html">Rue Briffaut : rue discrète, lecture dépendante du micro-secteur</a>
+        <a href="combien-vaut-appartement-rue-horace-bertin-marseille-13005.html">Rue Horace-Bertin : adresse du cœur fort, valeur liée à l’usage réel</a>
+        <a href="combien-vaut-appartement-rue-terrusse-marseille-13005.html">Rue Terrusse : bonne adresse, mais attention au halo et au tronçon</a>
+        <a href="combien-vaut-appartement-rue-du-camas-marseille-13005.html">Rue du Camas : cœur de quartier, potentiel avec travaux et forte projection</a>
+        <a href="combien-vaut-appartement-rue-saint-savournin-marseille-13005.html">Rue Saint-Savournin : connue, centrale, mais plus mixte qu’elle n’en a l’air</a>
+        <a href="combien-vaut-appartement-rue-abbe-de-l-epee-marseille-13005.html">Rue Abbé-de-l’Épée : bonne rue, mais valeur portée par le secteur autant que par la rue</a>
+        <a href="combien-vaut-appartement-rue-de-verdun-marseille-13005.html">Rue de Verdun : calme, pratique, ancien et résidences plus récentes</a>
+        <a href="combien-vaut-appartement-rue-monte-cristo-marseille-13005.html">Rue Monte-Cristo : utile, large, semi-récent, vues possibles, charme plus variable</a>
+        <a href="combien-vaut-appartement-rue-jaubert-marseille-13005.html">Rue Jaubert : calme, centrale, proximité Sébastopol, bâti ancien puis plus récent</a>
       </div>
     </section>
 
     <section class="section-card">
-      <div class="section-label">Pages piliers du cluster</div>
-      <h2>Pages centrales pour comprendre la logique du 13005</h2>
+      <div class="section-label">Pages de cadrage</div>
+      <h2>Compléter la lecture du 5e arrondissement</h2>
       <div class="link-list">
-        <a href="marseille-5e-arrondissement.html">Lire la page pilier sur Marseille 5e 13005</a>
-        <a href="estimation-appartement-marseille-5e.html">Lire la page sur l’estimation d’un appartement à Marseille 5e 13005</a>
-        <a href="estimation-immobiliere-marseille-prix-m2.html">Lire la page générale sur l’estimation immobilière à Marseille et le prix au m²</a>
-        <a href="demander-estimation-marseille.html">Demander une estimation immobilière à Marseille</a>
+        <a href="marseille-5e-arrondissement.html">Marseille 5e arrondissement : acheter, vendre ou faire estimer ne se traite pas à l’aveugle</a>
+        <a href="estimation-appartement-marseille-5e.html">Estimation appartement Marseille 5e : pourquoi deux biens proches ne valent pas pareil</a>
+        <a href="estimation-appartement-secteur-chave-saint-michel-sebastopol-longchamp-marseille.html">Secteur Chave, Saint-Michel, Sébastopol, Longchamp : corridor de valeur et de vie quotidienne</a>
+        <a href="estimation-immobiliere-marseille-prix-m2.html">Estimation immobilière Marseille : pourquoi le prix au m² ne suffit jamais</a>
       </div>
     </section>
 
@@ -515,37 +501,43 @@
       <div class="section-label">Questions fréquentes</div>
       <h2>Questions fréquentes sur le prix m2 Marseille 13005</h2>
 
-      <h3>Quel est le prix m2 moyen à Marseille 13005 ?</h3>
+      <h3>Quel est le bon prix m2 à Marseille 13005 ?</h3>
       <p>
-        Il existe des moyennes et des fourchettes selon les portails, mais elles ne suffisent pas pour estimer un bien réel. Dans le 13005, les écarts entre rues, sous-secteurs et immeubles sont trop importants.
+        Il n’existe pas un seul bon prix m2. Il existe une hiérarchie entre rues, micro-secteurs, immeubles et types de biens. Le bon prix dépend de la rue exacte, de l’immeuble, de l’état, de l’étage, de la lumière, de l’ambiance et de la projection acquéreur.
       </p>
 
-      <h3>Le Camas, Chave, Baille et Saint-Pierre se vendent-ils au même niveau ?</h3>
+      <h3>Le 5e arrondissement de Marseille est-il homogène ?</h3>
       <p>
-        Non. Ces zones ne produisent pas la même lecture résidentielle, ni la même désirabilité, ni la même qualité d’usage. Cela change directement la valeur perçue.
+        Non. Le 5e arrondissement mélange des adresses très recherchées, des rues fortes mais nuancées, des secteurs plus circulants, des zones proches d’équipements hospitaliers, de l’ancien marseillais, du semi-récent, du récent et quelques maisons rares.
       </p>
 
-      <h3>Pourquoi une petite rue du 13005 peut-elle mieux tenir la valeur qu’un grand axe ?</h3>
+      <h3>Pourquoi le prix au mètre carré peut-il tromper ?</h3>
       <p>
-        Parce qu’une rue plus discrète peut offrir plus de calme, une meilleure ambiance, une respiration plus agréable et une meilleure projection résidentielle qu’un axe plus visible mais plus circulant.
+        Parce qu’il mélange des biens qui n’ont pas la même désirabilité. Un appartement lumineux dans un bel immeuble ancien du cœur Camas / Chave ne se lit pas comme un bien sombre, à rénover, sur un axe plus circulant ou dans une copropriété moins engageante.
       </p>
 
-      <h3>Peut-on estimer un appartement du 13005 uniquement avec un prix au m² ?</h3>
+      <h3>Les maisons du 13005 se vendent-elles comme les appartements ?</h3>
       <p>
-        Non. Il faut aussi lire l’immeuble, l’étage, la lumière, le plan, l’extérieur éventuel, la rue exacte et la manière dont le marché local comprend le bien.
+        Non. Les maisons sont rares dans Marseille 13005 et se lisent à part. Terrain, extérieur, calme, stationnement et intimité peuvent créer une valeur spécifique, distincte des moyennes d’appartements.
+      </p>
+
+      <h3>Y a-t-il encore des opportunités avec travaux dans le 13005 ?</h3>
+      <p>
+        Oui, mais toutes les opportunités ne se valent pas. Un bien avec travaux reste intéressant seulement si la rue, l’immeuble, le plan, la lumière et le potentiel de revalorisation sont cohérents.
       </p>
     </section>
 
-    <section class="section-card">
+    <section id="estimation" class="section-card">
       <div class="section-label">Passage à l’action</div>
-      <div class="contact-box">
-        <h3>Relire un bien dans le 13005 avant de fixer un prix</h3>
+      <div class="cta-box">
+        <h3>Faire relire un bien dans Marseille 13005 avant de fixer un prix</h3>
         <p>
-          Pour une vente, un arbitrage ou une simple relecture de valeur dans le 5e arrondissement de Marseille 13005, un premier échange peut aider à replacer le bien dans sa vraie géographie : rue, micro-secteur, immeuble, ambiance et cohérence réelle du prix.
+          Pour vendre, acheter, arbitrer ou simplement comprendre une valeur dans le 5e arrondissement, il faut replacer le bien dans sa vraie géographie : rue, micro-secteur, immeuble, ambiance, désirabilité, projection et cohérence avec les ventes comparables réellement utiles.
         </p>
         <div class="bottom-links">
           <a href="demander-estimation-marseille.html" class="contact-button">Demander une estimation immobilière à Marseille</a>
           <a href="marseille-5e-arrondissement.html" class="secondary-button">Lire Marseille 5e 13005</a>
+          <a href="bibliotheque-immobilier-marseille.html#rues-quartiers" class="secondary-button">Explorer les rues du 13005</a>
           <a href="index.html" class="secondary-button">Retour à l’accueil</a>
         </div>
       </div>
@@ -553,144 +545,13 @@
   </main>
 
   <div class="floating-stack">
-    <div id="search-panel" class="floating-panel">
-      <div class="panel-title">Recherche</div>
-      <h3 class="search-title">Rechercher un thème, une rue ou un sujet</h3>
-      <p class="search-subtitle">Cette recherche ouvre directement la bibliothèque avec le bon filtre.</p>
-      <input
-        type="text"
-        id="article-search"
-        class="search-input"
-        placeholder="Ex. prix m2 13005, Camas, Chave..."
-      />
-      <div class="search-tags">
-        <button type="button" class="search-tag" data-article-search-tag="prix m2 13005">prix m2 13005</button>
-        <button type="button" class="search-tag" data-article-search-tag="Marseille 5e">Marseille 5e</button>
-        <button type="button" class="search-tag" data-article-search-tag="Camas">Camas</button>
-        <button type="button" class="search-tag" data-article-search-tag="Chave">Chave</button>
-        <button type="button" class="search-tag" data-article-search-tag="estimation">estimation</button>
-      </div>
-    </div>
-
-    <button id="search-toggle" class="floating-button" type="button" aria-expanded="false" aria-controls="search-panel">
-      🔎 Recherche
-    </button>
-
-    <div id="quick-panel" class="floating-panel">
-      <div class="panel-title">Accès rapide</div>
-
-      <a class="quick-link" href="index.html">
-        <strong>Retour à l’accueil</strong>
-        <span>Revenir directement à la page d’accueil du site.</span>
-      </a>
-
-      <a class="quick-link" href="demander-estimation-marseille.html">
-        <strong>Demander une estimation</strong>
-        <span>Obtenir un avis de valeur ou une première lecture d’un bien à Marseille.</span>
-      </a>
-
-      <a class="quick-link" href="marseille-5e-arrondissement.html">
-        <strong>Lire Marseille 5e 13005</strong>
-        <span>Accéder à la page pilier du 5e arrondissement.</span>
-      </a>
-
-      <a class="quick-link" href="bibliotheque-immobilier-marseille.html#rues-quartiers">
-        <strong>Rues, quartiers et micro-secteurs</strong>
-        <span>Accéder directement aux lectures locales de la bibliothèque.</span>
-      </a>
-    </div>
-
-    <button id="quick-toggle" class="floating-button" type="button" aria-expanded="false" aria-controls="quick-panel">
-      Accès rapide
-    </button>
-
-    <button id="top-toggle" class="floating-button" type="button" aria-label="Revenir en haut de page">
-      ↑ Haut de page
-    </button>
+    <button id="top-toggle" class="floating-button" type="button" aria-label="Revenir en haut de page">↑ Haut de page</button>
   </div>
 
   <script>
-    const quickToggle = document.getElementById('quick-toggle');
-    const quickPanel = document.getElementById('quick-panel');
-    const searchToggle = document.getElementById('search-toggle');
-    const searchPanel = document.getElementById('search-panel');
     const topToggle = document.getElementById('top-toggle');
-    const articleSearch = document.getElementById('article-search');
-    const articleSearchTags = Array.from(document.querySelectorAll('[data-article-search-tag]'));
-
-    function closePanel(panel, button) {
-      panel.classList.remove('open');
-      button.setAttribute('aria-expanded', 'false');
-    }
-
-    function openPanel(panel, button) {
-      panel.classList.add('open');
-      button.setAttribute('aria-expanded', 'true');
-    }
-
-    function goToLibrarySearch(value) {
-      const query = value.trim();
-      if (query === '') {
-        window.location.href = 'bibliotheque-immobilier-marseille.html';
-      } else {
-        window.location.href = 'bibliotheque-immobilier-marseille.html?q=' + encodeURIComponent(query);
-      }
-    }
-
-    quickToggle.addEventListener('click', function () {
-      const isOpen = quickPanel.classList.contains('open');
-      closePanel(searchPanel, searchToggle);
-      if (isOpen) {
-        closePanel(quickPanel, quickToggle);
-      } else {
-        openPanel(quickPanel, quickToggle);
-      }
-    });
-
-    searchToggle.addEventListener('click', function () {
-      const isOpen = searchPanel.classList.contains('open');
-      closePanel(quickPanel, quickToggle);
-      if (isOpen) {
-        closePanel(searchPanel, searchToggle);
-      } else {
-        openPanel(searchPanel, searchToggle);
-        setTimeout(() => {
-          articleSearch.focus();
-        }, 50);
-      }
-    });
-
     topToggle.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    document.addEventListener('click', function (event) {
-      const clickedQuickPanel = quickPanel.contains(event.target);
-      const clickedQuickToggle = quickToggle.contains(event.target);
-      const clickedSearchPanel = searchPanel.contains(event.target);
-      const clickedSearchToggle = searchToggle.contains(event.target);
-
-      if (!clickedQuickPanel && !clickedQuickToggle) {
-        closePanel(quickPanel, quickToggle);
-      }
-
-      if (!clickedSearchPanel && !clickedSearchToggle) {
-        closePanel(searchPanel, searchToggle);
-      }
-    });
-
-    articleSearch.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        goToLibrarySearch(articleSearch.value);
-      }
-    });
-
-    articleSearchTags.forEach(tag => {
-      tag.addEventListener('click', function () {
-        const value = tag.getAttribute('data-article-search-tag');
-        goToLibrarySearch(value);
-      });
     });
   </script>
 </body>
