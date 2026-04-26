@@ -26,17 +26,20 @@
     h3 { font-size:21px; line-height:1.25; margin:22px 0 10px; }
     p { font-size:18px; margin:0 0 16px; color:#1e293b; }
     .lead { color:var(--muted); max-width:860px; }
-    .info-list,.link-list { display:grid; gap:12px; margin-top:18px; }
-    .info-item,.link-list a { border:1px solid #e2e8f0; border-radius:17px; padding:14px 16px; background:#fff; color:var(--text); font-size:16px; }
+    .info-list,.link-list,.situation-grid,.steps-grid { display:grid; gap:12px; margin-top:18px; }
+    .situation-grid { grid-template-columns: repeat(2, 1fr); }
+    .info-item,.link-list a,.situation-item,.step-item { border:1px solid #e2e8f0; border-radius:17px; padding:14px 16px; background:#fff; color:var(--text); font-size:16px; }
     .link-list a { display:block; font-weight:700; font-size:15px; }
     .link-list a:hover { background:#f8fbfd; }
+    .situation-item h3,.step-item h3 { font-size:18px; margin:0 0 8px; }
+    .situation-item p,.step-item p { font-size:15px; color:var(--muted); margin:0; }
     .cta-box { margin-top:8px; padding:28px; background:var(--surface-soft); border:1px solid #eadfce; border-radius:22px; }
     .cta-box h3 { margin:0 0 12px; font-size:24px; }
     .cta-actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:18px; }
     .primary-button,.secondary-button { display:inline-block; padding:14px 22px; border-radius:999px; font-weight:700; font-size:15px; }
     .primary-button { background:#0f172a; color:#fff; border:1px solid #0f172a; }
     .secondary-button { background:#fff; color:#0f172a; border:1px solid #cbd5e1; }
-    @media(max-width:640px){ .container{padding:0 16px 100px;} h1{font-size:34px;} .intro{font-size:20px;} h2{font-size:24px;} p{font-size:17px;} }
+    @media(max-width:640px){ .container{padding:0 16px 100px;} h1{font-size:34px;} .intro{font-size:20px;} h2{font-size:24px;} p{font-size:17px;} .situation-grid{grid-template-columns:1fr;} }
   </style>
 </head>
 <body>
@@ -58,6 +61,19 @@
     </section>
 
     <section class="section-card">
+      <div class="section-label">Votre situation</div>
+      <h2>Chaque demande d’estimation commence par un contexte réel</h2>
+      <p>La valeur ne se lit pas de la même manière selon le type de bien, l’usage prévu, le délai, l’état du logement et la raison de la demande.</p>
+      <div class="situation-grid">
+        <div class="situation-item"><h3>Appartement</h3><p>Rue, étage, lumière, extérieur, copropriété, travaux et projection acquéreur changent fortement la lecture.</p></div>
+        <div class="situation-item"><h3>Maison</h3><p>Terrain, stationnement, accès, extérieur, calme, travaux et rareté locale pèsent autant que la surface.</p></div>
+        <div class="situation-item"><h3>Bien locatif</h3><p>Loyer, occupation, DPE, état, gestion, vacance possible et arbitrage vente/location doivent être relus ensemble.</p></div>
+        <div class="situation-item"><h3>Succession ou arbitrage</h3><p>La priorité est souvent de poser une valeur défendable, compréhensible et utile à une décision partagée.</p></div>
+        <div class="situation-item"><h3>Vente à préparer</h3><p>Le bon prix dépend du secteur, du tempo, de la concurrence, des objections possibles et du niveau de demande réel.</p></div>
+      </div>
+    </section>
+
+    <section class="section-card">
       <div class="section-label">Types de biens</div>
       <h2>Appartement, maison, immeuble, bien locatif : quels biens peuvent être estimés ?</h2>
       <p>Une demande d’estimation peut concerner un appartement, une maison, un immeuble, un bien locatif, un logement détenu en SCI ou un bien à arbitrer avant vente. La valeur se lit différemment selon le type de bien, son usage, son état et son secteur.</p>
@@ -68,6 +84,19 @@
         <div class="info-item">Bien locatif ou logement occupé</div>
         <div class="info-item">Bien détenu en SCI</div>
         <div class="info-item">Bien à arbitrer avant vente, location ou travaux</div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-label">Première estimation</div>
+      <h2>Comment se passe une première estimation ?</h2>
+      <p>Le premier échange sert à comprendre le bien et le contexte avant de produire une lecture de valeur plus fiable qu’une moyenne automatique.</p>
+      <div class="steps-grid">
+        <div class="step-item"><h3>1. Adresse ou secteur</h3><p>Une rue, un quartier ou un micro-secteur permet déjà d’écarter les moyennes trop larges.</p></div>
+        <div class="step-item"><h3>2. Type de bien</h3><p>Appartement, maison, immeuble ou bien locatif ne répondent pas aux mêmes critères de valeur.</p></div>
+        <div class="step-item"><h3>3. Contexte du projet</h3><p>Vente, arbitrage, succession, location ou simple vérification ne demandent pas la même lecture.</p></div>
+        <div class="step-item"><h3>4. Première lecture</h3><p>La valeur est replacée dans la rue, l’immeuble, l’état du bien, la demande et les objections possibles.</p></div>
+        <div class="step-item"><h3>5. Échange si besoin</h3><p>Un rendez-vous ou un complément peut être utile quand le bien, le secteur ou l’arbitrage demande plus de finesse.</p></div>
       </div>
     </section>
 
