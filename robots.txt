@@ -2,4 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://brunolebert.github.io/bruno-lebert-blog/sitemap.xml
-Sitemap: https://brunolebert.github.io/bruno-lebert-blog/sitemap-indexation.xml
