@@ -39,7 +39,10 @@
     .primary-button,.secondary-button { display:inline-block; padding:14px 22px; border-radius:999px; font-weight:700; font-size:15px; }
     .primary-button { background:#0f172a; color:#fff; border:1px solid #0f172a; }
     .secondary-button { background:#fff; color:#0f172a; border:1px solid #cbd5e1; }
-    @media(max-width:640px){ .container{padding:0 16px 100px;} h1{font-size:34px;} .intro{font-size:20px;} h2{font-size:24px;} p{font-size:17px;} .situation-grid{grid-template-columns:1fr;} }
+    footer { max-width:920px; margin:0 auto; padding:0 20px 34px; color:#64748b; font-size:14px; }
+    .footer-links { border-top:1px solid var(--line); padding-top:18px; display:flex; flex-wrap:wrap; gap:12px 18px; }
+    .footer-links a { color:#475569; font-weight:700; text-decoration:none; }
+    @media(max-width:640px){ .container{padding:0 16px 100px;} h1{font-size:34px;} .intro{font-size:20px;} h2{font-size:24px;} p{font-size:17px;} .situation-grid{grid-template-columns:1fr;} footer{padding:0 16px 34px;} }
   </style>
 </head>
 <body>
@@ -161,5 +164,14 @@
       </div>
     </section>
   </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Accueil</a>
+      <a href="contact-immobilier-marseille.html">Contact</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
+    </div>
+  </footer>
 </body>
 </html>
