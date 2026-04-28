@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estimer un appartement avec DVF, data.gouv et l’IA à Marseille | Bruno Lebert</title>
+  <meta name="description" content="DVF, data.gouv et l’intelligence artificielle peuvent aider à estimer un appartement. Mais une valeur fiable demande encore de relire l’adresse, l’état du bien, la lumière, les défauts, les travaux et le marché réel." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://brunolebert.github.io/bruno-lebert-blog/estimer-appartement-dvf-data-ia-marseille.html" />
+  <style>
+    :root{--bg:#fbfaf7;--surface:#fff;--text:#132238;--muted:#56657a;--line:#dbe3ec;--hero:#142235;--hero-soft:#1e3148;--sand:#f5efe5}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.75}a{color:inherit}.hero{background:linear-gradient(180deg,var(--hero),var(--hero-soft));color:#fff;padding:40px 0 46px;margin-bottom:28px}.container{max-width:920px;margin:0 auto;padding:0 20px 86px}.hero .container{padding-bottom:0}.back-link{display:inline-block;background:rgba(255,255,255,.96);color:var(--hero);border-radius:999px;padding:11px 16px;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:20px}.page-tag{display:inline-block;background:rgba(255,255,255,.10);color:rgba(255,255,255,.88);font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:10px 16px;border-radius:999px;margin-bottom:16px;border:1px solid rgba(255,255,255,.14)}h1{font-size:clamp(34px,5vw,52px);line-height:1.08;margin:0 0 18px}.intro{font-size:21px;color:rgba(255,255,255,.84);margin:0;max-width:880px}.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:26px;margin-bottom:22px;box-shadow:0 1px 2px rgba(15,23,42,.04)}h2{font-size:28px;line-height:1.2;margin:0 0 16px}p{font-size:18px;margin:0 0 16px;color:#1e293b}.short-lines p{margin-bottom:8px}.resources{display:grid;gap:12px;margin-top:18px}.resource-link{display:block;border:1px solid #e2e8f0;border-radius:18px;padding:16px;background:#fff;text-decoration:none}.resource-link strong{display:block;font-size:17px;margin-bottom:4px}.resource-link span{display:block;font-size:14px;color:var(--muted)}.cta{background:var(--sand);border-color:#eadfce}.button{display:inline-block;margin-top:6px;border-radius:999px;padding:13px 20px;background:#0f172a;color:#fff;font-weight:700;text-decoration:none;font-size:15px}.footer-links{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-wrap:wrap;gap:12px 18px;color:#64748b;font-size:14px}.footer-links a{color:#475569;font-weight:700;text-decoration:none}@media(max-width:640px){.container{padding:0 16px 76px}.hero{padding:32px 0 38px}h1{font-size:34px}.intro{font-size:20px}.card{padding:20px;border-radius:22px}h2{font-size:24px}p{font-size:17px}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <a href="index.html" class="back-link">← Retour à l’accueil</a>
+      <div class="page-tag">Estimation, données et IA</div>
+      <h1>Peut-on estimer son appartement avec DVF, data.gouv et une intelligence artificielle ?</h1>
+      <p class="intro">De plus en plus de propriétaires commencent seuls.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Introduction</h2>
+      <p>De plus en plus de propriétaires commencent seuls.</p>
+      <div class="short-lines">
+        <p>Ils ouvrent DVF.</p>
+        <p>Ils cherchent les ventes passées.</p>
+        <p>Ils consultent data.gouv.</p>
+        <p>Ils comparent les annonces en ligne.</p>
+        <p>Ils testent une estimation automatique.</p>
+        <p>Ils demandent parfois à ChatGPT, Claude, Gemini, Mistral, Perplexity, Copilot ou un autre assistant IA : “Combien vaut mon appartement ?”</p>
+      </div>
+      <p>Ce réflexe est logique.</p>
+      <div class="short-lines">
+        <p>Pourquoi attendre un rendez-vous si une première réponse semble possible en quelques secondes ?</p>
+        <p>Pourquoi appeler une agence si les ventes sont publiques ?</p>
+        <p>Pourquoi ne pas utiliser l’intelligence artificielle si elle peut déjà organiser les données, comparer des biens et produire une première hypothèse ?</p>
+      </div>
+      <p>Le sujet n’est pas de refuser ces outils.</p>
+      <p>Au contraire : ils sont utiles. Ils donnent une base. Ils permettent de mieux comprendre. Ils évitent parfois de partir totalement à l’aveugle.</p>
+      <p>Mais ils ne suffisent pas à décider seuls d’un prix.</p>
+      <div class="short-lines">
+        <p>DVF dit ce qui s’est vendu.</p>
+        <p>data.gouv donne de la matière brute.</p>
+        <p>L’IA conversationnelle peut organiser une hypothèse.</p>
+      </div>
+      <p>Mais votre bien, lui, doit encore être regardé, compris et relu.</p>
+    </section>
+
+    <section class="card">
+      <h2>Le nouveau réflexe des propriétaires</h2>
+      <p>Avant, beaucoup de propriétaires attendaient qu’un professionnel leur donne un prix.</p>
+      <p>Aujourd’hui, ils arrivent souvent avec une première idée.</p>
+      <div class="short-lines">
+        <p>Ils ont consulté des annonces.</p>
+        <p>Ils ont vu des ventes dans leur rue.</p>
+        <p>Ils ont comparé un prix au mètre carré.</p>
+        <p>Ils ont demandé une estimation en ligne.</p>
+        <p>Ils ont interrogé une IA.</p>
+        <p>Ils ont parfois déjà préparé une fourchette.</p>
+      </div>
+      <p>Cette évolution est saine.</p>
+      <p>Un propriétaire mieux informé pose de meilleures questions. Il comprend mieux les écarts. Il sait qu’un prix ne sort pas de nulle part. Il peut comparer les sources au lieu de subir un chiffre annoncé sans explication.</p>
+      <p>Mais ce nouveau réflexe crée aussi une difficulté.</p>
+      <p>Plus il y a d’outils, plus il y a de réponses.</p>
+      <p>Et plus il y a de réponses, plus il faut savoir les trier.</p>
+      <div class="short-lines">
+        <p>DVF peut suggérer une valeur.</p>
+        <p>Une estimation en ligne peut donner une fourchette.</p>
+        <p>ChatGPT, Claude, Gemini, Mistral, Perplexity ou Copilot peuvent proposer un raisonnement.</p>
+        <p>Un voisin peut évoquer une vente.</p>
+        <p>Leboncoin peut afficher des prix ambitieux.</p>
+        <p>Un notaire peut donner une lecture patrimoniale.</p>
+        <p>Un agent peut donner une lecture terrain.</p>
+      </div>
+      <p>Le problème n’est plus seulement d’obtenir un prix.</p>
+      <p>Le problème est de savoir lequel mérite d’être cru.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ce que DVF permet vraiment de voir</h2>
+      <p>DVF est une ressource précieuse.</p>
+      <p>Elle permet de consulter des ventes immobilières passées. Elle donne accès à des informations utiles : prix de vente, date, surface, adresse ou localisation, type de bien, parfois des éléments cadastraux.</p>
+      <p>Pour un propriétaire, c’est une révolution silencieuse.</p>
+      <p>Il peut voir que des biens ont été vendus dans son secteur. Il peut comparer des surfaces. Il peut repérer des niveaux de prix. Il peut se rendre compte que certaines annonces en ligne ne correspondent pas toujours aux ventes réellement actées.</p>
+      <p>DVF aide donc à sortir du flou.</p>
+      <p>Mais DVF ne raconte pas toute l’histoire.</p>
+      <p>La base ne dit pas toujours si le bien vendu était rénové, fatigué, lumineux, sombre, occupé, vide, bruyant, traversant, charmant, mal distribué, avec une copropriété saine ou avec des travaux à venir.</p>
+      <div class="short-lines">
+        <p>Elle ne dit pas toujours ce qui s’est passé pendant la négociation.</p>
+        <p>Elle ne dit pas toujours si le prix affiché au départ était beaucoup plus haut.</p>
+        <p>Elle ne dit pas toujours combien de temps le bien est resté sur le marché.</p>
+        <p>Elle ne dit pas toujours si l’acheteur a obtenu une concession.</p>
+        <p>Elle ne dit pas toujours si un défaut a pesé lourd.</p>
+      </div>
+      <p>DVF donne une trace.</p>
+      <p>Mais une trace n’est pas encore une lecture.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ce que data.gouv apporte à une estimation</h2>
+      <p>data.gouv ouvre l’accès à une matière très utile.</p>
+      <p>On peut y retrouver des données publiques, des informations sur les ventes, l’énergie, le cadastre, parfois des éléments urbains, techniques ou territoriaux.</p>
+      <p>Pour l’immobilier, cette matière peut devenir précieuse.</p>
+      <div class="short-lines">
+        <p>Elle permet de croiser des informations.</p>
+        <p>De replacer un bien dans un environnement.</p>
+        <p>De regarder un marché autrement qu’avec une simple annonce.</p>
+        <p>De comprendre qu’un prix dépend aussi du contexte : localisation, énergie, immeuble, secteur, contraintes, usages, historique des ventes.</p>
+      </div>
+      <p>Mais là encore, les données ne parlent pas toutes seules.</p>
+      <p>Une donnée brute peut être juste et conduire à une mauvaise conclusion.</p>
+      <div class="short-lines">
+        <p>Parce qu’elle n’a pas toujours été produite pour répondre directement à votre question.</p>
+        <p>Parce qu’elle demande à être filtrée.</p>
+        <p>Parce qu’elle peut être ancienne, incomplète, trop large ou mal interprétée.</p>
+        <p>Parce qu’une donnée fiable sur un secteur ne suffit pas forcément à comprendre un bien précis.</p>
+      </div>
+      <p>La donnée donne de la matière.</p>
+      <p>Elle ne donne pas automatiquement une décision.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ce que l’IA peut faire avec ces informations</h2>
+      <p>Une intelligence artificielle conversationnelle peut être très utile pour structurer une réflexion.</p>
+      <p>On peut lui donner une adresse, une surface, un étage, un DPE, des ventes comparables, quelques caractéristiques du bien, et lui demander une première analyse.</p>
+      <div class="short-lines">
+        <p>Un outil comme ChatGPT, Claude, Gemini, Mistral, Perplexity ou Copilot peut aider à organiser les éléments.</p>
+        <p>Comparer des hypothèses.</p>
+        <p>Pointer des questions à vérifier.</p>
+        <p>Expliquer pourquoi deux prix sont différents.</p>
+        <p>Aider à rédiger une annonce.</p>
+        <p>Lister les points à préparer avant une vente.</p>
+        <p>Reformuler une stratégie.</p>
+        <p>Mettre de l’ordre dans des informations dispersées.</p>
+      </div>
+      <p>C’est déjà beaucoup.</p>
+      <p>Mais l’IA dépend de ce qu’on lui donne.</p>
+      <div class="short-lines">
+        <p>S’il manque des informations, son raisonnement peut sembler propre tout en étant fragile.</p>
+        <p>S’il reçoit de mauvais comparables, il peut produire une conclusion cohérente à partir d’une base mauvaise.</p>
+        <p>S’il ne connaît pas l’état réel du bien, il peut surestimer ou sous-estimer l’impact d’un défaut.</p>
+        <p>S’il ne voit pas l’immeuble, la rue, la lumière ou la copropriété, il ne peut pas les intégrer correctement.</p>
+      </div>
+      <p>L’IA peut organiser une hypothèse.</p>
+      <p>Elle ne doit pas devenir la décision.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ce que l’IA ne voit pas dans un bien</h2>
+      <p>Une intelligence artificielle peut travailler vite.</p>
+      <p>Elle peut croiser des ventes, des annonces, des prix au mètre carré, des données énergétiques, des caractéristiques déclarées. Elle peut aider à poser une méthode.</p>
+      <p>Mais elle ne visite pas le bien.</p>
+      <p>Elle ne voit pas l’état réel des peintures, les sols fatigués, les sanitaires datés, les menuiseries usées, les volets en mauvais état, les traces d’humidité, les petites fissures, les cloques de peinture, les remontées capillaires, la gouttière qui marque déjà une façade ou un angle de plafond.</p>
+      <div class="short-lines">
+        <p>Elle ne mesure pas toujours la lumière d’une pièce.</p>
+        <p>Elle ne ressent pas le bruit d’une rue.</p>
+        <p>Elle ne voit pas la profondeur d’un vis-à-vis.</p>
+        <p>Elle ne comprend pas l’ambiance d’un immeuble.</p>
+        <p>Elle ne sait pas toujours si la copropriété est tenue, négligée, habitée par des propriétaires stables ou occupée par une majorité de locataires de passage.</p>
+      </div>
+      <p>Elle peut lire “bon état”.</p>
+      <p>Mais bon état ne veut pas dire la même chose pour un vendeur, un acheteur, un artisan, un diagnostiqueur ou un professionnel habitué à voir des biens.</p>
+      <p>Elle peut lire “travaux à prévoir”.</p>
+      <p>Mais des travaux peuvent être simples, lourds, visibles, invisibles, urgents, psychologiquement bloquants ou au contraire facilement acceptables selon le prix.</p>
+      <p>C’est pour cela qu’une estimation produite par l’IA doit toujours être relue dans la matière réelle du bien.</p>
+      <p>Non pas parce que l’IA est inutile.</p>
+      <p>Mais parce qu’elle ne voit pas encore ce qui se joue dans le réel.</p>
+    </section>
+
+    <section class="card">
+      <h2>Jardin, piscine, extérieur : les mots ne suffisent pas</h2>
+      <p>Certains mots semblent simples.</p>
+      <div class="short-lines">
+        <p>Jardin.</p>
+        <p>Terrasse.</p>
+        <p>Piscine.</p>
+        <p>Vue.</p>
+        <p>Calme.</p>
+        <p>Bon état.</p>
+      </div>
+      <p>Mais dans l’immobilier, ces mots peuvent recouvrir des réalités très différentes.</p>
+      <p>Une IA peut lire “jardin”. Mais un jardin peut être une vraie respiration, une pelouse entretenue, un terrain sec, des mauvaises herbes, un extérieur enclavé, une contrainte d’entretien ou un argument majeur.</p>
+      <p>Elle peut lire “piscine”. Mais une piscine enterrée, une piscine tubulaire, un bassin fatigué, une piscine hors-sol ou une nage à contre-courant ne racontent pas la même valeur.</p>
+      <p>Elle peut lire “terrasse”. Mais une terrasse ensoleillée, intime, profonde, bruyante, exposée au vis-à-vis ou difficile à meubler ne produit pas le même effet.</p>
+      <p>Elle peut lire “vue”. Mais une vue dégagée, une vue latérale, un vis-à-vis doux, un mur proche ou une perspective sur des arbres anciens ne provoquent pas la même réaction.</p>
+      <p>L’immobilier est fait de mots, mais il se décide dans les sensations.</p>
+      <p>C’est là que les données deviennent insuffisantes.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ce que les données ne ressentent pas</h2>
+      <p>Les données savent compter.</p>
+      <p>Elles peuvent dire combien de biens comparables sont en vente, à quel prix, dans quel secteur, avec quelles surfaces, quels DPE, quelles typologies.</p>
+      <p>Mais elles ne savent pas mesurer l’émotion d’une visite.</p>
+      <p>Elles ne savent pas toujours dire pourquoi un appartement ordinaire déclenche un coup de cœur, ni pourquoi un bien apparemment cohérent laisse les acheteurs froids.</p>
+      <p>Elles ne mesurent pas l’attachement du vendeur, ni l’écart parfois immense entre ce qu’un propriétaire aime dans son bien et ce que le marché acceptera de payer.</p>
+      <p>Elles peuvent repérer une rareté statistique.</p>
+      <p>Mais elles ne comprennent pas toujours la rareté vécue.</p>
+      <div class="short-lines">
+        <p>Une lumière particulière.</p>
+        <p>Une vue qui apaise.</p>
+        <p>Une terrasse qui change l’usage.</p>
+        <p>Un calme inattendu.</p>
+        <p>Une sensation d’espace.</p>
+        <p>Une adresse qui résonne.</p>
+        <p>Une ambiance d’immeuble.</p>
+        <p>Une circulation fluide dans le logement.</p>
+      </div>
+      <p>La donnée peut approcher une valeur.</p>
+      <p>Mais elle ne mesure pas toujours ce qui fait qu’un acheteur s’arrête, se projette ou renonce.</p>
+    </section>
+
+    <section class="card">
+      <h2>Pourquoi une donnée fiable peut produire une estimation fragile</h2>
+      <p>C’est l’un des pièges les plus importants.</p>
+      <p>Une donnée peut être fiable, et l’estimation qui en sort peut rester fragile.</p>
+      <p>Pourquoi ?</p>
+      <p>Parce que la donnée répond à une partie de la question, pas à toute la question.</p>
+      <div class="short-lines">
+        <p>Une vente DVF peut être exacte, mais le bien vendu n’était peut-être pas comparable.</p>
+        <p>Un prix au mètre carré peut être réel, mais trop large pour votre immeuble.</p>
+        <p>Une annonce peut être visible, mais pas vendue.</p>
+        <p>Une estimation en ligne peut être cohérente, mais aveugle à un défaut.</p>
+        <p>Une IA peut produire un raisonnement fluide, mais à partir d’informations incomplètes.</p>
+      </div>
+      <p>Le danger ne vient pas seulement des mauvaises données.</p>
+      <p>Il vient aussi des bonnes données mal utilisées.</p>
+      <p>Une estimation fiable n’est pas seulement une addition de chiffres.</p>
+      <p>C’est une lecture.</p>
+    </section>
+
+    <section class="card">
+      <h2>À Marseille, l’adresse et l’immeuble changent tout</h2>
+      <p>À Marseille, cette question est encore plus sensible.</p>
+      <p>La ville ne se lit pas seulement par arrondissement. Elle se lit par quartier, par rue, par immeuble, parfois par cage d’escalier.</p>
+      <p>Un appartement au Camas, à Baille, à la Blancarde, aux Cinq-Avenues, à Longchamp, à Vauban, à Endoume, à la Joliette ou à Saint-Pierre ne sera pas perçu de la même façon.</p>
+      <p>Et même dans un même secteur, les écarts peuvent être importants.</p>
+      <div class="short-lines">
+        <p>Une rue calme n’a pas la même valeur qu’un axe passant.</p>
+        <p>Un immeuble entretenu ne raconte pas la même chose qu’une copropriété fatiguée.</p>
+        <p>Un étage élevé sans ascenseur ne se lit pas comme un étage élevé avec vue et ascenseur.</p>
+        <p>Une proximité de tramway peut être un atout ou une nuisance selon l’adresse exacte.</p>
+        <p>Un bien lumineux peut compenser certains défauts.</p>
+        <p>Un bien sombre peut perdre beaucoup, même avec une bonne surface.</p>
+      </div>
+      <p>À Marseille, le prix moyen aide à commencer.</p>
+      <p>Mais il faut descendre dans le réel.</p>
+      <div class="short-lines">
+        <p>L’adresse.</p>
+        <p>L’immeuble.</p>
+        <p>L’étage.</p>
+        <p>La lumière.</p>
+        <p>La copropriété.</p>
+        <p>La rue.</p>
+        <p>L’usage.</p>
+        <p>Le marché vivant autour.</p>
+      </div>
+      <p>C’est souvent là que l’estimation commence vraiment.</p>
+    </section>
+
+    <section class="card">
+      <h2>Comment utiliser ces outils sans se tromper</h2>
+      <p>DVF, data.gouv, les portails et l’IA conversationnelle ne sont pas des ennemis.</p>
+      <p>Ils doivent être utilisés.</p>
+      <p>Mais dans le bon ordre, avec la bonne prudence.</p>
+      <p>D’abord, regarder les ventes passées pour comprendre le marché réel.</p>
+      <p>Ensuite, comparer les annonces en ligne, mais sans oublier qu’une annonce n’est pas une vente.</p>
+      <p>Puis, utiliser l’IA pour organiser les informations, formuler des hypothèses, lister les questions à vérifier.</p>
+      <p>Ensuite seulement, confronter cette hypothèse au bien réel.</p>
+      <p>Il faut demander :</p>
+      <div class="short-lines">
+        <p>Le bien est-il vraiment comparable aux ventes retenues ?</p>
+        <p>Son état est-il correctement décrit ?</p>
+        <p>La copropriété est-elle lisible ?</p>
+        <p>Les travaux sont-ils sous-estimés ?</p>
+        <p>La lumière, le bruit, le vis-à-vis, l’étage ou l’extérieur changent-ils la perception ?</p>
+        <p>Le vendeur est-il attaché à des qualités que le marché ne paiera pas ?</p>
+        <p>Les acheteurs disponibles peuvent-ils financer ce prix maintenant ?</p>
+      </div>
+      <p>Ce dernier point est essentiel.</p>
+      <p>Un prix ne tient pas parce qu’il est cohérent sur le papier.</p>
+      <p>Il tient parce qu’un acheteur solvable peut le payer.</p>
+    </section>
+
+    <section class="card">
+      <h2>Faire relire avant de décider</h2>
+      <p>Estimer seul est possible.</p>
+      <p>Commencer avec DVF, data.gouv et une intelligence artificielle est même souvent utile.</p>
+      <p>Mais décider seul d’un prix, publier une annonce ou engager une négociation à partir d’une estimation fragile peut coûter cher.</p>
+      <p>Il peut être utile de faire relire :</p>
+      <div class="short-lines">
+        <p>les ventes retenues ;</p>
+        <p>les écarts entre plusieurs estimations ;</p>
+        <p>le prix envisagé ;</p>
+        <p>l’état réel du bien ;</p>
+        <p>les points faibles ;</p>
+        <p>les travaux ;</p>
+        <p>la copropriété ;</p>
+        <p>l’annonce avant publication ;</p>
+        <p>les signaux qui pourraient faire négocier un acheteur.</p>
+      </div>
+      <p>Le but n’est pas forcément de confier un mandat.</p>
+      <p>Le but peut simplement être de vérifier si l’hypothèse tient debout.</p>
+      <p>Vous pouvez commencer seul.</p>
+      <p>Vous n’êtes pas obligé de décider seul.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ressources utiles</h2>
+      <p>Pour prolonger la réflexion :</p>
+      <div class="resources">
+        <a class="resource-link" href="estimation-immobiliere-fiable-marseille.html"><strong>Comment savoir si une estimation immobilière est fiable ?</strong><span>estimation-immobiliere-fiable-marseille.html</span></a>
+        <a class="resource-link" href="vendre-sans-agence-marseille-economies-risques.html"><strong>Vendre sans agence à Marseille : ce que vous économisez vraiment</strong><span>vendre-sans-agence-marseille-economies-risques.html</span></a>
+        <a class="resource-link" href="conseil-immobilier-marseille-avant-decision.html"><strong>Conseil immobilier à Marseille : clarifier avant de décider</strong><span>conseil-immobilier-marseille-avant-decision.html</span></a>
+        <a class="resource-link" href="estimation-immobiliere-marseille-prix-m2.html"><strong>Estimation immobilière à Marseille : comprendre le prix au m² et ses limites</strong><span>estimation-immobiliere-marseille-prix-m2.html</span></a>
+        <a class="resource-link" href="estimation-avant-vendre-marseille.html"><strong>Avant de vendre à Marseille : pourquoi bien cadrer le projet change tout</strong><span>estimation-avant-vendre-marseille.html</span></a>
+        <a class="resource-link" href="vendre-marseille-avant-publier-annonce.html"><strong>Vendre à Marseille avant de publier une annonce</strong><span>vendre-marseille-avant-publier-annonce.html</span></a>
+        <a class="resource-link" href="bibliotheque-immobilier-marseille.html"><strong>Bibliothèque immobilière Marseille</strong><span>bibliotheque-immobilier-marseille.html</span></a>
+      </div>
+    </section>
+
+    <section class="card cta">
+      <h2>Relire une estimation faite avec des outils</h2>
+      <p>Vous avez consulté DVF, data.gouv, une estimation en ligne ou une intelligence artificielle.</p>
+      <p>Le premier échange peut simplement servir à relire les comparables, les hypothèses, le prix envisagé et les points que les outils ne peuvent pas voir.</p>
+      <a class="button" href="contact-immobilier-marseille.html">Me contacter</a>
+    </section>
+
+    <footer class="footer-links">
+      <a href="index.html">Accueil</a>
+      <a href="bibliotheque-immobilier-marseille.html">Bibliothèque</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
+    </footer>
+  </main>
+</body>
+</html>
