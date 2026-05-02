@@ -43,154 +43,8 @@
   }
   </script>
   <style>
-    :root {
-      --text: #1f2933;
-      --muted: #5f6b76;
-      --line: #e5e7eb;
-      --soft: #f7f7f5;
-      --accent: #7f1d1d;
-      --accent-soft: #fff1f1;
-      --max: 980px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: #ffffff;
-      line-height: 1.65;
-    }
-    header, main, footer {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    header {
-      padding-top: 34px;
-      padding-bottom: 22px;
-      border-bottom: 1px solid var(--line);
-    }
-    .breadcrumb {
-      font-size: 0.92rem;
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
-    .breadcrumb a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.78rem;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    h1 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.12;
-      margin: 0 0 18px;
-      letter-spacing: -0.035em;
-    }
-    .intro {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 800px;
-      margin: 0;
-    }
-    main {
-      padding-top: 34px;
-      padding-bottom: 54px;
-    }
-    section {
-      margin: 0 0 38px;
-    }
-    h2 {
-      font-size: 1.55rem;
-      line-height: 1.25;
-      margin: 0 0 14px;
-      letter-spacing: -0.02em;
-    }
-    h3 {
-      font-size: 1.16rem;
-      margin: 24px 0 8px;
-    }
-    p {
-      margin: 0 0 14px;
-    }
-    ul {
-      margin: 0 0 16px 20px;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 7px;
-    }
-    .note {
-      background: var(--soft);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 22px;
-      margin: 26px 0;
-    }
-    .note strong {
-      color: var(--accent);
-    }
-    .quote {
-      border-left: 4px solid var(--accent);
-      padding-left: 18px;
-      margin: 26px 0;
-      font-size: 1.12rem;
-      color: #313942;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin: 22px 0;
-    }
-    .card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 20px;
-    }
-    .card h3 {
-      margin-top: 0;
-    }
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .button {
-      display: inline-block;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 10px 14px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .button:hover {
-      background: var(--accent-soft);
-    }
-    footer {
-      border-top: 1px solid var(--line);
-      padding-top: 22px;
-      padding-bottom: 40px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-    @media (max-width: 720px) {
-      header, main, footer { padding-left: 16px; padding-right: 16px; }
-      .grid { grid-template-columns: 1fr; }
-      .links { display: block; }
-      .button { margin: 0 0 10px; }
-    }
+    :root {--text:#1f2933;--muted:#5f6b76;--line:#e5e7eb;--soft:#f7f7f5;--accent:#7f1d1d;--accent-soft:#fff1f1;--max:980px}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);background:#fff;line-height:1.65}header,main,footer{max-width:var(--max);margin:0 auto;padding:0 20px}header{padding-top:34px;padding-bottom:22px;border-bottom:1px solid var(--line)}.breadcrumb{font-size:.92rem;color:var(--muted);margin-bottom:22px}.breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{text-decoration:underline}.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--accent);font-weight:700;margin-bottom:12px}h1{font-size:clamp(2rem,4vw,3.2rem);line-height:1.12;margin:0 0 18px;letter-spacing:-.035em}.intro{font-size:1.15rem;color:var(--muted);max-width:800px;margin:0}main{padding-top:34px;padding-bottom:54px}section{margin:0 0 38px}h2{font-size:1.55rem;line-height:1.25;margin:0 0 14px;letter-spacing:-.02em}h3{font-size:1.16rem;margin:24px 0 8px}p{margin:0 0 14px}ul{margin:0 0 16px 20px;padding:0}li{margin-bottom:7px}.note{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:22px;margin:26px 0}.note strong{color:var(--accent)}.quote{border-left:4px solid var(--accent);padding-left:18px;margin:26px 0;font-size:1.12rem;color:#313942}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:22px 0}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.card h3{margin-top:0}.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.button{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem}.button:hover{background:var(--accent-soft)}footer{border-top:1px solid var(--line);padding-top:22px;padding-bottom:40px;color:var(--muted);font-size:.92rem}@media(max-width:720px){header,main,footer{padding-left:16px;padding-right:16px}.grid{grid-template-columns:1fr}.links{display:block}.button{margin:0 0 10px}}
   </style>
 </head>
 <body>
@@ -211,15 +65,20 @@
       <p>Le 13005 ne peut pas être lu avec une moyenne unique. Chave, Camas, Sébastopol, Eugène-Pierre, Baille, Timone, Conception, Saint-Pierre, Blancarde, Cinq-Avenues et Longchamp ne répondent pas à la même logique de valeur.</p>
       <p>Une estimation utile doit donc distinguer les secteurs résidentiels, les secteurs plus fonctionnels, les axes de transport, les rues plus calmes, les immeubles anciens, les étages, les extérieurs, le DPE, le stationnement et la projection réelle des acheteurs.</p>
     </section>
-  </header>
 
-  <main>
     <section>
       <h2>Le 13005 ne se lit pas comme une moyenne</h2>
       <p>Quand un propriétaire cherche une estimation d’appartement à Marseille 13005, il commence souvent par regarder un prix moyen, une carte de prix au mètre carré, DVF, data.gouv, une estimation en ligne ou une réponse donnée par une IA conversationnelle. C’est utile pour situer un premier ordre de grandeur.</p>
       <p>Mais dans le 5e arrondissement, cette première lecture peut vite devenir trompeuse. Le secteur mélange des ambiances très différentes : des rues très désirables autour de Chave, Camas et Sébastopol, des secteurs plus fonctionnels vers Baille, Timone ou Conception, des continuités vers Saint-Pierre, Blancarde ou Cinq-Avenues, et des axes où la circulation, le stationnement ou l’environnement immédiat changent fortement la projection.</p>
       <div class="quote">Les données donnent une base. Mais la valeur réelle demande une lecture.</div>
       <p>Deux appartements du même arrondissement, parfois à quelques minutes à pied l’un de l’autre, peuvent donc provoquer des réactions très différentes chez les acheteurs.</p>
+    </section>
+
+    <section>
+      <h2>Pourquoi les pages de prix au m² ne suffisent pas</h2>
+      <p>Les portails immobiliers, les pages de prix, DVF, data.gouv et les outils d’estimation en ligne peuvent donner des prix bas, moyens ou hauts. C’est utile pour ouvrir une réflexion.</p>
+      <p>Mais ces données ne disent pas toujours l’étage, la lumière, le bruit, l’extérieur, la qualité de l’immeuble, le DPE, la copropriété, les travaux, la profondeur d’une terrasse, l’ambiance de la rue ou la vraie capacité d’un acheteur à se projeter.</p>
+      <div class="note"><strong>Point de vigilance :</strong> dans le 13005, une moyenne peut attirer l’attention, mais elle ne suffit pas à décider. Une estimation fiable consiste à savoir quel chiffre mérite d’être cru selon le bien réel.</div>
     </section>
 
     <section>
@@ -247,30 +106,12 @@
       <h2>Les critères qui changent réellement la valeur d’un appartement</h2>
       <p>Pour estimer correctement un appartement à Marseille 13005, il faut croiser plusieurs niveaux de lecture.</p>
       <div class="grid">
-        <div class="card">
-          <h3>La rue et le tronçon</h3>
-          <p>Une rue calme, une portion commerçante, un axe de circulation, une continuité piétonne ou une adresse en transition ne produisent pas la même projection.</p>
-        </div>
-        <div class="card">
-          <h3>L’immeuble et la copropriété</h3>
-          <p>Façade, parties communes, entretien, ambiance, charges, travaux, tenue générale : la copropriété peut renforcer ou dégrader une bonne adresse.</p>
-        </div>
-        <div class="card">
-          <h3>L’étage et l’ascenseur</h3>
-          <p>Dans l’ancien marseillais, l’ascenseur n’est pas automatique. Le 2e sans ascenseur reste souvent acceptable ; plus haut, la négociation peut se durcir.</p>
-        </div>
-        <div class="card">
-          <h3>L’extérieur et la lumière</h3>
-          <p>Balcon, terrasse, cour, jardin, vue arrière, vis-à-vis, profondeur de lumière : un extérieur ou une respiration peuvent changer fortement la perception.</p>
-        </div>
-        <div class="card">
-          <h3>Le DPE et les travaux</h3>
-          <p>Le DPE, le chauffage, les fenêtres, la ventilation, l’état intérieur et les travaux à prévoir influencent la confiance des acheteurs.</p>
-        </div>
-        <div class="card">
-          <h3>Le stationnement</h3>
-          <p>Dans plusieurs secteurs du 13005, le stationnement reste un irritant important. Il peut peser lourd selon le profil familial ou professionnel de l’acheteur.</p>
-        </div>
+        <div class="card"><h3>La rue et le tronçon</h3><p>Une rue calme, une portion commerçante, un axe de circulation, une continuité piétonne ou une adresse en transition ne produisent pas la même projection.</p></div>
+        <div class="card"><h3>L’immeuble et la copropriété</h3><p>Façade, parties communes, entretien, ambiance, charges, travaux, tenue générale : la copropriété peut renforcer ou dégrader une bonne adresse.</p></div>
+        <div class="card"><h3>L’étage et l’ascenseur</h3><p>Dans l’ancien marseillais, l’ascenseur n’est pas automatique. Le 2e sans ascenseur reste souvent acceptable ; plus haut, la négociation peut se durcir.</p></div>
+        <div class="card"><h3>L’extérieur et la lumière</h3><p>Balcon, terrasse, cour, jardin, vue arrière, vis-à-vis, profondeur de lumière : un extérieur ou une respiration peuvent changer fortement la perception.</p></div>
+        <div class="card"><h3>Le DPE et les travaux</h3><p>Le DPE, le chauffage, les fenêtres, la ventilation, l’état intérieur et les travaux à prévoir influencent la confiance des acheteurs.</p></div>
+        <div class="card"><h3>Le stationnement</h3><p>Dans plusieurs secteurs du 13005, le stationnement reste un irritant important. Il peut peser lourd selon le profil familial ou professionnel de l’acheteur.</p></div>
       </div>
     </section>
 
@@ -278,9 +119,7 @@
       <h2>Pourquoi DVF et les estimations en ligne doivent être relues</h2>
       <p>DVF et data.gouv permettent de retrouver des ventes passées. Les portails d’estimation et les IA peuvent organiser ces informations, comparer des biens et produire une première hypothèse.</p>
       <p>Mais une base de ventes ne dit pas tout. Elle ne dit pas toujours l’étage réel, la qualité de la rénovation, la lumière, le bruit, la vue, la tenue de l’immeuble, la profondeur d’un extérieur, le vis-à-vis, l’ambiance de la copropriété ou la réaction concrète d’un acheteur en visite.</p>
-      <div class="note">
-        <strong>Point de vigilance :</strong> une donnée fiable peut produire une estimation fragile si elle n’est pas confrontée au réel. Dans un arrondissement aussi contrasté que le 13005, une moyenne peut attirer l’attention, mais elle ne suffit pas à décider.
-      </div>
+      <div class="note"><strong>Point de vigilance :</strong> une donnée fiable peut produire une estimation fragile si elle n’est pas confrontée au réel. Dans un arrondissement aussi contrasté que le 13005, une moyenne peut attirer l’attention, mais elle ne suffit pas à décider.</div>
     </section>
 
     <section>
@@ -295,6 +134,23 @@
       <p>Un propriétaire peut consulter une agence, un notaire, un expert immobilier, un diagnostiqueur, un courtier, un gestionnaire, un portail d’estimation ou une IA. Chacun peut être utile selon le contexte.</p>
       <p>Mais avant de choisir l’interlocuteur ou la méthode, il faut souvent clarifier le problème : vendre vite ou vendre au bon prix, vendre seul ou accompagné, relire DVF, comprendre l’impact du DPE, arbitrer des travaux, préparer les documents, choisir le bon moment, éviter une mauvaise exposition.</p>
       <p>C’est à ce niveau que Bruno Lebert intervient : comme premier regard de cadrage, avant décision, pour relire la situation, hiérarchiser les signaux et aider à choisir la bonne stratégie.</p>
+    </section>
+
+    <section>
+      <h2>Lire le 13005 par secteur</h2>
+      <p>Pour comprendre la valeur d’un appartement dans le 5e arrondissement, il faut descendre du code postal vers les secteurs, les rues et les usages.</p>
+      <div class="links">
+        <a class="button" href="estimation-boulevard-chave-marseille-13005.html">Boulevard Chave</a>
+        <a class="button" href="estimation-boulevard-eugene-pierre-marseille-13005.html">Boulevard Eugène-Pierre</a>
+        <a class="button" href="estimation-appartement-camas-sebastopol-marseille-13005.html">Camas / Sébastopol</a>
+        <a class="button" href="estimation-appartement-baille-timone-conception-marseille-13005.html">Baille / Timone / Conception</a>
+        <a class="button" href="estimation-appartement-saint-pierre-marseille-13005.html">Saint-Pierre</a>
+        <a class="button" href="estimation-appartement-blancarde-marseille-13005-13004.html">Blancarde</a>
+        <a class="button" href="estimation-appartement-cinq-avenues-longchamp-marseille.html">Cinq-Avenues / Longchamp</a>
+        <a class="button" href="estimation-appartement-terrasse-jardin-marseille.html">Terrasse / jardin</a>
+        <a class="button" href="estimer-appartement-dvf-data-ia-marseille.html">DVF, data.gouv et IA</a>
+        <a class="button" href="contact-immobilier-marseille.html">Demander un avis avant de décider</a>
+      </div>
     </section>
 
     <section>
