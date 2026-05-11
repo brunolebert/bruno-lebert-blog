@@ -304,6 +304,71 @@
       border: 1px solid #eadfce;
     }
 
+    .schematic-map {
+      margin-top: 22px;
+      border-radius: 30px;
+      padding: 18px;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(139,92,246,.13), transparent 24%),
+        radial-gradient(circle at 78% 70%, rgba(59,130,246,.14), transparent 28%),
+        linear-gradient(135deg, #fffaf2 0%, #ffffff 52%, #eef6ff 100%);
+      border: 1px solid #eadfce;
+      box-shadow: 0 18px 44px rgba(15, 23, 42, .08);
+      overflow: hidden;
+    }
+
+    .schematic-map svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 22px;
+      background: #fffdf8;
+    }
+
+    .map-label {
+      font: 800 16px Inter, Arial, sans-serif;
+      fill: #132238;
+      paint-order: stroke;
+      stroke: rgba(255,255,255,.94);
+      stroke-width: 5px;
+      stroke-linejoin: round;
+    }
+
+    .map-small-label {
+      font: 800 13px Inter, Arial, sans-serif;
+      fill: #132238;
+      paint-order: stroke;
+      stroke: rgba(255,255,255,.94);
+      stroke-width: 4px;
+      stroke-linejoin: round;
+    }
+
+    .axis-label {
+      font: 900 13px Inter, Arial, sans-serif;
+      fill: #334155;
+      letter-spacing: .02em;
+      paint-order: stroke;
+      stroke: rgba(255,255,255,.92);
+      stroke-width: 4px;
+      stroke-linejoin: round;
+    }
+
+    .map-zone { stroke: rgba(15,23,42,.18); stroke-width: 2; }
+    .map-axis { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .map-dot { stroke: #ffffff; stroke-width: 3; }
+
+    .atlas-explainer {
+      margin-top: 22px;
+      padding-top: 4px;
+    }
+
+    .atlas-explainer-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #132238;
+      margin: 0 0 12px;
+    }
+
     .atlas-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
