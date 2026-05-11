@@ -407,7 +407,13 @@
 
     @media (max-width: 860px) {
       .grid-2,
-      .grid-3 { grid-template-columns: 1fr; }
+      .grid-3,
+      .atlas-grid,
+      .legend-grid,
+      .compare-3 { grid-template-columns: 1fr; }
+      .decision-path { grid-template-columns: 1fr; }
+      .decision-step:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -18px; transform: translateX(-50%); }
+      .decision-step { min-height: 64px; }
     }
 
     @media (max-width: 640px) {
