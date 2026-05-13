@@ -221,5 +221,57 @@
   <div class="floating-contact">
     <a href="contact-immobilier-marseille.html">Faire une demande</a>
   </div>
+<script id="bl-action-cta-immediate">
+(function(){
+  function norm(t){return(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+  var modal=document.getElementById('bl-contact-modal');
+  var form=document.getElementById('bl-contact-form');
+  var type=document.getElementById('bl-request-type');
+  var first=document.getElementById('bl-name');
+  if(!modal||!type)return;
+  function situation(label){
+    var x=norm(label);
+    if(x.indexOf('candidat')>-1)return'Je souhaite candidater';
+    if(x.indexOf('proche')>-1)return'J’aide un proche';
+    if(x.indexOf('prix')>-1||x.indexOf('relire')>-1)return'J’ai déjà un prix en tête';
+    if(x.indexOf('vente')>-1||x.indexOf('vendre')>-1||x.indexOf('publier')>-1)return'Je prépare une vente';
+    if(x.indexOf('estim')>-1)return'Je cherche une estimation';
+    if(x.indexOf('question')>-1)return'Je veux poser une question';
+    if(x.indexOf('contact')>-1||x.indexOf('demande')>-1||x.indexOf('situation')>-1)return'Je veux poser une question';
+    return'Je veux être rappelé';
+  }
+  function openModal(label){
+    type.value=situation(label);
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    setTimeout(function(){if(first)first.focus();},30);
+  }
+  function isImmediate(text){
+    var x=norm(text);
+    return x==='etre rappele'||x.indexOf('etre rappele')>-1||x==='expliquer ma situation'||x==='faire une demande'||x==='demander une estimation'||x==='demander une estimation a marseille'||x==='estimer'||x==='contact'||x==='candidature'||x==='je souhaite candidater'||x==='poser une question'||x==='j aide un proche'||x==='j ai deja un prix en tete'||x.indexOf('formulaire de contact')>-1||x.indexOf('demander une premiere lecture')>-1||x.indexOf('envoyer une candidature')>-1;
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a');
+    if(!a||a.target==='_blank')return;
+    if(isImmediate(a.textContent)){
+      e.preventDefault();
+      e.stopPropagation();
+      if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+      openModal(a.textContent);
+    }
+  },true);
+  if(form&&!form.dataset.blImmediateSubmit){
+    form.dataset.blImmediateSubmit='1';
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+      var body='Bonjour Bruno,\n\nMa situation : '+type.value+'\n\nNom : '+(document.getElementById('bl-name')||{}).value+'\nTéléphone : '+(document.getElementById('bl-phone')||{}).value+'\nEmail : '+(document.getElementById('bl-email')||{}).value+'\nAdresse ou secteur du bien : '+(document.getElementById('bl-address')||{}).value+'\nMessage : '+(document.getElementById('bl-message')||{}).value+'\n\nBien cordialement,';
+      window.location.href='mailto:lebertbruno@gmail.com?subject='+encodeURIComponent('Demande immobilier Marseille — '+type.value)+'&body='+encodeURIComponent(body);
+    },true);
+  }
+})();
+</script>
 </body>
 </html>
