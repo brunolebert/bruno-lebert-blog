@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Maquette offline — Carte schématique Atlas Marseille Provence Alpilles</title>
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --surface: #fffdf8;
+      --ink: #102033;
+      --muted: #5f6e7f;
+      --line: #e4d8c8;
+      --blue: #13243a;
+      --blue-soft: #203a58;
+      --sand: #eadbc8;
+      --accent: #a9784e;
+      --green: #66785f;
+      --shadow: 0 18px 44px rgba(16, 32, 51, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top left, rgba(234, 219, 200, 0.45), transparent 32%), var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 38px 22px 70px;
+    }
+
+    .notice {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.82);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(34px, 6vw, 62px);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      color: var(--blue);
+    }
+
+    .intro {
+      max-width: 820px;
+      margin: 20px 0 34px;
+      font-size: clamp(19px, 2.4vw, 25px);
+      color: var(--muted);
+    }
+
+    .atlas-card {
+      background: rgba(255, 253, 248, 0.94);
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .atlas-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .map-panel {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(19, 36, 58, 0.05), transparent 46%),
+        linear-gradient(180deg, #fffaf3, #f3eadf);
+      overflow: hidden;
+      padding: 28px;
+    }
+
+    .zone {
+      position: absolute;
+      border: 1px solid rgba(16, 32, 51, 0.16);
+      box-shadow: 0 10px 26px rgba(16, 32, 51, 0.08);
+      color: var(--blue);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .zone strong {
+      display: block;
+      font-size: clamp(19px, 2.6vw, 28px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .zone span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(16, 32, 51, 0.68);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .zone-marseille {
+      left: 11%;
+      top: 16%;
+      width: 38%;
+      height: 34%;
+      border-radius: 42% 58% 45% 55%;
+      background: rgba(19, 36, 58, 0.12);
+    }
+
+    .zone-peripherie {
+      left: 42%;
+      top: 30%;
+      width: 36%;
+      height: 30%;
+      border-radius: 55% 45% 52% 48%;
+      background: rgba(169, 120, 78, 0.16);
+    }
+
+    .zone-provence {
+      left: 30%;
+      top: 58%;
+      width: 50%;
+      height: 28%;
+      border-radius: 48% 52% 44% 56%;
+      background: rgba(102, 120, 95, 0.17);
+    }
+
+    .axis {
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      top: 54%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(19, 36, 58, 0.34), transparent);
+      transform: rotate(10deg);
+    }
+
+    .sea-note {
+      position: absolute;
+      left: 24px;
+      bottom: 22px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(19, 36, 58, 0.08);
+      color: rgba(16, 32, 51, 0.62);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .side-panel {
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--surface);
+      padding: 26px;
+    }
+
+    .side-panel h2 {
+      margin: 0 0 14px;
+      color: var(--blue);
+      font-size: 30px;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+    }
+
+    .side-panel p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .legend {
+      display: grid;
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .legend-item {
+      display: grid;
+      grid-template-columns: 16px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: #314155;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      margin-top: 4px;
+      border: 1px solid rgba(16,32,51,.18);
+    }
+
+    .dot-blue { background: rgba(19, 36, 58, 0.20); }
+    .dot-brown { background: rgba(169, 120, 78, 0.28); }
+    .dot-green { background: rgba(102, 120, 95, 0.28); }
+
+    .credit {
+      border-top: 1px dashed #cdbba5;
+      padding-top: 16px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .credit strong { color: var(--blue); }
+
+    @media (max-width: 880px) {
+      .atlas-grid { grid-template-columns: 1fr; }
+      .map-panel { min-height: 480px; }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 26px 14px 54px; }
+      .atlas-card { padding: 18px; border-radius: 26px; }
+      .map-panel { min-height: 560px; padding: 18px; border-radius: 24px; }
+      .zone { position: relative; left: auto; top: auto; width: 100%; height: auto; min-height: 124px; margin-bottom: 14px; border-radius: 24px; }
+      .axis { display: none; }
+      .sea-note { position: relative; left: auto; bottom: auto; display: inline-flex; margin-top: 4px; }
+      .side-panel { padding: 20px; border-radius: 24px; }
+      .side-panel h2 { font-size: 25px; }
+      .side-panel p { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Maquette offline carte schématique atlas territoires">
+    <div class="notice">Maquette technique — noindex — non reliée</div>
+    <h1>Carte schématique Atlas Marseille, périphérie, Provence-Alpilles</h1>
+    <p class="intro">Modèle offline destiné à valider une direction visuelle territoriale avant toute intégration publique. Cette carte situe des grands ensembles ; elle ne fixe aucun prix et ne représente pas une limite officielle.</p>
+
+    <section class="atlas-card" aria-label="Carte schématique des grands territoires couverts">
+      <div class="atlas-grid">
+        <div class="map-panel" aria-label="Schéma géographique non officiel">
+          <div class="axis" aria-hidden="true"></div>
+          <div class="zone zone-marseille">
+            <strong>Marseille</strong>
+            <span>Arrondissements, rues, quartiers, axes longs</span>
+          </div>
+          <div class="zone zone-peripherie">
+            <strong>Périphérie proche</strong>
+            <span>Aubagne, Allauch, Cassis, Gémenos, Plan-de-Cuques</span>
+          </div>
+          <div class="zone zone-provence">
+            <strong>Provence-Alpilles</strong>
+            <span>Eyragues, Saint-Rémy, Châteaurenard, Noves, Graveson</span>
+          </div>
+          <div class="sea-note">Repère éditorial — non cadastral</div>
+        </div>
+
+        <aside class="side-panel">
+          <h2>Situer avant de lire un prix</h2>
+          <p>Cette maquette ne cherche pas à produire une carte exacte. Elle sert à montrer comment l’Atlas peut distinguer trois familles de lecture : ville dense, périphérie proche, Provence-Alpilles.</p>
+          <div class="legend" aria-label="Légende">
+            <div class="legend-item"><span class="dot dot-blue"></span><span>Marseille : lecture par arrondissement, rue, tronçon et immeuble.</span></div>
+            <div class="legend-item"><span class="dot dot-brown"></span><span>Périphérie : maison, accès, usage quotidien, terrain et stationnement.</span></div>
+            <div class="legend-item"><span class="dot dot-green"></span><span>Provence-Alpilles : village, résidence principale ou secondaire, entretien, saisonnalité.</span></div>
+          </div>
+          <p>La carte aide à se repérer. La décision demande ensuite une lecture humaine du bien réel.</p>
+          <p class="credit"><strong>Source de lecture géographique :</strong> OpenStreetMap contributors, Open Database License 1.0. Schéma éditorial simplifié, sans extraction de fond cartographique, sans prix, sans limite officielle.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
