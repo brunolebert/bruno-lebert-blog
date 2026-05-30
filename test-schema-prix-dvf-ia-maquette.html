@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Maquette offline — Schéma prix / DVF / IA / terrain</title>
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --surface: #fffdf8;
+      --surface-soft: #fbf6ed;
+      --ink: #102033;
+      --muted: #5f6e7f;
+      --line: #e4d8c8;
+      --blue: #13243a;
+      --sand: #eadbc8;
+      --accent: #a9784e;
+      --shadow: 0 18px 44px rgba(16, 32, 51, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top left, rgba(234, 219, 200, 0.45), transparent 32%), var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 38px 22px 70px;
+    }
+
+    .notice {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.82);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      max-width: 880px;
+      margin: 0;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      color: var(--blue);
+    }
+
+    .intro {
+      max-width: 780px;
+      margin: 20px 0 34px;
+      font-size: clamp(19px, 2.4vw, 25px);
+      color: var(--muted);
+    }
+
+    .maquette-card {
+      background: rgba(255, 253, 248, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .central-message {
+      background: linear-gradient(135deg, var(--blue), #203a58);
+      color: #fff;
+      border-radius: 26px;
+      padding: 26px;
+      margin-bottom: 24px;
+    }
+
+    .central-message p {
+      max-width: 860px;
+      margin: 0;
+      font-size: clamp(22px, 3.2vw, 34px);
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+    }
+
+    .schema-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .step {
+      position: relative;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 22px;
+      background: var(--surface);
+    }
+
+    .step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -22px;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--sand);
+      color: var(--blue);
+      font-weight: 900;
+      z-index: 2;
+    }
+
+    .step-label {
+      display: inline-flex;
+      width: max-content;
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .step h2 {
+      margin: 16px 0 10px;
+      font-size: 24px;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--blue);
+    }
+
+    .step p {
+      margin: 0 0 16px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid #e7dfd3;
+      background: #fffaf3;
+      color: #314155;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      margin: 22px 0 0;
+      padding: 18px 20px;
+      border: 1px dashed #cdbba5;
+      border-radius: 22px;
+      background: rgba(255, 250, 243, 0.72);
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .footer-note strong { color: var(--blue); }
+
+    @media (max-width: 980px) {
+      .schema-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .step:not(:last-child)::after { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 26px 14px 54px; }
+      .maquette-card { padding: 18px; border-radius: 26px; }
+      .central-message { padding: 20px; border-radius: 22px; }
+      .schema-flow { grid-template-columns: 1fr; gap: 12px; }
+      .step { min-height: auto; padding: 18px; border-radius: 22px; }
+      .step h2 { font-size: 22px; }
+      .step p { font-size: 15px; }
+      .chip { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Maquette offline schéma prix DVF IA terrain">
+    <div class="notice">Maquette technique — non indexée — non reliée</div>
+    <h1>Schéma prix, DVF, IA et terrain</h1>
+    <p class="intro">Modèle offline destiné à valider une direction visuelle avant toute intégration publique. Aucun prix, aucune donnée nouvelle, aucune carte, aucune image.</p>
+
+    <section class="maquette-card" aria-label="Schéma pédagogique prix DVF IA terrain décision humaine">
+      <div class="central-message">
+        <p>La donnée aide à commencer. Le terrain permet de comprendre. La décision demande une lecture humaine.</p>
+      </div>
+
+      <div class="schema-flow">
+        <article class="step">
+          <div>
+            <span class="step-label">Données publiques</span>
+            <h2>Observer les traces disponibles</h2>
+            <p>Les informations publiques et les annonces visibles donnent un premier socle, mais elles ne décrivent pas encore le bien réel.</p>
+          </div>
+          <div class="chips" aria-label="Sources et repères">
+            <span class="chip">DVF</span>
+            <span class="chip">Annonces visibles</span>
+            <span class="chip">Prix moyens</span>
+            <span class="chip">Historiques disponibles</span>
+          </div>
+        </article>
+
+        <article class="step">
+          <div>
+            <span class="step-label">Hypothèse</span>
+            <h2>Organiser une première lecture</h2>
+            <p>Une estimation automatique ou une IA peut structurer les éléments, comparer des signaux et formuler une hypothèse à vérifier.</p>
+          </div>
+          <div class="chips" aria-label="Hypothèses possibles">
+            <span class="chip">Estimation automatique</span>
+            <span class="chip">IA</span>
+            <span class="chip">Comparaison statistique</span>
+            <span class="chip">Première lecture</span>
+          </div>
+        </article>
+
+        <article class="step">
+          <div>
+            <span class="step-label">Terrain</span>
+            <h2>Vérifier ce que le chiffre ne voit pas</h2>
+            <p>L’adresse, l’immeuble, l’étage, l’ambiance et la concurrence réelle peuvent confirmer, nuancer ou fragiliser l’hypothèse.</p>
+          </div>
+          <div class="chips" aria-label="Critères terrain">
+            <span class="chip">Rue</span>
+            <span class="chip">Tronçon</span>
+            <span class="chip">Immeuble</span>
+            <span class="chip">Étage</span>
+            <span class="chip">Lumière</span>
+            <span class="chip">Bruit</span>
+            <span class="chip">Extérieur</span>
+            <span class="chip">Copropriété</span>
+            <span class="chip">DPE</span>
+            <span class="chip">Concurrence réelle</span>
+          </div>
+        </article>
+
+        <article class="step">
+          <div>
+            <span class="step-label">Décision humaine</span>
+            <h2>Transformer le repère en choix défendable</h2>
+            <p>La décision relie le prix, le calendrier, la stratégie et le projet réel. Elle ne se réduit pas à une moyenne ou à une réponse automatique.</p>
+          </div>
+          <div class="chips" aria-label="Décisions possibles">
+            <span class="chip">Prix défendable</span>
+            <span class="chip">Stratégie de vente</span>
+            <span class="chip">Arbitrage</span>
+            <span class="chip">Calendrier</span>
+            <span class="chip">Publication ou attente</span>
+          </div>
+        </article>
+      </div>
+
+      <p class="footer-note"><strong>Note de validation :</strong> cette maquette est volontairement isolée, sans image, sans JavaScript et sans lien sortant. Elle doit être validée visuellement avant toute adaptation dans une page métier.</p>
+    </section>
+  </main>
+</body>
+</html>
