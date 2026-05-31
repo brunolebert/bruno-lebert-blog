@@ -436,7 +436,7 @@
   }
   function isImmediate(text){
     var x=norm(text);
-    return x==='etre rappele'||x.indexOf('etre rappele')>-1||x==='expliquer ma situation'||x==='faire une demande'||x==='demander une estimation'||x==='demander une estimation a marseille'||x==='je souhaite candidater'||x==='poser une question'||x==='j aide un proche'||x==='j ai deja un prix en tete'||x.indexOf('demander une premiere lecture')>-1;
+    return false;
   }
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a');
