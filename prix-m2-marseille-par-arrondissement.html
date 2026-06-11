@@ -233,7 +233,7 @@
         type.value=(label||'').toLowerCase().indexOf('rappel')>-1?'Je veux être rappelé':'Je veux poser une question';
         modal.removeAttribute('hidden');modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(function(){if(first)first.focus();},30);
       }
-      function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+      function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');modal.setAttribute('hidden','hidden');document.body.style.overflow='';}
       document.querySelectorAll('.js-open-modal').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();openModal(a.textContent);});});
       document.querySelectorAll('[data-bl-close]').forEach(function(b){b.addEventListener('click',closeModal);});
       modal.addEventListener('click',function(e){if(e.target===modal)closeModal();});
