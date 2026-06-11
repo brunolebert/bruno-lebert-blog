@@ -276,6 +276,7 @@
   }
   function openModal(label){
     type.value=situation(label);
+    modal.removeAttribute('hidden');
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
