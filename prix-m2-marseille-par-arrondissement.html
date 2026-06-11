@@ -231,7 +231,7 @@
       if(!modal||!form||!type)return;
       function openModal(label){
         type.value=(label||'').toLowerCase().indexOf('rappel')>-1?'Je veux être rappelé':'Je veux poser une question';
-        modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(function(){if(first)first.focus();},30);
+        modal.removeAttribute('hidden');modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(function(){if(first)first.focus();},30);
       }
       function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
       document.querySelectorAll('.js-open-modal').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();openModal(a.textContent);});});
