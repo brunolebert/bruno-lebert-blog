@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://brunolebert.github.io/bruno-lebert-blog/sitemap-gsc.xml
+Sitemap: https://conseil-immobilier-marseille.fr/sitemap-gsc.xml
