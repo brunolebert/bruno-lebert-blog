@@ -18,6 +18,10 @@
       --line: #dbe3ec;
       --hero: #142235;
       --hero-soft: #1e3148;
+      --accent: #b78454;
+      --sand: #fffaf2;
+      --reading: 760px;
+      --shell: 1180px;
     }
 
     * { box-sizing: border-box; }
@@ -47,9 +51,30 @@
     }
 
     .container {
-      max-width: 880px;
+      max-width: var(--shell);
       margin: 0 auto;
-      padding: 0 20px 80px;
+      padding: 0 20px 96px;
+    }
+
+    .reading {
+      max-width: var(--reading);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .chapter {
+      margin: 68px 0;
+      scroll-margin-top: 24px;
+    }
+
+    .chapter-head {
+      max-width: var(--reading);
+      margin: 0 auto 24px;
+    }
+
+    .chapter-head p {
+      color: var(--muted);
+      font-size: 19px;
     }
 
     .hero-top {
@@ -100,11 +125,142 @@
     .section-card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 26px;
+      border-radius: 26px;
+      padding: 30px;
       margin-bottom: 24px;
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
     }
+
+    .card-emphasis {
+      background: var(--sand);
+      border-color: #eadfce;
+    }
+
+    .quick-answer {
+      margin-top: -2px;
+      padding: clamp(26px, 4vw, 38px);
+      border-top: 6px solid var(--accent);
+    }
+
+    .quick-grid,
+    .decision-grid,
+    .data-grid,
+    .nav-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .quick-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .decision-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .data-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .nav-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .quick-item,
+    .decision-card,
+    .data-card,
+    .nav-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    .quick-item strong,
+    .decision-card strong,
+    .data-card strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .quick-item p,
+    .decision-card p,
+    .data-card p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .nav-card {
+      display: block;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .nav-card span {
+      display: block;
+      margin-top: 5px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .method-path {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .method-step {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      position: relative;
+    }
+
+    .method-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -12px;
+      color: #94a3b8;
+      font-weight: 900;
+    }
+
+    .marseille-block {
+      background: linear-gradient(135deg, #142235, #1e3148);
+      color: #fff;
+      border: 0;
+    }
+
+    .marseille-block .section-label,
+    .marseille-block h2 { color: #fff; }
+    .marseille-block p { color: rgba(255,255,255,.82); }
+    .marseille-block .link-list a { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: #fff; }
+    .marseille-block .link-list a:hover { background: rgba(255,255,255,.13); }
+
+    .editorial-note {
+      border-left: 4px solid var(--accent);
+      padding: 16px 18px;
+      background: var(--sand);
+      border-radius: 0 16px 16px 0;
+      margin: 22px 0 0;
+    }
+
+    .editorial-note p { margin: 0; font-size: 16px; color: #334155; }
+
+    .article-figure {
+      max-width: 760px;
+      margin: 42px auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 10px;
+      box-shadow: 0 1px 2px rgba(15,23,42,.04);
+    }
+
+    .article-figure img { display:block; max-width:100%; width:auto; height:auto; margin:0 auto; border-radius:14px; }
+    .article-figure figcaption { margin:.65rem 8px 4px; color:var(--muted); font-size:.92rem; line-height:1.45; text-align:center; }
 
     .section-label {
       font-size: 12px;
@@ -229,10 +385,29 @@
       background: #f8fafc;
     }
 
+    @media (max-width: 860px) {
+      .quick-grid,
+      .decision-grid,
+      .data-grid,
+      .nav-grid { grid-template-columns: 1fr 1fr; }
+      .method-path { grid-template-columns: 1fr; }
+      .method-step { min-height: 60px; }
+      .method-step:not(:last-child)::after { content: "↓"; right: auto; bottom: -18px; }
+    }
+
     @media (max-width: 640px) {
       .container {
-        padding: 0 16px 80px;
+        padding: 0 16px 84px;
       }
+
+      .chapter { margin: 52px 0; }
+      .section-card { padding: 22px; border-radius: 22px; }
+      .quick-grid,
+      .decision-grid,
+      .data-grid,
+      .nav-grid { grid-template-columns: 1fr; }
+      .quick-answer { padding: 22px; }
+      .bottom-links a { width: 100%; text-align: center; }
 
       h1 {
         font-size: 34px;
@@ -270,21 +445,39 @@
   </header>
 
   <main class="container">
-    <section class="section-card">
-      <div class="section-label">Réponse courte</div>
-      <h2>Comment estimer réellement un bien immobilier à Marseille ?</h2>
-      <p><strong>Une estimation immobilière à Marseille part des ventes et repères pertinents, puis descend à l’adresse et au micro-secteur, relit l’immeuble ou la parcelle, puis le bien réel.</strong> Elle intègre ensuite l’état, le DPE, les travaux, les extérieurs et la concurrence actuellement visible pour transformer un repère de marché en prix défendable.</p>
-      <p>Cette méthode vaut pour un appartement comme pour une maison. Elle ne constitue pas une formule mathématique universelle : chaque bien doit être comparé à des références réellement pertinentes et replacé dans son contexte de vente.</p>
-      <div class="link-list">
-        <a href="demander-estimation-marseille.html">J’ai un bien ou un prix à faire relire</a>
-        <a href="estimation-immobiliere-fiable-marseille.html">Je veux vérifier si une estimation est fiable</a>
-        <a href="qui-peut-estimer-bien-immobilier-marseille.html">Je veux savoir qui peut estimer selon mon objectif</a>
+    <section class="section-card quick-answer card-emphasis" id="en-30-secondes">
+      <div class="section-label">En 30 secondes</div>
+      <h2>Le prix au m² est un point de départ. L’estimation commence quand on descend jusqu’au bien réel.</h2>
+      <p class="lead"><strong>Une estimation immobilière à Marseille part des ventes et repères pertinents, puis descend à l’adresse et au micro-secteur, relit l’immeuble ou la parcelle, puis le bien réel.</strong> Elle intègre ensuite l’état, le DPE, les travaux, les extérieurs et la concurrence actuellement visible pour transformer un repère de marché en prix défendable.</p>
+      <div class="quick-grid" aria-label="Repères essentiels pour une estimation immobilière à Marseille">
+        <div class="quick-item"><strong>Prix au m²</strong><p>Un repère pour cadrer, jamais le résultat automatique.</p></div>
+        <div class="quick-item"><strong>Adresse et immeuble</strong><p>La rue, le micro-secteur et le bâti changent déjà la lecture.</p></div>
+        <div class="quick-item"><strong>Bien réel</strong><p>État, étage, lumière, extérieur, DPE et travaux comptent.</p></div>
+        <div class="quick-item"><strong>Marché du moment</strong><p>Comparables et concurrence visible rendent le prix défendable.</p></div>
       </div>
+      <div class="editorial-note"><p>Cette méthode vaut pour un appartement comme pour une maison. Elle ne constitue pas une formule mathématique universelle : chaque bien doit être comparé à des références réellement pertinentes et replacé dans son contexte de vente.</p></div>
     </section>
 
-    <section class="section-card">
-      <div class="section-label">Point de départ</div>
-      <h2>Le prix au m² donne une tendance, pas une estimation immobilière fiable</h2>
+    <nav class="section-card" aria-label="Sommaire de l’estimation immobilière à Marseille">
+      <div class="section-label">Choisir votre porte d’entrée</div>
+      <div class="nav-grid">
+        <a class="nav-card" href="#prix-m2">Ce chiffre est utile. Il ne suffit pas.<span>Comprendre la limite du prix moyen.</span></a>
+        <a class="nav-card" href="#methode">Comment passe-t-on du repère au prix défendable ?<span>Voir la méthode de précision.</span></a>
+        <a class="nav-card" href="#marseille">À Marseille, où la lecture change-t-elle ?<span>Rue, micro-secteur et environnement.</span></a>
+        <a class="nav-card" href="#bien-reel">Qu’est-ce qui change la valeur du bien réel ?<span>Immeuble, appartement, maison, extérieur.</span></a>
+        <a class="nav-card" href="#donnees">Que disent vraiment DVF et comparables ?<span>Données, concurrence et limites.</span></a>
+        <a class="nav-card" href="#decision">Vous avez déjà un prix ?<span>Relier l’estimation à une décision.</span></a>
+      </div>
+    </nav>
+
+    <section class="chapter" id="prix-m2">
+      <div class="chapter-head">
+        <div class="section-label">Point de départ</div>
+        <h2>Ce chiffre est utile. Il ne suffit pas.</h2>
+        <p>Le prix au m² aide à cadrer une valeur. La suite consiste à comprendre ce que la moyenne ne voit pas.</p>
+      </div>
+      <div class="section-card reading">
+      <h3>Le prix au m² donne une tendance, pas une estimation immobilière fiable</h3>
       <p class="lead">
         Beaucoup de particuliers commencent par chercher un prix moyen au mètre carré à Marseille. Ce réflexe est compréhensible, mais il devient vite trompeur dès qu’il s’agit d’estimer un bien réel. Un prix au m² donne un repère de départ. Il ne permet pas, à lui seul, de comprendre la vraie valeur d’un appartement, d’une maison ou d’un immeuble.
       </p>
@@ -294,16 +487,28 @@
       <p>
         Le passage utile consiste donc à transformer le prix moyen en prix défendable : un prix que l’on peut expliquer à partir de comparables réellement pertinents, de la concurrence visible et de la manière dont les acheteurs liront le bien en visite.
       </p>
+      </div>
     </section>
 
-    <figure class="article-figure" style="max-width:560px;margin:1.75rem auto;background:#fff;border:1px solid var(--line,#dbe3ec);border-radius:18px;padding:10px;box-shadow:0 1px 2px rgba(15,23,42,.04);">
-      <img src="assets/images/marseille-7e-final-dng-019-marseille-7e-dng-019-notre-dame-de-la-garde-plan-large-ville-entre-arbres-et-montagnes.webp" alt="Vue large de Marseille entre quartiers, arbres et reliefs." width="1600" height="1200" loading="lazy" style="display:block;max-width:100%;width:auto;height:auto;aspect-ratio:1600/1200;object-fit:contain;margin:0 auto;border-radius:12px;">
-      <figcaption style="margin:.55rem 6px 2px;color:var(--muted,#56657a);font-size:.92rem;line-height:1.45;text-align:center;">À Marseille, une moyenne ne montre ni le relief, ni les accès, ni les écarts d’immeuble, d’étage, de lumière et d’usage entre deux adresses.</figcaption>
+    <figure class="article-figure">
+      <img src="assets/images/marseille-7e-final-dng-019-marseille-7e-dng-019-notre-dame-de-la-garde-plan-large-ville-entre-arbres-et-montagnes.webp" alt="Vue large de Marseille entre quartiers, arbres et reliefs." width="1600" height="1200" loading="lazy">
+      <figcaption>À Marseille, une moyenne ne montre ni le relief, ni les accès, ni les écarts d’immeuble, d’étage, de lumière et d’usage entre deux adresses.</figcaption>
     </figure>
 
-    <section class="section-card">
+    <section class="chapter" id="methode">
+      <div class="chapter-head">
+        <div class="section-label">Méthode</div>
+        <h2>Du marché marseillais au bien réel : descendre en précision</h2>
+        <p>Une estimation devient plus utile à mesure que le repère général est confronté à des éléments réellement comparables.</p>
+      </div>
+      <div class="section-card">
+        <div class="method-path" aria-label="Méthode de précision d’une estimation immobilière">
+          <div class="method-step">Marseille</div><div class="method-step">Arrondissement</div><div class="method-step">Rue</div><div class="method-step">Immeuble</div><div class="method-step">Bien</div><div class="method-step">Marché</div><div class="method-step">Décision</div>
+        </div>
+      </div>
+      <div class="section-card reading">
       <div class="section-label">Donnée, IA, terrain</div>
-      <h2>Relier le chiffre à une situation réelle</h2>
+      <h3>Relier le chiffre à une situation réelle</h3>
       <p>Les plateformes affichent un ordre d’idée. Les outils d’IA peuvent formuler une hypothèse. Mais une estimation défendable demande encore de relier ce chiffre au terrain : adresse, immeuble, étage, usage, DPE, travaux, concurrence et moment de vente.</p>
       <p>Mon rôle n’est pas de promettre un prix automatique. Il est d’aider à comprendre si le repère trouvé au mètre carré tient debout pour le bien réel.</p>
       <div class="link-list">
@@ -315,9 +520,11 @@
         <a href="qui-peut-estimer-bien-immobilier-marseille.html">Qui peut estimer un bien immobilier à Marseille ?</a>
         <a href="demander-estimation-marseille.html">Faire relire un prix ou une estimation</a>
       </div>
+      </div>
     </section>
 
-    <section class="section-card">
+    <section class="chapter" id="marseille">
+      <div class="section-card marseille-block">
       <div class="section-label">Lecture locale</div>
       <h2>À Marseille, la rue, le quartier et le micro-secteur changent déjà beaucoup de choses</h2>
       <p>
@@ -332,9 +539,9 @@
         <a href="estimation-appartement-marseille-13005.html">Lire la page sur l’estimation d’un appartement à Marseille 13005</a>
         <a href="estimation-immobiliere-fiable-marseille.html">Comprendre ce qui rend une estimation fiable</a>
       </div>
-    </section>
+      </div>
 
-    <section class="section-card">
+      <div class="section-card reading">
       <div class="section-label">Arrondissements</div>
       <h2>Le prix au m² se relit aussi arrondissement par arrondissement</h2>
       <p>
@@ -347,9 +554,17 @@
         <a href="estimation-appartement-marseille-7e-arrondissement.html">Estimation appartement Marseille 7e : rareté, mer, vue et micro-situation</a>
         <a href="estimation-maison-appartement-marseille-8e-arrondissement.html">Estimation maison ou appartement Marseille 8e : Prado, Périer, Mazargues, littoral</a>
       </div>
+      </div>
     </section>
 
-    <section class="section-card">
+    <section class="chapter" id="bien-reel">
+      <div class="chapter-head">
+        <div class="section-label">Application au bien réel</div>
+        <h2>Ce que la moyenne ne voit pas</h2>
+        <p>Après la localisation, la valeur se joue dans le bâti, l’usage, l’état et les caractéristiques que l’acheteur perçoit réellement.</p>
+      </div>
+      <div class="decision-grid">
+        <div class="section-card decision-card">
       <div class="section-label">Immeuble et usage</div>
       <h2>L’immeuble compte souvent presque autant que le bien</h2>
       <p>
@@ -358,9 +573,9 @@
       <p>
         Le marché regarde aussi l’état des parties communes, l’allure générale, la cohérence de l’ensemble, les signes de travaux à venir, ou encore la qualité de la gestion. C’est pour cela qu’un simple prix moyen au m² peut donner une illusion de précision là où il faudrait en réalité une vraie lecture d’immeuble.
       </p>
-    </section>
+        </div>
 
-    <section class="section-card">
+        <div class="section-card decision-card">
       <div class="section-label">Caractéristiques du bien</div>
       <h2>Étage, lumière, extérieur, distribution : la valeur n’est jamais abstraite</h2>
       <p><strong>Pour un appartement</strong>, l’adresse et l’immeuble se relisent avec l’étage, l’ascenseur, la lumière, l’exposition, la vue, les nuisances, la distribution, le DPE, les travaux et la copropriété. Un balcon, une terrasse ou un stationnement ne comptent pas seulement parce qu’ils existent : leur usage réel et leur rareté locale doivent être compris.</p>
@@ -379,23 +594,37 @@
         <div class="info-item">État général du bien et travaux éventuels</div>
         <div class="info-item">Stationnement et confort d’usage réel</div>
       </div>
-    </section>
+        </div>
+      </div>
 
-    <section class="section-card">
+      <div class="section-card reading card-emphasis">
       <div class="section-label">Maison et terrain</div>
       <h2>Comment estimer une maison avec terrain à Marseille ?</h2>
       <p>Une maison ne s’estime pas en multipliant simplement sa surface habitable par un prix moyen au m². Il faut relire la parcelle et la configuration du bien : terrain, jardin, terrasse, piscine, stationnement, dépendances, exposition, vue, nuisances, état et travaux.</p>
       <p>La rareté locale compte également. Un extérieur facile à vivre, une dépendance réellement utile ou un stationnement peuvent modifier la perception du bien, mais leur effet dépend du secteur, de l’usage et du marché. La conformité des aménagements doit aussi être vérifiée lorsqu’elle est pertinente ; aucun coefficient universel ne remplace cette lecture.</p>
+      </div>
     </section>
 
-    <section class="section-card">
+    <section class="chapter" id="donnees">
+      <div class="chapter-head">
+        <div class="section-label">Preuves et limites</div>
+        <h2>Les données cadrent la décision ; elles ne remplacent pas la lecture du bien.</h2>
+      </div>
+      <div class="section-card">
       <div class="section-label">Données et comparables</div>
       <h2>DVF, comparables et concurrence visible : trois lectures complémentaires</h2>
       <p>La DVF aide à observer des ventes passées. Les comparables permettent de sélectionner des biens réellement proches par localisation, typologie et caractéristiques. La concurrence visible montre enfin ce qu’un acheteur peut comparer au moment où le bien arrive sur le marché.</p>
       <p>Une estimation automatique ou en ligne peut fournir un premier ordre de grandeur. Une estimation humaine sert à vérifier ce que l’outil voit mal : état réel, qualité de l’immeuble ou de la parcelle, lumière, nuisances, travaux, DPE, extérieur, copropriété et cohérence du prix face aux alternatives disponibles.</p>
+      <div class="data-grid" aria-label="Trois lectures complémentaires pour estimer un bien">
+        <div class="data-card"><strong>DVF</strong><p><b>Mesure :</b> des ventes passées enregistrées.<br><b>Apporte :</b> des repères de marché.<br><b>Ne conclut pas :</b> l’état réel ni le prix exact du bien.</p></div>
+        <div class="data-card"><strong>Comparables</strong><p><b>Mesure :</b> la proximité utile de biens similaires.<br><b>Apporte :</b> une comparaison plus fine.<br><b>Ne conclut pas :</b> sans relire les différences concrètes.</p></div>
+        <div class="data-card"><strong>Concurrence visible</strong><p><b>Mesure :</b> les alternatives offertes aux acheteurs au moment de vendre.<br><b>Apporte :</b> le contexte actuel.<br><b>Ne conclut pas :</b> le prix final à elle seule.</p></div>
+      </div>
+      </div>
     </section>
 
-    <section class="section-card">
+    <section class="chapter" id="decision">
+      <div class="section-card card-emphasis reading">
       <div class="section-label">Décision</div>
       <h2>Une estimation immobilière doit éclairer une décision, pas simplement produire un chiffre</h2>
       <p>
@@ -407,9 +636,15 @@
       <p>
         Si le prix obtenu doit servir à vendre puis acheter, il faut aussi convertir cette valeur en capital réellement mobilisable après remboursement du crédit et autres coûts éventuels. Le dossier <a href="acheter-vendre-arbitrer-immobilier-marseille-provence.html">acheter, financer et arbitrer : déterminer son vrai budget</a> relie estimation, capital restant dû, financement et calendrier.
       </p>
+      <div class="bottom-links">
+        <a href="demander-estimation-marseille.html" class="contact-button">Faire relire mon prix dans son contexte réel</a>
+        <a href="estimation-immobiliere-fiable-marseille.html" class="secondary-button">Vérifier la fiabilité d’une estimation</a>
+      </div>
+      </div>
     </section>
 
-    <section class="section-card">
+    <section class="chapter" id="faq">
+      <div class="section-card reading">
       <div class="section-label">Questions fréquentes</div>
       <h2>Questions fréquentes sur le prix au m² et l’estimation immobilière à Marseille</h2>
 
@@ -432,9 +667,21 @@
       <p>
         Un avis de valeur permet d’éviter un prix de départ incohérent, de préparer plus proprement une vente et de mieux comprendre la lecture probable du marché.
       </p>
+      </div>
     </section>
 
-    <section class="section-card">
+    <section class="chapter" id="action">
+      <div class="section-card">
+      <div class="section-label">Lectures suivantes</div>
+      <h2>Approfondir sans repartir de zéro</h2>
+      <div class="nav-grid">
+        <a class="nav-card" href="estimation-immobiliere-fiable-marseille.html">Vérifier la fiabilité d’une estimation<span>Méthode, limites et points de contrôle.</span></a>
+        <a class="nav-card" href="qui-peut-estimer-bien-immobilier-marseille.html">Choisir le bon interlocuteur<span>Selon l’objectif et la situation.</span></a>
+        <a class="nav-card" href="prix-m2-marseille-par-arrondissement.html">Revenir aux repères de prix<span>Lire Marseille arrondissement par arrondissement.</span></a>
+      </div>
+      </div>
+
+      <div class="section-card">
       <div class="section-label">Passage à l’action</div>
       <div class="contact-box">
         <h3>Relire une estimation à Marseille</h3>
@@ -442,10 +689,10 @@
           Pour une vente, un arbitrage ou une simple relecture de valeur à Marseille, un premier échange peut aider à clarifier ce qu’un bien vaut vraiment dans son contexte réel.
         </p>
         <div class="bottom-links">
-          <a href="demander-estimation-marseille.html" class="contact-button">Faire relire un prix ou une estimation à Marseille</a>
-          <a href="estimation-immobiliere-fiable-marseille.html" class="secondary-button">Comprendre ce qui rend une estimation fiable</a>
-          <a href="estimation-avant-vendre-marseille.html" class="secondary-button">Lire la page sur l’estimation avant de vendre</a>
+          <a href="demander-estimation-marseille.html" class="contact-button">Faire relire mon prix dans son contexte réel</a>
+          <a href="estimation-avant-vendre-marseille.html" class="secondary-button">Préparer l’estimation avant une vente</a>
         </div>
+      </div>
       </div>
     </section>
   </main>
