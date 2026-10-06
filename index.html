@@ -91,6 +91,24 @@
     .home-search-box{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:30px;padding:24px;box-shadow:var(--soft-shadow)}.home-search-box label{display:block;font-weight:900;margin-bottom:10px}.home-search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}.home-search-row input{width:100%;min-height:50px;border:1px solid #cbd5e1;border-radius:16px;padding:12px 15px;font:inherit;color:var(--ink);background:#fff}.home-search-row button{border:1px solid #cbd5e1;border-radius:16px;padding:0 18px;background:#fff;color:var(--blue);font-weight:850;cursor:pointer}.home-search-row input:focus-visible,.home-search-row button:focus-visible,.home-search-result:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.home-search-status{color:var(--muted);font-size:14px;margin:12px 0}.home-search-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.home-search-result{display:block;border:1px solid #e2e8f0;border-radius:18px;padding:15px;background:#fff}.home-search-result strong{display:block;color:var(--blue)}.home-search-result span{display:block;color:var(--muted);font-size:13px;margin-top:4px}@media(max-width:640px){.home-search-row{grid-template-columns:1fr}.home-search-row button{min-height:44px}.home-search-results{grid-template-columns:1fr}.home-search-box{padding:18px;border-radius:24px}}
     .header-search{position:relative;width:min(300px,26vw);flex:0 0 auto}.header-search-box{background:#fff;border:1px solid #d8dee8;border-radius:16px;padding:7px;box-shadow:0 6px 16px rgba(16,32,51,.06)}.header-search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}.header-search-row input{min-width:0;width:100%;height:38px;border:0;border-radius:11px;padding:8px 10px;font:inherit;font-size:13px;color:var(--ink);background:#fff}.header-search-row button{border:0;border-radius:11px;padding:0 9px;background:var(--sand-2);color:var(--blue);font-weight:850;cursor:pointer}.header-search-row input:focus-visible,.header-search-row button:focus-visible,.mobile-search-toggle:focus-visible{outline:3px solid var(--gold);outline-offset:2px}.header-search-status{margin:5px 4px 1px;color:var(--muted);font-size:11px}.header-search-results{position:absolute;top:calc(100% + 8px);right:0;width:min(420px,90vw);display:grid;gap:7px;padding:8px;background:#fff;border:1px solid #d8dee8;border-radius:18px;box-shadow:0 20px 48px rgba(16,32,51,.18)}.header-search-results:empty{display:none}.header-search-results .home-search-result{padding:11px 12px;border-radius:13px}.header-search-results .home-search-result strong{font-size:13px}.header-search-results .home-search-result span{font-size:11px}.header-actions{display:flex;align-items:center;gap:8px}.mobile-search-toggle{display:none;align-items:center;justify-content:center;width:46px;height:46px;border:1px solid #d5dde7;border-radius:16px;background:#fff;color:var(--blue);font-size:21px;cursor:pointer;box-shadow:0 6px 16px rgba(16,32,51,.07)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:1180px){.header-search{display:none;position:absolute;left:16px;right:16px;top:calc(100% + 10px);width:auto;z-index:110}.header-search.open{display:block}}@media(max-width:640px){.mobile-search-toggle{width:44px;height:44px;border-radius:15px}.header-search{left:12px;right:12px;top:calc(100% + 8px)}}
     .bl-back-to-top{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:90;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(19,34,56,.18);border-radius:999px;background:rgba(255,252,247,.96);color:var(--blue);font-size:21px;font-weight:800;line-height:1;box-shadow:0 10px 24px rgba(15,23,42,.16);backdrop-filter:blur(12px);cursor:pointer}.bl-back-to-top[hidden]{display:none}.bl-back-to-top:hover{background:#fff;border-color:#d8c9b8}.bl-back-to-top:focus-visible{outline:3px solid var(--gold);outline-offset:3px}@media(max-width:640px){.bl-back-to-top{right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));width:42px;height:42px}}
+
+    /* Accueil V3 — architecture de parcours, anti-cardification, trois états responsive */
+    .hero{padding:clamp(50px,6vw,76px) 0 52px}.hero-grid{max-width:880px}.hero-lead{max-width:700px;font-size:clamp(20px,2.2vw,27px)}.hero-actions{margin-top:24px}.identity-doors{margin-top:26px}.hero-signature{margin-top:26px;padding-top:16px}
+    #intentions{padding:72px 0 54px}#intentions>.container:first-child{padding-top:0!important;margin-bottom:42px}#intentions>.container:first-child .section-head{padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}#intentions>.container:first-child .resources-row a{border:0;border-radius:0;background:transparent;padding:7px 0;border-bottom:1px solid rgba(16,32,51,.24)}
+    #intentions .project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}#intentions .project-card{display:grid;grid-template-columns:120px minmax(0,1fr);grid-template-rows:auto auto auto;column-gap:22px;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:24px 20px 24px 0;box-shadow:none}#intentions .project-card:nth-child(odd){border-right:1px solid var(--line);padding-right:28px}#intentions .project-card:nth-child(even){padding-left:28px}#intentions .project-card .tag{grid-row:1/4;align-self:start;background:transparent;padding:3px 0;border-radius:0;color:var(--gold);font-size:10px}#intentions .project-card h3{margin:0 0 6px;font-size:20px}#intentions .project-card p{margin:0 0 8px;font-size:14px}#intentions .project-card .card-link{font-size:13px}
+    #intentions .cta-panel{margin-top:34px!important;border-radius:0;padding:28px 0;background:transparent;color:var(--ink);box-shadow:none;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}#intentions .cta-panel h2{color:var(--ink);font-size:clamp(26px,3vw,38px)}#intentions .cta-panel p{color:var(--muted)}#intentions .cta-panel .eyebrow{color:var(--gold)}#intentions .cta-panel .btn-primary{background:var(--blue);color:#fff}#intentions .cta-panel .btn-secondary{color:var(--blue);border-color:#bfc9d5;background:transparent}
+    .v3-secondary-paths{padding:42px 0;border-top:1px solid var(--line)}.v3-secondary-paths .section-head{margin-bottom:18px}.v3-secondary-paths h2{font-size:clamp(27px,3.2vw,38px)}.v3-secondary-paths .subline{font-size:15px}.v3-secondary-paths .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}.v3-secondary-paths .project-card,.v3-secondary-paths .project-card.secondary{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;padding:18px 20px 18px 0}.v3-secondary-paths .project-card h3{font-size:18px;margin:5px 0}.v3-secondary-paths .project-card p{font-size:13px;margin-bottom:8px}.v3-secondary-paths .tag{background:transparent;padding:0;color:var(--gold)}.v3-secondary-paths .secondary-row{display:contents}
+    #projets{background:#fff}#projets .project-card p{max-width:300px}
+    .local-section{padding:78px 0;background:var(--sand-2)}.local-section .section-head{margin-bottom:38px}.local-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:52px;align-items:start}.local-main,.local-panel{background:transparent;color:var(--ink);border:0;border-radius:0;padding:0;box-shadow:none}.local-main .eyebrow{color:var(--gold)}.local-main p{color:var(--muted)}.local-main a{color:var(--blue);border-bottom:1px solid rgba(16,32,51,.28)}.local-links{grid-template-columns:1fr;gap:8px}.local-list{grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line)}.local-list a{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:13px 8px 13px 0}.local-list a:hover{background:transparent;text-decoration:underline}.article-figure{max-width:none;margin:46px 0 0;padding:0;border:0;border-radius:0;box-shadow:none;background:transparent}.article-figure img{height:clamp(280px,34vw,460px);object-fit:cover;border-radius:0}.article-figure figcaption{margin:10px 0 0}
+    #territoires{padding:52px 0}#territoires .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}#territoires .project-card{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;padding:22px 28px 22px 0}#territoires .project-card+.project-card{padding-left:28px;border-left:1px solid var(--line)}
+    .method{padding:64px 0}.method-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.method-card{background:transparent;border:0;border-radius:0;padding:24px 24px 24px 0}.method-card+.method-card{border-left:1px solid var(--line);padding-left:24px}.method-number{background:transparent;color:var(--gold);width:auto;height:auto;justify-content:flex-start;margin:0 0 12px;font-size:13px}.method-card h3{margin:0 0 6px;font-size:20px}.method-card p{font-size:14px}
+    .trust-section{padding:72px 0}.trust-layout{grid-template-columns:minmax(240px,320px) minmax(0,1fr);gap:64px}.trust-photo{border-radius:4px}.trust-points{grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid rgba(255,255,255,.16)}.trust-point{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.16);border-radius:0;padding:16px 20px 16px 0}.trust-point:nth-child(even){padding-left:20px;border-left:1px solid rgba(255,255,255,.16)}
+    #ressources{padding:56px 0}#ressources .resources-row{gap:0;border-top:1px solid var(--line)}#ressources .resources-row a{flex:1 1 33%;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;padding:14px 18px 14px 0}
+    .final-cta{padding:20px 0 72px}.final-cta .cta-panel{border-radius:18px;padding:34px}
+    @media(max-width:1280px){.desktop-nav{display:none}.mobile-nav-toggle,.mobile-search-toggle{display:inline-flex}.site-header-inner{position:relative;min-height:66px}.site-brand{font-size:18px}.header-actions{margin-left:auto}.header-search{display:none;position:absolute;left:24px;right:24px;top:calc(100% + 10px);width:auto;z-index:110}.header-search.open{display:block}.header-search-box{padding:10px;border-radius:18px;box-shadow:0 24px 58px rgba(16,32,51,.18)}.header-search-row input{height:44px;font-size:16px}.header-search-results{position:static;width:100%;margin-top:8px;box-shadow:none;border:0;padding:0}.header-search-status{font-size:13px;margin:8px 4px 2px}}
+    @media(max-width:1024px){#intentions .project-grid{grid-template-columns:1fr}#intentions .project-card,#intentions .project-card:nth-child(odd),#intentions .project-card:nth-child(even){border-right:0;padding:20px 0;grid-template-columns:105px minmax(0,1fr)}.v3-secondary-paths .project-grid{grid-template-columns:repeat(2,1fr)}.local-grid{grid-template-columns:1fr;gap:34px}#territoires .project-grid{grid-template-columns:1fr}#territoires .project-card,#territoires .project-card+.project-card{padding:18px 0;border-left:0}.trust-layout{grid-template-columns:260px minmax(0,1fr);gap:36px}}
+    @media(max-width:768px){.hero{padding:44px 0 38px}.hero-signature{display:block}.hero-signature a{display:inline-block;margin-top:10px}.v3-secondary-paths .project-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:repeat(2,1fr)}.method-card:nth-child(3){border-left:0}.trust-layout{grid-template-columns:1fr}.trust-photo{max-width:260px;margin:0}.local-list{grid-template-columns:1fr}#ressources .resources-row a{flex-basis:50%}}
+    @media(max-width:480px){.hero-lead{font-size:19px}.identity-doors{display:grid;gap:12px}.hero-signature p{max-width:32ch}#intentions{padding-top:48px}#intentions>.container:first-child .section-head{display:block}#intentions>.container:first-child .resources-row{margin-top:14px!important}#intentions .project-card,#intentions .project-card:nth-child(odd),#intentions .project-card:nth-child(even){display:block;padding:18px 0}#intentions .project-card .tag{display:block;margin-bottom:5px}.v3-secondary-paths{padding:34px 0}.method-grid{grid-template-columns:1fr}.method-card,.method-card+.method-card{border-left:0;border-bottom:1px solid var(--line);padding:18px 0}.trust-points{grid-template-columns:1fr}.trust-point,.trust-point:nth-child(even){padding:14px 0;border-left:0}#ressources .resources-row a{flex-basis:100%}.final-cta .cta-panel{padding:24px 20px}}
   </style>
 </head>
 <body>
@@ -136,8 +154,8 @@
       <div class="hero-grid">
         <div class="eyebrow">Immobilier · Marseille · Données · Décision</div>
         <h1>Comprendre l’immobilier à Marseille avant de décider.</h1>
-        <p class="hero-lead">Prix, quartiers, estimation, vente, achat, location et ressources professionnelles : un environnement pour explorer, vérifier et préparer une décision immobilière.</p>
-        <div class="hero-actions"><a class="btn btn-primary" href="#intentions">Commencer par mon projet</a><a class="btn btn-secondary" href="bibliotheque-immobilier-marseille.html">Explorer les ressources</a></div>
+        <p class="hero-lead">Prix, quartiers, estimation, vente, achat et location : explorez Marseille, vérifiez vos repères et avancez vers une décision mieux préparée.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#intentions">Choisir mon point de départ</a><a class="btn btn-secondary" href="#lecture-locale">Explorer Marseille</a></div>
         <div class="identity-doors" aria-label="Principales portes d’entrée">
           <a class="identity-door" href="#intentions"><strong>Projet immobilier</strong><span>Estimation, vente, achat, location et arbitrage.</span></a>
           <a class="identity-door" href="#professionnels"><strong>Professionnels / dirigeants</strong><span>Progression, organisation et développement.</span></a>
@@ -172,9 +190,9 @@
       <div class="container">
         <div class="section-head">
           <div class="section-title">
-            <div class="eyebrow">Choisir le bon point d’entrée</div>
-            <h2>Pourquoi êtes-vous venu sur ce blog ?</h2>
-            <p class="subline">Chaque situation immobilière demande une lecture différente. Choisissez l’entrée la plus proche de votre question, puis avancez vers une page utile sans passer par toute la bibliothèque.</p>
+            <div class="eyebrow">Votre point de départ</div>
+            <h2>Une question, puis le bon parcours.</h2>
+            <p class="subline">Commencez par votre situation. Les accès plus précis — arrondissement, DPE, extérieur, professionnel — restent disponibles sans transformer l’accueil en catalogue.</p>
           </div>
         </div>
         <div class="project-grid">
@@ -201,12 +219,12 @@
         </div>
       </div>
     </section>
-    <section id="commencer">
+    <section id="commencer" class="v3-secondary-paths">
       <div class="container">
         <div class="section-head">
           <div class="section-title">
-            <div class="eyebrow">Par où commencer ?</div>
-            <h2>Choisir la bonne porte d’entrée sans tout lire</h2>
+            <div class="eyebrow">Explorer plus précisément</div>
+            <h2>Affiner par secteur ou caractéristique</h2>
             <p class="subline">Le site sert à orienter une décision immobilière : faire relire une estimation, comprendre un arrondissement, analyser un extérieur, vendre, arbitrer ou demander une première lecture humaine.</p>
           </div>
         </div>
@@ -223,12 +241,12 @@
       </div>
     </section>
 
-    <section id="projets">
+    <section id="projets" class="v3-secondary-paths">
       <div class="container">
         <div class="section-head">
           <div class="section-title">
-            <div class="eyebrow">Votre projet</div>
-            <h2>Choisir la bonne entrée</h2>
+            <div class="eyebrow">Passer à l’action</div>
+            <h2>Préparer une décision immobilière</h2>
             <p class="subline">Un projet se lit d’abord par sa situation : valeur, vente, achat, gestion ou recommandation.</p>
           </div>
         </div>
@@ -294,7 +312,7 @@
       <div class="container">
         <div class="section-head">
           <div class="section-title">
-            <div class="eyebrow">Territoires et solutions</div>
+            <div class="eyebrow">Du local au projet</div>
             <h2>Marseille d’abord, puis les territoires qui prolongent le projet</h2>
             <p class="subline">Bruno Lebert habite le 5e arrondissement, possède plus de vingt ans d’expérience dans l’immobilier et travaille à Marseille. La lecture part de Marseille, puis peut s’élargir à la périphérie proche, au littoral, aux calanques ou à certains territoires de Provence quand le projet le demande.</p>
           </div>
