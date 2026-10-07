@@ -147,7 +147,7 @@
         <a href="contact-immobilier-marseille.html">Contact</a>
       </nav>
       <div id="header-search" class="header-search" role="search">
-        <div class="header-search-box"><label class="sr-only" for="home-search-input">Rechercher dans une sélection de dossiers</label><div class="header-search-row"><input id="home-search-input" type="search" autocomplete="off" placeholder="Rechercher un dossier" aria-describedby="home-search-status"><button id="home-search-clear" type="button">Effacer</button></div><p id="home-search-status" class="header-search-status" aria-live="polite">Saisissez au moins deux caractères.</p><div id="home-search-results" class="header-search-results"></div></div>
+        <div class="header-search-box"><label class="sr-only" for="home-search-input">Rechercher dans le blog immobilier</label><form id="home-search-form" class="header-search-row" action="bibliotheque-immobilier-marseille.html" method="get"><input id="home-search-input" name="q" type="search" autocomplete="off" placeholder="Sujet, lieu, question…" aria-describedby="home-search-status"><button id="home-search-submit" type="submit">Rechercher</button></form><p id="home-search-status" class="header-search-status" aria-live="polite">Recherche dans la bibliothèque complète.</p><div id="home-search-results" class="header-search-results"></div></div>
       </div>
       <div class="header-actions">
       <button id="mobile-search-toggle" class="mobile-search-toggle" type="button" aria-label="Ouvrir la recherche" aria-expanded="false" aria-controls="header-search">⌕</button>
@@ -479,22 +479,8 @@
 </script>
 <script id="bl-home-search-and-top">
 (function(){
-  var data=[
-    ['Viager, nue-propriété et démembrement','Patrimoine et transmission','viager-nue-propriete-demembrement-marseille.html','viager nue propriete nue-propriete demembrement succession patrimoine'],
-    ['Bruno Lebert — immobilier à Marseille','Portrait professionnel','bruno-lebert-conseil-immobilier-marseille.html','bruno lebert experience conseil immobilier marseille'],
-    ['Demander une estimation à Marseille','Estimation et avis de valeur','demander-estimation-marseille.html','estimation prix avis valeur vendre vente'],
-    ['Comprendre un DPE à Marseille','Diagnostics et décision','dpe-marseille-comprendre-acheter-vendre.html','dpe diagnostic energie travaux vente achat location'],
-    ['Questions pratiques : travaux, diagnostics, copropriété','Guide pratique','questions-pratiques-immobilier-marseille-travaux-diagnostics-copropriete.html','copropriete travaux diagnostics syndic'],
-    ['Vendre avant de publier une annonce','Vente immobilière','vendre-marseille-avant-publier-annonce.html','vente vendre annonce prix'],
-    ['Prix immobilier Marseille 5e','Quartier et arrondissement','prix-m2-marseille-13005.html','marseille 5e 13005 quartier prix m2 chave camas'],
-    ['Prix immobilier par arrondissement','Repères locaux','prix-m2-marseille-par-arrondissement.html','quartier marseille arrondissement prix'],
-    ['Acheter et relire un bien avant de décider','Achat immobilier','acheter-marseille-relire-bien-avant-decider.html','achat acheter offre copropriete dpe'],
-    ['Bibliothèque immobilière de Marseille','Tous les dossiers','bibliotheque-immobilier-marseille.html','bibliotheque dossiers recherche immobilier marseille']
-  ];
-  function norm(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’']/g,' ').replace(/-/g,' ').trim();}
-  var input=document.getElementById('home-search-input'),out=document.getElementById('home-search-results'),status=document.getElementById('home-search-status'),clear=document.getElementById('home-search-clear');
-  function render(){var q=norm(input.value);out.innerHTML='';if(q.length<2){status.textContent='Saisissez au moins deux caractères.';return;}var terms=q.split(/\s+/);var hits=data.filter(function(x){var hay=norm(x.join(' '));return terms.every(function(t){return hay.indexOf(t)>-1;});});status.textContent=hits.length?hits.length+' résultat'+(hits.length>1?'s':'')+' trouvé'+(hits.length>1?'s':'')+'.':'Aucun résultat. Essayez un thème plus large ou ouvrez la bibliothèque.';hits.forEach(function(x){var a=document.createElement('a');a.className='home-search-result';a.href=x[2];a.innerHTML='<strong>'+x[0]+'</strong><span>'+x[1]+'</span>';out.appendChild(a);});}
-  if(input){input.addEventListener('input',render);clear.addEventListener('click',function(){input.value='';render();input.focus();});}
+  var input=document.getElementById('home-search-input'),form=document.getElementById('home-search-form'),status=document.getElementById('home-search-status');
+  if(form&&input){form.addEventListener('submit',function(e){var q=(input.value||'').trim();if(q.length<2){e.preventDefault();status.textContent='Saisissez au moins deux caractères.';input.focus();return;}status.textContent='Ouverture des résultats dans la bibliothèque complète…';});}
   var b=document.querySelector('.bl-back-to-top');if(b){var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;function sync(){b.hidden=window.scrollY<500;}sync();addEventListener('scroll',sync,{passive:true});b.addEventListener('click',function(){scrollTo({top:0,behavior:reduce?'auto':'smooth'});});}
 })();
 </script>
