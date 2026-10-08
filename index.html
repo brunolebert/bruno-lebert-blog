@@ -131,13 +131,18 @@
     @media(max-width:768px){.hero{min-height:auto;padding:54px 0 46px}.hero::before{background:linear-gradient(180deg,rgba(6,18,30,.55) 0%,rgba(6,18,30,.9) 58%,rgba(6,18,30,.98) 100%),url('assets/images/marseille-vu-mucem-vers-notre-dame-de-la-garde-et-fort-2e.webp') 58% top/auto 54% no-repeat}.hero::after{display:none}.hero-grid{padding:190px 0 0}h1{font-size:clamp(48px,13vw,70px)}.services-grid{justify-content:flex-start}#intentions{padding-top:72px}#intentions>.container:nth-child(2)>.section-head,.local-section .section-head,#territoires .section-head{grid-template-columns:1fr}#intentions>.container:nth-child(2)>.section-head::after,.local-section .section-head::after{display:none}#intentions .project-grid{grid-template-columns:1fr}#intentions .project-card:nth-child(1),#intentions .project-card:nth-child(2),#intentions .project-card:nth-child(n+3){grid-column:auto;min-height:210px}.v3-secondary-paths .project-grid{grid-template-columns:1fr}.local-section{padding:80px 0}.article-figure img{height:420px}.method-grid{grid-template-columns:repeat(2,1fr)}.trust-layout{grid-template-columns:1fr}.trust-photo{width:min(82%,360px);height:auto}.trust-points{grid-template-columns:1fr}.trust-point,.trust-point:nth-child(even){padding:16px 0;border-left:0}.final-cta .cta-panel{grid-template-columns:1fr}.cta-buttons{justify-content:flex-start}}
     @media(max-width:480px){.site-brand{font-size:15px}.hero{padding-top:24px}.hero-grid{padding-top:180px}.hero .eyebrow{font-size:10px}.hero .eyebrow::before{width:26px}h1{font-size:clamp(44px,13vw,58px)}.hero-lead{font-size:18px}.hero-actions{display:grid}.identity-doors{margin-top:28px}.hero-signature{margin-top:24px}.services{padding:0 12px}#intentions>.container:first-child{margin-bottom:48px}#intentions .project-card,#intentions .project-card:nth-child(odd),#intentions .project-card:nth-child(even){padding:22px;min-height:190px}#intentions .project-card h3{margin-top:20px}.v3-secondary-paths{padding:52px 0}.local-section::before{font-size:90px;top:28px}.local-section .section-head{margin-bottom:44px}.local-grid{gap:42px}.article-figure{margin-top:50px}.article-figure img{height:340px}.article-figure::before{left:12px;top:12px}.method{padding:72px 0}.method-grid{grid-template-columns:1fr}.method-card,.method-card+.method-card{padding:24px 24px 72px}.trust-section{padding:76px 0}.trust-photo{width:88%;box-shadow:14px 16px 0 var(--v4-sky)}#ressources{padding:70px 0}.final-cta .cta-panel{padding:50px 20px}.final-cta .cta-panel h2{font-size:40px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.project-card:hover{transform:none!important}}
+    /* UX ciblée : menu compact accessible sur toutes les tailles */
+    .desktop-nav{display:none!important}.mobile-nav-toggle{display:inline-flex!important}.header-actions{margin-left:auto}.site-header-inner{position:relative}
+    .mobile-nav-panel{left:auto;right:0;width:min(680px,calc(100vw - 32px));max-height:min(76vh,690px);overflow-y:auto;overscroll-behavior:contain;border-radius:12px;padding:20px;background:#fffaf4}
+    .mobile-nav-panel nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 26px}.nav-group{min-width:0}.nav-group p{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:#a16f43}.mobile-nav-panel .nav-group a{display:block;padding:8px 5px;border-radius:4px;font-size:14px;line-height:1.3;font-weight:700}.mobile-nav-panel .nav-group a:focus-visible{outline:2px solid #b78454;outline-offset:2px}
+    @media(max-width:640px){.mobile-nav-panel{right:0;width:min(380px,calc(100vw - 24px));padding:16px;max-height:76dvh}.mobile-nav-panel nav{grid-template-columns:1fr;gap:14px}.mobile-nav-panel .nav-group a{padding:7px 4px;font-size:14px}}
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="container site-header-inner">
       <a class="site-brand" href="index.html" aria-label="Accueil Conseil immobilier Marseille">Conseil immobilier Marseille</a>
-      <nav class="desktop-nav" aria-label="Navigation principale">
+      <nav class="desktop-nav" aria-label="Navigation principale" hidden>
         <a href="demander-estimation-marseille.html">Estimer</a>
         <a href="prix-m2-marseille-par-arrondissement.html">Comprendre les prix</a>
         <a href="#lecture-locale">Explorer Marseille</a>
@@ -154,18 +159,12 @@
       <button id="mobile-nav-toggle" class="mobile-nav-toggle" type="button" aria-label="Ouvrir la navigation" aria-expanded="false" aria-controls="mobile-nav-panel">
         <span class="burger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
       </button>
-      <div id="mobile-nav-panel" class="mobile-nav-panel">
-        <nav aria-label="Navigation mobile">
-          <a href="demander-estimation-marseille.html">Estimer un bien</a>
-          <a href="vendre-marseille-avant-publier-annonce.html">Préparer une vente</a>
-          <a href="acheter-marseille-relire-bien-avant-decider.html">Préparer un achat</a>
-          <a href="gestion-locative-marseille-particulier-sci.html">Location / gestion</a>
-          <a href="prix-m2-marseille-par-arrondissement.html">Explorer Marseille</a>
-          <a href="bibliotheque-immobilier-marseille.html">Ressources et données</a>
-          <a href="conseiller-immobilier-comparer-son-cadre-de-travail.html">Professionnels de l’immobilier</a>
-          <a href="conseil-developpement-agence-immobiliere-marseille.html">Dirigeants / structures</a>
-          <a href="postuler-immobilier-marseille.html">Candidature</a>
-          <a href="contact-immobilier-marseille.html">Contact</a>
+      <div id="mobile-nav-panel" class="mobile-nav-panel" aria-label="Menu principal">
+        <nav aria-label="Navigation par intentions">
+          <div class="nav-group"><p>Mon projet immobilier</p><a href="demander-estimation-marseille.html">Estimer un bien</a><a href="vendre-marseille-avant-publier-annonce.html">Préparer une vente</a><a href="acheter-marseille-relire-bien-avant-decider.html">Préparer un achat</a><a href="gestion-locative-marseille-particulier-sci.html">Location / gestion</a></div>
+          <div class="nav-group"><p>Explorer et comprendre</p><a href="prix-m2-marseille-par-arrondissement.html">Explorer Marseille</a><a href="atlas-prix-immobilier-rues-quartiers-marseille-provence.html">Comprendre les prix</a><a href="bibliotheque-immobilier-marseille.html">Ressources et données</a></div>
+          <div class="nav-group"><p>Professionnels</p><a href="conseiller-immobilier-comparer-son-cadre-de-travail.html">Professionnels de l’immobilier</a><a href="conseil-developpement-agence-immobiliere-marseille.html">Dirigeants / structures</a><a href="postuler-immobilier-marseille.html">Candidature</a></div>
+          <div class="nav-group nav-contact"><p>Contact</p><a href="contact-immobilier-marseille.html">Prendre contact</a></div>
         </nav>
       </div>
     </div>
@@ -404,6 +403,7 @@
         event.stopPropagation();
         const isOpen=mobileNavPanel.classList.toggle('open');
         mobileNavToggle.setAttribute('aria-expanded',String(isOpen));
+        if(isOpen){const firstLink=mobileNavPanel.querySelector('a');if(firstLink)firstLink.focus();}else{mobileNavToggle.focus();}
       });
 
       mobileNavPanel.addEventListener('click',function(event){
@@ -417,9 +417,8 @@
       document.addEventListener('click',closeMobileNav);
 
       document.addEventListener('keydown',function(event){
-        if(event.key==='Escape'){
-          closeMobileNav();
-        }
+        if(event.key==='Escape'&&mobileNavPanel.classList.contains('open')){closeMobileNav();mobileNavToggle.focus();}
+        if(event.key==='Tab'&&mobileNavPanel.classList.contains('open')){const links=Array.from(mobileNavPanel.querySelectorAll('a'));const first=links[0],last=links[links.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}
       });
     }
   </script>
