@@ -135,7 +135,8 @@
     .desktop-nav{display:none!important}.mobile-nav-toggle{display:inline-flex!important}.header-actions{margin-left:auto}.site-header-inner{position:relative}
     .mobile-nav-panel{left:auto;right:0;width:min(680px,calc(100vw - 32px));max-height:min(76vh,690px);overflow-y:auto;overscroll-behavior:contain;border-radius:12px;padding:20px;background:#fffaf4}
     .mobile-nav-panel nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 26px}.nav-group{min-width:0}.nav-group p{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:#a16f43}.mobile-nav-panel .nav-group a{display:block;padding:8px 5px;border-radius:4px;font-size:14px;line-height:1.3;font-weight:700}.mobile-nav-panel .nav-group a:focus-visible{outline:2px solid #b78454;outline-offset:2px}
-    @media(max-width:640px){.mobile-nav-panel{right:0;width:min(380px,calc(100vw - 24px));padding:16px;max-height:76dvh}.mobile-nav-panel nav{grid-template-columns:1fr;gap:14px}.mobile-nav-panel .nav-group a{padding:7px 4px;font-size:14px}}
+    @media(max-width:640px){.mobile-nav-panel{right:0;width:min(380px,calc(100vw - 24px));padding:14px;max-height:76dvh}.mobile-nav-panel nav{grid-template-columns:1fr;gap:9px}.mobile-nav-panel .nav-group a{padding:7px 4px;font-size:14px}}
+    .mobile-nav-panel{padding:16px}.mobile-nav-panel nav{gap:12px 20px}.nav-group p{margin-bottom:3px}.mobile-nav-panel .nav-group a{padding:7px 5px;min-height:34px}.mobile-nav-toggle[aria-expanded="true"] .burger-lines span:nth-child(1){transform:translateY(7px) rotate(45deg)}.mobile-nav-toggle[aria-expanded="true"] .burger-lines span:nth-child(2){opacity:0}.mobile-nav-toggle[aria-expanded="true"] .burger-lines span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}.burger-lines span{transition:transform .15s ease,opacity .15s ease}@media(prefers-reduced-motion:reduce){.burger-lines span{transition:none}}@media(max-width:640px){.mobile-nav-panel{padding:14px}.mobile-nav-panel nav{gap:9px}}
   </style>
 </head>
 <body>
@@ -162,7 +163,7 @@
       <div id="mobile-nav-panel" class="mobile-nav-panel" aria-label="Menu principal">
         <nav aria-label="Navigation par intentions">
           <div class="nav-group"><p>Mon projet immobilier</p><a href="demander-estimation-marseille.html">Estimer un bien</a><a href="vendre-marseille-avant-publier-annonce.html">Préparer une vente</a><a href="acheter-marseille-relire-bien-avant-decider.html">Préparer un achat</a><a href="gestion-locative-marseille-particulier-sci.html">Location / gestion</a></div>
-          <div class="nav-group"><p>Explorer et comprendre</p><a href="prix-m2-marseille-par-arrondissement.html">Explorer Marseille</a><a href="atlas-prix-immobilier-rues-quartiers-marseille-provence.html">Comprendre les prix</a><a href="bibliotheque-immobilier-marseille.html">Ressources et données</a></div>
+          <div class="nav-group"><p>Explorer et comprendre</p><a href="index-rues-voies-secteurs-marseille-provence.html">Explorer les territoires</a><a href="atlas-prix-immobilier-rues-quartiers-marseille-provence.html">Comprendre les prix</a><a href="bibliotheque-immobilier-marseille.html">Ressources et données</a></div>
           <div class="nav-group"><p>Professionnels</p><a href="conseiller-immobilier-comparer-son-cadre-de-travail.html">Professionnels de l’immobilier</a><a href="conseil-developpement-agence-immobiliere-marseille.html">Dirigeants / structures</a><a href="postuler-immobilier-marseille.html">Candidature</a></div>
           <div class="nav-group nav-contact"><p>Contact</p><a href="contact-immobilier-marseille.html">Prendre contact</a></div>
         </nav>
@@ -176,7 +177,7 @@
         <div class="eyebrow">Immobilier · Marseille · Données · Décision</div>
         <h1>Comprendre l’immobilier à Marseille avant de décider.</h1>
         <p class="hero-lead">Estimer un bien, comprendre les prix, explorer Marseille, préparer une vente ou un achat : partez de votre besoin réel.</p>
-        <div class="hero-actions"><a class="btn btn-primary" href="#intentions">Choisir mon parcours</a><a class="btn btn-secondary" href="#lecture-locale">Explorer Marseille</a></div>
+        <div class="hero-actions"><a class="btn btn-primary" href="#intentions">Choisir mon parcours</a><a class="btn btn-secondary" href="index-rues-voies-secteurs-marseille-provence.html">Explorer les territoires</a></div>
       </div>
     </div>
   </header>
@@ -397,13 +398,15 @@
       const closeMobileNav=function(){
         mobileNavPanel.classList.remove('open');
         mobileNavToggle.setAttribute('aria-expanded','false');
+        mobileNavToggle.setAttribute('aria-label','Ouvrir la navigation');
       };
 
       mobileNavToggle.addEventListener('click',function(event){
         event.stopPropagation();
         const isOpen=mobileNavPanel.classList.toggle('open');
         mobileNavToggle.setAttribute('aria-expanded',String(isOpen));
-        if(isOpen){const firstLink=mobileNavPanel.querySelector('a');if(firstLink)firstLink.focus();}else{mobileNavToggle.focus();}
+        mobileNavToggle.setAttribute('aria-label',isOpen?'Fermer la navigation':'Ouvrir la navigation');
+        if(isOpen){if(event.detail===0){const firstLink=mobileNavPanel.querySelector('a');if(firstLink)firstLink.focus();}}else{mobileNavToggle.focus();}
       });
 
       mobileNavPanel.addEventListener('click',function(event){
