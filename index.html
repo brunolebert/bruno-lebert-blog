@@ -142,6 +142,8 @@
     .hero-cim-caption{font-size:13px;letter-spacing:.01em;color:rgba(255,255,255,.72);margin:17px 0 0;max-width:640px}.cim-entry{padding:70px 0;background:#e9dfd1;border-bottom:1px solid rgba(17,36,58,.15)}.cim-entry-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:clamp(32px,7vw,110px);align-items:end}.cim-entry h2{font-size:clamp(52px,7vw,94px);margin:10px 0 0}.cim-entry-subtitle{display:block;font-size:clamp(22px,3vw,35px);font-weight:500;letter-spacing:-.035em;margin-top:13px}.cim-entry-copy>p:first-child{font-size:clamp(21px,2.5vw,29px);line-height:1.24;font-weight:700;margin:0 0 14px}.cim-entry-detail{font-size:15px;line-height:1.65;color:#4b5a6a;max-width:46ch}.cim-entry-link{display:inline-block;margin-top:15px;padding-bottom:7px;border-bottom:2px solid currentColor;font-weight:900;font-size:16px}.territory-wide-link{display:inline-block;border-bottom:1px solid currentColor;padding-bottom:4px;font-weight:800;color:inherit}.local-section .territory-wide-link{color:#fff}
     @media(max-width:768px){.cim-entry{padding:52px 0}.cim-entry-layout{grid-template-columns:1fr;gap:22px}.cim-entry h2{font-size:clamp(48px,10vw,76px)}.hero-cim-caption{font-size:12px;line-height:1.5}}
     @media(max-width:480px){.header-cim-link{font-size:11px;padding:9px 6px}.header-actions{gap:4px}.site-brand{font-size:13px;max-width:37vw;white-space:normal;line-height:1.1}.cim-entry{padding:42px 0}.cim-entry h2{font-size:49px}.cim-entry-subtitle{font-size:23px}}
+    /* Statut temporaire : CIM Data visible, sans interaction vers une route non publique */
+    .cim-pending{cursor:default;user-select:text}.header-cim-link.cim-pending{border-bottom:0;color:var(--v4-ink);font-weight:850}.cim-pending-note{font-size:11px;font-weight:500;color:#647386}.hero .cim-pending-hero{background:rgba(247,239,228,.14);border:1px solid rgba(247,239,228,.4);color:#f7efe4;box-shadow:none;transform:none}.cim-pending-section{border-bottom:0;color:#5b6470;font-weight:700;font-size:14px;margin-top:15px;padding:0}.header-cim-link.cim-pending:hover{color:var(--v4-ink);border-color:transparent}@media(max-width:640px){.cim-pending-note{display:none}}
   </style>
 </head>
 <body>
@@ -161,7 +163,7 @@
         <div class="header-search-box"><label class="sr-only" for="home-search-input">Rechercher dans le blog immobilier</label><form id="home-search-form" class="header-search-row" action="bibliotheque-immobilier-marseille.html" method="get"><input id="home-search-input" name="q" type="search" autocomplete="off" placeholder="Sujet, lieu, question…" aria-describedby="home-search-status"><button id="home-search-submit" type="submit">Rechercher</button></form><p id="home-search-status" class="header-search-status" aria-live="polite">Recherche dans la bibliothèque complète.</p><div id="home-search-results" class="header-search-results"></div></div>
       </div>
       <div class="header-actions">
-      <a class="header-cim-link" href="/cim-data" aria-label="Explorer une adresse avec CIM Data">CIM Data <span aria-hidden="true">↗</span></a>
+      <span class="header-cim-link cim-pending" aria-label="CIM Data, mise en ligne en cours">CIM Data <span class="cim-pending-note">· mise en ligne en cours</span></span>
       <button id="mobile-search-toggle" class="mobile-search-toggle" type="button" aria-label="Ouvrir la recherche" aria-expanded="false" aria-controls="header-search">⌕</button>
       <button id="mobile-nav-toggle" class="mobile-nav-toggle" type="button" aria-label="Ouvrir la navigation" aria-expanded="false" aria-controls="mobile-nav-panel">
         <span class="burger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -183,7 +185,7 @@
         <div class="eyebrow">Immobilier · Marseille · Données · Décision</div>
         <h1>Comprendre l’immobilier à Marseille avant de décider.</h1>
         <p class="hero-lead">Un lieu, un prix, une décision : explorez les données d’une adresse ou demandez une lecture humaine de votre bien.</p>
-        <div class="hero-actions"><a class="btn btn-primary" href="/cim-data">Explorer une adresse <span aria-hidden="true">↗</span></a><a class="btn btn-secondary" href="demander-estimation-marseille.html">Demander une estimation</a></div>
+        <div class="hero-actions"><span class="btn btn-primary cim-pending cim-pending-hero" aria-label="CIM Data, mise en ligne en cours">Mise en ligne en cours</span><a class="btn btn-secondary" href="demander-estimation-marseille.html">Demander une estimation</a></div>
         <p class="hero-cim-caption">CIM Data · Le bien dans son marché · Prix, ventes et comparables autour d’une adresse.</p>
       </div>
     </div>
@@ -206,7 +208,7 @@
     <section class="cim-entry" aria-labelledby="cim-entry-title">
       <div class="container cim-entry-layout">
         <div><div class="eyebrow">01 / Explorer</div><h2 id="cim-entry-title">CIM Data<span class="cim-entry-subtitle">Le bien dans son marché</span></h2></div>
-        <div class="cim-entry-copy"><p>Prix, ventes et comparables autour d’une adresse.</p><p class="cim-entry-detail">Rechercher une adresse, consulter les ventes réalisées et confronter des comparables : des repères pour mieux comprendre, pas une estimation automatique.</p><a href="/cim-data" class="cim-entry-link">Explorer une adresse <span aria-hidden="true">↗</span></a></div>
+        <div class="cim-entry-copy"><p>Prix, ventes et comparables autour d’une adresse.</p><p class="cim-entry-detail">Rechercher une adresse, consulter les ventes réalisées et confronter des comparables : des repères pour mieux comprendre, pas une estimation automatique.</p><span class="cim-entry-link cim-pending cim-pending-section">Mise en ligne en cours</span></div>
       </div>
     </section>
   <main>
