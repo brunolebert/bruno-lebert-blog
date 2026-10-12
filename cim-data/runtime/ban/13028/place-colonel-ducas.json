@@ -1,0 +1,1 @@
+{"v":2,"code":"13028","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","1","Place Colonel Ducas","13600","La Ciotat",5.609563,43.177255,"13028000AC0055|13028000AC0056"],["","2","Place Colonel Ducas","13600","La Ciotat",5.609466,43.177073,"13028000AC0050|13028000AC0051"]]}

@@ -1,0 +1,1 @@
+{"v":2,"code":"13211","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["1","boulevard jean carminati","2022-12-15",2022,"Maison",268.0,750000.0,2798.507462686567,"B","13211|871|L|83"],["2","boulevard jean carminati","2024-09-19",2024,"Maison",55.0,429000.0,7800.0,"B","13211|871|L|88"]]}

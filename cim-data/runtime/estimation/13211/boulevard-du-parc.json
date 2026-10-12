@@ -1,0 +1,1 @@
+{"v":2,"code":"13211","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["9","boulevard du parc","2021-08-18",2021,"Maison",117.0,235000.0,2008.5470085470085,"B","13211|863|C|51"],["12","boulevard du parc","2024-04-30",2024,"Maison",83.0,460000.0,5542.168674698795,"A","13211|863|C|160"]]}

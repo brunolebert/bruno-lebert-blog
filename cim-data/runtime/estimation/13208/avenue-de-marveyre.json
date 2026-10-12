@@ -1,0 +1,1 @@
+{"v":2,"code":"13208","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["9001","avenue de marveyre","2021-05-31",2021,"Maison",170.0,1490000.0,8764.70588235294,"A","13208|840|C|14"],["9023","avenue de marveyre","2023-03-16",2023,"Maison",250.0,3605000.0,14420.0,"B","13208|840|C|40"]]}

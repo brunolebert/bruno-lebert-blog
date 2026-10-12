@@ -1,0 +1,1 @@
+{"v":2,"code":"13205","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["55","rue pascal cros","2022-04-27",2022,"Appartement",52.0,312000.0,6000.0,"B","13205|819|C|67"],["57","rue pascal cros","2023-10-23",2023,"Appartement",51.0,307900.0,6037.254901960784,"A","13205|819|C|66"]]}

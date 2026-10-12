@@ -1,0 +1,1 @@
+{"v":2,"code":"13209","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["9","avenue mozart","2021-07-01",2021,"Maison",135.0,650000.0,4814.814814814815,"A","13209|853|P|34"],["1","avenue mozart","2023-01-12",2023,"Maison",100.0,643100.0,6431.0,"B","13209|853|P|17"]]}

@@ -1,0 +1,1 @@
+{"v":2,"code":"13216","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["11","rue boisseau","2022-04-06",2022,"Appartement",65.0,100000.0,1538.4615384615386,"A","13216|910|E|226"],["11","rue boisseau","2023-05-26",2023,"Appartement",65.0,144000.0,2215.3846153846152,"A","13216|910|E|226"]]}

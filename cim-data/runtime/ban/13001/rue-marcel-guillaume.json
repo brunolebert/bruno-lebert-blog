@@ -1,0 +1,1 @@
+{"v":2,"code":"13001","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","3","Rue  Marcel Guillaume","13100","Aix-en-Provence",5.446662,43.525379,"13001000AK0123"],["","1","Rue  Marcel Guillaume","13100","Aix-en-Provence",5.446816,43.525392,"13001000AK0095|13001000AK0096"]]}

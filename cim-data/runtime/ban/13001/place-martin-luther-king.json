@@ -1,0 +1,1 @@
+{"v":2,"code":"13001","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","3","Place  Martin Luther King","13090","Aix-en-Provence",5.433177,43.522446,"13001000CO0018"],["","1","Place  Martin Luther King","13090","Aix-en-Provence",5.43303,43.522503,"13001000CO0018|13001000CO0019"]]}

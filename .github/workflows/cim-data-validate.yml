@@ -1,0 +1,99 @@
+name: CIM Data runtime validation
+
+on:
+  pull_request:
+    paths:
+      - "cim-data/**"
+      - ".nojekyll"
+      - ".github/workflows/cim-data-validate.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "cim-data/**"
+      - ".nojekyll"
+      - ".github/workflows/cim-data-validate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate CIM Data static runtime
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          root = Path("cim-data")
+          manifest_path = root / "manifest.json"
+          page = root / "index.html"
+
+          assert Path(".nojekyll").is_file()
+          assert manifest_path.is_file()
+          assert page.is_file()
+
+          manifest = json.loads(
+              manifest_path.read_text(encoding="utf-8")
+          )
+
+          assert (
+              manifest["lineage"]["sqlite_to_v1"]
+              == "CERTIFIED"
+          )
+
+          assert (
+              manifest["validation"]["sqlite_to_v1_certified"]
+              is True
+          )
+
+          assert (
+              manifest["validation"]["publication_certified"]
+              is False
+          )
+
+          expected = [
+              root / "runtime/ban/13204/boulevard-chave.json",
+              root / "runtime/ban/13205/boulevard-chave.json",
+              root / "runtime/dvf/13204/chave.json",
+              root / "runtime/dvf/13205/chave.json",
+              root / "runtime/estimation/13204/boulevard-chave.json",
+              root / "runtime/estimation/13205/boulevard-chave.json",
+          ]
+
+          for path in expected:
+              assert path.is_file(), path
+              json.loads(path.read_text(encoding="utf-8"))
+
+          source = page.read_text(encoding="utf-8")
+
+          for forbidden in (
+              "/address/search",
+              "/dvf/search",
+              "/openapi.json",
+          ):
+              assert forbidden not in source, forbidden
+
+          assert "runtime/ban/" in source
+          assert "runtime/dvf/" in source
+          assert "runtime/estimation/" in source
+
+          json_count = sum(
+              1 for _ in root.rglob("*.json")
+          )
+
+          assert json_count >= 60000, json_count
+
+          print("CIM_DATA_RUNTIME_VALIDATION=OK")
+          print(f"JSON_FILES={json_count}")
+          print(
+              "PAYLOAD_TREE="
+              + manifest["dataset"]["payload_tree_sha256"]
+          )
+          PY

@@ -1,0 +1,1 @@
+{"v":2,"code":"13001","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","1","Rue  Guynemer","13090","Aix-en-Provence",5.437964,43.516425,"13001000CK0031"],["","2","Rue  Guynemer","13090","Aix-en-Provence",5.438142,43.516466,"13001000CK0020"]]}

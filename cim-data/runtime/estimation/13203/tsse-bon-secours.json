@@ -1,0 +1,1 @@
+{"v":2,"code":"13203","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["12","tsse bon secours","2021-04-21",2021,"Appartement",45.0,46400.0,1031.111111111111,"B","13203|813|K|123"],["5","tsse bon secours","2023-12-14",2023,"Maison",48.0,57000.0,1187.5,"A","13203|813|K|110"]]}

@@ -1,0 +1,1 @@
+{"v":2,"code":"13208","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["24","rue du doct henri metras","2021-12-10",2021,"Maison",125.0,1023000.0,8184.0,"B","13208|844|L|60"],["20","rue du doct henri metras","2024-06-28",2024,"Maison",123.0,911000.0,7406.504065040651,"A","13208|844|L|112"]]}

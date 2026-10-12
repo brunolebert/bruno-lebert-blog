@@ -1,0 +1,1410 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CIM Data — Le bien dans son marché | Bruno Lebert</title>
+<meta name="description" content="Prix, ventes et comparables autour d’une adresse avec CIM Data. Données de marché réalisées et comparables filtrables.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://conseil-immobilier-marseille.fr/cim-data/">
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+>
+
+<style>
+:root{
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color:#18202a;
+  background:#f5f6f8;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+}
+
+header{
+  background:white;
+  border-bottom:1px solid #dde1e6;
+  padding:22px;
+}
+
+main{
+  max-width:1280px;
+  margin:auto;
+  padding:22px;
+}
+
+h1{
+  margin:0 0 6px;
+  font-size:clamp(26px,4vw,42px);
+}
+
+h2{
+  margin-top:0;
+}
+
+.subtitle{
+  max-width:820px;
+  color:#56606b;
+}
+
+.search-wrap{
+  position:relative;
+  margin-top:22px;
+  max-width:760px;
+}
+
+#addressInput{
+  width:100%;
+  font-size:18px;
+  padding:15px 17px;
+  border:1px solid #bcc4cd;
+  border-radius:10px;
+  background:white;
+}
+
+#suggestions{
+  position:absolute;
+  z-index:1000;
+  top:calc(100% + 5px);
+  left:0;
+  right:0;
+  background:white;
+  border:1px solid #d3d8de;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.suggestion{
+  padding:12px 14px;
+  cursor:pointer;
+  border-bottom:1px solid #edf0f2;
+}
+
+.suggestion:hover{
+  background:#f2f5f8;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);
+  gap:18px;
+  margin-top:20px;
+}
+
+.card{
+  background:white;
+  border:1px solid #e0e4e8;
+  border-radius:14px;
+  padding:18px;
+}
+
+#map{
+  height:440px;
+  border-radius:12px;
+  background:#e8ebee;
+}
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:14px;
+}
+
+.kpi{
+  border:1px solid #e1e5e9;
+  border-radius:10px;
+  padding:13px;
+}
+
+.kpi strong{
+  display:block;
+  font-size:23px;
+}
+
+.kpi span{
+  color:#66717d;
+  font-size:13px;
+}
+
+.filters{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(120px,1fr));
+  gap:10px;
+}
+
+label{
+  font-size:13px;
+  color:#56606b;
+}
+
+select,
+input[type="number"]{
+  width:100%;
+  margin-top:4px;
+  padding:10px;
+  border:1px solid #c8ced5;
+  border-radius:8px;
+  background:white;
+}
+
+.status{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:12px 0;
+}
+
+.badge{
+  font-size:12px;
+  border:1px solid #ccd2d8;
+  border-radius:999px;
+  padding:4px 8px;
+  background:#fafbfc;
+}
+
+.sale{
+  padding:12px 0;
+  border-bottom:1px solid #eceff2;
+}
+
+.sale:last-child{
+  border-bottom:0;
+}
+
+.sale-title{
+  font-weight:650;
+}
+
+.sale-meta{
+  font-size:14px;
+  color:#616c77;
+  margin-top:4px;
+}
+
+.notice{
+  padding:14px;
+  border-radius:10px;
+  background:#f4f6f8;
+  color:#46515d;
+  line-height:1.45;
+}
+
+.cta{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  font-weight:700;
+  padding:14px;
+  border-radius:10px;
+  background:#18202a;
+  color:white;
+  margin-top:14px;
+}
+
+#selectedAddress{
+  font-weight:650;
+  font-size:18px;
+}
+
+.empty{
+  color:#6b7580;
+  padding:16px 0;
+}
+
+@media(max-width:850px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .filters{
+    grid-template-columns:1fr 1fr;
+  }
+
+  #map{
+    height:330px;
+  }
+}
+
+@media(max-width:520px){
+  main,
+  header{
+    padding:15px;
+  }
+
+  .filters,
+  .kpis{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>CIM Data — Le bien dans son marché</h1>
+
+  <div class="subtitle">
+    <strong>Prix, ventes et comparables autour d’une adresse.</strong><br>
+    Recherchez une adresse pour comprendre son marché à partir
+    des ventes réalisées et de comparables filtrables.
+  </div>
+
+  <div class="search-wrap">
+    <input
+      id="addressInput"
+      autocomplete="off"
+      placeholder="Rechercher une adresse à Marseille…"
+    >
+    <div id="suggestions" class="hidden"></div>
+  </div>
+</header>
+
+<main>
+
+  <section id="resultSection" class="hidden">
+
+    <div class="card">
+      <div id="selectedAddress"></div>
+
+      <div class="status">
+        <span class="badge">BAN · OFFICIAL</span>
+        <span class="badge">DVF · OFFICIAL</span>
+        <span class="badge">Marché réalisé</span>
+        <span class="badge">Comparables · CALCULATED</span>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <div>
+        <div class="card">
+          <div id="map"></div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h2>Comparer les ventes</h2>
+
+          <div class="filters">
+            <label>
+              Type
+              <select id="typeFilter">
+                <option value="">Tous</option>
+                <option value="Appartement">Appartement</option>
+                <option value="Maison">Maison</option>
+              </select>
+            </label>
+
+            <label>
+              Pièces
+              <input
+                id="roomsFilter"
+                type="number"
+                min="1"
+                step="1"
+                placeholder="Toutes"
+              >
+            </label>
+
+            <label>
+              Surface min.
+              <input
+                id="surfaceMin"
+                type="number"
+                min="1"
+                step="1"
+                placeholder="m²"
+              >
+            </label>
+
+            <label>
+              Surface max.
+              <input
+                id="surfaceMax"
+                type="number"
+                min="1"
+                step="1"
+                placeholder="m²"
+              >
+            </label>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi">
+              <strong id="salesCount">—</strong>
+              <span>ventes retenues</span>
+            </div>
+
+            <div class="kpi">
+              <strong id="medianM2">—</strong>
+              <span>médiane €/m² disponible</span>
+            </div>
+
+            <div class="kpi">
+              <strong id="latestYear">—</strong>
+              <span>vente la plus récente</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h2>Ventes comparables</h2>
+
+          <div class="notice">
+            Aucun coefficient automatique n'est appliqué.
+            Les filtres servent seulement à isoler des transactions
+            réellement signées présentant des caractéristiques proches.
+          </div>
+
+          <div id="salesList"></div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h2>Ce que ces données disent</h2>
+
+          <p>
+            Elles montrent le marché réellement réalisé :
+            transactions enregistrées dans DVF et repères disponibles
+            autour de l'adresse sélectionnée.
+          </p>
+
+          <p>
+            Elles ne connaissent pas nécessairement l'état intérieur,
+            la qualité d'une terrasse, un jardin, une vue,
+            l'exposition, la lumière, des surfaces hors Carrez
+            ou une configuration atypique.
+          </p>
+
+          <div class="notice">
+            <strong>Une donnée de marché n'est pas une estimation automatique.</strong>
+            La valeur d'un bien particulier demande une relecture
+            de ses caractéristiques réelles.
+          </div>
+
+          <a
+            class="cta"
+            href="https://conseil-immobilier-marseille.fr/demander-estimation-marseille.html"
+          >
+            Faire analyser mon bien
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <section id="welcome" class="card" style="margin-top:20px">
+    Recherchez une adresse pour afficher les ventes et construire
+    vos propres comparables.
+  </section>
+
+</main>
+
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script>
+"use strict";
+
+const input = document.getElementById("addressInput");
+const suggestions = document.getElementById("suggestions");
+const resultSection = document.getElementById("resultSection");
+const welcome = document.getElementById("welcome");
+const salesList = document.getElementById("salesList");
+
+const filters = [
+  "typeFilter",
+  "roomsFilter",
+  "surfaceMin",
+  "surfaceMax"
+].map(id => document.getElementById(id));
+
+let map = null;
+let selectedMarker = null;
+let saleLayer = null;
+let currentAddress = null;
+let currentSales = [];
+let openApi = null;
+let searchTimer = null;
+
+function first(obj, names){
+  for(const name of names){
+    const value = obj?.[name];
+
+    if(value !== undefined && value !== null && value !== ""){
+      return value;
+    }
+  }
+
+  return null;
+}
+
+function numberValue(value){
+  if(value === null || value === undefined || value === ""){
+    return null;
+  }
+
+  const n = Number(
+    String(value)
+      .replace(/\s/g, "")
+      .replace(",", ".")
+  );
+
+  return Number.isFinite(n) ? n : null;
+}
+
+function unwrap(item){
+  if(item && item.properties){
+    return {
+      ...item.properties,
+      _geometry:item.geometry || null
+    };
+  }
+
+  return item || {};
+}
+
+function arrayFrom(payload){
+  if(Array.isArray(payload)){
+    return payload;
+  }
+
+  for(const key of [
+    "results",
+    "items",
+    "addresses",
+    "rows",
+    "features",
+    "data"
+  ]){
+    if(Array.isArray(payload?.[key])){
+      return payload[key];
+    }
+  }
+
+  return [];
+}
+
+function normaliseAddress(raw){
+  const p = unwrap(raw);
+
+  const geometryCoordinates =
+    p._geometry?.coordinates || [];
+
+  return {
+    raw:p,
+
+    label:
+      first(p, [
+        "label",
+        "adresse",
+        "address",
+        "name"
+      ])
+      || "Adresse",
+
+    number:
+      first(p, [
+        "housenumber",
+        "numero",
+        "number"
+      ]),
+
+    street:
+      first(p, [
+        "street",
+        "voie",
+        "nom_voie",
+        "adresse_nom_voie"
+      ]),
+
+    code:
+      first(p, [
+        "code_insee",
+        "citycode",
+        "code_commune",
+        "code"
+      ]),
+
+    postcode:
+      first(p, [
+        "postcode",
+        "code_postal"
+      ]),
+
+    lon:
+      numberValue(
+        first(p, [
+          "lon",
+          "lng",
+          "longitude"
+        ])
+        ?? geometryCoordinates[0]
+      ),
+
+    lat:
+      numberValue(
+        first(p, [
+          "lat",
+          "latitude"
+        ])
+        ?? geometryCoordinates[1]
+      )
+  };
+}
+
+function normaliseSale(raw){
+  const r = unwrap(raw);
+
+  return {
+    raw:r,
+
+    type:
+      first(r, [
+        "type_local",
+        "type",
+        "local_type"
+      ]),
+
+    rooms:
+      numberValue(
+        first(r, [
+          "nombre_pieces_principales",
+          "nombre_pieces",
+          "pieces",
+          "nb_pieces"
+        ])
+      ),
+
+    surface:
+      numberValue(
+        first(r, [
+          "surface_reelle_bati",
+          "surface_bati",
+          "surface"
+        ])
+      ),
+
+    priceM2:
+      numberValue(
+        first(r, [
+          "prix_m2",
+          "prix_m2_bati",
+          "simple_prix_m2",
+          "price_m2"
+        ])
+      ),
+
+    value:
+      numberValue(
+        first(r, [
+          "valeur_fonciere",
+          "valeur",
+          "price"
+        ])
+      ),
+
+    date:
+      first(r, [
+        "date_mutation_iso",
+        "date_mutation",
+        "date",
+        "mutation_date"
+      ]),
+
+    year:
+      numberValue(
+        first(r, [
+          "annee",
+          "year"
+        ])
+      ),
+
+    number:
+      first(r, [
+        "numero_voie",
+        "no_voie",
+        "numero",
+        "adresse_numero",
+        "housenumber"
+      ]),
+
+    street:
+      first(r, [
+        "voie",
+        "adresse_nom_voie",
+        "street"
+      ]),
+
+    lon:
+      numberValue(
+        first(r, [
+          "lon",
+          "longitude",
+          "lng"
+        ])
+      ),
+
+    lat:
+      numberValue(
+        first(r, [
+          "lat",
+          "latitude"
+        ])
+      ),
+
+    mutationId:
+      first(r, [
+        "id_mutation",
+        "mutation_id",
+        "id"
+      ])
+  };
+}
+
+async function fetchJson(url){
+  const response = await fetch(url);
+
+  if(!response.ok){
+    throw new Error(
+      "HTTP " + response.status
+    );
+  }
+
+  return response.json();
+}
+
+const MARSEILLE_CODES = [
+  "13201","13202","13203","13204",
+  "13205","13206","13207","13208",
+  "13209","13210","13211","13212",
+  "13213","13214","13215","13216"
+];
+
+let banIndexCache = null;
+
+function slug(value){
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function canonicalStreet(value){
+  return String(value || "")
+    .replace(/\bbd\b/gi, "boulevard")
+    .replace(/\bav\b/gi, "avenue")
+    .replace(/\bch\b/gi, "chemin");
+}
+
+function bareStreetSlug(value){
+  const types = new Set([
+    "rue","avenue","boulevard","chemin",
+    "traverse","impasse","place","cours",
+    "route","allee","montee","quai",
+    "corniche","square"
+  ]);
+
+  const parts = slug(value).split("-").filter(Boolean);
+
+  while(parts.length && types.has(parts[0])){
+    parts.shift();
+  }
+
+  return parts.join("-");
+}
+
+async function fetchOptional(url){
+  const response = await fetch(url);
+
+  if(response.status === 404){
+    return null;
+  }
+
+  if(!response.ok){
+    throw new Error("HTTP " + response.status);
+  }
+
+  return response.json();
+}
+
+function decodeShard(payload){
+  if(!payload){
+    return [];
+  }
+
+  const fields = payload.fields || payload.f || [];
+  const rows = payload.rows || payload.d || [];
+  const code = payload.code || payload.c || null;
+
+  return rows.map(row => {
+    const obj = {};
+
+    fields.forEach((field, i) => {
+      obj[field] = row[i];
+    });
+
+    if(code){
+      obj.code_insee = code;
+    }
+
+    return obj;
+  });
+}
+
+function parseAddressQuery(query){
+  const q = canonicalStreet(query.trim());
+
+  const match = q.match(
+    /^(\d{1,4}(?:\s*(?:bis|ter|quater))?)\s+(.+)$/i
+  );
+
+  if(match){
+    return {
+      number:match[1].trim().toLowerCase(),
+      street:match[2].trim()
+    };
+  }
+
+  return {
+    number:"",
+    street:q
+  };
+}
+
+async function loadBanIndexes(){
+  if(banIndexCache){
+    return banIndexCache;
+  }
+
+  banIndexCache = await Promise.all(
+    MARSEILLE_CODES.map(async code => ({
+      code,
+      payload:await fetchOptional(
+        "runtime/ban/" + code + "/_index.json"
+      )
+    }))
+  );
+
+  return banIndexCache;
+}
+
+async function searchAddress(query){
+  const parsed = parseAddressQuery(query);
+  const wanted = slug(parsed.street);
+
+  if(wanted.length < 2){
+    return [];
+  }
+
+  const tokens = wanted.split("-").filter(Boolean);
+  const indexes = await loadBanIndexes();
+  const candidates = [];
+
+  for(const entry of indexes){
+    const voies = entry.payload?.voies || {};
+
+    for(const [roadSlug, count] of Object.entries(voies)){
+      let score = 99;
+
+      if(roadSlug === wanted){
+        score = 0;
+      }
+      else if(roadSlug.startsWith(wanted)){
+        score = 1;
+      }
+      else if(tokens.every(t => roadSlug.includes(t))){
+        score = 2;
+      }
+
+      if(score < 99){
+        candidates.push({
+          code:entry.code,
+          roadSlug,
+          count,
+          score
+        });
+      }
+    }
+  }
+
+  candidates.sort(
+    (a,b) =>
+      a.score - b.score
+      || b.count - a.count
+      || a.roadSlug.localeCompare(b.roadSlug)
+  );
+
+  const selected = candidates.slice(0, 12);
+
+  const payloads = await Promise.all(
+    selected.map(item =>
+      fetchOptional(
+        "runtime/ban/"
+        + item.code
+        + "/"
+        + item.roadSlug
+        + ".json"
+      )
+    )
+  );
+
+  const found = [];
+  const seen = new Set();
+
+  for(const payload of payloads){
+    for(const row of decodeShard(payload)){
+      const number = String(row.numero ?? "").trim();
+
+      if(
+        parsed.number
+        && !number.toLowerCase().startsWith(parsed.number)
+      ){
+        continue;
+      }
+
+      const label = [
+        number,
+        row.nom_voie,
+        row.code_postal,
+        row.nom_commune
+      ]
+      .filter(Boolean)
+      .join(" ");
+
+      if(!label || seen.has(label)){
+        continue;
+      }
+
+      seen.add(label);
+
+      found.push({
+        label,
+        numero:number,
+        nom_voie:row.nom_voie,
+        code_postal:row.code_postal,
+        nom_commune:row.nom_commune,
+        code_insee:row.code_insee,
+        lon:row.lon,
+        lat:row.lat,
+        cad_parcelles:row.cad_parcelles
+      });
+
+      if(found.length >= 8){
+        return found;
+      }
+    }
+  }
+
+  return found;
+}
+
+async function loadStreetShard(family, address){
+  const full = slug(address.street);
+  const bare = bareStreetSlug(address.street);
+
+  const candidates =
+    family === "dvf"
+      ? [bare, full]
+      : [full, bare];
+
+  for(const roadSlug of [...new Set(candidates)].filter(Boolean)){
+    const payload = await fetchOptional(
+      "runtime/"
+      + family
+      + "/"
+      + address.code
+      + "/"
+      + roadSlug
+      + ".json"
+    );
+
+    if(payload){
+      return decodeShard(payload);
+    }
+  }
+
+  return [];
+}
+
+function joinKey(row){
+  const clean = value =>
+    String(value ?? "")
+      .trim()
+      .toLowerCase()
+      .replace(",", ".");
+
+  return [
+    row.date_mutation ?? row.date_mutation_iso,
+    row.numero_voie ?? row.no_voie,
+    row.type_local,
+    row.surface_m2 ?? row.surface_reelle_bati_num,
+    row.valeur_eur ?? row.valeur_fonciere_num
+  ]
+  .map(clean)
+  .join("|");
+}
+
+async function loadStaticSales(address){
+  const [estimationRows, dvfRows] = await Promise.all([
+    loadStreetShard("estimation", address),
+    loadStreetShard("dvf", address)
+  ]);
+
+  if(!estimationRows.length){
+    return dvfRows;
+  }
+
+  const dvf = new Map();
+
+  for(const row of dvfRows){
+    const key = joinKey(row);
+
+    if(!dvf.has(key)){
+      dvf.set(key, row);
+    }
+  }
+
+  return estimationRows.map(row => {
+    const source = dvf.get(joinKey(row)) || {};
+
+    return {
+      ...row,
+      nombre_pieces_principales:
+        row.nombre_pieces_principales
+        ?? source.nombre_pieces_principales
+        ?? null,
+      date_mutation_iso:
+        row.date_mutation
+        ?? source.date_mutation_iso
+        ?? source.date_mutation
+        ?? null,
+      source_year:
+        row.annee
+        ?? source.source_year
+        ?? null
+    };
+  });
+}
+
+function initMap(address){
+  if(!map){
+    map = L.map("map", {
+      zoomControl:true
+    });
+
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        maxZoom:19,
+        attribution:"© OpenStreetMap"
+      }
+    ).addTo(map);
+
+    saleLayer = L.layerGroup().addTo(map);
+  }
+
+  saleLayer.clearLayers();
+
+  if(selectedMarker){
+    selectedMarker.remove();
+  }
+
+  if(
+    Number.isFinite(address.lat)
+    && Number.isFinite(address.lon)
+  ){
+    map.setView(
+      [address.lat, address.lon],
+      17
+    );
+
+    selectedMarker = L.marker(
+      [address.lat, address.lon]
+    )
+      .addTo(map)
+      .bindPopup(address.label)
+      .openPopup();
+  }
+}
+
+function median(values){
+  const v = values
+    .filter(Number.isFinite)
+    .sort((a,b) => a-b);
+
+  if(!v.length){
+    return null;
+  }
+
+  const middle = Math.floor(v.length / 2);
+
+  if(v.length % 2){
+    return v[middle];
+  }
+
+  return (v[middle - 1] + v[middle]) / 2;
+}
+
+function filterSales(){
+  const type =
+    document.getElementById("typeFilter").value;
+
+  const rooms =
+    numberValue(
+      document.getElementById("roomsFilter").value
+    );
+
+  const min =
+    numberValue(
+      document.getElementById("surfaceMin").value
+    );
+
+  const max =
+    numberValue(
+      document.getElementById("surfaceMax").value
+    );
+
+  return currentSales.filter(sale => {
+    if(
+      type
+      && String(sale.type || "").toLowerCase()
+         !== type.toLowerCase()
+    ){
+      return false;
+    }
+
+    if(
+      rooms !== null
+      && sale.rooms !== rooms
+    ){
+      return false;
+    }
+
+    if(
+      min !== null
+      && (
+        sale.surface === null
+        || sale.surface < min
+      )
+    ){
+      return false;
+    }
+
+    if(
+      max !== null
+      && (
+        sale.surface === null
+        || sale.surface > max
+      )
+    ){
+      return false;
+    }
+
+    return true;
+  });
+}
+
+function displayDate(sale){
+  if(sale.date){
+    return sale.date;
+  }
+
+  if(sale.year){
+    return String(sale.year);
+  }
+
+  return "Date non disponible";
+}
+
+function euro(value){
+  if(!Number.isFinite(value)){
+    return "—";
+  }
+
+  return Math.round(value)
+    .toLocaleString("fr-FR")
+    + " €";
+}
+
+function render(){
+  const sales = filterSales();
+
+  document.getElementById("salesCount").textContent =
+    sales.length.toLocaleString("fr-FR");
+
+  const m2 = median(
+    sales
+      .map(s => s.priceM2)
+      .filter(Number.isFinite)
+  );
+
+  document.getElementById("medianM2").textContent =
+    m2 === null
+      ? "—"
+      : Math.round(m2).toLocaleString("fr-FR")
+        + " €/m²";
+
+  const years = sales
+    .map(s => {
+      if(s.year){
+        return s.year;
+      }
+
+      if(s.date){
+        const match =
+          String(s.date).match(/\b(20\d{2})\b/);
+
+        return match
+          ? Number(match[1])
+          : null;
+      }
+
+      return null;
+    })
+    .filter(Number.isFinite);
+
+  document.getElementById("latestYear").textContent =
+    years.length
+      ? Math.max(...years)
+      : "—";
+
+  saleLayer.clearLayers();
+
+  for(const sale of sales){
+    if(
+      Number.isFinite(sale.lat)
+      && Number.isFinite(sale.lon)
+    ){
+      L.circleMarker(
+        [sale.lat, sale.lon],
+        {
+          radius:5
+        }
+      )
+      .bindPopup(
+        [
+          sale.type || "Bien",
+          sale.surface
+            ? sale.surface + " m²"
+            : null,
+          sale.priceM2
+            ? Math.round(sale.priceM2)
+              .toLocaleString("fr-FR")
+              + " €/m²"
+            : null
+        ]
+        .filter(Boolean)
+        .join(" · ")
+      )
+      .addTo(saleLayer);
+    }
+  }
+
+  if(!sales.length){
+    salesList.innerHTML =
+      '<div class="empty">'
+      + "Aucune vente ne correspond à ces filtres."
+      + "</div>";
+
+    return;
+  }
+
+  const ordered = [...sales].sort((a,b) => {
+    const da = a.date || String(a.year || "");
+    const db = b.date || String(b.year || "");
+
+    return String(db).localeCompare(String(da));
+  });
+
+  salesList.innerHTML = ordered
+    .slice(0, 40)
+    .map(sale => {
+      const title = [
+        sale.number,
+        sale.street
+      ]
+      .filter(Boolean)
+      .join(" ")
+      || currentAddress?.street
+      || "Transaction";
+
+      const meta = [
+        displayDate(sale),
+        sale.type,
+        sale.rooms
+          ? sale.rooms + " pièce(s)"
+          : null,
+        sale.surface
+          ? sale.surface + " m²"
+          : null,
+        sale.priceM2
+          ? Math.round(sale.priceM2)
+            .toLocaleString("fr-FR")
+            + " €/m²"
+          : null,
+        sale.value
+          ? euro(sale.value)
+          : null
+      ]
+      .filter(Boolean)
+      .join(" · ");
+
+      return `
+        <div class="sale">
+          <div class="sale-title">${escapeHtml(title)}</div>
+          <div class="sale-meta">${escapeHtml(meta)}</div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function escapeHtml(value){
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+async function selectAddress(raw){
+  currentAddress = normaliseAddress(raw);
+
+  suggestions.classList.add("hidden");
+  suggestions.innerHTML = "";
+
+  input.value = currentAddress.label;
+
+  document.getElementById(
+    "selectedAddress"
+  ).textContent = currentAddress.label;
+
+  welcome.classList.add("hidden");
+  resultSection.classList.remove("hidden");
+
+  initMap(currentAddress);
+
+  salesList.innerHTML =
+    '<div class="empty">Chargement des ventes…</div>';
+
+  try{
+    const payload = await loadStaticSales(currentAddress);
+
+    currentSales = payload
+      .map(normaliseSale);
+
+    render();
+  }
+  catch(error){
+    currentSales = [];
+
+    salesList.innerHTML =
+      '<div class="empty">'
+      + "Les ventes n'ont pas pu être chargées : "
+      + escapeHtml(error.message)
+      + "</div>";
+
+    render();
+  }
+
+  setTimeout(
+    () => map?.invalidateSize(),
+    50
+  );
+}
+
+input.addEventListener("input", () => {
+  clearTimeout(searchTimer);
+
+  const query = input.value.trim();
+
+  if(query.length < 3){
+    suggestions.classList.add("hidden");
+    suggestions.innerHTML = "";
+    return;
+  }
+
+  searchTimer = setTimeout(
+    async () => {
+      try{
+        const payload = await searchAddress(query);
+        const rows = arrayFrom(payload);
+
+        suggestions.innerHTML = "";
+
+        if(!rows.length){
+          suggestions.innerHTML =
+            '<div class="suggestion">'
+            + "Aucune adresse trouvée"
+            + "</div>";
+
+          suggestions.classList.remove("hidden");
+          return;
+        }
+
+        rows.forEach(raw => {
+          const address = normaliseAddress(raw);
+
+          const div = document.createElement("div");
+          div.className = "suggestion";
+          div.textContent = address.label;
+
+          div.addEventListener(
+            "click",
+            () => selectAddress(raw)
+          );
+
+          suggestions.appendChild(div);
+        });
+
+        suggestions.classList.remove("hidden");
+      }
+      catch(error){
+        suggestions.innerHTML =
+          '<div class="suggestion">'
+          + "Recherche indisponible"
+          + "</div>";
+
+        suggestions.classList.remove("hidden");
+      }
+    },
+    180
+  );
+});
+
+filters.forEach(
+  element => element.addEventListener(
+    "input",
+    render
+  )
+);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"v":2,"code":"13207","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["12","rue scudery","2021-11-26",2021,"Maison",60.0,340000.0,5666.666666666667,"A","13207|829|C|40"],["12","rue scudery","2024-04-09",2024,"Maison",60.0,720000.0,12000.0,"A","13207|829|C|40"]]}

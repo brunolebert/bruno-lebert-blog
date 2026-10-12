@@ -1,0 +1,1 @@
+{"v":2,"code":"13207","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["5","rue du mouredu","2023-01-25",2023,"Maison",40.0,375550.0,9388.75,"A","13207|830|B|45"],["4","rue du mouredu","2024-07-09",2024,"Maison",20.0,80000.0,4000.0,"A","13207|830|B|43"]]}
