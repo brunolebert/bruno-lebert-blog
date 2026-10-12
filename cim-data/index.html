@@ -600,6 +600,7 @@ function normaliseSale(raw){
     surface:
       numberValue(
         first(r, [
+          "surface_m2",
           "surface_reelle_bati",
           "surface_bati",
           "surface"
@@ -619,6 +620,7 @@ function normaliseSale(raw){
     value:
       numberValue(
         first(r, [
+          "valeur_eur",
           "valeur_fonciere",
           "valeur",
           "price"
@@ -636,6 +638,7 @@ function normaliseSale(raw){
     year:
       numberValue(
         first(r, [
+          "source_year",
           "annee",
           "year"
         ])
@@ -1012,6 +1015,14 @@ async function loadStaticSales(address){
 }
 
 function initMap(address){
+  if(typeof L === "undefined"){
+    const node = document.getElementById("map");
+    if(node) node.setAttribute(
+      "aria-label",
+      "Fond de carte indisponible ; les ventes restent consultables."
+    );
+    return;
+  }
   if(!map){
     map = L.map("map", {
       zoomControl:true
@@ -1193,6 +1204,7 @@ function render(){
       ? Math.max(...years)
       : "—";
 
+  if(!saleLayer || typeof L === "undefined") return;
   saleLayer.clearLayers();
 
   for(const sale of sales){
