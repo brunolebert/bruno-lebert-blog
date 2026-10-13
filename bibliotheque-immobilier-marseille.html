@@ -61,19 +61,20 @@
     }
 
     .container {
-      max-width: 1040px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 0 20px 110px;
+      padding: 0 24px 120px;
     }
 
     .hero {
+      position: relative;
+      overflow: hidden;
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.10), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 24%),
-        linear-gradient(180deg, var(--hero), var(--hero-soft));
+        radial-gradient(circle at 12% 10%, rgba(255,255,255,0.10), transparent 28%),
+        linear-gradient(135deg, var(--hero), var(--hero-soft));
       color: #fff;
-      padding: 40px 0 44px;
-      margin-bottom: 26px;
+      padding: 64px 0 72px;
+      margin-bottom: 56px;
     }
 
     .hero-top {
@@ -109,16 +110,19 @@
     }
 
     h1 {
-      font-size: clamp(34px, 5vw, 50px);
-      line-height: 1.08;
-      margin: 0 0 18px;
+      max-width: 900px;
+      font-size: clamp(44px, 6vw, 76px);
+      line-height: .98;
+      letter-spacing: -.035em;
+      margin: 0 0 24px;
     }
 
     .intro {
-      font-size: 21px;
-      color: rgba(255,255,255,0.82);
+      font-size: clamp(19px, 2vw, 23px);
+      line-height: 1.55;
+      color: rgba(255,255,255,0.80);
       margin: 0;
-      max-width: 920px;
+      max-width: 760px;
     }
 
     .hero-nav {
@@ -139,12 +143,13 @@
     }
 
     .section-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 24px;
-      margin-bottom: 22px;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+      max-width: 920px;
+      margin: 0 auto 84px;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .section-label {
@@ -157,9 +162,11 @@
     }
 
     h2 {
-      font-size: 28px;
-      line-height: 1.2;
-      margin: 0 0 14px;
+      max-width: 820px;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: -.025em;
+      margin: 0 0 18px;
     }
 
     p {
@@ -176,17 +183,19 @@
     .summary-grid,
     .quick-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-top: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 32px;
+      margin-top: 32px;
+      border-top: 1px solid var(--line);
     }
 
     .summary-item,
     .quick-item {
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 18px;
-      background: #fff;
+      padding: 26px 0 28px;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
     }
 
     .summary-item h3,
@@ -205,15 +214,17 @@
 
     .article-list {
       display: grid;
-      gap: 14px;
-      margin-top: 16px;
+      gap: 0;
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
     }
 
     .article-item {
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 18px;
-      background: #fff;
+      padding: 26px 0 30px;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
     }
 
     .article-item h3 {
@@ -230,18 +241,19 @@
 
     .button {
       display: inline-block;
-      border: 1px solid #cfd9e4;
-      border-radius: 999px;
-      padding: 12px 18px;
+      border: 0;
+      border-bottom: 1px solid #9aa8b8;
+      border-radius: 0;
+      padding: 2px 0 4px;
       text-decoration: none;
       color: var(--text);
-      font-weight: 700;
-      background: #ffffff;
+      font-weight: 750;
+      background: transparent;
       font-size: 14px;
     }
 
     .button:hover {
-      background: #f8fbfd;
+      border-bottom-color: var(--text);
     }
 
     .article-figure {
@@ -421,10 +433,11 @@
     }
 
     @media (max-width: 700px) {
-      .container { padding: 0 16px 110px; }
-      h1 { font-size: 34px; }
-      .intro { font-size: 20px; }
-      h2 { font-size: 24px; }
+      .container { padding: 0 18px 110px; }
+      .hero { padding: 48px 0 54px; margin-bottom: 42px; }
+      h1 { font-size: clamp(38px, 12vw, 54px); }
+      .intro { font-size: 18px; }
+      h2 { font-size: 30px; }
       .summary-item h3,
       .quick-item h3,
       .article-item h3 { font-size: 18px; }
@@ -469,61 +482,15 @@
 
       </div>
 
-    <div class="section-card searchable-section">
-      <div class="section-label">Mode d’emploi</div><h2>Choisir sans tout parcourir</h2><p class="section-intro">Vous n’avez pas besoin de tout lire. Commencez par la famille qui correspond à votre situation : estimation, prix, vente, achat, bailleur, DPE, quartier, rue ou candidature. Pour une situation concrète, <a href="contact-immobilier-marseille.html">la page contact</a> reste la porte humaine. Pour une estimation, <a href="demander-estimation-marseille.html">la page demander-estimation</a> permet d’expliquer le bien. Pour retrouver une adresse ou un secteur, <a href="atlas-prix-immobilier-rues-quartiers-marseille-provence.html">l’atlas</a> et <a href="index-rues-voies-secteurs-marseille-provence.html">l’index des rues</a> servent de repères, sans remplacer la lecture du bien réel.</p>
-    </div>
-      <div class="section-card searchable-section" id="vous-venez-pour">
-        <div class="section-label">Vous venez pour</div><h2>Choisir rapidement la bonne porte</h2>
-        <div class="quick-grid">
-          <div class="quick-item searchable-item" data-search="estimer vendre prix estimation adresse calendrier"><h3>Estimer ou vendre</h3><p>Faire relire un prix, une adresse, un calendrier ou une estimation avant de vendre.</p><a class="button" href="demander-estimation-marseille.html">Faire relire mon sujet</a></div>
-          <div class="quick-item searchable-item" data-search="prix m2 arrondissement rues atlas valeur adresse"><h3>Comprendre les prix</h3><p>Commencer par les prix par arrondissement, puis descendre vers les rues seulement si nécessaire.</p><a class="button" href="prix-m2-marseille-par-arrondissement.html">Voir les prix par arrondissement</a></div>
-          <div class="quick-item searchable-item" data-search="acheter relire annonce copropriete dpe offre"><h3>Acheter</h3><p>Relire une annonce, un prix, une copropriété ou un DPE avant de faire une offre.</p><a class="button" href="acheter-marseille-relire-bien-avant-decider.html">Relire avant d’acheter</a></div>
-          <div class="quick-item searchable-item" data-search="bailleur location gestion dpe louer arbitrer"><h3>Louer ou gérer</h3><p>Clarifier loyer, DPE, dossier locataire, travaux ou arbitrage vendre / louer.</p><a class="button" href="location-gestion-bailleur-marseille-provence.html">Voir le parcours bailleur</a></div>
-          <div class="quick-item searchable-item" data-search="dpe travaux diagnostics copropriete renovation"><h3>DPE, travaux ou copropriété</h3><p>Lire les diagnostics et les travaux selon le projet : vendre, acheter, louer ou rénover.</p><a class="button" href="dpe-marseille-comprendre-acheter-vendre.html">Comprendre un DPE</a></div>
-          <div class="quick-item searchable-item" data-search="conseiller immobilier cadre travail candidature recrutement statut"><h3>Conseiller immobilier</h3><p>Comparer un cadre de travail ou comprendre les statuts sans basculer trop vite vers une candidature.</p><a class="button" href="conseiller-immobilier-comparer-son-cadre-de-travail.html">Comparer mon cadre</a></div>
-        </div>
-      </div>
-      <div class="summary-grid">
-        <div class="summary-item"><h3>Estimation, valeur et prix</h3><p>Demander une estimation, lire un avis de valeur, comprendre le prix au m² et les logiques de positionnement.</p><a class="button" href="#estimation">Aller à la section Estimation</a></div>
-        <div class="summary-item"><h3>Rues, quartiers et micro-secteurs</h3><p>Accéder directement aux lectures locales sur Marseille, les rues, les quartiers et les micro-secteurs.</p><a class="button" href="#rues-quartiers">Aller à la section Rues et quartiers</a></div>
-        <div class="summary-item"><h3>Vente, achat et cadrage</h3><p>Clarifier une vente, relire un achat, comprendre l’ordre des décisions et des interlocuteurs.</p><a class="button" href="#vente">Aller à la section Vente</a></div>
-        <div class="summary-item"><h3>Location, gestion locative et DPE</h3><p>Comprendre la mise en location, les risques, les obligations, le DPE et la lecture d’un immeuble.</p><a class="button" href="#location">Aller à la section Location</a></div>
-        <div class="summary-item"><h3>Candidature, recrutement et activité</h3><p>Postuler, envoyer une candidature, comprendre le cadre de travail et les logiques d’activité.</p><a class="button" href="#candidature">Aller à la section Candidature</a></div>
-        <div class="summary-item"><h3>Statuts d’exercice et installation</h3><p>Comparer les statuts, comprendre les cadres d’exercice, le portage, la micro-entreprise et les erreurs de départ.</p><a class="button" href="#statuts-installation">Aller à la section Statuts</a></div>
-      </div>
     </div>
 
     <div id="no-results" class="no-results">Aucun résultat direct pour cette recherche dans la bibliothèque actuelle.</div>
 
-    <div id="commencer-ici" class="section-card searchable-section">
-      <div class="section-label">Commencer ici</div><h2>Choisir le bon point d’entrée</h2><p class="section-intro">Vous n’avez pas besoin de tout lire. La bibliothèque sert d’abord à choisir la bonne porte selon votre situation : estimer, vendre, acheter, comprendre un arrondissement, relire un extérieur, regarder autour de Marseille ou demander un regard professionnel. Une question, une adresse ou un doute peuvent suffire à ouvrir le bon parcours.</p>
-      <div class="quick-grid">
-        <div class="quick-item searchable-item" data-search="premiere lecture estimation avis valeur demander aide situation"><h3>Je veux une première lecture</h3><p>Pour transmettre une situation, faire relire un prix ou demander un avis humain avant décision.</p><a class="button" href="demander-estimation-marseille.html">Expliquer ma situation</a></div>
-        <div class="quick-item searchable-item" data-search="arrondissement marseille 13001 13002 13003 13004 13005 13006 13007 13008 13009 13010 13011 13012 13013 13014 13015 13016"><h3>Je cherche un arrondissement</h3><p>Pour accéder aux pages officielles par arrondissement, du 13001 au 13016.</p><a class="button" href="#estimation">Voir les arrondissements</a></div>
-        <div class="quick-item searchable-item" data-search="terrasse jardin balcon patio exterieur rez de jardin piscine pergola"><h3>J’ai un bien avec extérieur</h3><p>Pour comprendre la valeur d’une terrasse, d’un balcon, d’un patio, d’un jardin ou d’un rez-de-jardin.</p><a class="button" href="estimation-appartement-terrasse-jardin-marseille.html">Lire la page extérieure</a></div>
-        <div class="quick-item searchable-item" data-search="professionnel agence immobiliere audit developpement structuration redressement recrutement communication"><h3>Je suis professionnel de l’immobilier</h3><p>Pour un audit, un regard extérieur, une structuration ou un accompagnement d’agence.</p><a class="button" href="conseil-developpement-agence-immobiliere-marseille.html">Voir l’entrée professionnelle</a></div>
-      </div>
-    </div>
 
-    <div id="parcours-besoins" class="section-card searchable-section">
-      <div class="section-label">Parcours par besoin</div><h2>Retrouver rapidement le bon parcours</h2><p class="section-intro">Les contenus sont nombreux, mais ils répondent à quelques besoins simples : décider, estimer, vendre, acheter, lire un secteur, comprendre un territoire ou structurer une activité.</p>
-      <div class="summary-grid">
-        <div class="summary-item searchable-item" data-search="vendre avant publier annonce sans agence prix decision"><h3>Vendre ou arbitrer</h3><p>Commencer par la vente avant publication, la vente sans agence ou le conseil avant décision.</p><a class="button" href="#vente">Voir le parcours vente</a></div>
-        <div class="summary-item searchable-item" data-search="acheter relire bien avant decision copropriete prix"><h3>Acheter ou relire un bien</h3><p>Relire l’adresse, l’immeuble, le prix demandé et la cohérence du projet.</p><a class="button" href="#achat">Voir le parcours achat</a></div>
-        <div class="summary-item searchable-item" data-search="territoires aubagne gemenos cassis allauch plan de cuques pennes mirabeau"><h3>Territoires au-delà de Marseille</h3><p>Accéder aux communes déjà documentées, notamment Aubagne et Gémenos, avec leurs propres pages d’estimation et de lecture locale.</p><a class="button" href="#estimation">Voir les territoires couverts</a></div>
-        <div class="summary-item searchable-item" data-search="bruno lebert territoires provence solutions conseil reseau"><h3>Comprendre le rôle de Bruno</h3><p>Lire le positionnement : Marseille, Provence, territoires, réseau, cadrage et solutions.</p><a class="button" href="conseil-immobilier-marseille-provence-territoires.html">Lire le positionnement</a></div>
-      </div>
-    </div>
 
-    <div id="acces-rapides" class="section-card searchable-section">
-      <div class="section-label">Accès rapides</div><h2>Faire une demande, transmettre une information ou envoyer une candidature</h2><p class="section-intro">Si vous savez déjà ce que vous cherchez, ces accès permettent d’aller directement à l’essentiel.</p>
-      <div class="quick-grid">
-        <div class="quick-item searchable-item" data-search="estimation avis de valeur demande estimation rendez-vous contact bien marseille"><h3>Demander une estimation</h3><p>Obtenir un avis de valeur, demander une estimation ou faire relire le positionnement d’un bien à Marseille.</p><a class="button" href="demander-estimation-marseille.html">Expliquer ma situation</a></div>
-        <div class="quick-item searchable-item" data-search="rendez-vous contact vente achat location arbitrage projet immobilier marseille"><h3>Prendre rendez-vous</h3><p>Premier échange autour d’une vente, d’un achat, d’une location, d’un arbitrage ou d’un projet immobilier à clarifier.</p><a class="button" href="contact-immobilier-marseille.html">Faire une demande</a></div>
-        <div class="quick-item searchable-item" data-search="candidature postuler recrutement immobilier marseille premier contact"><h3>Envoyer votre candidature</h3><p>Postuler, envoyer votre candidature et prendre un premier contact dans l’immobilier à Marseille.</p><a class="button" href="postuler-immobilier-marseille.html">Envoyer votre candidature</a></div>
-        <div class="quick-item searchable-item" data-search="apporteur affaires apport projet vente appartement maison immeuble marseille"><h3>Signaler un projet immobilier</h3><p>Transmettre une information utile à propos d’un appartement, d’une maison, d’un immeuble ou d’un projet immobilier à Marseille.</p><a class="button" href="apporteur-affaires-immobilier-marseille.html">Transmettre une information</a></div>
-      </div>
-    </div>
+
+
+
 
     <div id="estimation" class="section-card searchable-section">
       <div class="section-label">Estimation</div><h2>Demander une estimation, obtenir un avis de valeur, lire la vraie valeur d’un bien</h2><p class="section-intro">L’estimation n’est pas seulement un chiffre. Elle demande une lecture du bien, de l’immeuble, du secteur, du tempo, de la rue et de la cohérence réelle du prix dans le marché marseillais.</p>
