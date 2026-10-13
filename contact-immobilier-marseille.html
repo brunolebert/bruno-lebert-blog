@@ -35,15 +35,20 @@
   </script>
   <style>
     body { margin: 0; font-family: Arial, sans-serif; background: #f7f5f2; color: #0f172a; line-height: 1.6; }
-    .container { max-width: 920px; margin: 0 auto; padding: 32px 20px 80px; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px 110px; }
+    .hero { position:relative; overflow:hidden; background:radial-gradient(circle at 82% 12%,rgba(216,180,138,.15),transparent 30%),linear-gradient(135deg,#0b1c2e 0%,#102a44 55%,#193a58 100%); color:#fff; padding:64px 0 70px; margin-bottom:54px; }
+    .hero .container { padding-top:0; padding-bottom:0; }
+    .hero .intro { color:rgba(255,255,255,.82); max-width:780px; margin-bottom:0; }
+    .hero .page-tag { color:rgba(255,255,255,.82); border-color:rgba(255,255,255,.16); background:rgba(255,255,255,.08); }
+    .hero .back-link { background:rgba(255,255,255,.96); color:#142235; padding:11px 16px; border-radius:999px; text-decoration:none; }
     .back-link { display: inline-block; margin-bottom: 24px; color: #475569; text-decoration: none; font-size: 15px; }
     .back-link:hover { text-decoration: underline; }
     .page-tag { display: inline-block; background: #e9edf3; color: #475569; font-size: 13px; font-weight: bold; letter-spacing: 0.04em; text-transform: uppercase; padding: 10px 16px; border-radius: 999px; margin-bottom: 18px; }
-    h1 { font-size: 42px; line-height: 1.08; margin: 0 0 18px; }
-    .intro { font-size: 22px; color: #475569; margin-bottom: 34px; }
+    h1 { max-width:900px; font-size:clamp(44px,6vw,68px); line-height:.99; letter-spacing:-.04em; margin:0 0 24px; }
+    .intro { font-size:clamp(19px,2.2vw,24px); line-height:1.5; color:#475569; margin-bottom:34px; }
     .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; align-items: start; }
     .card { background: #ffffff; border: 1px solid #d8dee8; border-radius: 24px; padding: 24px; }
-    h2 { font-size: 26px; line-height: 1.2; margin: 0 0 14px; }
+    h2 { font-size:clamp(28px,3.2vw,38px); line-height:1.08; letter-spacing:-.02em; margin:0 0 16px; }
     h3 { font-size: 20px; line-height: 1.2; margin: 0 0 10px; }
     p { font-size: 18px; margin: 0 0 16px; color: #1e293b; }
     .reassurance-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 0 0 24px; }
@@ -83,17 +88,18 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <a href="index.html" class="back-link">← Retour à l’accueil</a>
+  <header class="hero">
+    <div class="container">
+      <a href="index.html" class="back-link">← Retour à l’accueil</a>
+      <div class="page-tag">Contact / Estimation / Vente / Achat / Location / Candidature</div>
+      <h1>Contacter Bruno Lebert à Marseille</h1>
+      <p class="intro">
+        Vous pouvez utiliser ce contact pour demander une estimation, être rappelé, poser une question ou clarifier un projet immobilier à Marseille. Le premier échange sert à poser le sujet simplement, sans engagement immédiat.
+      </p>
+    </div>
+  </header>
 
-    <div class="page-tag">Contact / Estimation / Vente / Achat / Location / Candidature</div>
-
-    <h1>Contacter Bruno Lebert à Marseille</h1>
-
-    <p class="intro">
-      Vous pouvez utiliser ce contact pour demander une estimation, être rappelé, poser une question ou clarifier un projet immobilier à Marseille. Le premier échange sert à poser le sujet simplement, sans engagement immédiat.
-    </p>
-
+  <main class="container">
     <div class="card" style="margin-bottom:24px;background:#fffaf4;border-color:#eadfce;">
       <h2>Vous pouvez écrire même si le projet n’est pas immédiat</h2>
       <p>Une première lecture peut simplement aider à savoir dans quel ordre réfléchir : vérifier un prix, préparer une vente, relire un achat, comprendre un DPE, arbitrer une mise en location ou poser une question avant de décider.</p>
@@ -261,7 +267,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </main>
 
   <footer>
     <div class="footer-links">
