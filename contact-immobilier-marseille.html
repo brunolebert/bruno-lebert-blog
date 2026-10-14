@@ -181,6 +181,34 @@
       main .bloc-confiance-portrait{grid-template-columns:1fr}
       main .bloc-confiance-portrait img{max-width:220px}
     }
+    /* UX Conversion V2 — Finitions : liens et titres du contenu */
+    main.container a:not(.submit-button):not(.mail-button){
+      color:#173654;
+      text-decoration:underline;
+      text-decoration-color:#b7a28a;
+      text-decoration-thickness:1px;
+      text-underline-offset:3px;
+    }
+    main.container a:not(.submit-button):not(.mail-button):hover{
+      color:#365b78;
+      text-decoration-color:currentColor;
+    }
+    main.container a:focus-visible{
+      outline:3px solid #aa7848;
+      outline-offset:3px;
+    }
+    main.container h2{
+      font-size:clamp(25px,2.7vw,35px);
+      line-height:1.22;
+    }
+    main.container #formulaire h2{
+      font-size:clamp(27px,2.8vw,36px);
+      line-height:1.2;
+    }
+    main.container .bloc-confiance-portrait h2{
+      font-size:clamp(25px,2.7vw,35px);
+      line-height:1.22;
+    }
   </style>
 </head>
 <body>

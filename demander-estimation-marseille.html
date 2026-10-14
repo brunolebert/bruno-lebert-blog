@@ -125,6 +125,27 @@
       main #demande .cta-actions{display:grid}
       main #demande .cta-actions a{text-align:center}
     }
+    /* UX Conversion V2 — Finitions : CTA prioritaire */
+    main.container > .section-card:first-child > .cta-actions .primary-button{
+      background:transparent;
+      color:#142235;
+      border:1px solid #bcae9c;
+      border-radius:5px;
+      font-weight:700;
+    }
+    main.container > .section-card:first-child > .cta-actions .primary-button:hover{
+      background:#f1e9dc;
+    }
+    main #demande .primary-button{
+      font-weight:800;
+      box-shadow:0 8px 20px rgba(20,34,53,.15);
+    }
+    main #demande .primary-button:hover{background:#233a54;border-color:#233a54}
+    main.container > .section-card:first-child > .cta-actions .primary-button:focus-visible,
+    main #demande .primary-button:focus-visible{
+      outline:3px solid #aa7848;
+      outline-offset:3px;
+    }
   </style>
 </head>
 <body>
