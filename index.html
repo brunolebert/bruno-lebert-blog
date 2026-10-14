@@ -144,8 +144,8 @@
     @media(max-width:480px){.header-cim-link{font-size:11px;padding:9px 6px}.header-actions{gap:4px}.site-brand{font-size:13px;max-width:37vw;white-space:normal;line-height:1.1}.cim-entry{padding:42px 0}.cim-entry h2{font-size:49px}.cim-entry-subtitle{font-size:23px}}
     /* Statut temporaire : CIM Data visible, sans interaction vers une route non publique */
     .cim-pending{cursor:default;user-select:text}.header-cim-link.cim-pending{border-bottom:0;color:var(--v4-ink);font-weight:850}.cim-pending-note{font-size:11px;font-weight:500;color:#647386}.hero .cim-pending-hero{background:rgba(247,239,228,.14);border:1px solid rgba(247,239,228,.4);color:#f7efe4;box-shadow:none;transform:none}.cim-pending-section{border-bottom:0;color:#5b6470;font-weight:700;font-size:14px;margin-top:15px;padding:0}.header-cim-link.cim-pending:hover{color:var(--v4-ink);border-color:transparent}@media(max-width:640px){.cim-pending-note{display:none}}
-    /* Recherche desktop compacte — aucune modification mobile */
-    @media (min-width:1281px){
+    /* Recherche compacte : desktop et fenêtres intermédiaires */
+    @media (min-width:769px){
       .site-header-inner{
         position:relative;
       }
@@ -156,9 +156,9 @@
         display:none;
         position:absolute;
         top:calc(100% + 10px);
-        right:24px;
+        right:0;
         left:auto;
-        width:min(420px,calc(100vw - 48px));
+        width:min(420px,calc(100vw - 32px));
         z-index:110;
       }
       .header-search.open{
