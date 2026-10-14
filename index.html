@@ -165,6 +165,15 @@
         display:block;
       }
     }
+    /* Accueil : H1 grand écran plus mesuré, sans impact mobile */
+    @media (min-width:1281px){
+      .hero h1{
+        font-size:clamp(64px,5vw,76px);
+        line-height:.96;
+        letter-spacing:-.052em;
+        max-width:760px;
+      }
+    }
   </style>
 </head>
 <body>
