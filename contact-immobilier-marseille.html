@@ -209,7 +209,12 @@
       font-size:clamp(25px,2.7vw,35px);
       line-height:1.22;
     }
-  </style>
+  
+    /* Lot visuel 01 : typographie et socle marine, sable et ivoire communs. */
+    :root{--bl-ink:#102033;--bl-sand:#efe1cc;--bl-ivory:#faf4ea;--bl-accent:#b78454}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#f7f1e8 0%,#f4efe7 55%,#fbf7f0 100%);color:var(--bl-ink)}
+    a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--bl-accent);outline-offset:3px}
+</style>
 </head>
 <body>
   <header class="hero">
