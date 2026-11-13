@@ -81,8 +81,8 @@ jobs:
               assert forbidden not in source, forbidden
 
           assert "runtime/ban/" in source
-          assert "runtime/dvf/" in source
-          assert "runtime/estimation/" in source
+          assert 'loadStreetShard("dvf", address)' in source
+          assert 'loadStreetShard("estimation", address)' in source
 
           json_count = sum(
               1 for _ in root.rglob("*.json")
