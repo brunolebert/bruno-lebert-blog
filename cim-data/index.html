@@ -1204,8 +1204,8 @@ function render(){
       ? Math.max(...years)
       : "—";
 
-  if(!saleLayer || typeof L === "undefined") return;
-  saleLayer.clearLayers();
+  if(saleLayer && typeof L !== "undefined"){
+    saleLayer.clearLayers();
 
   for(const sale of sales){
     if(
@@ -1235,6 +1235,7 @@ function render(){
       )
       .addTo(saleLayer);
     }
+  }
   }
 
   if(!sales.length){
