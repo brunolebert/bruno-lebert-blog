@@ -1,0 +1,1 @@
+{"v":2,"code":"13209","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["15","avenue de tahure","2021-04-28",2021,"Appartement",55.0,100000.0,1818.1818181818182,"B","13209|853|V|55"],["24","avenue de tahure","2021-06-04",2021,"Maison",149.0,525000.0,3523.489932885906,"A","13209|853|V|104"]]}

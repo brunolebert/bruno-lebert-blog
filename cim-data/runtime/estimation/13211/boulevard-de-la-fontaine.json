@@ -1,0 +1,1 @@
+{"v":2,"code":"13211","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["3","boulevard de la fontaine","2025-05-28",2025,"Maison",51.0,225000.0,4411.764705882353,"B","13211|865|I|104"],["29","boulevard de la fontaine","2025-08-26",2025,"Maison",80.0,247000.0,3087.5,"A","13211|865|I|90"]]}

@@ -1,0 +1,1 @@
+{"v":2,"code":"13001","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","50","Rue du Vallon De Mion","13100","Aix-en-Provence",5.345238,43.486895,"13001000KV0136|13001000KV0137|13001000KV0149"],["","120","Rue du Vallon De Mion","13100","Aix-en-Provence",5.345917,43.487036,"13001000KV0150|13001000KV0158"]]}

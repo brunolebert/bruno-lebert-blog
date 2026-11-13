@@ -1,0 +1,1 @@
+{"v":2,"code":"13211","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["3","rue etienne marchand","2023-08-31",2023,"Appartement",19.0,165000.0,8684.21052631579,"A","13211|867|K|124"],["7","rue etienne marchand","2023-11-13",2023,"Appartement",32.0,40000.0,1250.0,"B","13211|867|K|126"]]}

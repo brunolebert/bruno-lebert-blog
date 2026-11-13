@@ -1,0 +1,1 @@
+{"v":2,"code":"13215","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["5016","boulevard henri fabre","2022-01-10",2022,"Maison",60.0,240000.0,4000.0,"A","13215|903|A|167"],["5","boulevard henri fabre","2022-12-19",2022,"Maison",75.0,335000.0,4466.666666666667,"A","13215|903|A|134"]]}

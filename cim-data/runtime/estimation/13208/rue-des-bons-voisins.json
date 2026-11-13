@@ -1,0 +1,1 @@
+{"v":2,"code":"13208","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["36","rue des bons voisins","2021-01-26",2021,"Maison",40.0,250000.0,6250.0,"A","13208|837|D|458"],["5788","rue des bons voisins","2023-09-06",2023,"Maison",128.0,1450000.0,11328.125,"B","13208|837|D|818"]]}
