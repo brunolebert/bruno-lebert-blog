@@ -1,0 +1,1 @@
+{"v":2,"code":"13209","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["2","rue ramiel","2022-08-05",2022,"Appartement",36.0,106000.0,2944.4444444444443,"A","13209|849|O|128"],["2","rue ramiel","2022-12-23",2022,"Appartement",36.0,118370.0,3288.0555555555557,"A","13209|849|O|128"]]}

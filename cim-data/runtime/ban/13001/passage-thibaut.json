@@ -1,0 +1,1 @@
+{"v":2,"code":"13001","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","13","Passage  Thibaut","13100","Aix-en-Provence",5.442341,43.527897,"13001000AP0096"],["","15","Passage  Thibaut","13100","Aix-en-Provence",5.442261,43.527794,"13001000AP0103|13001000AP0106"]]}

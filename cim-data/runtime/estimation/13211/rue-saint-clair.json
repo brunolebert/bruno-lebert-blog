@@ -1,0 +1,1 @@
+{"v":2,"code":"13211","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["11","rue saint clair","2023-03-16",2023,"Appartement",77.0,250000.0,3246.753246753247,"A","13211|867|M|370"],["4","rue saint clair","2025-02-21",2025,"Maison",120.0,485000.0,4041.6666666666665,"B","13211|867|M|224"]]}

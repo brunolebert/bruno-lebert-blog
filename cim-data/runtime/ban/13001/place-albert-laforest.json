@@ -1,0 +1,1 @@
+{"v":2,"code":"13001","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","125","Place  Albert Laforest","13090","Aix-en-Provence",5.419671,43.522355,"13001000PR0264"],["","135","Place  Albert Laforest","13090","Aix-en-Provence",5.419697,43.522278,"13001000PR0265|13001000PR0266"]]}

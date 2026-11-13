@@ -1,0 +1,1 @@
+{"v":2,"code":"13051","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","4","Rue de Bir Hakeim","13680","Lançon-Provence",5.123098,43.591941,"13051000AC0003|13051000AC0005|13051000AC0004"],["","5","Rue de Bir Hakeim","13680","Lançon-Provence",5.123354,43.591456,"13051000AC0186|13051000AC0009"]]}

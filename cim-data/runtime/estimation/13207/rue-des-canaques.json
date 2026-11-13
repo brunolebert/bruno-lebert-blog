@@ -1,0 +1,1 @@
+{"v":2,"code":"13207","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["3","rue des canaques","2022-11-28",2022,"Maison",41.0,343000.0,8365.853658536585,"B","13207|829|H|11"],["9","rue des canaques","2023-10-18",2023,"Maison",50.0,461000.0,9220.0,"B","13207|829|H|14"]]}

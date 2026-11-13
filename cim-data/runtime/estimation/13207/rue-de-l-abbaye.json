@@ -1,0 +1,1 @@
+{"v":2,"code":"13207","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["1","rue de l abbaye","2024-07-26",2024,"Appartement",51.0,272850.0,5350.0,"A","13207|835|A|146"],["1","rue de l abbaye","2025-06-25",2025,"Appartement",40.0,255000.0,6375.0,"B","13207|835|A|146"]]}
