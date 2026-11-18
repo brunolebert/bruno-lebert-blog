@@ -820,7 +820,7 @@ function parseTerritoryQuery(query, rows){
   let street = slug(parsed.street);
   let postal = "";
 
-  const postalMatch = street.match(/(?:^|-)(\\d{5})$/);
+  const postalMatch = street.match(/(?:^|-)(\d{5})$/);
   if(postalMatch){
     postal = postalMatch[1];
     street = street.slice(0, -postal.length).replace(/-$/, "");
