@@ -961,6 +961,7 @@ async function searchAddress(query){
 }
 
 const dvfStreetIndexCache = new Map();
+const estimationStreetIndexCache = new Map();
 
 function semanticStreetKey(value){
   const omit = new Set([
@@ -1005,6 +1006,27 @@ async function loadStreetShard(family, address){
     if(payload) return decodeShard(payload);
   }
 
+  if(family === "estimation"){
+    // Exported estimation streets use the BAN road label; only an
+    // unambiguous semantic match is safe to load.
+    if(!estimationStreetIndexCache.has(address.code)){
+      const pending = fetchOptional(
+        "runtime/estimation/" + address.code + "/_index.json"
+      ).then(payload => Object.keys(payload?.voies || {}))
+       .catch(error => {
+         estimationStreetIndexCache.delete(address.code);
+         throw error;
+       });
+      estimationStreetIndexCache.set(address.code,pending);
+    }
+    const key = semanticStreetKey(address.street);
+    const available = await estimationStreetIndexCache.get(address.code);
+    const matches = available.filter(name => semanticStreetKey(name) === key);
+    if(matches.length !== 1) return [];
+    return decodeShard(await fetchOptional(
+      "runtime/estimation/" + address.code + "/" + matches[0] + ".json"
+    ));
+  }
   if(family !== "dvf") return [];
 
   // DVF often omits the road type or abbreviates its name.
@@ -1283,6 +1305,13 @@ function renderPriceMap(filteredSales){
     if(sale.type!=="Appartement" && sale.type!=="Maison") continue;
     if(!Number.isFinite(sale.priceM2) || sale.priceM2<=0) continue;
     const number = String(sale.number ?? "").trim().toLowerCase();
+    // New territorial records provide a parcel-corroborated coordinate.
+    // Never replace that with an arbitrary BAN point for the same number.
+    const confirmed = sale.raw?.statut_geographique
+      === "ADRESSE_ET_PARCELLE_CONCORDANTES";
+    if(confirmed && Number.isFinite(sale.lat) && Number.isFinite(sale.lon)){
+      points.set(number,{lat:sale.lat,lon:sale.lon});
+    }
     if(!points.has(number)) continue;
     if(!grouped.has(number)) grouped.set(number,[]);
     grouped.get(number).push(sale.priceM2);
@@ -1334,9 +1363,9 @@ function render(){
   const sales = filterSales();
   const calculated = currentDataKind === "comparables";
   document.getElementById("salesCountLabel").textContent = calculated
-    ? "comparables calculés retenus" : "lignes DVF retenues (pas des ventes distinctes)";
+    ? "comparables indicatifs retenus" : "lignes DVF retenues (pas des ventes distinctes)";
   document.getElementById("salesHeading").textContent = calculated
-    ? "Comparables calculés à partir des ventes" : "Lignes de transactions DVF";
+    ? "Comparables indicatifs calculés à partir des ventes" : "Lignes de transactions DVF";
   document.getElementById("medianM2Label").textContent = calculated
     ? "médiane €/m² des comparables calculés" : "médiane €/m² indisponible sur ces lignes DVF";
 
