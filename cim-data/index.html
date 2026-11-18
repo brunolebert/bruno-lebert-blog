@@ -115,6 +115,17 @@ h2{
   padding:18px;
 }
 
+.map-legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px 13px;
+  margin-top:10px;
+  font-size:12px;
+  color:#425161;
+}
+.map-legend span{display:inline-flex;align-items:center;gap:5px}
+.map-legend i{display:inline-block;width:11px;height:11px;border-radius:50%;border:1px solid #fff;box-shadow:0 0 0 1px #c6ced7}
+.map-legend-note{font-size:12px;color:#56606b;margin-top:8px;line-height:1.4}
 #map{
   height:440px;
   border-radius:12px;
@@ -298,6 +309,8 @@ input[type="number"]{
       <div>
         <div class="card">
           <div id="map"></div>
+          <div id="mapLegend" class="map-legend" aria-label="Légende des prix"></div>
+          <div id="mapLegendNote" class="map-legend-note" aria-live="polite">Sélectionnez une adresse pour consulter les prix géolocalisés disponibles.</div>
         </div>
 
         <div class="card" style="margin-top:18px">
@@ -446,6 +459,7 @@ let selectedMarker = null;
 let saleLayer = null;
 let currentAddress = null;
 let currentSales = [];
+let currentBanRows = [];
 let currentDataKind = "dvf";
 let openApi = null;
 let searchTimer = null;
@@ -1028,13 +1042,14 @@ function joinKey(row){
 }
 
 async function loadStaticSales(address){
-  const [estimationRows, dvfRows] = await Promise.all([
+  const [estimationRows, dvfRows, banRows] = await Promise.all([
     loadStreetShard("estimation", address),
-    loadStreetShard("dvf", address)
+    loadStreetShard("dvf", address),
+    loadStreetShard("ban", address)
   ]);
 
   if(!estimationRows.length){
-    return {rows:dvfRows, kind:"dvf"};
+    return {rows:dvfRows, banRows, kind:"dvf"};
   }
 
   const dvf = new Map();
@@ -1067,7 +1082,7 @@ async function loadStaticSales(address){
         ?? null
     };
   });
-  return {rows:enriched, kind:"comparables"};
+  return {rows:enriched, banRows, kind:"comparables"};
 }
 
 function initMap(address){
@@ -1218,6 +1233,103 @@ function euro(value){
     + " €";
 }
 
+// Map prices are calculated only from already qualified comparable records.
+// DVF raw rows can represent multiple lots sharing one sale value.
+function quantile(values, fraction){
+  const sorted = values.filter(Number.isFinite).sort((a,b)=>a-b);
+  if(!sorted.length) return null;
+  const position = (sorted.length-1)*fraction;
+  const lower = Math.floor(position);
+  const upper = Math.ceil(position);
+  return sorted[lower]+(sorted[upper]-sorted[lower])*(position-lower);
+}
+
+function renderPriceMap(filteredSales){
+  const legend = document.getElementById("mapLegend");
+  const note = document.getElementById("mapLegendNote");
+  if(saleLayer) saleLayer.clearLayers();
+  legend.innerHTML = "";
+
+  if(currentDataKind !== "comparables"){
+    note.textContent = "Prix géolocalisés indisponibles ici : seules les lignes DVF brutes sont disponibles, sans calcul fiable du prix au m².";
+    return;
+  }
+
+  const prices = filteredSales
+    .filter(s=>s.type==="Appartement" || s.type==="Maison")
+    .map(s=>s.priceM2)
+    .filter(v=>Number.isFinite(v) && v>0);
+  if(prices.length<4){
+    note.textContent = "Échantillon insuffisant pour classer les prix de cette voie (moins de 4 comparables exploitables).";
+    return;
+  }
+
+  const q1=quantile(prices,.25);
+  const med=quantile(prices,.5);
+  const q3=quantile(prices,.75);
+  const points = new Map();
+
+  for(const address of currentBanRows){
+    const number = String(address.numero ?? "").trim().toLowerCase();
+    const lat = numberValue(address.lat);
+    const lon = numberValue(address.lon);
+    if(number && Number.isFinite(lat) && Number.isFinite(lon) && !points.has(number)){
+      points.set(number,{lat,lon});
+    }
+  }
+
+  const grouped = new Map();
+  for(const sale of filteredSales){
+    if(sale.type!=="Appartement" && sale.type!=="Maison") continue;
+    if(!Number.isFinite(sale.priceM2) || sale.priceM2<=0) continue;
+    const number = String(sale.number ?? "").trim().toLowerCase();
+    if(!points.has(number)) continue;
+    if(!grouped.has(number)) grouped.set(number,[]);
+    grouped.get(number).push(sale.priceM2);
+  }
+
+  const color = value => value<q1 ? "#377eb8"
+    : value<med ? "#55a868"
+    : value<=q3 ? "#e39c37" : "#c44e52";
+  let displayed=0;
+  for(const [number,values] of grouped){
+    const point=points.get(number);
+    const price=median(values);
+    if(!Number.isFinite(price)) continue;
+    const shade=color(price);
+    if(saleLayer && typeof L!=="undefined"){
+      const displayNumber = escapeHtml(number);
+      const detail = escapeHtml(Math.round(price).toLocaleString("fr-FR"));
+      L.circleMarker([point.lat,point.lon],{
+        radius:7,color:"#fff",weight:2,fillColor:shade,fillOpacity:.9
+      }).bindPopup(
+        "<strong>"+displayNumber+" "+escapeHtml(currentAddress.street)+"</strong>"
+        +"<div>"+detail+" €/m² · médiane de "+values.length+" comparable(s)</div>"
+        +"<small>Prix relatif à la voie, non estimation du bien.</small>"
+      ).addTo(saleLayer);
+      displayed++;
+    }
+  }
+
+  const fmt = x=>Math.round(x).toLocaleString("fr-FR")+" €/m²";
+  const entries = [
+    ["#377eb8","Sous Q1 ("+fmt(q1)+")"],
+    ["#55a868","Q1 à médiane"],
+    ["#e39c37","Médiane à Q3"],
+    ["#c44e52","Au-dessus Q3 ("+fmt(q3)+")"]
+  ];
+  for(const [shade,label] of entries){
+    const item=document.createElement("span");
+    const dot=document.createElement("i");
+    dot.style.backgroundColor=shade;
+    item.append(dot,document.createTextNode(label));
+    legend.appendChild(item);
+  }
+  note.textContent = displayed
+    ? displayed+" adresse(s) géolocalisée(s) · "+prices.length+" comparables retenus · seuils propres à cette voie. Les couleurs mesurent le niveau de prix, pas la tension du marché."
+    : "Comparables présents, mais aucune correspondance géographique fiable avec les numéros d'adresse BAN.";
+}
+
 function render(){
   const sales = filterSales();
   const calculated = currentDataKind === "comparables";
@@ -1267,7 +1379,9 @@ function render(){
       ? Math.max(...years)
       : "—";
 
-  if(saleLayer && typeof L !== "undefined"){
+  renderPriceMap(sales);
+
+  if(false && saleLayer && typeof L !== "undefined"){
     saleLayer.clearLayers();
 
   for(const sale of sales){
@@ -1395,6 +1509,7 @@ async function selectAddress(raw){
     if(requestId !== addressRequestId) return;
 
     currentDataKind = payload.kind;
+    currentBanRows = payload.banRows;
     currentSales = payload.rows.map(normaliseSale);
 
     render();
@@ -1402,6 +1517,7 @@ async function selectAddress(raw){
   catch(error){
     if(requestId !== addressRequestId) return;
     currentSales = [];
+    currentBanRows = [];
     currentDataKind = "dvf";
     render();
     salesList.innerHTML =
