@@ -265,19 +265,79 @@ input[type="number"]{
     grid-template-columns:1fr;
   }
 }
+/* CIM Data — page d'accueil, progressive enhancement, no invented data */
+header{padding:0 5vw 35px;background:linear-gradient(132deg,#f8fafc 0%,#fff 48%,#edf4f3 100%);overflow:hidden}
+.brandbar{max-width:1280px;margin:auto;display:flex;align-items:center;gap:10px;padding:19px 0;font-size:17px;font-weight:650;letter-spacing:-.03em}
+.brand-mark{display:inline-grid;place-items:center;background:#172b31;color:#fff;border-radius:10px;width:34px;height:34px;font-size:21px}
+.brand-separator{height:19px;border-left:1px solid #cbd5d8;margin-left:8px}
+.brand-caption{color:#62717a;font-size:12px;letter-spacing:.02em;font-weight:500}
+.hero-layout{max-width:1280px;margin:20px auto 0;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:40px;align-items:center}
+.eyebrow,.section-kicker{font-size:11px;letter-spacing:.12em;font-weight:750;text-transform:uppercase;color:#426c60}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#52a88e;margin-right:5px}
+.hero-copy h1{font-size:clamp(36px,5.2vw,68px);letter-spacing:-.065em;line-height:1.06;margin:15px 0 19px;color:#182b30}
+.hero-highlight{color:#29745f}
+.hero-description{font-size:clamp(15px,1.5vw,19px);line-height:1.6;color:#596b70;max-width:620px;margin:0}
+.hero-visual{height:295px;border-radius:23px;background:linear-gradient(135deg,#d9eae5,#c1d5d3);position:relative;overflow:hidden;box-shadow:0 20px 45px rgba(24,54,49,.08);border:1px solid #c0d5ce}
+.visual-grid{position:absolute;inset:-20%;background-image:linear-gradient(90deg,rgba(255,255,255,.55) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.55) 1px,transparent 1px);background-size:38px 38px;transform:rotate(-18deg) scale(1.4)}
+.visual-road{position:absolute;background:rgba(255,255,255,.8);border:1px solid rgba(95,139,132,.15);height:35px;width:135%;left:-15%;transform:rotate(-26deg);top:41%;border-radius:30px}
+.road-two{transform:rotate(45deg);top:45%;left:-8%}
+.visual-point{position:absolute;width:19px;height:19px;background:#28745f;border:4px solid white;border-radius:50%;box-shadow:0 4px 13px #39796c60}
+.point-one{top:19%;left:28%}.point-two{top:49%;left:65%;background:#cf8b45}.point-three{top:69%;left:30%;background:#376d9b}.point-four{top:29%;left:79%}
+.visual-note{position:absolute;bottom:20px;right:20px;left:20px;display:flex;gap:12px;align-items:center;background:#fffefa;padding:13px 15px;border-radius:12px;box-shadow:0 7px 25px #203e371c;font-size:13px;color:#5f6d70}
+.visual-note strong{color:#26383e;font-size:15px}.visual-note-icon{font-size:28px;color:#27836b}
+.search-label{max-width:1280px;margin:30px auto 0;font-size:13px;font-weight:700;color:#1c3638}
+.search-label span{font-size:22px;vertical-align:middle;color:#27836b}
+.search-wrap{max-width:1280px;margin:8px auto 0}
+#addressInput{border:1px solid #bbcdc9;border-radius:13px;padding:19px 22px;font-size:17px;box-shadow:0 6px 28px #1b47431a;outline-offset:3px}
+#addressInput:focus{border-color:#2e816b;outline:2px solid #2e816b33}
+.welcome-home{margin-top:12px}
+.welcome-intro,.discovery-heading{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.welcome-intro h2,.discovery-heading h2{font-size:clamp(25px,3vw,37px);letter-spacing:-.045em;margin:9px 0}
+.welcome-intro p,.discovery-heading p{color:#617078;line-height:1.5;margin:0}
+.intro-arrow{font-size:45px;color:#2d816c}
+.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:25px}
+.feature-card{min-height:285px;border:1px solid #dce4e5;border-radius:18px;background:white;padding:25px;display:flex;flex-direction:column;box-shadow:0 8px 24px #172a3008}
+.feature-primary{background:#183b3a;color:#fff;border-color:#183b3a}
+.feature-index{font-size:11px;font-weight:750;letter-spacing:.1em;color:#43856f}
+.feature-primary .feature-index{color:#b4dccd}
+.feature-symbol{font-size:39px;font-weight:600;color:#33836c;margin-top:15px}.feature-primary .feature-symbol{color:#c0ddbb}
+.feature-symbol-map{font-size:48px}.feature-symbol-chart{font-size:53px;line-height:1}
+.feature-card h3{font-size:21px;letter-spacing:-.03em;margin:11px 0 8px}
+.feature-card p{font-size:14px;line-height:1.55;color:#607077;margin:0 0 17px}
+.feature-primary p{color:#d7e7e2}
+.feature-action{margin-top:auto;text-align:left;display:flex;justify-content:space-between;align-items:center;background:none;border:0;border-top:1px solid #dbe7e5;padding:16px 0 0;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:#277b65}
+.feature-primary .feature-action{color:#e6f1ed;border-top-color:#426764}
+.feature-action:hover{text-decoration:underline}
+.discovery-section{margin:48px 0 0}.roadmap-label,.coming-soon{font-size:11px;white-space:nowrap;color:#647c76;background:#edf3f0;border-radius:999px;padding:7px 10px;font-weight:650}
+.discovery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:21px}
+.discovery-item{background:white;border:1px solid #e0e7e6;border-radius:13px;display:flex;align-items:center;gap:13px;padding:18px}
+.discovery-icon{display:grid;place-items:center;font-size:24px;color:#267960;background:#e9f3ee;border-radius:11px;min-width:46px;height:46px}
+.discovery-item div{display:grid;gap:4px;min-width:0}.discovery-item strong{font-size:14px}.discovery-item small{font-size:12px;color:#6c7c83;line-height:1.4}
+.discovery-item .coming-soon{margin-left:auto}
+.trust-strip{display:flex;gap:17px;justify-content:center;flex-wrap:wrap;border-top:1px solid #dbe4e2;margin-top:35px;padding:23px 0 7px;font-size:11px;color:#60716e}
+@media(max-width:850px){.hero-layout{grid-template-columns:1fr}.hero-visual{height:200px}.feature-grid{grid-template-columns:1fr}.feature-card{min-height:0}.discovery-grid{grid-template-columns:1fr}}
+@media(max-width:520px){header{padding:0 16px 25px}.brand-caption{font-size:11px}.hero-copy h1{font-size:40px}.hero-layout{gap:18px}.hero-visual{height:175px}.visual-note{bottom:10px;left:10px;right:10px}.welcome-intro,.discovery-heading{align-items:flex-start}.intro-arrow{display:none}.roadmap-label{font-size:10px}.discovery-item{padding:12px}.discovery-item .coming-soon{padding:6px}}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>CIM Data — Le bien dans son marché</h1>
-
-  <div class="subtitle">
-    <strong>Prix, ventes et comparables autour d’une adresse.</strong><br>
-    Recherchez une adresse pour comprendre son marché à partir
-    des ventes réalisées et de comparables filtrables.
+  <div class="brandbar"><span class="brand-mark" aria-hidden="true">C</span><span>CIM <strong>Data</strong></span><span class="brand-separator"></span><span class="brand-caption">Observatoire immobilier</span></div>
+  <div class="hero-layout">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Données immobilières géolocalisées</span>
+      <h1>Votre bien.<br><span class="hero-highlight">Son marché, en clair.</span></h1>
+      <p class="hero-description">Découvrez les ventes réalisées, comparez les prix au m² et explorez votre adresse sur une carte. Des données concrètes pour comprendre votre marché immobilier.</p>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="visual-grid"></div>
+      <div class="visual-road road-one"></div><div class="visual-road road-two"></div>
+      <span class="visual-point point-one"></span><span class="visual-point point-two"></span><span class="visual-point point-three"></span><span class="visual-point point-four"></span>
+      <div class="visual-note"><span class="visual-note-icon">⌖</span><span>Comprendre un quartier<br><strong>une adresse à la fois.</strong></span></div>
+    </div>
   </div>
+  <div class="search-label"><span aria-hidden="true">⌕</span> Commencez par votre adresse</div>
 
   <div class="search-wrap">
     <input
@@ -427,9 +487,46 @@ input[type="number"]{
     </div>
   </section>
 
-  <section id="welcome" class="card" style="margin-top:20px">
-    Recherchez une adresse pour afficher les ventes et construire
-    vos propres comparables.
+  <section id="welcome" class="welcome-home" aria-label="Découvrir CIM Data">
+    <div class="welcome-intro">
+      <div><span class="section-kicker">UNE LECTURE IMMOBILIÈRE PLUS CLAIRE</span><h2>Tout commence par une adresse.</h2><p>Retrouvez vos repères immobiliers avant d'aller plus loin dans l'analyse d'un bien.</p></div>
+      <div class="intro-arrow" aria-hidden="true">↘</div>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card feature-primary">
+        <span class="feature-index">01 / LE MARCHÉ RÉALISÉ</span>
+        <div class="feature-symbol" aria-hidden="true">€</div>
+        <h3>Quel est le prix au m² ?</h3>
+        <p>Explorez les transactions signées et les comparables disponibles, sans confondre prix affichés et prix réellement vendus.</p>
+        <button class="feature-action" type="button" data-focus-search>Explorer les ventes <span aria-hidden="true">↗</span></button>
+      </article>
+      <article class="feature-card">
+        <span class="feature-index">02 / SUR LA CARTE</span>
+        <div class="feature-symbol feature-symbol-map" aria-hidden="true">⌖</div>
+        <h3>Où se situent les ventes ?</h3>
+        <p>Visualisez les observations géolocalisées et les écarts de prix dans une voie, lorsque les données sont suffisantes.</p>
+        <button class="feature-action" type="button" data-focus-search>Ouvrir la recherche <span aria-hidden="true">↗</span></button>
+      </article>
+      <article class="feature-card">
+        <span class="feature-index">03 / COMPARER</span>
+        <div class="feature-symbol feature-symbol-chart" aria-hidden="true">≋</div>
+        <h3>Quels biens comparer ?</h3>
+        <p>Affinez les ventes par type de logement, nombre de pièces et surface pour étudier des biens plus proches du vôtre.</p>
+        <button class="feature-action" type="button" data-focus-search>Comparer les ventes <span aria-hidden="true">↗</span></button>
+      </article>
+    </div>
+    <div class="discovery-section">
+      <div class="discovery-heading"><div><span class="section-kicker">LA VISION CIM DATA</span><h2>Bien plus qu'un prix.</h2><p>Un futur dossier de quartier et de bien, à parcourir rubrique par rubrique.</p></div><span class="roadmap-label">En cours de construction</span></div>
+      <div class="discovery-grid">
+        <div class="discovery-item"><span class="discovery-icon">▦</span><div><strong>Cadastre et urbanisme</strong><small>Parcelles, zonages, règles et contraintes</small></div><span class="coming-soon">À venir</span></div>
+        <div class="discovery-item"><span class="discovery-icon">⌂</span><div><strong>Copropriété et syndic</strong><small>Informations disponibles sur l'immeuble</small></div><span class="coming-soon">À venir</span></div>
+        <div class="discovery-item"><span class="discovery-icon">◈</span><div><strong>DPE et énergie</strong><small>Performance énergétique et émissions</small></div><span class="coming-soon">À venir</span></div>
+        <div class="discovery-item"><span class="discovery-icon">≈</span><div><strong>Eau, risques et environnement</strong><small>Inondations, nappes, bruit et pollution</small></div><span class="coming-soon">À venir</span></div>
+        <div class="discovery-item"><span class="discovery-icon">▣</span><div><strong>Écoles et services publics</strong><small>Établissements, mobilité, santé et services</small></div><span class="coming-soon">À venir</span></div>
+        <div class="discovery-item"><span class="discovery-icon">↗</span><div><strong>Évolution et tension du marché</strong><small>Indicateurs distincts des seules couleurs de prix</small></div><span class="coming-soon">À venir</span></div>
+      </div>
+    </div>
+    <div class="trust-strip"><span>◉ Sources publiques et méthodes explicitées</span><span>◉ Ventes signées ≠ annonces</span><span>◉ Données disponibles ≠ estimation personnalisée</span></div>
   </section>
 
 </main>
@@ -442,6 +539,12 @@ input[type="number"]{
 "use strict";
 
 const input = document.getElementById("addressInput");
+document.querySelectorAll("[data-focus-search]").forEach(button => {
+  button.addEventListener("click", () => {
+    input.scrollIntoView({behavior:"smooth",block:"center"});
+    input.focus({preventScroll:true});
+  });
+});
 const suggestions = document.getElementById("suggestions");
 const resultSection = document.getElementById("resultSection");
 const welcome = document.getElementById("welcome");
