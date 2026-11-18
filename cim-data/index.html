@@ -449,6 +449,7 @@ let currentSales = [];
 let currentDataKind = "dvf";
 let openApi = null;
 let searchTimer = null;
+let addressRequestId = 0;
 
 function first(obj, names){
   for(const name of names){
@@ -1113,7 +1114,7 @@ function initMap(address){
       [address.lat, address.lon]
     )
       .addTo(map)
-      .bindPopup(address.label)
+      .bindPopup(escapeHtml(address.label))
       .openPopup();
   }
 }
@@ -1369,6 +1370,7 @@ function escapeHtml(value){
 }
 
 async function selectAddress(raw){
+  const requestId = ++addressRequestId;
   currentAddress = normaliseAddress(raw);
 
   suggestions.classList.add("hidden");
@@ -1390,6 +1392,7 @@ async function selectAddress(raw){
 
   try{
     const payload = await loadStaticSales(currentAddress);
+    if(requestId !== addressRequestId) return;
 
     currentDataKind = payload.kind;
     currentSales = payload.rows.map(normaliseSale);
@@ -1397,16 +1400,15 @@ async function selectAddress(raw){
     render();
   }
   catch(error){
+    if(requestId !== addressRequestId) return;
     currentSales = [];
     currentDataKind = "dvf";
-
+    render();
     salesList.innerHTML =
       '<div class="empty">'
       + "Les données n'ont pas pu être chargées : "
       + escapeHtml(error.message)
       + "</div>";
-
-    render();
   }
 
   setTimeout(
@@ -1430,6 +1432,7 @@ input.addEventListener("input", () => {
     async () => {
       try{
         const payload = await searchAddress(query);
+        if(input.value.trim() !== query) return;
         const rows = arrayFrom(payload);
 
         suggestions.innerHTML = "";
@@ -1462,6 +1465,7 @@ input.addEventListener("input", () => {
         suggestions.classList.remove("hidden");
       }
       catch(error){
+        if(input.value.trim() !== query) return;
         suggestions.innerHTML =
           '<div class="suggestion">'
           + "Recherche indisponible"
