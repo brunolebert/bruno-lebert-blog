@@ -1281,14 +1281,17 @@ function renderPriceMap(filteredSales){
     .filter(s=>s.type==="Appartement" || s.type==="Maison")
     .map(s=>s.priceM2)
     .filter(v=>Number.isFinite(v) && v>0);
-  if(prices.length<4){
-    note.textContent = "Échantillon insuffisant pour classer les prix de cette voie (moins de 4 comparables exploitables).";
+  if(!prices.length){
+    note.textContent = "Aucun prix au m² exploitable pour cette voie.";
     return;
   }
 
-  const q1=quantile(prices,.25);
-  const med=quantile(prices,.5);
-  const q3=quantile(prices,.75);
+  // A small sample can still locate observed sales, but must not
+  // suggest reliable quartiles or relative price rankings.
+  const limitedSample = prices.length<4;
+  const q1=limitedSample ? null : quantile(prices,.25);
+  const med=limitedSample ? null : quantile(prices,.5);
+  const q3=limitedSample ? null : quantile(prices,.75);
   const points = new Map();
 
   for(const address of currentBanRows){
@@ -1317,7 +1320,8 @@ function renderPriceMap(filteredSales){
     grouped.get(number).push(sale.priceM2);
   }
 
-  const color = value => value<q1 ? "#377eb8"
+  const color = value => limitedSample ? "#89939f"
+    : value<q1 ? "#377eb8"
     : value<med ? "#55a868"
     : value<=q3 ? "#e39c37" : "#c44e52";
   let displayed=0;
@@ -1341,12 +1345,14 @@ function renderPriceMap(filteredSales){
   }
 
   const fmt = x=>Math.round(x).toLocaleString("fr-FR")+" €/m²";
-  const entries = [
-    ["#377eb8","Sous Q1 ("+fmt(q1)+")"],
-    ["#55a868","Q1 à médiane"],
-    ["#e39c37","Médiane à Q3"],
-    ["#c44e52","Au-dessus Q3 ("+fmt(q3)+")"]
-  ];
+  const entries = limitedSample
+    ? [["#89939f","Ventes observées · échantillon limité"]]
+    : [
+      ["#377eb8","Sous Q1 ("+fmt(q1)+")"],
+      ["#55a868","Q1 à médiane"],
+      ["#e39c37","Médiane à Q3"],
+      ["#c44e52","Au-dessus Q3 ("+fmt(q3)+")"]
+    ];
   for(const [shade,label] of entries){
     const item=document.createElement("span");
     const dot=document.createElement("i");
@@ -1355,7 +1361,9 @@ function renderPriceMap(filteredSales){
     legend.appendChild(item);
   }
   note.textContent = displayed
-    ? displayed+" adresse(s) géolocalisée(s) · "+prices.length+" comparables retenus · seuils propres à cette voie. Les couleurs mesurent le niveau de prix, pas la tension du marché."
+    ? limitedSample
+      ? displayed+" adresse(s) géolocalisée(s) · seulement "+prices.length+" comparable(s) indicatif(s) : marqueurs neutres, aucun classement statistique."
+      : displayed+" adresse(s) géolocalisée(s) · "+prices.length+" comparables indicatifs retenus · seuils propres à cette voie. Les couleurs mesurent le niveau de prix, pas la tension du marché."
     : "Comparables présents, mais aucune correspondance géographique fiable avec les numéros d'adresse BAN.";
 }
 
