@@ -272,7 +272,7 @@ input[type="number"]{
     <input
       id="addressInput"
       autocomplete="off"
-      placeholder="Rechercher une adresse à Marseille…"
+      placeholder="Rechercher une adresse, une ville ou un code postal…"
     >
     <div id="suggestions" class="hidden"></div>
   </div>
@@ -350,12 +350,12 @@ input[type="number"]{
           <div class="kpis">
             <div class="kpi">
               <strong id="salesCount">—</strong>
-              <span>ventes retenues</span>
+              <span id="salesCountLabel">observations retenues</span>
             </div>
 
             <div class="kpi">
               <strong id="medianM2">—</strong>
-              <span>médiane €/m² disponible</span>
+              <span id="medianM2Label">médiane €/m² des comparables calculés</span>
             </div>
 
             <div class="kpi">
@@ -366,12 +366,13 @@ input[type="number"]{
         </div>
 
         <div class="card" style="margin-top:18px">
-          <h2>Ventes comparables</h2>
+          <h2 id="salesHeading">Transactions disponibles</h2>
 
           <div class="notice">
             Aucun coefficient automatique n'est appliqué.
-            Les filtres servent seulement à isoler des transactions
-            réellement signées présentant des caractéristiques proches.
+            Les lignes DVF peuvent répéter une même mutation (dépendances, plusieurs locaux).
+            Seuls les comparables calculés permettent ici une médiane au m² ;
+            les lignes DVF brutes ne constituent pas chacune une vente distincte.
           </div>
 
           <div id="salesList"></div>
@@ -445,6 +446,7 @@ let selectedMarker = null;
 let saleLayer = null;
 let currentAddress = null;
 let currentSales = [];
+let currentDataKind = "dvf";
 let openApi = null;
 let searchTimer = null;
 
@@ -603,6 +605,7 @@ function normaliseSale(raw){
           "surface_m2",
           "surface_reelle_bati",
           "surface_bati",
+          "surface_reelle_bati_num",
           "surface"
         ])
       ),
@@ -622,6 +625,7 @@ function normaliseSale(raw){
         first(r, [
           "valeur_eur",
           "valeur_fonciere",
+          "valeur_fonciere_num",
           "valeur",
           "price"
         ])
@@ -858,6 +862,7 @@ async function searchAddress(query){
   if(wanted.length < 2) return [];
 
   const tokens = wanted.split("-").filter(Boolean);
+  const semanticWanted = semanticStreetKey(wanted);
   const matches = [];
 
   for(const [code, commune, roadSlug, count] of rows){
@@ -878,6 +883,7 @@ async function searchAddress(query){
     if(roadSlug === wanted) score = 0;
     else if(roadSlug.startsWith(wanted)) score = 1;
     else if(tokens.every(token => roadSlug.includes(token))) score = 2;
+    else if(semanticWanted && semanticStreetKey(roadSlug) === semanticWanted) score = 3;
     if(score !== 99){
       matches.push({code,roadSlug,count,score,commune});
     }
@@ -1027,7 +1033,7 @@ async function loadStaticSales(address){
   ]);
 
   if(!estimationRows.length){
-    return dvfRows;
+    return {rows:dvfRows, kind:"dvf"};
   }
 
   const dvf = new Map();
@@ -1040,7 +1046,7 @@ async function loadStaticSales(address){
     }
   }
 
-  return estimationRows.map(row => {
+  const enriched = estimationRows.map(row => {
     const source = dvf.get(joinKey(row)) || {};
 
     return {
@@ -1060,6 +1066,7 @@ async function loadStaticSales(address){
         ?? null
     };
   });
+  return {rows:enriched, kind:"comparables"};
 }
 
 function initMap(address){
@@ -1212,15 +1219,22 @@ function euro(value){
 
 function render(){
   const sales = filterSales();
+  const calculated = currentDataKind === "comparables";
+  document.getElementById("salesCountLabel").textContent = calculated
+    ? "comparables calculés retenus" : "lignes DVF retenues (pas des ventes distinctes)";
+  document.getElementById("salesHeading").textContent = calculated
+    ? "Comparables calculés à partir des ventes" : "Lignes de transactions DVF";
+  document.getElementById("medianM2Label").textContent = calculated
+    ? "médiane €/m² des comparables calculés" : "médiane €/m² indisponible sur ces lignes DVF";
 
   document.getElementById("salesCount").textContent =
     sales.length.toLocaleString("fr-FR");
 
-  const m2 = median(
+  const m2 = calculated ? median(
     sales
       .map(s => s.priceM2)
       .filter(Number.isFinite)
-  );
+  ) : null;
 
   document.getElementById("medianM2").textContent =
     m2 === null
@@ -1289,7 +1303,7 @@ function render(){
   if(!sales.length){
     salesList.innerHTML =
       '<div class="empty">'
-      + "Aucune vente ne correspond à ces filtres."
+      + "Aucune observation ne correspond à ces filtres."
       + "</div>";
 
     return;
@@ -1377,17 +1391,18 @@ async function selectAddress(raw){
   try{
     const payload = await loadStaticSales(currentAddress);
 
-    currentSales = payload
-      .map(normaliseSale);
+    currentDataKind = payload.kind;
+    currentSales = payload.rows.map(normaliseSale);
 
     render();
   }
   catch(error){
     currentSales = [];
+    currentDataKind = "dvf";
 
     salesList.innerHTML =
       '<div class="empty">'
-      + "Les ventes n'ont pas pu être chargées : "
+      + "Les données n'ont pas pu être chargées : "
       + escapeHtml(error.message)
       + "</div>";
 
