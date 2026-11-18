@@ -1381,40 +1381,6 @@ function render(){
 
   renderPriceMap(sales);
 
-  if(false && saleLayer && typeof L !== "undefined"){
-    saleLayer.clearLayers();
-
-  for(const sale of sales){
-    if(
-      Number.isFinite(sale.lat)
-      && Number.isFinite(sale.lon)
-    ){
-      L.circleMarker(
-        [sale.lat, sale.lon],
-        {
-          radius:5
-        }
-      )
-      .bindPopup(
-        [
-          sale.type || "Bien",
-          sale.surface
-            ? sale.surface + " m²"
-            : null,
-          sale.priceM2
-            ? Math.round(sale.priceM2)
-              .toLocaleString("fr-FR")
-              + " €/m²"
-            : null
-        ]
-        .filter(Boolean)
-        .join(" · ")
-      )
-      .addTo(saleLayer);
-    }
-  }
-  }
-
   if(!sales.length){
     salesList.innerHTML =
       '<div class="empty">'
