@@ -939,32 +939,67 @@ async function searchAddress(query){
   return found;
 }
 
+const dvfStreetIndexCache = new Map();
+
+function semanticStreetKey(value){
+  const omit = new Set([
+    "rue","avenue","boulevard","chemin","traverse","impasse",
+    "place","cours","route","allee","montee","quai","corniche",
+    "square","passage","voie","vc","che","av","bd",
+    "de","du","des","d","la","le","les","l"
+  ]);
+  const aliases = {president:"pdt",st:"saint",ste:"sainte"};
+  return slug(value).split("-")
+    .filter(Boolean)
+    .map(token => aliases[token] || token)
+    .filter(token => !omit.has(token))
+    .join("-");
+}
+
+async function dvfStreetSlugs(code){
+  if(!dvfStreetIndexCache.has(code)){
+    const pending = fetchOptional(
+      "runtime/dvf/" + code + "/_index.json"
+    ).then(payload => Object.keys(payload?.voies || {}))
+     .catch(error => {
+       dvfStreetIndexCache.delete(code);
+       throw error;
+     });
+    dvfStreetIndexCache.set(code,pending);
+  }
+  return dvfStreetIndexCache.get(code);
+}
+
 async function loadStreetShard(family, address){
   const full = slug(address.street);
   const bare = bareStreetSlug(address.street);
-
-  const candidates =
-    family === "dvf"
-      ? [bare, full]
-      : [full, bare];
+  const candidates = family === "dvf"
+    ? [bare,full] : [full,bare];
 
   for(const roadSlug of [...new Set(candidates)].filter(Boolean)){
     const payload = await fetchOptional(
-      "runtime/"
-      + family
-      + "/"
-      + address.code
-      + "/"
-      + roadSlug
-      + ".json"
+      "runtime/" + family + "/" + address.code
+      + "/" + roadSlug + ".json"
     );
-
-    if(payload){
-      return decodeShard(payload);
-    }
+    if(payload) return decodeShard(payload);
   }
 
-  return [];
+  if(family !== "dvf") return [];
+
+  // DVF often omits the road type or abbreviates its name.
+  // Match only one unambiguous street inside the selected INSEE code.
+  const key = semanticStreetKey(address.street);
+  if(!key) return [];
+  const available = await dvfStreetSlugs(address.code);
+  const matches = available.filter(
+    name => semanticStreetKey(name) === key
+  );
+  if(matches.length !== 1) return [];
+
+  const payload = await fetchOptional(
+    "runtime/dvf/" + address.code + "/" + matches[0] + ".json"
+  );
+  return decodeShard(payload);
 }
 
 function joinKey(row){
