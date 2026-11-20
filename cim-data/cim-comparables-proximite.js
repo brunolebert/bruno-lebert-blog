@@ -172,7 +172,8 @@ async function update(){
     return;
   }
   const data=window.CIMData;
-  const address=data?.addresses?.find(a=>String(a.key)===String(selectedKey));
+  const address=window.CIMExternalAddress||
+    data?.addresses?.find(a=>String(a.key)===String(selectedKey));
   if(!address){
     status.textContent="Sélectionne une adresse.";
     return;
@@ -185,6 +186,13 @@ async function update(){
   const enabled=document.getElementById("showSales")?.checked!==false;
   if(!enabled){
     status.textContent="Comparables masqués.";
+    return;
+  }
+  if(window.CIMExternalAddress &&
+     !/^132(0[1-9]|1[0-6])$/.test(String(address.code))){
+    status.textContent="Comparables 50/100 m non encore disponibles hors Marseille.";
+    const oldCount=document.getElementById("visibleCount");
+    if(oldCount)oldCount.textContent="Comparables non disponibles";
     return;
   }
   status.textContent="Recherche dans un rayon de "+radius+" m…";
