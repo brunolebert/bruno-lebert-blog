@@ -231,7 +231,7 @@ async function update(){
       }).addTo(layer);
       g.marker=marker;
       marker.on("click",()=>chooseGroup(g));
-      if(g.items.length>1){
+      if(g.items.length>=1){
         const count=L.marker([g.lat,g.lon],{
           interactive:false,
           icon:L.divIcon({
