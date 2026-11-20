@@ -759,6 +759,10 @@ button:focus-visible,input:focus-visible{
 }
 </style>
 
+
+<style id="cimNoFloatingAddress">
+.address-tooltip,.leaflet-tooltip.address-tooltip{display:none!important}
+</style>
 </head>
 
 <body>
@@ -1242,7 +1246,7 @@ function selectAddress(key, recenter=true){
   const marker = markersByAddress.get(key);
 
   if(marker){
-    marker.openTooltip();
+    /* Informations affichées dans le panneau droit. */
   }
 
   renderDetail();
@@ -2046,5 +2050,6 @@ window.CIMInitialAddressKey=DATA.reference_194.address.key;
 <script src="cim-quartiers-prix.js"></script>
 <script src="cim-adresse-parcelle.js"></script>
 <script src="cim-carte-epuree.js"></script>
+<script src="cim-comparables-proximite.js"></script>
 </body>
 </html>
