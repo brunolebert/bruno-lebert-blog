@@ -1,0 +1,1 @@
+{"v":2,"code":"13207","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["15","rue montplaisir","2021-03-01",2021,"Maison",101.0,506272.0,5012.59405940594,"A","13207|830|L|115"],["9","rue montplaisir","2022-08-09",2022,"Maison",60.0,600000.0,10000.0,"A","13207|830|L|113"]]}
