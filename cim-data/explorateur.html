@@ -767,6 +767,82 @@ button:focus-visible,input:focus-visible{
 <style id="cimNearbyMapClean">
 .map-top,.map-legend{display:none!important}
 </style>
+
+<style id="cimLayoutThreeZones">
+@media(min-width:960px){
+  .workspace{
+    grid-template-columns:250px minmax(0,1fr) 300px!important;
+  }
+  .right{
+    grid-column:auto!important;
+    border-top:0!important;
+    border-left:1px solid var(--line)!important;
+    max-height:none!important;
+  }
+  .left,.right{min-width:0}
+  #map{min-height:0;height:100%}
+}
+@media(min-width:960px) and (max-width:1200px){
+  .workspace{
+    grid-template-columns:225px minmax(0,1fr) 275px!important;
+  }
+}
+#cimNearbyComparables{
+  border:0!important;
+  border-radius:0!important;
+  margin:0!important;
+  padding:14px!important;
+  background:#fff!important;
+}
+#cimNearbyMedian{
+  background:#e8f0ff!important;
+  border:2px solid #0A3A8F!important;
+}
+.cim-fold{
+  margin:0 12px 10px;
+  border:1px solid #dde5ee;
+  border-radius:9px;
+  background:white;
+  overflow:hidden;
+}
+.cim-fold>summary{
+  cursor:pointer;
+  padding:11px;
+  color:#173c6d;
+  font-size:12px;
+  font-weight:750;
+}
+.cim-fold[open]>summary{
+  border-bottom:1px solid #dde5ee;
+}
+.cim-fold>.section{
+  padding:10px;
+  border:0;
+}
+.cim-dossier details{
+  border-bottom:1px solid #e1e7ee;
+}
+.cim-dossier summary{
+  cursor:pointer;
+  padding:13px 15px;
+  font-size:13px;
+  font-weight:750;
+  color:#183c66;
+}
+.cim-dossier .cim-dossier-content{
+  padding:0 15px 13px;
+  font-size:12px;
+  line-height:1.5;
+  color:#56677b;
+}
+#cimSelectedComparable{
+  margin:10px 12px;
+}
+.right-head h2{
+  font-size:17px!important;
+  overflow-wrap:anywhere;
+}
+</style>
 </head>
 
 <body>
@@ -2061,5 +2137,70 @@ window.CIMInitialAddressKey=DATA.reference_194.address.key;
 <script src="cim-adresse-parcelle.js"></script>
 <script src="cim-carte-epuree.js"></script>
 <script src="cim-comparables-proximite.js"></script>
+
+<script id="cimLayoutController">
+(function(){
+"use strict";
+if(window.CIMLayoutThreeZonesReady)return;
+window.CIMLayoutThreeZonesReady=true;
+const left=document.querySelector(".left");
+const right=document.querySelector(".right");
+if(!left||!right)return;
+
+const sections=[...left.children].filter(
+  node=>node.classList?.contains("section")
+);
+const advanced=document.createElement("details");
+advanced.className="cim-fold";
+const summary=document.createElement("summary");
+summary.textContent="Indicateurs et filtres complémentaires";
+advanced.append(summary);
+for(const section of sections)advanced.append(section);
+left.append(advanced);
+
+const dossier=document.createElement("div");
+dossier.className="cim-dossier";
+const entries=[
+  ["Immeuble","Informations de l'immeuble : consulter l'historique disponible ci-dessous. Enrichissement à poursuivre."],
+  ["Cadastre","Parcelles consultables directement sur la carte. Les correspondances adresse/parcelle restent à contrôler pour chaque bien."],
+  ["Syndic et copropriété","Données du syndic et de la copropriété non encore intégrées et certifiées pour cette adresse."],
+  ["DPE","DPE individualisé non encore intégré et certifié pour cette adresse."],
+  ["Urbanisme","PLU et règles d'urbanisme à raccorder à la parcelle et à contrôler."],
+  ["Risques","Risques réglementaires et environnementaux à raccorder et à contrôler à l'adresse."]
+];
+for(const [name,description] of entries){
+  const details=document.createElement("details");
+  const head=document.createElement("summary");
+  head.textContent=name;
+  const body=document.createElement("div");
+  body.className="cim-dossier-content";
+  body.textContent=description;
+  details.append(head,body);
+  dossier.append(details);
+}
+const rightHead=right.querySelector(".right-head");
+if(rightHead)rightHead.insertAdjacentElement("afterend",dossier);
+
+const tabs=right.querySelector(".tabs");
+const detail=right.querySelector("#detail");
+if(tabs&&detail){
+  const history=document.createElement("details");
+  history.className="cim-fold";
+  history.style.margin="10px";
+  const head=document.createElement("summary");
+  head.textContent="Ventes, marché et sources disponibles";
+  history.append(head);
+  tabs.before(history);
+  history.append(tabs,detail);
+}
+
+const nearby=document.getElementById("cimNearbyComparables");
+if(nearby&&nearby.parentElement!==left){
+  left.prepend(nearby);
+}
+window.CIMMap?.invalidateSize();
+})();
+</script>
+
 </body>
 </html>

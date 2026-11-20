@@ -28,7 +28,17 @@ list.style.cssText="display:grid;gap:6px;max-height:340px;overflow-y:auto";
 const note=document.createElement("small");
 note.textContent="Distances approximatives entre coordonnées d'adresse et centroïdes cadastraux. Comparables DVF calculés, pas nécessairement des transactions distinctes.";
 note.style.cssText="display:block;color:#637187;margin-top:9px";
-panel.append(title,controls,status,selected,list,note);
+const medianBox=document.createElement("section");
+medianBox.id="cimNearbyMedian";
+medianBox.style.cssText=[
+  "background:#e8f0ff",
+  "border:2px solid #0A3A8F",
+  "border-radius:11px",
+  "padding:14px 15px",
+  "margin:10px 0 13px",
+  "text-align:center"
+].join(";");
+panel.append(title,controls,status,medianBox,selected,list,note);
 
 function price(v){return Math.round(v).toLocaleString("fr-FR")+" €/m²";}
 function median(values){
@@ -111,6 +121,10 @@ function chooseGroup(group){
   if(!group)return;
   selectedGroup=group.id;
   selected.replaceChildren();
+  const right=document.querySelector(".right");
+  const headNode=right?.querySelector(".right-head");
+  if(headNode&&selected.parentElement!==right)
+    headNode.insertAdjacentElement("afterend",selected);
   const head=text(selected,
     group.items.length+" comparable(s) sur cette position",
     "font-weight:700;margin:8px 0");
@@ -152,6 +166,7 @@ refreshButtons();
 async function update(){
   const serial=++generation;
   clear();
+  medianBox.replaceChildren();
   if(!mountMap()){
     status.textContent="Initialisation de la carte…";
     return;
@@ -212,10 +227,24 @@ async function update(){
     visibleGroups=[...groups.values()];
     status.textContent=matches.length+" comparables · "+groups.size+
       " positions · "+radius+" m";
-    if(matches.length>=5)text(list,"Médiane locale : "+price(med),
-      "font-weight:800;color:#0A3A8F;font-size:16px");
-    else text(list,"Échantillon insuffisant pour une médiane fiable.",
-      "font-weight:700;color:#93521a");
+    medianBox.replaceChildren();
+    text(medianBox,"MÉDIANE LOCALE · RAYON "+radius+" M",
+      "font-size:11px;font-weight:800;letter-spacing:1px;color:#395781");
+    if(matches.length>=5){
+      text(medianBox,price(med),
+        "font-size:30px;font-weight:900;color:#0A3A8F;line-height:1.3;margin:5px 0");
+      text(medianBox,matches.length+" comparables calculés · "+
+        groups.size+" positions cadastrales",
+        "font-size:12px;font-weight:650;color:#334866");
+      text(medianBox,"Indicateur de marché, pas estimation du bien",
+        "font-size:11px;color:#617089;margin-top:7px");
+    }else{
+      text(medianBox,"Données insuffisantes",
+        "font-size:19px;font-weight:800;color:#93521a;margin:6px 0");
+      text(medianBox,matches.length+" comparables · "+
+        groups.size+" positions",
+        "font-size:12px;color:#617089");
+    }
     if(!matches.length)text(list,"Aucun comparable dans ce rayon.");
     circle=L.circle([lat,lon],{
       radius,color:"#0A3A8F",weight:2,fillOpacity:.025,
@@ -254,8 +283,8 @@ async function update(){
 }
 function init(){
   if(!document.getElementById("cimNearbyComparables")){
-    const detail=document.getElementById("detail");
-    if(detail)detail.insertAdjacentElement("beforebegin",panel);
+    const left=document.querySelector(".left");
+    if(left)left.prepend(panel);
   }
   selectedKey=window.CIMInitialAddressKey||
     window.CIMData?.reference_194?.address?.key||selectedKey;
