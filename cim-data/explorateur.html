@@ -763,6 +763,10 @@ button:focus-visible,input:focus-visible{
 <style id="cimNoFloatingAddress">
 .address-tooltip,.leaflet-tooltip.address-tooltip{display:none!important}
 </style>
+
+<style id="cimNearbyMapClean">
+.map-top,.map-legend{display:none!important}
+</style>
 </head>
 
 <body>
@@ -844,11 +848,11 @@ button:focus-visible,input:focus-visible{
 
    <div class="layer-row">
      <input id="showSales" type="checkbox" checked>
-     <div class="layer-label">Adresses avec comparables</div>
+     <div class="layer-label">Afficher les comparables du rayon</div>
    </div>
 
    <div class="layer-note">
-     Un point localise une adresse BAN avec comparable(s). Les transactions DVF doivent être distinguées des comparables.
+     Un point représente une position cadastrale comportant un ou plusieurs comparables du rayon choisi.
    </div>
 
    <div style="height:10px"></div>
@@ -1115,6 +1119,7 @@ L.tileLayer(
 ).addTo(map);
 
 markerLayer = L.layerGroup().addTo(map);
+window.CIMLegacyMarkerLayer=markerLayer;
 
 function installPriceLegend(){
   const control = L.control({position:"topleft"});
@@ -1148,6 +1153,11 @@ installPriceLegend();
 function renderMarkers(){
 
   markerLayer.clearLayers();
+  if(window.CIMNearbyMapActive){
+    document.getElementById("visibleCount").textContent=
+      "Comparables de proximité";
+    return;
+  }
   markersByAddress.clear();
 
   const show = document.getElementById("showSales").checked;
