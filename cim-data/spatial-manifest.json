@@ -1,0 +1,42 @@
+{
+  "base_commit": "54e3ccfe3e9669c882cb10a6bb2b272770b72eff",
+  "components": {
+    "cadastre": {
+      "bytes": 234954010,
+      "classification": "OFFICIAL",
+      "files": 2837,
+      "geometries": "ORIGINAL_GEOJSON",
+      "included_in_local_integration": true,
+      "index_count": 58,
+      "largest_shard_bytes": 267391,
+      "publication_certified": false,
+      "records": 410723,
+      "shard_count": 2779,
+      "source": "LOCAL_SQLITE_TO_V1_TO_V2",
+      "source_freshness": "NOT_VERIFIED",
+      "spatial_selection": "SHARD_BOUNDING_BOX"
+    },
+    "qpv": {
+      "bytes": 9290894,
+      "classification": "OFFICIAL",
+      "files": 55,
+      "geometries": "ORIGINAL_GEOJSON",
+      "included_in_local_integration": true,
+      "index_count": 1,
+      "largest_shard_bytes": 180170,
+      "publication_certified": false,
+      "records": 1584,
+      "shard_count": 54,
+      "source": "LOCAL_SQLITE_TO_V1_TO_V2",
+      "source_freshness": "NOT_VERIFIED",
+      "spatial_selection": "SHARD_BOUNDING_BOX"
+    }
+  },
+  "existing_estimation_files": "PRESERVED_UNMODIFIED",
+  "generated_at_utc": "2026-11-19T10:13:31.211721+00:00",
+  "public_certification": false,
+  "purpose": "ADDITIVE_SPATIAL_EXTENSION_PR4",
+  "schema_version": 1,
+  "source_v2_manifest_sha256": "083a65f4a92e50c8d8d94a829a912b90aa4a0c9e1335ef11cb9751ceb273f53c",
+  "status": "LOCAL_PREPARED_NOT_PUBLISHED"
+}

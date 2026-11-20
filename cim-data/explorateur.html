@@ -1,0 +1,2050 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Boulevard Chave — Explorateur immobilier</title>
+
+<link
+ rel="stylesheet"
+ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<style>
+:root{
+ --navy:#17243a;
+ --blue:#1b63c6;
+ --blue2:#427ecb;
+ --blueSoft:#eaf2fc;
+ --ink:#20252b;
+ --muted:#68727e;
+ --line:#dde2e8;
+ --soft:#f6f7f9;
+ --panel:#fff;
+ --green:#287b58;
+ --orange:#c7791b;
+ --red:#bb3c3c;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+ margin:0;
+ height:100%;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+ color:var(--ink);
+ background:#eef1f4;
+}
+
+button,input,select{
+ font:inherit;
+}
+
+.app{
+ height:100vh;
+ display:grid;
+ grid-template-rows:70px minmax(0,1fr);
+}
+
+.topbar{
+ display:flex;
+ align-items:center;
+ gap:16px;
+ background:white;
+ border-bottom:1px solid var(--line);
+ padding:10px 16px;
+ position:relative;
+ z-index:2000;
+}
+
+.brand{
+ min-width:225px;
+}
+
+.brand-title{
+ font-size:18px;
+ font-weight:850;
+ color:var(--navy);
+}
+
+.brand-sub{
+ font-size:11px;
+ color:var(--muted);
+ margin-top:2px;
+}
+
+.search-wrap{
+ position:relative;
+ flex:1;
+ max-width:750px;
+}
+
+.search{
+ width:100%;
+ height:46px;
+ border:1px solid #afb7c2;
+ border-radius:9px;
+ padding:0 46px 0 15px;
+ background:white;
+ outline:none;
+}
+
+.search:focus{
+ border-color:var(--blue);
+ box-shadow:0 0 0 3px rgba(27,99,198,.10);
+}
+
+.search-button{
+ position:absolute;
+ top:5px;
+ right:5px;
+ height:36px;
+ width:36px;
+ border:0;
+ border-radius:7px;
+ background:var(--blue);
+ color:white;
+ cursor:pointer;
+}
+
+.suggestions{
+ position:absolute;
+ top:50px;
+ left:0;
+ right:0;
+ display:none;
+ max-height:360px;
+ overflow:auto;
+ background:white;
+ border:1px solid var(--line);
+ border-radius:9px;
+ box-shadow:0 10px 35px rgba(0,0,0,.16);
+}
+
+.suggestion{
+ display:block;
+ width:100%;
+ padding:11px 13px;
+ text-align:left;
+ border:0;
+ border-bottom:1px solid #eee;
+ background:white;
+ cursor:pointer;
+}
+
+.suggestion:hover{
+ background:#f5f8fc;
+}
+
+.suggestion strong{
+ display:block;
+}
+
+.suggestion small{
+ display:block;
+ margin-top:3px;
+ color:var(--muted);
+}
+
+.source-chip{
+ margin-left:auto;
+ white-space:nowrap;
+ border:1px solid var(--line);
+ border-radius:999px;
+ padding:7px 10px;
+ font-size:11px;
+ color:var(--muted);
+}
+
+.workspace{
+ min-height:0;
+ display:grid;
+ grid-template-columns:310px minmax(400px,1fr) 405px;
+}
+
+.left{
+ min-height:0;
+ overflow:auto;
+ background:white;
+ border-right:1px solid var(--line);
+}
+
+.right{
+ min-height:0;
+ overflow:auto;
+ background:white;
+ border-left:1px solid var(--line);
+}
+
+.section{
+ padding:14px;
+ border-bottom:1px solid #e9edf1;
+}
+
+.section-title{
+ font-size:11px;
+ font-weight:850;
+ text-transform:uppercase;
+ letter-spacing:.07em;
+ color:#525e6b;
+ margin-bottom:10px;
+}
+
+.kpi-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:7px;
+}
+
+.kpi{
+ border:1px solid var(--line);
+ border-radius:9px;
+ padding:9px;
+ background:var(--soft);
+}
+
+.kpi-value{
+ font-size:18px;
+ line-height:1.1;
+ font-weight:850;
+ color:var(--navy);
+}
+
+.kpi-label{
+ margin-top:4px;
+ font-size:10px;
+ color:var(--muted);
+ line-height:1.25;
+}
+
+.range{
+ margin-top:10px;
+ padding:10px;
+ border-radius:9px;
+ background:var(--blueSoft);
+}
+
+.range-main{
+ font-size:16px;
+ font-weight:850;
+ color:#164b91;
+}
+
+.range-sub{
+ margin-top:4px;
+ font-size:11px;
+ line-height:1.35;
+ color:#536477;
+}
+
+.layer-row{
+ display:flex;
+ align-items:center;
+ gap:9px;
+ margin:8px 0;
+}
+
+.layer-row input{
+ width:17px;
+ height:17px;
+}
+
+.layer-label{
+ font-size:13px;
+ font-weight:650;
+}
+
+.layer-note{
+ margin-left:26px;
+ margin-top:-5px;
+ font-size:10px;
+ color:var(--muted);
+}
+
+.years{
+ display:flex;
+ flex-wrap:wrap;
+ gap:6px;
+}
+
+.year-chip{
+ display:flex;
+ gap:5px;
+ align-items:center;
+ border:1px solid var(--line);
+ padding:6px 8px;
+ border-radius:8px;
+ font-size:12px;
+}
+
+.type-select{
+ width:100%;
+ padding:8px;
+ border:1px solid var(--line);
+ border-radius:8px;
+ background:white;
+}
+
+.chart-row{
+ display:grid;
+ grid-template-columns:38px 1fr 64px;
+ align-items:center;
+ gap:7px;
+ margin:7px 0;
+ font-size:11px;
+}
+
+.chart-track{
+ height:8px;
+ border-radius:999px;
+ background:#e7ebef;
+ overflow:hidden;
+}
+
+.chart-bar{
+ height:100%;
+ background:var(--blue2);
+ border-radius:999px;
+}
+
+.chart-value{
+ text-align:right;
+ font-weight:750;
+}
+
+.iris-row{
+ padding:8px 0;
+ border-top:1px solid #edf0f3;
+}
+
+.iris-name{
+ font-size:12px;
+ font-weight:750;
+}
+
+.iris-meta{
+ font-size:10px;
+ color:var(--muted);
+ margin-top:3px;
+ line-height:1.4;
+}
+
+.map-wrap{
+ min-width:0;
+ position:relative;
+}
+
+#map{
+ width:100%;
+ height:100%;
+ min-height:500px;
+ background:#dfe5e9;
+}
+
+.map-top{
+ position:absolute;
+ z-index:900;
+ top:12px;
+ left:12px;
+ right:12px;
+ pointer-events:none;
+ display:flex;
+ gap:8px;
+ justify-content:space-between;
+}
+
+.map-chip{
+ background:rgba(255,255,255,.95);
+ border:1px solid var(--line);
+ border-radius:8px;
+ padding:8px 10px;
+ box-shadow:0 2px 8px rgba(0,0,0,.08);
+ font-size:11px;
+}
+
+.map-legend{
+ position:absolute;
+ z-index:900;
+ left:12px;
+ bottom:25px;
+ background:rgba(255,255,255,.96);
+ border:1px solid var(--line);
+ border-radius:9px;
+ padding:9px;
+ font-size:10px;
+ box-shadow:0 3px 12px rgba(0,0,0,.10);
+}
+
+.legend-item{
+ display:flex;
+ align-items:center;
+ gap:6px;
+ margin:4px 0;
+}
+
+.legend-dot{
+ width:10px;
+ height:10px;
+ border-radius:50%;
+}
+
+.right-head{
+ padding:15px 16px 12px;
+ border-bottom:1px solid var(--line);
+}
+
+.eyebrow{
+ font-size:10px;
+ color:var(--muted);
+ text-transform:uppercase;
+ letter-spacing:.08em;
+ font-weight:850;
+}
+
+.right h2{
+ margin:4px 0 2px;
+ font-size:21px;
+ color:var(--navy);
+}
+
+.right-sub{
+ color:var(--muted);
+ font-size:12px;
+}
+
+.tabs{
+ display:flex;
+ gap:5px;
+ flex-wrap:wrap;
+ padding:10px 14px;
+ border-bottom:1px solid var(--line);
+}
+
+.tab{
+ border:1px solid var(--line);
+ border-radius:7px;
+ padding:7px 9px;
+ background:white;
+ font-size:11px;
+ font-weight:750;
+ cursor:pointer;
+}
+
+.tab.active{
+ background:var(--blueSoft);
+ border-color:#a8c4eb;
+ color:#144e96;
+}
+
+.detail{
+ padding:14px;
+}
+
+.detail-kpis{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:7px;
+ margin-bottom:12px;
+}
+
+.detail-kpi{
+ border:1px solid var(--line);
+ border-radius:8px;
+ padding:8px;
+}
+
+.detail-kpi strong{
+ display:block;
+ font-size:14px;
+}
+
+.detail-kpi span{
+ display:block;
+ margin-top:3px;
+ font-size:9px;
+ color:var(--muted);
+}
+
+.sale{
+ border:1px solid var(--line);
+ border-radius:10px;
+ padding:11px;
+ margin:9px 0;
+ background:white;
+}
+
+.sale-top{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+}
+
+.sale-price{
+ font-size:17px;
+ font-weight:850;
+ color:var(--navy);
+}
+
+.sale-date{
+ color:var(--muted);
+ font-size:11px;
+}
+
+.sale-ratio{
+ display:inline-block;
+ margin-top:7px;
+ padding:5px 7px;
+ border-radius:6px;
+ background:#edf5ff;
+ color:#164d91;
+ font-size:11px;
+ font-weight:800;
+}
+
+.sale-warning{
+ display:inline-block;
+ margin-top:7px;
+ padding:5px 7px;
+ border-radius:6px;
+ background:#f5f1eb;
+ color:#7d5b26;
+ font-size:10px;
+}
+
+.locals{
+ margin-top:8px;
+ font-size:11px;
+ line-height:1.5;
+}
+
+.parcel{
+ margin-top:8px;
+ font-size:10px;
+ color:var(--muted);
+ word-break:break-word;
+}
+
+.callout{
+ padding:10px;
+ border-left:3px solid var(--blue);
+ background:#f5f8fd;
+ font-size:11px;
+ line-height:1.45;
+ margin:10px 0;
+}
+
+.pending{
+ margin:8px 0;
+ padding:10px;
+ border:1px dashed #bdc5ce;
+ border-radius:9px;
+ color:var(--muted);
+ font-size:11px;
+}
+
+.latest-list{
+ max-height:300px;
+ overflow:auto;
+}
+
+.latest-row{
+ display:grid;
+ grid-template-columns:42px 1fr auto;
+ gap:7px;
+ align-items:center;
+ padding:8px 0;
+ border-top:1px solid #edf0f3;
+ cursor:pointer;
+}
+
+.latest-row:hover{
+ background:#f8fafc;
+}
+
+.latest-number{
+ font-weight:850;
+ color:var(--blue);
+}
+
+.latest-meta{
+ font-size:10px;
+ color:var(--muted);
+}
+
+.latest-value{
+ font-size:11px;
+ font-weight:750;
+}
+
+.reference-badge{
+ display:inline-block;
+ padding:4px 7px;
+ border-radius:999px;
+ background:#fff0f0;
+ color:#a82929;
+ font-size:10px;
+ font-weight:850;
+ margin-left:5px;
+}
+
+.leaflet-tooltip.address-tooltip{
+ background:white;
+ border:1px solid #cad1d9;
+ color:#28323d;
+ font-size:11px;
+ box-shadow:0 2px 8px rgba(0,0,0,.13);
+}
+
+@media(max-width:1150px){
+ .workspace{
+   grid-template-columns:270px minmax(400px,1fr);
+ }
+
+ .right{
+   grid-column:1/-1;
+   border-left:0;
+   border-top:1px solid var(--line);
+   max-height:48vh;
+ }
+
+ #map{
+   min-height:65vh;
+ }
+}
+
+@media(max-width:760px){
+ .app{
+   height:auto;
+   display:block;
+ }
+
+ .topbar{
+   flex-wrap:wrap;
+   height:auto;
+ }
+
+ .brand{
+   width:100%;
+ }
+
+ .source-chip{
+   display:none;
+ }
+
+ .workspace{
+   display:block;
+ }
+
+ .left{
+   border-right:0;
+ }
+
+ #map{
+   height:68vh;
+ }
+
+ .right{
+   max-height:none;
+ }
+
+ .detail-kpis{
+   grid-template-columns:1fr 1fr;
+ }
+}
+</style>
+
+<style>
+:root{--cim-red:#FF3B30;--cim-blue:#007AFF;
+--cim-orange:#FF9500;--cim-navy:#0A3A8F}
+button:focus-visible,input:focus-visible{
+  outline:2px solid var(--cim-blue);outline-offset:2px}
+</style>
+<script src="cim-runtime-adapter.js"></script>
+
+
+<style>
+.cim-price-legend{
+  background:rgba(255,255,255,.97);
+  box-shadow:0 2px 12px #0A3A8F33;
+  border:1px solid #0A3A8F33;
+  border-radius:9px;
+  padding:11px 13px;
+  width:min(325px,60vw);
+  font:12px/1.4 system-ui,sans-serif;
+  color:#142640
+}
+.cim-price-title{font-weight:800;margin-bottom:7px}
+.cim-price-gradient{
+  height:12px;border-radius:8px;
+  background:linear-gradient(to right,#377eb8 0%,
+   #55a868 33%,#e39c37 66%,#c44e52 100%)
+}
+.cim-price-values{
+  display:flex;justify-content:space-between;
+  gap:8px;flex-wrap:wrap;margin-top:7px;
+  font-size:10px;font-weight:700
+}
+.cim-price-explainer{
+  font-size:10px;color:#51647b;margin-top:7px
+}
+</style>
+
+<style>
+.cim-parcel-control{
+  width:min(335px,65vw);background:#fff;
+  padding:11px 13px;border:1px solid #cbd5e1;
+  border-radius:9px;box-shadow:0 3px 12px #14264033;
+  font:12px/1.4 system-ui,sans-serif;color:#172b48
+}
+.cim-parcel-label{font-weight:800;display:flex;align-items:center;gap:7px}
+.cim-parcel-label input{accent-color:#007AFF}
+.cim-parcel-gradient{
+  height:13px;border-radius:5px;margin:9px 0 5px;
+  background:linear-gradient(to right,#208f78,#65bf54,#e9e751,#ffad32,#e64b43)
+}
+.cim-parcel-scale{display:flex;justify-content:space-between;gap:5px;font-size:10px}
+.cim-parcel-status{font-weight:700;margin-top:8px}
+.cim-parcel-note{font-size:10px;color:#536277;margin-top:5px}
+</style>
+
+<style id="cimCarteEpureeStyle">
+/* Les fonctions restent actives : seuls les encarts
+   cartographiques redondants sont masqués. */
+.cim-price-legend,
+.cim-quartier-prices,
+.cim-parcel-control,
+.cim-parcel-navigation {
+  display:none!important;
+}
+.cim-layers-sidebar {
+  margin:12px 0;
+  padding:12px;
+  border:1px solid #d7e0e9;
+  border-radius:9px;
+  background:#f7f9fc;
+  color:#172b48;
+  font:12px/1.45 system-ui,sans-serif;
+}
+.cim-layers-sidebar strong {
+  display:block;
+  margin-bottom:8px;
+  font-size:13px;
+}
+.cim-sidebar-gradient {
+  height:10px;
+  border-radius:6px;
+  background:linear-gradient(
+    90deg,#289782,#77ba6a,#e1d968,#f2aa61,#df766c
+  );
+}
+.cim-sidebar-scale {
+  margin:7px 0 10px;
+  font-size:11px;
+  color:#52637b;
+}
+.cim-sidebar-toggle {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+.cim-sidebar-toggle input {
+  accent-color:#007AFF;
+}
+#cimLayersStatus {
+  display:block;
+  margin-top:8px;
+  color:#53647a;
+}
+</style>
+
+</head>
+
+<body>
+
+<div role="status" style="background:#0A3A8F;color:white;padding:9px 18px;text-align:center;font:600 13px system-ui">
+  CIM Data · Aperçu d'intégration local · Boulevard Chave ·
+  Comparables calculés (distincts des mutations DVF) · Non publié
+</div>
+
+
+<div class="app">
+
+<header class="topbar">
+
+ <div class="brand">
+   <div class="brand-title">Explorateur immobilier</div>
+   <div class="brand-sub">CIM Data · Explorateur immobilier</div>
+ </div>
+
+ <div class="search-wrap">
+   <input
+     id="search"
+     class="search"
+     autocomplete="off"
+     placeholder="Ex. 194 boulevard Chave, 177, 274…">
+
+   <button
+     id="searchButton"
+     class="search-button"
+     type="button"
+     aria-label="Rechercher">→</button>
+
+   <div id="suggestions" class="suggestions"></div>
+ </div>
+
+ <div class="source-chip">
+   BAN · DVF · Comparables 2021–2025
+ </div>
+
+</header>
+
+<div class="workspace">
+
+<aside class="left">
+
+ <div class="section">
+   <div class="section-title">Boulevard Chave</div>
+
+   <div class="kpi-grid">
+     <div class="kpi">
+       <div id="kpiMutations" class="kpi-value"></div>
+       <div class="kpi-label">comparables calculés</div>
+     </div>
+
+     <div class="kpi">
+       <div id="kpiAddresses" class="kpi-value"></div>
+       <div class="kpi-label">numéros géolocalisés</div>
+     </div>
+
+     <div class="kpi">
+       <div id="kpiSimple" class="kpi-value"></div>
+       <div class="kpi-label">comparables exploitables</div>
+     </div>
+
+     <div class="kpi">
+       <div class="kpi-value">2021–25</div>
+       <div class="kpi-label">période DVF locale</div>
+     </div>
+   </div>
+
+   <div class="range">
+     <div id="streetMedian" class="range-main"></div>
+     <div id="streetRange" class="range-sub"></div>
+   </div>
+ </div>
+
+ <div class="section">
+   <div class="section-title">Couches & filtres</div>
+
+   <div class="layer-row">
+     <input id="showSales" type="checkbox" checked>
+     <div class="layer-label">Adresses avec comparables</div>
+   </div>
+
+   <div class="layer-note">
+     Un point localise une adresse BAN avec comparable(s). Les transactions DVF doivent être distinguées des comparables.
+   </div>
+
+   <div style="height:10px"></div>
+
+   <div class="years" id="years"></div>
+
+   <div style="height:10px"></div>
+
+   <select id="typeFilter" class="type-select">
+     <option value="all">Tous types</option>
+     <option value="Appartement">Appartement</option>
+     <option value="Maison">Maison</option>
+     <option value="simple">Mutations simples uniquement</option>
+   </select>
+ </div>
+
+ <div class="section">
+   <div class="section-title">Évolution €/m²</div>
+   <div id="yearChart"></div>
+
+   <div class="layer-note" style="margin:8px 0 0">
+     Médiane des comparables calculés uniquement.
+     Ce n’est pas une estimation de valeur actuelle.
+   </div>
+ </div>
+
+ <div class="section">
+   <div class="section-title">Derniers comparables disponibles</div>
+   <div id="latestSales" class="latest-list"></div>
+ </div>
+
+ <div class="section">
+   <div class="section-title">Segments IRIS du boulevard</div>
+   <div id="irisList"></div>
+ </div>
+
+</aside>
+
+<main class="map-wrap">
+
+ <div id="map"></div>
+
+ <div class="map-top">
+   <div class="map-chip">
+     <strong>Boulevard Chave · Marseille</strong><br>
+     données historiques DVF
+   </div>
+
+   <div id="visibleCount" class="map-chip"></div>
+ </div>
+
+ <div class="map-legend">
+   <strong>Comparable calculé · €/m²</strong>
+
+   <div class="legend-item">
+     <span class="legend-dot" style="background:#377eb8"></span>
+     sous Q1
+   </div>
+
+   <div class="legend-item">
+     <span class="legend-dot" style="background:#55a868"></span>
+     Q1 → médiane
+   </div>
+
+   <div class="legend-item">
+     <span class="legend-dot" style="background:#e39c37"></span>
+     médiane → Q3
+   </div>
+
+   <div class="legend-item">
+     <span class="legend-dot" style="background:#c44e52"></span>
+     au-dessus de Q3
+   </div>
+
+   <div class="legend-item">
+     <span class="legend-dot" style="background:#8e98a3"></span>
+     pas de ratio simple
+   </div>
+ </div>
+
+</main>
+
+<aside class="right">
+
+ <div class="right-head">
+   <div class="eyebrow">Adresse sélectionnée</div>
+
+   <h2 id="detailTitle"></h2>
+
+   <div id="detailSubtitle" class="right-sub"></div>
+ </div>
+
+ <div class="tabs">
+   <button class="tab active" data-tab="sales">Ventes</button>
+   <button class="tab" data-tab="market">Marché</button>
+   <button class="tab" data-tab="building">Immeuble</button>
+   <button class="tab" data-tab="sources">Sources</button>
+ </div>
+
+ <div id="detail" class="detail"></div>
+
+</aside>
+
+</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+(async function(){
+try{
+
+const DATA = await loadCimPilotData();
+
+const mutationsByKey = new Map(
+  DATA.mutations.map(m => [m.key, m])
+);
+
+const addressesByKey = new Map(
+  DATA.addresses.map(a => [a.key, a])
+);
+
+const yearsActive = new Set(
+  Object.keys(DATA.street.stats.yearly).map(Number)
+);
+
+let currentAddressKey = "194";
+let currentTab = "sales";
+let markerLayer = null;
+let markersByAddress = new Map();
+
+const q1 = DATA.street.stats.q1_m2;
+const med = DATA.street.stats.median_m2;
+const q3 = DATA.street.stats.q3_m2;
+
+function euro(value){
+  if(value === null || value === undefined) return "—";
+
+  return Number(value).toLocaleString(
+    "fr-FR",
+    {
+      maximumFractionDigits:0
+    }
+  ) + " €";
+}
+
+function euroM2(value){
+  if(value === null || value === undefined) return "—";
+
+  return Number(value).toLocaleString(
+    "fr-FR",
+    {
+      maximumFractionDigits:0
+    }
+  ) + " €/m²";
+}
+
+function dateFR(value){
+  if(!value) return "—";
+
+  const p = value.split("-");
+
+  if(p.length !== 3) return value;
+
+  return p[2] + "/" + p[1] + "/" + p[0];
+}
+
+function median(values){
+  const arr = values
+    .filter(v => Number.isFinite(Number(v)))
+    .map(Number)
+    .sort((a,b)=>a-b);
+
+  if(!arr.length) return null;
+
+  const mid = Math.floor(arr.length/2);
+
+  if(arr.length % 2) return arr[mid];
+
+  return (arr[mid-1] + arr[mid]) / 2;
+}
+
+function markerColor(value){
+  if(value === null || value === undefined){
+    return "#8e98a3";
+  }
+
+  if(value < q1) return "#377eb8";
+  if(value < med) return "#55a868";
+  if(value <= q3) return "#e39c37";
+
+  return "#c44e52";
+}
+
+function addressMutations(address){
+  return address.mutations
+    .map(k => mutationsByKey.get(k))
+    .filter(Boolean)
+    .sort((a,b)=>b.date.localeCompare(a.date));
+}
+
+function mutationVisible(m){
+  if(!yearsActive.has(Number(m.year))) return false;
+
+  const filter = document.getElementById("typeFilter").value;
+
+  if(filter === "all") return true;
+
+  if(filter === "simple"){
+    return m.simple === true;
+  }
+
+  return m.simple_type === filter;
+}
+
+function visibleMutationsForAddress(address){
+  return addressMutations(address).filter(mutationVisible);
+}
+
+function addressRatio(address){
+  const values = visibleMutationsForAddress(address)
+    .filter(m => m.simple && m.ratio_m2)
+    .map(m => m.ratio_m2);
+
+  return median(values);
+}
+
+function addressLabel(address){
+  return (
+    address.key
+    + " Boulevard Chave, "
+    + address.code_postal
+    + " Marseille"
+  );
+}
+
+// ------------------------------------------------------------
+// MAP
+// ------------------------------------------------------------
+
+const map = L.map(
+  "map",
+  {
+    zoomControl:false
+  }
+);
+
+L.control.zoom({
+  position:"bottomright"
+}).addTo(map);
+
+L.control.scale({
+  imperial:false,
+  position:"bottomright"
+}).addTo(map);
+
+L.tileLayer(
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {
+    maxZoom:19,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }
+).addTo(map);
+
+markerLayer = L.layerGroup().addTo(map);
+
+function installPriceLegend(){
+  const control = L.control({position:"topleft"});
+  control.onAdd = function(){
+    const div = L.DomUtil.create("div","cim-price-legend");
+    const medianValue = DATA.street.stats.median_m2;
+    const q1Value = DATA.street.stats.q1_m2;
+    const q3Value = DATA.street.stats.q3_m2;
+    const format = v => Number.isFinite(Number(v))
+      ? Math.round(Number(v)).toLocaleString("fr-FR")+" €/m²" : "—";
+    div.innerHTML = `
+      <div class="cim-price-title">Prix au m² · comparables calculés</div>
+      <div class="cim-price-gradient"></div>
+      <div class="cim-price-values">
+        <span>Q1 : ${format(q1Value)}</span>
+        <span>Médiane : ${format(medianValue)}</span>
+        <span>Q3 : ${format(q3Value)}</span>
+      </div>
+      <div class="cim-price-explainer">
+        Couleur des points : position par rapport aux quartiles du boulevard.
+        Ce n'est pas encore une carte de secteurs colorés.
+      </div>`;
+    L.DomEvent.disableClickPropagation(div);
+    return div;
+  };
+  control.addTo(map);
+}
+installPriceLegend();
+
+
+function renderMarkers(){
+
+  markerLayer.clearLayers();
+  markersByAddress.clear();
+
+  const show = document.getElementById("showSales").checked;
+
+  if(!show){
+    document.getElementById("visibleCount").textContent =
+      "Points masqués";
+    return;
+  }
+
+  let visibleAddresses = 0;
+
+  for(const address of DATA.addresses){
+
+    const visible = visibleMutationsForAddress(address);
+
+    if(!visible.length) continue;
+
+    visibleAddresses++;
+
+    const ratio = addressRatio(address);
+    const is194 = false;
+
+    const marker = L.circleMarker(
+      [address.latitude, address.longitude],
+      {
+        radius:is194 ? 9 : 5.5,
+        weight:is194 ? 3 : 1.5,
+        color:is194 ? "#8d1f1f" : "#ffffff",
+        fillColor:is194 ? "#e74c3c" : markerColor(ratio),
+        fillOpacity:.88
+      }
+    );
+
+    marker.bindTooltip(
+      "<strong>"
+      + addressLabel(address)
+      + "</strong><br>"
+      + visible.length
+      + " comparable(s)"
+      + (
+        ratio
+        ? "<br>Médiane simple : " + euroM2(ratio)
+        : "<br>Pas de ratio simple"
+      ),
+      {
+        className:"address-tooltip",
+        direction:"top"
+      }
+    );
+
+    marker.on("click",()=>{
+      selectAddress(address.key, false);
+    });
+
+    marker.addTo(markerLayer);
+    markersByAddress.set(address.key, marker);
+  }
+
+  document.getElementById("visibleCount").textContent =
+    visibleAddresses.toLocaleString("fr-FR")
+    + " adresses visibles";
+}
+
+function fitStreet(){
+
+  const points = DATA.addresses
+    .filter(a => a.latitude && a.longitude)
+    .map(a => [a.latitude,a.longitude]);
+
+  if(points.length){
+    map.fitBounds(
+      L.latLngBounds(points),
+      {
+        padding:[35,35]
+      }
+    );
+  }
+}
+
+function selectAddress(key, recenter=true){
+
+  const address = addressesByKey.get(key);
+
+  if(!address) return;
+
+  currentAddressKey = key;
+
+  if(recenter){
+    map.setView(
+      [address.latitude,address.longitude],
+      18
+    );
+  }
+
+  const marker = markersByAddress.get(key);
+
+  if(marker){
+    marker.openTooltip();
+  }
+
+  renderDetail();
+  window.dispatchEvent(new CustomEvent(
+    "cim:address-selected",{detail:{key}}
+  ));
+}
+
+// ------------------------------------------------------------
+// SEARCH
+// ------------------------------------------------------------
+
+const search = document.getElementById("search");
+const suggestions = document.getElementById("suggestions");
+
+function normalize(v){
+  return String(v || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/[’']/g," ")
+    .replace(/-/g," ")
+    .replace(/\s+/g," ")
+    .trim();
+}
+
+function searchMatches(){
+
+  const q = normalize(search.value);
+
+  if(!q) return [];
+
+  const items = [];
+
+  if(
+    "boulevard chave".includes(q)
+    || q.includes("boulevard chave")
+    || q === "chave"
+  ){
+    items.push({
+      type:"street",
+      label:"Boulevard Chave — vue d’ensemble",
+      meta:
+        DATA.street.stats.mutations_total
+        + " mutations · "
+        + DATA.street.stats.adresses_geolocalisees
+        + " numéros"
+    });
+  }
+
+  DATA.addresses.forEach(address=>{
+
+    const text = normalize(
+      addressLabel(address)
+    );
+
+    if(
+      text.includes(q)
+      || normalize(address.key).startsWith(q)
+    ){
+      items.push({
+        type:"address",
+        key:address.key,
+        label:addressLabel(address),
+        meta:
+          address.nb_mutations
+          + " comparable(s)"
+          + (
+            address.median_ratio_m2
+            ? " · " + euroM2(address.median_ratio_m2)
+            : ""
+          )
+      });
+    }
+  });
+
+  return items.slice(0,18);
+}
+
+function showSuggestions(){
+
+  const items = searchMatches();
+
+  suggestions.innerHTML = "";
+
+  if(!items.length){
+    suggestions.style.display = "none";
+    return;
+  }
+
+  items.forEach(item=>{
+
+    const button = document.createElement("button");
+    button.className = "suggestion";
+    button.type = "button";
+
+    button.innerHTML =
+      "<strong>" + item.label + "</strong>"
+      + "<small>" + item.meta + "</small>";
+
+    button.onclick = ()=>{
+
+      suggestions.style.display = "none";
+
+      if(item.type === "street"){
+        search.value = "Boulevard Chave";
+        fitStreet();
+        renderStreetDetail();
+      }
+      else{
+        search.value = item.label;
+        selectAddress(item.key,true);
+      }
+    };
+
+    suggestions.appendChild(button);
+  });
+
+  suggestions.style.display = "block";
+}
+
+function runSearch(){
+
+  const items = searchMatches();
+
+  if(!items.length){
+    return;
+  }
+
+  const first = items[0];
+
+  suggestions.style.display = "none";
+
+  if(first.type === "street"){
+    fitStreet();
+    renderStreetDetail();
+  }
+  else{
+    selectAddress(first.key,true);
+  }
+}
+
+search.addEventListener(
+  "input",
+  showSuggestions
+);
+
+search.addEventListener(
+  "focus",
+  showSuggestions
+);
+
+search.addEventListener(
+  "keydown",
+  event=>{
+    if(event.key === "Enter"){
+      runSearch();
+    }
+  }
+);
+
+document.getElementById("searchButton")
+  .addEventListener("click",runSearch);
+
+document.addEventListener(
+  "click",
+  event=>{
+    if(!event.target.closest(".search-wrap")){
+      suggestions.style.display = "none";
+    }
+  }
+);
+
+// ------------------------------------------------------------
+// STREET KPIs
+// ------------------------------------------------------------
+
+document.getElementById("kpiMutations").textContent =
+  DATA.street.stats.mutations_total.toLocaleString("fr-FR");
+
+document.getElementById("kpiAddresses").textContent =
+  DATA.street.stats.adresses_geolocalisees.toLocaleString("fr-FR");
+
+document.getElementById("kpiSimple").textContent =
+  DATA.street.stats.mutations_simples.toLocaleString("fr-FR");
+
+document.getElementById("streetMedian").textContent =
+  "Médiane simple : "
+  + euroM2(DATA.street.stats.median_m2);
+
+document.getElementById("streetRange").textContent =
+  "50 % des comparables calculés : "
+  + euroM2(DATA.street.stats.q1_m2)
+  + " à "
+  + euroM2(DATA.street.stats.q3_m2);
+
+// ------------------------------------------------------------
+// YEARS
+// ------------------------------------------------------------
+
+const yearsEl = document.getElementById("years");
+
+Object.keys(DATA.street.stats.yearly).forEach(year=>{
+
+  const label = document.createElement("label");
+  label.className = "year-chip";
+
+  label.innerHTML =
+    '<input type="checkbox" checked value="'
+    + year
+    + '"> '
+    + year;
+
+  const input = label.querySelector("input");
+
+  input.addEventListener("change",()=>{
+
+    if(input.checked){
+      yearsActive.add(Number(year));
+    }
+    else{
+      yearsActive.delete(Number(year));
+    }
+
+    refreshFilteredUI();
+  });
+
+  yearsEl.appendChild(label);
+});
+
+document.getElementById("typeFilter")
+  .addEventListener("change",refreshFilteredUI);
+
+document.getElementById("showSales")
+  .addEventListener("change",renderMarkers);
+
+// ------------------------------------------------------------
+// YEAR CHART
+// ------------------------------------------------------------
+
+function renderYearChart(){
+
+  const chart = document.getElementById("yearChart");
+
+  const values = Object.values(
+    DATA.street.stats.yearly
+  )
+  .map(x=>x.median_m2)
+  .filter(Boolean);
+
+  const max = Math.max(...values,1);
+
+  chart.innerHTML = "";
+
+  Object.entries(
+    DATA.street.stats.yearly
+  ).forEach(([year,s])=>{
+
+    const row = document.createElement("div");
+    row.className = "chart-row";
+
+    const width = s.median_m2
+      ? Math.max(
+          4,
+          Math.round(s.median_m2/max*100)
+        )
+      : 0;
+
+    row.innerHTML =
+      "<div>" + year + "</div>"
+      + '<div class="chart-track">'
+      + '<div class="chart-bar" style="width:'
+      + width
+      + '%"></div></div>'
+      + '<div class="chart-value">'
+      + (
+          s.median_m2
+          ? Number(s.median_m2).toLocaleString("fr-FR")
+          : "—"
+        )
+      + "</div>";
+
+    chart.appendChild(row);
+  });
+}
+
+// ------------------------------------------------------------
+// LATEST SALES
+// ------------------------------------------------------------
+
+function renderLatest(){
+
+  const target = document.getElementById("latestSales");
+
+  const visible = DATA.mutations
+    .filter(mutationVisible)
+    .slice()
+    .sort((a,b)=>b.date.localeCompare(a.date))
+    .slice(0,18);
+
+  target.innerHTML = "";
+
+  visible.forEach(m=>{
+
+    const row = document.createElement("div");
+    row.className = "latest-row";
+
+    row.innerHTML =
+      '<div class="latest-number">'
+      + m.numero
+      + "</div>"
+      + "<div>"
+      + "<strong>"
+      + dateFR(m.date)
+      + "</strong>"
+      + '<div class="latest-meta">'
+      + (
+          m.simple_type
+          ? m.simple_type
+          : "mutation complexe"
+        )
+      + (
+          m.simple_surface
+          ? " · " + m.simple_surface + " m²"
+          : ""
+        )
+      + "</div></div>"
+      + '<div class="latest-value">'
+      + euro(m.value)
+      + "</div>";
+
+    row.onclick = ()=>{
+      selectAddress(
+        (
+          m.numero
+          + (
+              m.suffixe
+              ? " " + m.suffixe
+              : ""
+            )
+        ).trim(),
+        true
+      );
+    };
+
+    target.appendChild(row);
+  });
+}
+
+// ------------------------------------------------------------
+// IRIS CONTEXT
+// ------------------------------------------------------------
+
+function renderIris(){
+
+  const target = document.getElementById("irisList");
+
+  target.innerHTML = "";
+
+  DATA.iris_context
+    .filter(x=>x.affichage_autorise === "OUI")
+    .forEach(x=>{
+
+      const row = document.createElement("div");
+      row.className = "iris-row";
+
+      row.innerHTML =
+        '<div class="iris-name">'
+        + x.iris
+        + " · "
+        + x.quartier
+        + "</div>"
+        + '<div class="iris-meta">'
+        + Number(x.median_m2).toLocaleString("fr-FR")
+        + " €/m² · "
+        + x.volume
+        + " ventes · "
+        + x.fiabilite
+        + "<br>Q1–Q3 : "
+        + Number(x.q1_m2).toLocaleString("fr-FR")
+        + "–"
+        + Number(x.q3_m2).toLocaleString("fr-FR")
+        + " €/m²"
+        + "</div>";
+
+      target.appendChild(row);
+    });
+}
+
+// ------------------------------------------------------------
+// DETAIL PANEL
+// ------------------------------------------------------------
+
+function setTabs(){
+
+  document.querySelectorAll(".tab").forEach(btn=>{
+
+    btn.classList.toggle(
+      "active",
+      btn.dataset.tab === currentTab
+    );
+  });
+}
+
+function localText(local){
+
+  let text = local.type || "Local";
+
+  if(local.surface){
+    text += " · " + Number(local.surface) + " m²";
+  }
+
+  if(local.pieces){
+    text += " · " + Number(local.pieces) + " pièce(s)";
+  }
+
+  return text;
+}
+
+function renderSales(address){
+
+  const mutations = addressMutations(address);
+
+  let html = "";
+
+  if(false){
+    html += `
+      <div class="callout">
+        <strong>Adresse de référence du pilote.</strong><br>
+        Le 194 Boulevard Chave est identifié dans les DVF
+        avec sa transaction, sa parcelle et ses coordonnées.
+      </div>`;
+  }
+
+  mutations.forEach(m=>{
+
+    html += `
+      <div class="sale">
+
+        <div class="sale-top">
+          <div>
+            <div class="sale-price">${euro(m.value)}</div>
+            <div class="sale-date">${dateFR(m.date)}</div>
+          </div>
+
+          <div class="sale-date">
+            ${m.id_mutation || ""}
+          </div>
+        </div>
+
+        ${
+          m.simple && m.ratio_m2
+          ? `
+            <div class="sale-ratio">
+              ${euroM2(m.ratio_m2)}
+              · comparable calculé
+            </div>`
+          : `
+            <div class="sale-warning">
+              mutation complexe — ratio €/m² non affiché
+            </div>`
+        }
+
+        <div class="locals">
+          ${m.locaux.map(localText).join("<br>")}
+        </div>
+
+        <div class="parcel">
+          Parcelle(s) :
+          ${
+            m.parcelles.length
+            ? m.parcelles.join(" · ")
+            : "non renseignée"
+          }
+        </div>
+
+      </div>`;
+  });
+
+  return html;
+}
+
+function renderMarket(address){
+
+  const mutations = addressMutations(address);
+
+  const ratios = mutations
+    .filter(m=>m.simple && m.ratio_m2)
+    .map(m=>m.ratio_m2);
+
+  const addrMedian = median(ratios);
+
+  const surfaces = mutations
+    .filter(m=>m.simple_surface)
+    .map(m=>m.simple_surface);
+
+  const types = {};
+
+  mutations.forEach(m=>{
+    if(m.simple_type){
+      types[m.simple_type] =
+        (types[m.simple_type] || 0) + 1;
+    }
+  });
+
+  return `
+    <div class="detail-kpis">
+
+      <div class="detail-kpi">
+        <strong>${mutations.length}</strong>
+        <span>comparable(s)</span>
+      </div>
+
+      <div class="detail-kpi">
+        <strong>${addrMedian ? euroM2(addrMedian) : "—"}</strong>
+        <span>médiane comparables calculés</span>
+      </div>
+
+      <div class="detail-kpi">
+        <strong>${surfaces.length ? Math.round(median(surfaces)) + " m²" : "—"}</strong>
+        <span>surface médiane simple</span>
+      </div>
+
+    </div>
+
+    <div class="callout">
+      Boulevard Chave :
+      <strong>${euroM2(DATA.street.stats.median_m2)}</strong>
+      en médiane sur les comparables calculés exploitables,
+      avec un intervalle Q1–Q3 de
+      <strong>${euroM2(DATA.street.stats.q1_m2)}</strong>
+      à
+      <strong>${euroM2(DATA.street.stats.q3_m2)}</strong>.
+    </div>
+
+    <div class="pending">
+      Cette comparaison repose sur des comparables calculés à partir de données historiques.
+      Elle ne constitue ni une estimation du logement sélectionné
+      ni une valeur actuelle garantie.
+    </div>
+  `;
+}
+
+function renderBuilding(address){
+
+  const mutations = addressMutations(address);
+
+  const parcels = [
+    ...new Set(
+      mutations.flatMap(m=>m.parcelles)
+    )
+  ];
+
+  return `
+    <div class="detail-kpis">
+
+      <div class="detail-kpi">
+        <strong>${parcels.length}</strong>
+        <span>parcelle(s) DVF</span>
+      </div>
+
+      <div class="detail-kpi">
+        <strong>${mutations.length}</strong>
+        <span>historique comparable(s)</span>
+      </div>
+
+    </div>
+
+    <div class="sale">
+      <strong>Parcelles identifiées</strong>
+
+      <div class="parcel" style="font-size:12px">
+        ${
+          parcels.length
+          ? parcels.join("<br>")
+          : "Aucune parcelle renseignée"
+        }
+      </div>
+    </div>
+
+    <div class="pending">
+      <strong>Cadastre</strong><br>
+      Géométrie de parcelle à raccorder au prochain lot.
+    </div>
+
+    <div class="pending">
+      <strong>Copropriété & syndic</strong><br>
+      RNIC non encore importé dans BLOG DATA API.
+    </div>
+
+    <div class="pending">
+      <strong>DPE · Urbanisme · Risques</strong><br>
+      Couches prévues mais non activées tant que leur
+      rapprochement adresse/parcelle n'est pas validé.
+    </div>
+  `;
+}
+
+function renderSources(){
+
+  return `
+    <div class="callout">
+      <strong>Source principale</strong><br>
+      DVF géolocalisées — data.gouv.fr —
+      fichiers départementaux des Bouches-du-Rhône,
+      millésimes 2021 à 2025.
+    </div>
+
+    <div class="sale">
+      <strong>Règle de lecture</strong>
+
+      <div class="locals">
+        La valeur foncière correspond à une mutation.
+        Certaines mutations regroupent plusieurs locaux,
+        dépendances ou lots.
+      </div>
+    </div>
+
+    <div class="sale">
+      <strong>Prix au m² affiché</strong>
+
+      <div class="locals">
+        Le ratio prix/surface n'est calculé que lorsque
+        la mutation comporte exactement un local résidentiel
+        exploitable. Les mutations complexes ne reçoivent
+        volontairement aucun prix au m².
+      </div>
+    </div>
+
+    <div class="pending">
+      Fond de carte du prototype :
+      OpenStreetMap.
+      Le fournisseur de tuiles de production n'est pas encore choisi.
+    </div>
+  `;
+}
+
+function renderDetail(){
+
+  const address = addressesByKey.get(
+    currentAddressKey
+  );
+
+  if(!address){
+    renderStreetDetail();
+    return;
+  }
+
+  const mutations = addressMutations(address);
+
+  document.getElementById("detailTitle").innerHTML =
+    addressLabel(address)
+    + (
+        false
+        ? '<span class="reference-badge">PILOTE</span>'
+        : ""
+      );
+
+  document.getElementById("detailSubtitle").textContent =
+    mutations.length
+    + " comparable(s) calculé(s) associé(s)";
+
+  let html = "";
+
+  if(currentTab === "sales"){
+    html = renderSales(address);
+  }
+  else if(currentTab === "market"){
+    html = renderMarket(address);
+  }
+  else if(currentTab === "building"){
+    html = renderBuilding(address);
+  }
+  else{
+    html = renderSources();
+  }
+
+  document.getElementById("detail").innerHTML = html;
+}
+
+function renderStreetDetail(){
+
+  currentAddressKey = null;
+
+  document.getElementById("detailTitle").textContent =
+    "Boulevard Chave";
+
+  document.getElementById("detailSubtitle").textContent =
+    DATA.street.stats.mutations_total
+    + " mutations · "
+    + DATA.street.stats.adresses_geolocalisees
+    + " numéros géolocalisés";
+
+  document.getElementById("detail").innerHTML = `
+    <div class="detail-kpis">
+
+      <div class="detail-kpi">
+        <strong>${DATA.street.stats.mutations_total}</strong>
+        <span>mutations</span>
+      </div>
+
+      <div class="detail-kpi">
+        <strong>${DATA.street.stats.adresses_geolocalisees}</strong>
+        <span>numéros</span>
+      </div>
+
+      <div class="detail-kpi">
+        <strong>${euroM2(DATA.street.stats.median_m2)}</strong>
+        <span>médiane simple</span>
+      </div>
+
+    </div>
+
+    <div class="callout">
+      Clique sur un point de la carte ou recherche
+      un numéro pour ouvrir l'historique réel de cette adresse.
+    </div>
+
+    <div class="sale">
+      <strong>50 % central des comparables calculés</strong>
+      <div class="locals">
+        ${euroM2(DATA.street.stats.q1_m2)}
+        à
+        ${euroM2(DATA.street.stats.q3_m2)}
+      </div>
+    </div>
+
+    <div class="pending">
+      Les agrégats décrivent les comparables disponibles pour ce boulevard.
+      Ils ne représentent pas une estimation actuelle de chaque immeuble.
+    </div>
+  `;
+}
+
+document.querySelectorAll(".tab").forEach(btn=>{
+
+  btn.addEventListener("click",()=>{
+
+    currentTab = btn.dataset.tab;
+    setTabs();
+
+    if(currentAddressKey){
+      renderDetail();
+    }
+    else{
+      renderStreetDetail();
+    }
+  });
+});
+
+// ------------------------------------------------------------
+// FILTER REFRESH
+// ------------------------------------------------------------
+
+function refreshFilteredUI(){
+  renderMarkers();
+  renderLatest();
+
+  if(currentAddressKey){
+    renderDetail();
+  }
+}
+
+// ------------------------------------------------------------
+// INITIALISATION
+// ------------------------------------------------------------
+
+renderYearChart();
+renderLatest();
+renderIris();
+renderMarkers();
+setTabs();
+
+const ref = DATA.reference_194.address;
+
+map.setView(
+  [ref.latitude,ref.longitude],
+  17
+);
+
+selectAddress(DATA.reference_194.address.key,false);
+
+search.value = addressLabel(DATA.reference_194.address);
+window.CIMMap=map; window.CIMData=DATA;
+window.CIMSelectAddress=selectAddress;
+window.CIMInitialAddressKey=DATA.reference_194.address.key;
+ window.dispatchEvent(new Event("cim:ready"));
+
+}catch(error){
+  console.error("CIM Data — adaptateur",error);
+  const note=document.createElement("div");
+  note.setAttribute("role","alert");
+  note.style.cssText="padding:18px;background:#fff2ef;color:#8a1e16";
+  note.textContent="Données CIM Data indisponibles : "+error.message;
+  document.body.prepend(note);
+}
+})();
+</script>
+
+<script src="cim-parcels-price.js"></script>
+<script src="cim-quartiers-prix.js"></script>
+<script src="cim-adresse-parcelle.js"></script>
+<script src="cim-carte-epuree.js"></script>
+</body>
+</html>

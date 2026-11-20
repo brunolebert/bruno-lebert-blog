@@ -317,6 +317,99 @@ header{padding:0 5vw 35px;background:linear-gradient(132deg,#f8fafc 0%,#fff 48%,
 .trust-strip{display:flex;gap:17px;justify-content:center;flex-wrap:wrap;border-top:1px solid #dbe4e2;margin-top:35px;padding:23px 0 7px;font-size:11px;color:#60716e}
 @media(max-width:850px){.hero-layout{grid-template-columns:1fr}.hero-visual{height:200px}.feature-grid{grid-template-columns:1fr}.feature-card{min-height:0}.discovery-grid{grid-template-columns:1fr}}
 @media(max-width:520px){header{padding:0 16px 25px}.brand-caption{font-size:11px}.hero-copy h1{font-size:40px}.hero-layout{gap:18px}.hero-visual{height:175px}.visual-note{bottom:10px;left:10px;right:10px}.welcome-intro,.discovery-heading{align-items:flex-start}.intro-arrow{display:none}.roadmap-label{font-size:10px}.discovery-item{padding:12px}.discovery-item .coming-soon{padding:6px}}
+
+/* Recherche au premier plan, y compris sur les sections suivantes */
+header { position:relative; z-index:30; overflow:visible; }
+main { position:relative; z-index:1; }
+.search-wrap { position:relative; z-index:40; }
+#suggestions {
+  z-index:10000;
+  max-height:min(420px,60vh);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+.suggestion:focus-visible {
+  outline:2px solid #247761;
+  outline-offset:-3px;
+  background:#edf5f1;
+}
+.suggestion-kind {
+  display:block;
+  font-size:12px;
+  opacity:.7;
+  margin-top:3px;
+}
+
+
+/* Palette de référence : localisation + trois couches */
+:root{
+  --cim-pin:#FF3B30;
+  --cim-blue:#007AFF;
+  --cim-orange:#FF9500;
+  --cim-navy:#0A3A8F;
+}
+.brand-mark{
+  background:var(--cim-navy);
+  border-radius:11px;
+}
+.hero-highlight,.eyebrow,.section-kicker,
+.intro-arrow,.feature-index,.feature-action,
+.search-label span{
+  color:var(--cim-blue);
+}
+.hero-copy h1{color:var(--cim-navy)}
+.live-dot{background:var(--cim-pin)}
+.hero-visual{
+  background:linear-gradient(135deg,#e5f3ff,#f2f7ff);
+  border-color:#c7def7;
+}
+.visual-point{background:var(--cim-pin)}
+.point-two{background:var(--cim-orange)}
+.point-three{background:var(--cim-blue)}
+.point-four{background:var(--cim-navy)}
+.visual-note-icon{color:var(--cim-blue)}
+.feature-primary{
+  background:var(--cim-navy);
+  border-color:var(--cim-navy);
+}
+.feature-primary .feature-index,
+.feature-primary .feature-symbol,
+.feature-primary .feature-action{color:#fff}
+.discovery-icon{background:#e6f1ff;color:var(--cim-blue)}
+#addressInput:focus{
+  border-color:var(--cim-blue);
+  outline:2px solid #007aff30;
+}
+.search-wrap{z-index:100}
+#suggestions{z-index:10001;max-height:min(440px,62vh)}
+.cim-suggestion{
+  display:block;
+  width:100%;
+  border:0;
+  border-bottom:1px solid #e6edf7;
+  border-radius:0;
+  background:#fff;
+  color:#152c4c;
+  text-align:left;
+  font:inherit;
+  cursor:pointer;
+}
+.cim-suggestion:hover,.cim-suggestion:focus-visible{
+  background:#eaf3ff;
+  outline:2px solid var(--cim-blue);
+  outline-offset:-2px;
+}
+.cim-result-counter{
+  padding:11px 14px;
+  font-size:12px;
+  font-weight:700;
+  background:#eaf3ff;
+  color:var(--cim-navy);
+  position:sticky;
+  top:0;
+  z-index:1;
+}
+
 </style>
 </head>
 
@@ -371,6 +464,14 @@ header{padding:0 5vw 35px;background:linear-gradient(132deg,#f8fafc 0%,#fff 48%,
           <div id="map"></div>
           <div id="mapLegend" class="map-legend" aria-label="Légende des prix"></div>
           <div id="mapLegendNote" class="map-legend-note" aria-live="polite">Sélectionnez une adresse pour consulter les prix géolocalisés disponibles.</div>
+          <div id="spatialTools" style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px">
+            <label><input id="showCadastre" type="checkbox"> Parcelles cadastrales</label>
+            <label><input id="showQpv" type="checkbox"> Quartiers prioritaires</label>
+          </div>
+          <div id="spatialStatus" role="status" aria-live="polite"
+               style="font-size:13px;color:#56606b;margin-top:8px">
+            Activez une couche cartographique pour explorer les données disponibles.
+          </div>
         </div>
 
         <div class="card" style="margin-top:18px">
@@ -560,6 +661,9 @@ const filters = [
 let map = null;
 let selectedMarker = null;
 let saleLayer = null;
+let spatialLayers = {};
+let spatialGeneration = 0;
+const spatialCache = new Map();
 let currentAddress = null;
 let currentSales = [];
 let currentBanRows = [];
@@ -1233,6 +1337,9 @@ function initMap(address){
     ).addTo(map);
 
     saleLayer = L.layerGroup().addTo(map);
+    spatialLayers.cadastre = L.layerGroup().addTo(map);
+    spatialLayers.qpv = L.layerGroup().addTo(map);
+    map.on("moveend", refreshSpatialLayers);
   }
 
   saleLayer.clearLayers();
@@ -1258,6 +1365,127 @@ function initMap(address){
       .openPopup();
   }
 }
+
+
+const spatialConfig = {
+  cadastre:{control:"showCadastre",minZoom:15,limit:12,color:"#2563eb"},
+  qpv:{control:"showQpv",minZoom:12,limit:8,color:"#c2410c"}
+};
+function spatialIntersects(box,bounds){
+  return Array.isArray(box) && box.length===4 &&
+    box[0]<=bounds.getEast() && box[2]>=bounds.getWest() &&
+    box[1]<=bounds.getNorth() && box[3]>=bounds.getSouth();
+}
+async function spatialFetch(url){
+  if(!spatialCache.has(url)){
+    spatialCache.set(url,fetchJson(url).catch(err=>{
+      spatialCache.delete(url);
+      throw err;
+    }));
+  }
+  return spatialCache.get(url);
+}
+async function refreshSpatialLayers(){
+  const generation=++spatialGeneration;
+  if(!map || !currentAddress) return;
+  const bounds=map.getBounds();
+  const messages=[];
+
+  for(const [family,cfg] of Object.entries(spatialConfig)){
+    if(generation!==spatialGeneration) return;
+    const layer=spatialLayers[family];
+    if(!layer) continue;
+    layer.clearLayers();
+    if(!document.getElementById(cfg.control).checked) continue;
+
+    if(map.getZoom()<cfg.minZoom){
+      messages.push(family.toUpperCase()+": rapprochez la carte.");
+      continue;
+    }
+
+    const code=family==="cadastre"
+      ? String(currentAddress.code||"").trim()
+      : "FRANCE";
+    if(!/^[A-Za-z0-9]+$/.test(code)){
+      messages.push(family.toUpperCase()+": territoire inconnu.");
+      continue;
+    }
+    const prefix="runtime/"+family+"/"+
+      (family==="cadastre" ? code+"/" : "");
+    let index;
+    try {
+      index=await spatialFetch(prefix+"_index.json");
+    } catch(err){
+      if(generation!==spatialGeneration) return;
+      messages.push(family.toUpperCase()+": données absentes pour ce territoire.");
+      continue;
+    }
+    if(generation!==spatialGeneration) return;
+
+    const candidates=(index.shards||[]).filter(item=>
+      /^part-[0-9]{5}\.json$/.test(item.file) &&
+      spatialIntersects(item.bbox,bounds)
+    );
+    const selected=candidates.slice(0,cfg.limit);
+    let shown=0,errors=0;
+
+    for(const shard of selected){
+      if(generation!==spatialGeneration) return;
+      try{
+        const payload=await spatialFetch(prefix+shard.file);
+        if(generation!==spatialGeneration) return;
+        const fields=Object.fromEntries(
+          payload.fields.map((name,i)=>[name,i])
+        );
+        for(const row of payload.rows){
+          const raw=row[fields.geometry_geojson];
+          if(!raw) continue;
+          const geometry=typeof raw==="string" ? JSON.parse(raw) : raw;
+          if(!geometry || !["Polygon","MultiPolygon"].includes(geometry.type)){
+            continue;
+          }
+          const polygon=L.geoJSON({
+            type:"Feature",geometry:geometry,properties:{}
+          },{
+            style:{
+              color:cfg.color,weight:1.5,
+              fillOpacity:family==="qpv" ? .10 : .06
+            }
+          });
+          if(!polygon.getBounds().intersects(bounds)) continue;
+          const title=family==="cadastre"
+            ? row[fields.idu] || "Parcelle"
+            : row[fields.nom_qp] || "Quartier prioritaire";
+          const detail=family==="cadastre"
+            ? [row[fields.section],row[fields.numero]].filter(Boolean).join(" — ")
+            : row[fields.code_qp] || "";
+          polygon.bindPopup(
+            "<strong>"+escapeHtml(title)+"</strong>"+
+            (detail ? "<div>"+escapeHtml(detail)+"</div>" : "")
+          );
+          polygon.addTo(layer);
+          shown++;
+        }
+      }catch(err){
+        errors++;
+      }
+    }
+    messages.push(family.toUpperCase()+": "+shown+" géométries affichées"+
+      (selected.length<candidates.length
+        ? " (zone partielle : rapprochez la carte)" : "")+
+      (errors ? " ; erreurs de lecture" : ""));
+  }
+  if(generation===spatialGeneration){
+    document.getElementById("spatialStatus").textContent=
+      messages.join(" · ") ||
+      "Activez une couche cartographique pour explorer les données disponibles.";
+  }
+}
+Object.values(spatialConfig).forEach(cfg=>{
+  document.getElementById(cfg.control).addEventListener(
+    "change",refreshSpatialLayers
+  );
+});
 
 function median(values){
   const v = values
@@ -1606,6 +1834,7 @@ async function selectAddress(raw){
   resultSection.classList.remove("hidden");
 
   initMap(currentAddress);
+  refreshSpatialLayers();
 
   salesList.innerHTML =
     '<div class="empty">Chargement des ventes…</div>';
@@ -1639,65 +1868,316 @@ async function selectAddress(raw){
   );
 }
 
-input.addEventListener("input", () => {
-  clearTimeout(searchTimer);
 
+async function completeStreet(query){
+  const index = await loadTerritoryIndex();
+  const parsed = parseTerritoryQuery(query,index);
+  const needle = slug(parsed.street);
+  if(needle.length < 2) return [];
+
+  const tokens = needle.split("-").filter(Boolean);
+  const results = [];
+  const seen = new Set();
+
+  for(const [code,commune,roadSlug] of index){
+    const city = slug(commune);
+    if(parsed.city && city !== parsed.city &&
+       !(parsed.city==="marseille" && city.startsWith("marseille")))
+      continue;
+
+    if(!tokens.every(token => roadSlug.includes(token))) continue;
+
+    const key = code+":"+roadSlug;
+    if(seen.has(key)) continue;
+    seen.add(key);
+
+    const pretty = roadSlug.replaceAll("-"," ");
+    const score = roadSlug === needle ? 0 :
+      roadSlug.startsWith(needle) ? 1 :
+      roadSlug.split("-").some(word => word.startsWith(needle)) ? 2 : 3;
+
+    results.push({
+      label:pretty+" — "+commune,
+      query:pretty+" "+commune,
+      score,
+      roadSlug
+    });
+  }
+
+  results.sort((a,b) => a.score-b.score ||
+    a.roadSlug.length-b.roadSlug.length ||
+    a.label.localeCompare(b.label,"fr"));
+
+  return results.slice(0,8);
+}
+
+
+// Parcours : voie BAN -> tous ses numéros -> adresse précise.
+let suggestionGeneration = 0;
+let currentSuggestionActions = [];
+
+function setSuggestionItems(items){
+  suggestions.replaceChildren();
+  currentSuggestionActions = [];
+
+  for(const item of items){
+    const node = document.createElement("button");
+    node.type = "button";
+    node.className = "suggestion cim-suggestion";
+    node.setAttribute("role","option");
+
+    const title = document.createElement("span");
+    title.textContent = item.title;
+    node.appendChild(title);
+
+    if(item.detail){
+      const detail = document.createElement("small");
+      detail.className = "suggestion-kind";
+      detail.textContent = item.detail;
+      node.appendChild(detail);
+    }
+
+    const index = currentSuggestionActions.length;
+    currentSuggestionActions.push(item.action);
+
+    node.addEventListener("click", () => {
+      currentSuggestionActions[index]();
+    });
+    suggestions.appendChild(node);
+  }
+
+  suggestions.classList.toggle("hidden",items.length === 0);
+}
+
+function suggestionNotice(message){
+  setSuggestionItems([{
+    title:message,
+    detail:"",
+    action:() => input.focus()
+  }]);
+}
+
+function displayRoadName(slugValue){
+  return slugValue
+    .replaceAll("-"," ")
+    .replace(/^./,c => c.toUpperCase());
+}
+
+async function findRoadCandidates(query){
+  const rows = await loadTerritoryIndex();
+  const parsed = parseTerritoryQuery(query,rows);
+  const wanted = slug(parsed.street);
+  if(wanted.length < 2) return [];
+
+  const tokens = wanted.split("-").filter(Boolean);
+  const found = [];
+  const seen = new Set();
+
+  for(const [code,commune,roadSlug,count] of rows){
+    if(parsed.city){
+      const city = slug(commune);
+      if(city !== parsed.city &&
+         !(parsed.city === "marseille" && city.startsWith("marseille")))
+        continue;
+    }
+
+    if(/^130(0[1-9]|1[0-6])$/.test(parsed.postal)){
+      if(code !== "132"+parsed.postal.slice(-2)) continue;
+    }
+
+    const words = roadSlug.split("-");
+    const matches = tokens.every(token =>
+      words.some(word => word.startsWith(token))
+      || roadSlug.includes(token)
+    );
+    if(!matches) continue;
+
+    const key = code+":"+roadSlug;
+    if(seen.has(key)) continue;
+    seen.add(key);
+
+    const score = roadSlug === wanted ? 0 :
+      roadSlug.startsWith(wanted) ? 1 :
+      words.some(word => word.startsWith(wanted)) ? 2 : 3;
+
+    found.push({code,commune,roadSlug,count,score});
+  }
+
+  found.sort((a,b) =>
+    a.score-b.score ||
+    a.roadSlug.length-b.roadSlug.length ||
+    Number(b.count)-Number(a.count) ||
+    a.commune.localeCompare(b.commune,"fr")
+  );
+  return found.slice(0,24);
+}
+
+async function chooseRoad(road){
+  const generation = ++suggestionGeneration;
+  const title = displayRoadName(road.roadSlug);
+  input.value = title+" — "+road.commune;
+  suggestionNotice("Chargement des numéros disponibles…");
+
+  try{
+    const payload = await fetchOptional(
+      "runtime/ban/"+road.code+"/"+road.roadSlug+".json"
+    );
+    if(generation !== suggestionGeneration) return;
+
+    if(!payload){
+      suggestionNotice("Adresses BAN indisponibles pour cette voie.");
+      return;
+    }
+
+    const rows = decodeShard(payload);
+    const unique = new Map();
+
+    for(const row of rows){
+      const number = String(row.numero ?? "").trim();
+      if(!number) continue;
+
+      const label = [
+        number,row.nom_voie,row.code_postal,row.nom_commune
+      ].filter(Boolean).join(" ");
+
+      if(!unique.has(label)){
+        unique.set(label,{
+          ...row,
+          label,
+          code_insee:row.code_insee || road.code
+        });
+      }
+    }
+
+    const addresses = [...unique.values()].sort((a,b) =>
+      String(a.numero).localeCompare(
+        String(b.numero),"fr",{numeric:true,sensitivity:"base"}
+      )
+    );
+
+    if(!addresses.length){
+      suggestionNotice(
+        "Aucun numéro BAN disponible pour cette voie."
+      );
+      return;
+    }
+
+    setSuggestionItems(addresses.map(address => ({
+      title:address.label,
+      detail:"Sélectionner cette adresse",
+      action:() => {
+        ++suggestionGeneration;
+        selectAddress(address);
+      }
+    })));
+
+    const counter = document.createElement("div");
+    counter.className = "cim-result-counter";
+    counter.textContent = addresses.length+
+      " adresse(s) BAN disponibles dans cette voie";
+    suggestions.prepend(counter);
+    input.focus();
+  }catch(error){
+    if(generation === suggestionGeneration){
+      suggestionNotice(
+        "Impossible de charger les numéros : "+error.message
+      );
+    }
+  }
+}
+
+async function updateSuggestions(){
   const query = input.value.trim();
+  const generation = ++suggestionGeneration;
 
-  if(query.length < 3){
-    suggestions.classList.add("hidden");
-    suggestions.innerHTML = "";
+  if(query.length < 2){
+    setSuggestionItems([]);
     return;
   }
 
-  searchTimer = setTimeout(
-    async () => {
-      try{
-        const payload = await searchAddress(query);
-        if(input.value.trim() !== query) return;
-        const rows = arrayFrom(payload);
+  try{
+    const parsed = parseAddressQuery(query);
+    if(parsed.number){
+      const addresses = await searchAddress(query);
+      if(generation !== suggestionGeneration) return;
 
-        suggestions.innerHTML = "";
-
-        if(!rows.length){
-          suggestions.innerHTML =
-            '<div class="suggestion">'
-            + "Aucune adresse trouvée"
-            + "</div>";
-
-          suggestions.classList.remove("hidden");
-          return;
-        }
-
-        rows.forEach(raw => {
-          const address = normaliseAddress(raw);
-
-          const div = document.createElement("div");
-          div.className = "suggestion";
-          div.textContent = address.label;
-
-          div.addEventListener(
-            "click",
-            () => selectAddress(raw)
-          );
-
-          suggestions.appendChild(div);
-        });
-
-        suggestions.classList.remove("hidden");
+      if(addresses.length){
+        setSuggestionItems(addresses.map(address => ({
+          title:address.label,
+          detail:"Adresse précise",
+          action:() => {
+            ++suggestionGeneration;
+            selectAddress(address);
+          }
+        })));
+        return;
       }
-      catch(error){
-        if(input.value.trim() !== query) return;
-        suggestions.innerHTML =
-          '<div class="suggestion">'
-          + "Recherche indisponible"
-          + "</div>";
+    }
 
-        suggestions.classList.remove("hidden");
-      }
-    },
-    180
-  );
+    const roads = await findRoadCandidates(query);
+    if(generation !== suggestionGeneration) return;
+
+    if(!roads.length){
+      suggestionNotice(
+        "Aucune voie BAN correspondant à cette recherche."
+      );
+      return;
+    }
+
+    setSuggestionItems(roads.map(road => ({
+      title:displayRoadName(road.roadSlug)+" — "+road.commune,
+      detail:"Voir les numéros de cette voie",
+      action:() => chooseRoad(road)
+    })));
+  }catch(error){
+    if(generation === suggestionGeneration){
+      suggestionNotice("Recherche indisponible : "+error.message);
+    }
+  }
+}
+
+input.addEventListener("input",() => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(updateSuggestions,160);
+});
+
+input.addEventListener("keydown",event => {
+  if(event.key === "Escape"){
+    suggestions.classList.add("hidden");
+  }
+  if(event.key === "Enter" || event.key === "ArrowDown"){
+    const first = suggestions.querySelector(
+      "button.cim-suggestion"
+    );
+    if(first && !suggestions.classList.contains("hidden")){
+      event.preventDefault();
+      if(event.key === "Enter") first.click();
+      else first.focus();
+    }else if(event.key === "Enter"){
+      event.preventDefault();
+      clearTimeout(searchTimer);
+      updateSuggestions();
+    }
+  }
+});
+
+suggestions.addEventListener("keydown",event => {
+  const items = [...suggestions.querySelectorAll(
+    "button.cim-suggestion"
+  )];
+  const index = items.indexOf(document.activeElement);
+  if(index < 0) return;
+
+  if(event.key === "ArrowDown" || event.key === "ArrowUp"){
+    event.preventDefault();
+    const next = index+(event.key === "ArrowDown" ? 1 : -1);
+    if(next < 0) input.focus();
+    else items[Math.min(next,items.length-1)].focus();
+  }
+  if(event.key === "Escape"){
+    suggestions.classList.add("hidden");
+    input.focus();
+  }
 });
 
 filters.forEach(
