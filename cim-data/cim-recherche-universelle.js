@@ -71,8 +71,11 @@ function message(s){
  clear();option(s,"",()=>{});
 }
 function matches(q,all){
- const terms=normal(q).replace(/^\d+\s*/,"").split(" ")
-   .filter(Boolean);
+ const terms=normal(q)
+   .replace(/^\d+[a-z]?\s*/,"")
+   .replace(/\b\d{5}\b/g,"")
+   .replace(/[,;]/g," ")
+   .split(" ").filter(Boolean);
  if(!terms.length)return [];
  return all.filter(s=>terms.every(t=>s.hay.includes(t)))
    .sort((a,b)=>{
