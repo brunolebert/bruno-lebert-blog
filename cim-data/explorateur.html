@@ -1176,9 +1176,45 @@ const map = L.map(
   }
 );
 
-L.control.zoom({
-  position:"bottomright"
-}).addTo(map);
+// Contrôle de zoom CIM Data : commandes explicites et accessibles.
+(function installCimZoom(){
+ const control=L.control({position:"topright"});
+ control.onAdd=function(){
+  const wrapper=L.DomUtil.create("div","leaflet-bar cim-zoom-control");
+  wrapper.style.cssText="background:#fff;position:relative;z-index:1100";
+  function button(symbol,label,delta){
+   const el=L.DomUtil.create("a","",wrapper);
+   el.href="#";
+   el.textContent=symbol;
+   el.title=label;
+   el.setAttribute("role","button");
+   el.setAttribute("aria-label",label);
+   el.style.cssText="display:flex;align-items:center;justify-content:center;width:34px;height:34px;font:bold 22px system-ui;text-decoration:none;color:#173451;background:white;cursor:pointer";
+   L.DomEvent.on(el,"click",function(event){
+    L.DomEvent.stop(event);
+    const before=map.getZoom();
+    const min=map.getMinZoom();
+    const max=map.getMaxZoom();
+    const target=Math.max(min,Math.min(max,before+delta));
+    if(target!==before)map.setZoom(target,{animate:false});
+    window.CIMZoomLastAction={
+     action:delta>0?"plus":"moins",
+     before,
+     requested:target,
+     after:map.getZoom(),
+     min,max
+    };
+   });
+  }
+  button("+","Zoom avant",1);
+  button("−","Zoom arrière",-1);
+  L.DomEvent.disableClickPropagation(wrapper);
+  L.DomEvent.disableScrollPropagation(wrapper);
+  return wrapper;
+ };
+ control.addTo(map);
+ window.CIMZoomControl=control;
+})();
 
 L.control.scale({
   imperial:false,
