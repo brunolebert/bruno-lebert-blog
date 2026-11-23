@@ -7,7 +7,7 @@ const indexPromise=fetch(ROOT+"index.json").then(r=>{
   return r.json();
 });
 const cache=new Map();
-let generation=0, radius=50, selectedKey=null;
+let generation=0, radius=100, selectedKey=null;
 let layer=null, circle=null, selectedGroup=null;
 let visibleGroups=[], currentMatches=[];
 
@@ -18,7 +18,46 @@ const title=document.createElement("strong");
 title.textContent="Comparables à proximité";
 title.style.cssText="display:block;font-size:15px;margin-bottom:9px";
 const controls=document.createElement("div");
-controls.style.cssText="display:flex;gap:8px;margin-bottom:10px";
+controls.style.cssText="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:10px";
+
+const filters=document.createElement("div");
+filters.style.cssText="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-bottom:10px";
+function field(label,el){
+ const wrap=document.createElement("label");
+ wrap.style.cssText="display:grid;gap:3px;font-size:11px;font-weight:600";
+ const span=document.createElement("span");span.textContent=label;
+ el.style.cssText="width:100%;min-width:0;box-sizing:border-box;padding:7px;border:1px solid #abc0dc;border-radius:6px;background:white";
+ wrap.append(span,el);filters.append(wrap);
+ return el;
+}
+function selection(items){
+ const el=document.createElement("select");
+ for(const [v,t] of items){
+  const option=document.createElement("option");
+  option.value=v;option.textContent=t;el.append(option);
+ }
+ return el;
+}
+const kind=field("Type de bien",selection([
+ ["all","Tous les biens"],["Appartement","Appartement"],["Maison","Maison"]
+]));
+kind.id="cimMainType";
+const period=field("Période",selection([
+ ["all","Toutes les années"],["1","1 an"],["3","3 ans"],["5","5 ans"]
+]));
+function numeric(id){
+ const el=document.createElement("input");
+ el.type="number";el.min="0";el.placeholder="Libre";el.id=id;
+ return el;
+}
+const surfaceMin=field("Surface min. m²",numeric("cimSurfaceMin"));
+const surfaceMax=field("Surface max. m²",numeric("cimSurfaceMax"));
+const priceMin=field("Prix min. €",numeric("cimPrixMin"));
+const priceMax=field("Prix max. €",numeric("cimPrixMax"));
+const filterHelp=document.createElement("small");
+filterHelp.style.cssText="display:block;color:#637187;margin-bottom:8px";
+filterHelp.textContent="Pièces : à raccorder aux transactions DVF détaillées. Prix et €/m² issus des comparables calculés.";
+
 const status=document.createElement("div");
 status.setAttribute("role","status");
 status.style.cssText="font-weight:650;margin-bottom:7px";
@@ -38,7 +77,7 @@ medianBox.style.cssText=[
   "margin:10px 0 13px",
   "text-align:center"
 ].join(";");
-panel.append(title,controls,status,medianBox,selected,list,note);
+panel.append(title,controls,filters,filterHelp,status,medianBox,selected,list,note);
 
 function price(v){return Math.round(v).toLocaleString("fr-FR")+" €/m²";}
 function median(values){
@@ -87,6 +126,7 @@ function clear(){
   if(layer)layer.clearLayers();
   if(circle){window.CIMMap?.removeLayer(circle);circle=null;}
   selected.replaceChildren();
+  selectedGroup=null;
   list.replaceChildren();
   visibleGroups=[];
   currentMatches=[];
@@ -107,7 +147,8 @@ function card(m){
   el.type="button";
   el.style.cssText="width:100%;text-align:left;background:white;border:1px solid #dce4ee;border-radius:7px;padding:8px;color:#172b48;cursor:pointer";
   text(el,(m.numero+" "+m.voie).trim()+" · "+Math.round(m.d)+" m","font-weight:700");
-  text(el,price(m.price)+" · "+m.type+
+  text(el,(Number(m.value)>0?Math.round(Number(m.value)).toLocaleString("fr-FR")+" € · ":"")+
+    price(m.price)+" · "+m.type+
     (Number(m.surface)>0?" · "+m.surface+" m²":""),
     "font-weight:600;color:#0A3A8F");
   text(el,m.date+" · "+m.code+" · parcelle "+m.parcelle,
@@ -136,17 +177,18 @@ function cardSimple(m){
   const item=document.createElement("div");
   item.style.cssText="margin:5px 0;padding-bottom:5px;border-bottom:1px solid #d4dfeb";
   text(item,(m.numero+" "+m.voie).trim()+" · "+Math.round(m.d)+" m","font-weight:600");
-  text(item,price(m.price)+" · "+m.type+
+  text(item,(Number(m.value)>0?Math.round(Number(m.value)).toLocaleString("fr-FR")+" € · ":"")+
+    price(m.price)+" · "+m.type+
     (m.surface?" · "+m.surface+" m²":""));
   text(item,m.date+" · parcelle "+m.parcelle,"font-size:11px;color:#637187");
   return item;
 }
 const buttons=[];
-for(const value of [50,100]){
+for(const value of [50,100,250,500,1000,2000]){
   const b=document.createElement("button");
   b.type="button";
-  b.textContent=value+" m";
-  b.style.cssText="padding:7px 14px;border:1px solid #abc0dc;border-radius:7px;cursor:pointer";
+  b.textContent=value>=1000?(value/1000)+" km":value+" m";
+  b.style.cssText="padding:7px 3px;border:1px solid #abc0dc;border-radius:7px;cursor:pointer;font:12px system-ui";
   b.addEventListener("click",()=>{
     radius=value;
     refreshButtons();
@@ -188,15 +230,19 @@ async function update(){
     status.textContent="Comparables masqués.";
     return;
   }
-  if(window.CIMExternalAddress &&
-     !/^132(0[1-9]|1[0-6])$/.test(String(address.code))){
-    status.textContent="Comparables 50/100 m non encore disponibles hors Marseille.";
-    const oldCount=document.getElementById("visibleCount");
-    if(oldCount)oldCount.textContent="Comparables non disponibles";
+  status.textContent="Recherche dans un rayon de "+radius+" m…";
+  const type=kind.value;
+  function bound(el){return el.value===""?null:Number(el.value);}
+  const minS=bound(surfaceMin),maxS=bound(surfaceMax);
+  const minP=bound(priceMin),maxP=bound(priceMax);
+  const years=period.value==="all"?null:Number(period.value);
+  const currentYear=new Date().getFullYear();
+  if([minS,maxS,minP,maxP].some(v=>v!==null&&(!Number.isFinite(v)||v<0))||
+     (minS!==null&&maxS!==null&&minS>maxS)||
+     (minP!==null&&maxP!==null&&minP>maxP)){
+    status.textContent="Bornes de surface ou de prix invalides.";
     return;
   }
-  status.textContent="Recherche dans un rayon de "+radius+" m…";
-  const type=document.getElementById("typeFilter")?.value||"all";
   try{
     const idx=await indexPromise;
     const codes=Object.entries(idx.territories||{})
@@ -211,7 +257,14 @@ async function update(){
         const p=Number(r[8]);
         if(d>radius||!Number.isFinite(p)||p<=0)continue;
         const localType=String(r[5]||"");
-        if(type!=="all"&&type!=="simple"&&type!==localType)continue;
+        if(type!=="all"&&type!==localType)continue;
+        const surface=Number(r[6]),sale=Number(r[7]);
+        const year=Number(String(r[2]||"").slice(0,4));
+        if(minS!==null&&(!Number.isFinite(surface)||surface<minS))continue;
+        if(maxS!==null&&(!Number.isFinite(surface)||surface>maxS))continue;
+        if(minP!==null&&(!Number.isFinite(sale)||sale<=0||sale<minP))continue;
+        if(maxP!==null&&(!Number.isFinite(sale)||sale<=0||sale>maxP))continue;
+        if(years!==null&&(!Number.isFinite(year)||year<currentYear-years+1))continue;
         matches.push({
           lon:Number(r[0]),lat:Number(r[1]),d,price:p,
           date:String(r[2]||""),numero:String(r[3]||""),
@@ -236,7 +289,8 @@ async function update(){
     status.textContent=matches.length+" comparables · "+groups.size+
       " positions · "+radius+" m";
     medianBox.replaceChildren();
-    text(medianBox,"MÉDIANE LOCALE · RAYON "+radius+" M",
+    text(medianBox,"MÉDIANE · "+(type==="all"?"TOUS BIENS":type.toUpperCase())+
+      " · "+(radius>=1000?(radius/1000)+" KM":radius+" M"),
       "font-size:11px;font-weight:800;letter-spacing:1px;color:#395781");
     if(matches.length>=5){
       text(medianBox,price(med),
@@ -302,9 +356,20 @@ window.addEventListener("cim:ready",init);
 window.addEventListener("cim:address-selected",e=>{
   selectedKey=e.detail?.key??null;update();
 });
-for(const id of ["showSales","typeFilter"]){
-  document.getElementById(id)?.addEventListener("change",update);
+for(const control of [kind,period,surfaceMin,surfaceMax,priceMin,priceMax]){
+ control.addEventListener("change",update);
 }
+const legacyType=document.getElementById("typeFilter");
+if(legacyType){
+ legacyType.value="all";
+ legacyType.addEventListener("change",()=>{
+  kind.value=["Appartement","Maison"].includes(legacyType.value)
+   ?legacyType.value:"all";
+  update();
+ });
+ kind.addEventListener("change",()=>{legacyType.value=kind.value;});
+}
+document.getElementById("showSales")?.addEventListener("change",update);
 if(document.readyState==="loading")
   document.addEventListener("DOMContentLoaded",init,{once:true});
 else init();
