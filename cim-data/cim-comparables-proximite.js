@@ -281,7 +281,7 @@ async function update(){
     const q3=quantile(matches.map(m=>m.price),.75);
     const groups=new Map();
     for(const m of matches){
-      const key=m.lon.toFixed(7)+"/"+m.lat.toFixed(7);
+      const key=m.parcelle && m.parcelle.trim() ? m.code+"/"+m.parcelle.trim() : m.lon.toFixed(7)+"/"+m.lat.toFixed(7);
       if(!groups.has(key))groups.set(key,{id:key,items:[],lon:m.lon,lat:m.lat});
       groups.get(key).items.push(m);
     }
