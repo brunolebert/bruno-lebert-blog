@@ -67,33 +67,63 @@ function control(){
 
   const container=document.createElement("div");
   container.id=ID;
-  container.style.cssText=[
-    "background:#fff","padding:8px 12px",
-    "border:1px solid #cbd5e1","border-radius:8px",
-    "box-shadow:0 2px 8px #0002","font:13px system-ui",
-    "max-width:190px"
-  ].join(";");
+  container.style.cssText="position:relative;font:13px system-ui,sans-serif";
+
+  const button=document.createElement("button");
+  button.type="button";
+  button.textContent="☷ Couches ▾";
+  button.setAttribute("aria-expanded","false");
+  button.setAttribute("aria-controls","cimLayersMenu");
+  button.style.cssText="background:white;color:#17365d;border:1px solid #cbd5e1;border-radius:8px;padding:8px 11px;font:600 13px system-ui;box-shadow:0 2px 8px #0002;cursor:pointer";
+
+  const menu=document.createElement("div");
+  menu.id="cimLayersMenu";
+  menu.hidden=true;
+  menu.style.cssText="position:absolute;top:calc(100% + 5px);left:0;width:235px;max-width:calc(100vw - 40px);background:white;color:#1e293b;border:1px solid #cbd5e1;border-radius:9px;padding:12px;box-shadow:0 5px 20px #0003;box-sizing:border-box;z-index:1000";
 
   const heading=document.createElement("strong");
   heading.textContent="Couches cartographiques";
-  container.append(heading);
+  heading.style.cssText="display:block;margin-bottom:10px";
+  menu.append(heading);
+
   const label=document.createElement("label");
-  label.style.cssText="display:flex;align-items:center;gap:7px;cursor:pointer";
+  label.style.cssText="display:flex;align-items:center;gap:9px;cursor:pointer;line-height:1.4";
+
   const checkbox=document.createElement("input");
   checkbox.type="checkbox";
+  checkbox.style.cssText="flex:none;width:16px;height:16px";
   checkbox.setAttribute("aria-label","Afficher les quartiers prioritaires QPV");
+
   const text=document.createElement("span");
   text.textContent="Quartiers prioritaires (QPV)";
   label.append(checkbox,text);
-  label.style.marginTop="7px";
-  container.append(label);
+  menu.append(label);
 
   const status=document.createElement("div");
-  status.style.cssText="font-size:11px;color:#64748b;margin-top:3px";
+  status.style.cssText="font-size:11px;color:#64748b;margin-top:9px";
   status.textContent="Couche désactivée";
-  container.append(status);
+  menu.append(status);
 
-  const leafletControl=window.L.control({position:"bottomleft"});
+  container.append(button,menu);
+
+  function setOpen(open){
+    menu.hidden=!open;
+    button.setAttribute("aria-expanded",String(open));
+    button.textContent=open?"☷ Couches ▴":"☷ Couches ▾";
+  }
+
+  button.addEventListener("click",()=>setOpen(menu.hidden));
+  document.addEventListener("pointerdown",event=>{
+    if(!container.contains(event.target))setOpen(false);
+  });
+  container.addEventListener("keydown",event=>{
+    if(event.key==="Escape"){
+      setOpen(false);
+      button.focus();
+    }
+  });
+
+  const leafletControl=window.L.control({position:"topleft"});
   leafletControl.onAdd=()=>container;
   leafletControl.addTo(map);
   window.L.DomEvent.disableClickPropagation(container);
