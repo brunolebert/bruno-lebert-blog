@@ -27,6 +27,14 @@ const indexPromise=fetch(root+"territory-index.json").then(r=>{
    voie:normal(r[f.voie])
  }));
 });
+const territoryPromise=fetch(
+ root+"territoires-navigation.json"
+).then(r=>{
+ if(!r.ok)throw Error("Referentiel territorial HTTP "+r.status);
+ return r.json();
+}).then(j=>window.CIMTerritorySearch.createIndex(j))
+.catch(()=>null);
+
 const banCache=new Map();
 let serial=0,activeStreet=null,selectedMarker=null;
 let initialized=false;
@@ -92,6 +100,72 @@ function addressLabel(a){
  return String(a.numero||"")+" "+String(a.nom_voie||"")+
    ", "+String(a.code_postal||"")+" "+String(a.nom_commune||"");
 }
+function leaveTerritory(){
+ document.body.classList.remove("cim-territory-mode");
+ document.getElementById("cimTerritoryDossier")?.remove();
+ window.CIMSelectedTerritory=null;
+}
+
+function displayTerritory(t){
+ const map=window.CIMMap;
+ if(!map)return;
+ ++serial;
+ clear();
+ leaveTerritory();
+ input.value=t.commune;
+
+ if(selectedMarker){
+   map.removeLayer(selectedMarker);
+   selectedMarker=null;
+ }
+
+ window.CIMExternalAddress=null;
+ window.CIMSelectedTerritory=t;
+
+ document.body.classList.remove("cim-universal-mode");
+ document.body.classList.add("cim-territory-mode");
+
+ window.dispatchEvent(new CustomEvent(
+   "cim:territory-selected",
+   {detail:{territory:t}}
+ ));
+
+ const b=t.emprise;
+ map.fitBounds(
+   [[b[1],b[0]],[b[3],b[2]]],
+   {padding:[30,30],maxZoom:14}
+ );
+
+ const title=document.getElementById("detailTitle");
+ const subtitle=document.getElementById("detailSubtitle");
+
+ if(title)title.textContent=t.commune;
+ if(subtitle)subtitle.textContent="Vue territoriale";
+
+ const dossier=document.createElement("section");
+ dossier.id="cimTerritoryDossier";
+ dossier.style.cssText="padding:13px;font:13px/1.6 system-ui";
+
+ const rows=[
+   ["Territoire",t.commune],
+   ["Code INSEE",t.code],
+   ["Voies indexées",String(t.voies)],
+   ["Adresses BAN",String(t.adresses)],
+   ["Marché immobilier","Statistiques communales à raccorder"],
+   ["Comparables","Sélectionnez une adresse pour consulter les ventes proches."]
+ ];
+
+ for(const [label,value] of rows){
+   const p=document.createElement("p");
+   const strong=document.createElement("strong");
+   strong.textContent=label+" : ";
+   p.append(strong,document.createTextNode(value));
+   dossier.append(p);
+ }
+
+ document.querySelector(".right")?.append(dossier);
+}
+
 function displayAddress(a,s){
  const map=window.CIMMap;
  if(!map){message("Carte non initialisée");return;}
@@ -99,6 +173,7 @@ function displayAddress(a,s){
  if(!Number.isFinite(lat)||!Number.isFinite(lon)){
    message("Coordonnées de l'adresse indisponibles");return;
  }
+ leaveTerritory();
  clear();
  input.value=addressLabel(a);
  const isPilot=s.code==="13205"&&s.slug==="boulevard-chave";
@@ -192,8 +267,24 @@ async function suggest(){
   const all=await indexPromise;
   if(token!==serial)return;
   const number=actualNumber(q);
+  const territorial=await territoryPromise;
+  if(token!==serial)return;
+
+  if(!number&&territorial){
+    const exact=territorial.exact(q);
+    const candidates=exact.length?exact:territorial.prefix(q);
+
+    for(const t of candidates)
+      option(t.commune,"Commune · "+t.code,
+        ()=>displayTerritory(t));
+  }
+
   const found=matches(q,all);
-  if(!found.length){message("Aucune voie correspondante");return;}
+  if(!found.length){
+    if(!suggestions.children.length)
+      message("Aucune voie correspondante");
+    return;
+  }
   if(number){
    await Promise.all(found.slice(0,5).map(async s=>{
      try{
@@ -248,6 +339,7 @@ function init(){
  document.addEventListener("keydown",captureKey,true);
  document.addEventListener("click",captureClick,true);
  window.addEventListener("cim:address-selected",e=>{
+   leaveTerritory();
    if(!e.detail?.external){
      window.CIMExternalAddress=null;
      document.body.classList.remove("cim-universal-mode");
@@ -260,6 +352,16 @@ function init(){
  body.cim-universal-mode .right .cim-fold,
  body.cim-universal-mode .left .cim-fold{display:none!important}
  #cimUniversalDossier{border-top:1px solid #dce4ef}
+
+ body:not(.cim-universal-mode) #cimUniversalDossier,
+ body.cim-territory-mode .right .tabs,
+ body.cim-territory-mode .right #detail,
+ body.cim-territory-mode .right .cim-fold,
+ body.cim-territory-mode .left .cim-fold,
+ body.cim-territory-mode #cimNearbyComparables,
+ body.cim-territory-mode #cimNearbyMedian{
+   display:none!important
+ }
  `;
  document.head.append(style);
 }

@@ -90,8 +90,9 @@ async function initialize(){
   }
 
   function paint(){
-    if(!loaded)return;
     parcelLayer.clearLayers();
+    if(window.CIMSelectedTerritory)return;
+    if(!loaded)return;
     const visible=map.getBounds();
     const detailed=map.getZoom()>=16;
 
@@ -145,6 +146,7 @@ async function initialize(){
   }
 
   function selectParcel(key,{recenter=false,fromMap=false}={}){
+    if(window.CIMSelectedTerritory)return;
     const entry=parcels.get(key);
     if(!entry)return;
     selected=key;
@@ -244,6 +246,13 @@ async function initialize(){
       loading=false;
     }
   }
+
+  window.addEventListener("cim:territory-selected",()=>{
+    selected=null;
+    pendingAddress=null;
+    parcelLayer.clearLayers();
+    document.getElementById("cimParcelCard")?.remove();
+  });
 
   window.addEventListener("cim:address-selected",event=>{
     pendingAddress=event.detail?.key??null;

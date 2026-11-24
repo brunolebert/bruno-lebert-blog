@@ -209,6 +209,14 @@ async function update(){
   const serial=++generation;
   clear();
   medianBox.replaceChildren();
+
+  if(window.CIMSelectedTerritory){
+    window.CIMNearbyVisibleMatches=0;
+    status.textContent="Sélectionnez une adresse.";
+    const count=document.getElementById("visibleCount");
+    if(count)count.textContent="Vue territoriale";
+    return;
+  }
   if(!mountMap()){
     status.textContent="Initialisation de la carte…";
     return;
@@ -352,6 +360,17 @@ function init(){
     window.CIMData?.reference_194?.address?.key||selectedKey;
   update();
 }
+window.addEventListener("cim:territory-selected",()=>{
+  ++generation;
+  selectedKey=null;
+  clear();
+  medianBox.replaceChildren();
+  status.textContent="Sélectionnez une adresse.";
+  window.CIMNearbyVisibleMatches=0;
+  const count=document.getElementById("visibleCount");
+  if(count)count.textContent="Vue territoriale";
+});
+
 window.addEventListener("cim:ready",init);
 window.addEventListener("cim:address-selected",e=>{
   selectedKey=e.detail?.key??null;update();

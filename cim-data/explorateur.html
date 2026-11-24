@@ -1265,6 +1265,12 @@ installPriceLegend();
 function renderMarkers(){
 
   markerLayer.clearLayers();
+
+  if(window.CIMSelectedTerritory){
+    document.getElementById("visibleCount").textContent=
+      "Vue territoriale";
+    return;
+  }
   if(window.CIMNearbyMapActive){
     document.getElementById("visibleCount").textContent=
       "Comparables de proximité";
@@ -2008,6 +2014,8 @@ function renderSources(){
 
 function renderDetail(){
 
+  if(window.CIMSelectedTerritory)return;
+
   const address = addressesByKey.get(
     currentAddressKey
   );
@@ -2239,6 +2247,7 @@ window.CIMMap?.invalidateSize();
 })();
 </script>
 
+<script src="cim-navigation-territoriale.js"></script>
 <script src="cim-recherche-universelle.js"></script>
 <script src="cim-couches-cartographiques.js"></script>
 </body>
