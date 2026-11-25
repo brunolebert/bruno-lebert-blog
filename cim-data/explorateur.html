@@ -1363,12 +1363,21 @@ function selectAddress(key, recenter=true){
 
   if(!address) return;
 
+  window.CIMExternalAddress=null;
+  window.CIMSelectedTerritory=null;
+  document.body.classList.remove(
+    "cim-universal-mode","cim-territory-mode"
+  );
+  document.getElementById("cimTerritoryDossier")?.remove();
+
   currentAddressKey = key;
 
   if(recenter){
+    map.stop();
     map.setView(
       [address.latitude,address.longitude],
-      18
+      18,
+      {animate:false}
     );
   }
 

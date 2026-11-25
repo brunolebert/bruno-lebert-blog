@@ -182,7 +182,7 @@ async function initialize(){
     const keys=[...(keysByNumber.get(normalizeNumber(number))||[])];
     const found=keys.find(key=>parcels.has(key));
     if(found){
-      selectParcel(found,{recenter:true});
+      selectParcel(found,{recenter:false});
       if(keys.length>1)
         status(keys.length+" parcelles liées à cette adresse ; "+
           "première parcelle surlignée.");

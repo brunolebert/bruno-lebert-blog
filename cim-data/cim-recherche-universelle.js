@@ -343,6 +343,10 @@ function init(){
    if(!e.detail?.external){
      window.CIMExternalAddress=null;
      document.body.classList.remove("cim-universal-mode");
+      if(selectedMarker){
+        window.CIMMap?.removeLayer(selectedMarker);
+        selectedMarker=null;
+      }
    }
  });
  const style=document.createElement("style");

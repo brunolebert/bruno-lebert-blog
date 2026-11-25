@@ -222,7 +222,10 @@ async function update(){
     return;
   }
   const data=window.CIMData;
-  const address=window.CIMExternalAddress||
+  const external=window.CIMExternalAddress;
+  const address=(
+    external && String(external.key)===String(selectedKey)
+  ) ? external :
     data?.addresses?.find(a=>String(a.key)===String(selectedKey));
   if(!address){
     status.textContent="Sélectionne une adresse.";
