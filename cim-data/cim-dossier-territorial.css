@@ -1,0 +1,35 @@
+
+#cimTerritoryMarket {
+    margin-top:16px;
+    padding-top:12px;
+    border-top:1px solid #dbe2ea;
+}
+#cimTerritoryMarket h3 {
+    margin:0 0 8px;
+    font-size:16px;
+}
+#cimTerritoryMarket h4 {
+    margin:0 0 6px;
+    font-size:14px;
+}
+#cimTerritoryMarket p {
+    margin:5px 0;
+    line-height:1.4;
+}
+#cimTerritoryMarket small {
+    display:block;
+    margin-top:8px;
+    line-height:1.4;
+    color:#64748b;
+}
+.cim-territory-market-type {
+    margin:12px 0;
+    padding:12px;
+    border:1px solid #dbe2ea;
+    border-radius:8px;
+}
+.cim-territory-market-price {
+    display:block;
+    color:#0A3A8F;
+    font-size:24px;
+}

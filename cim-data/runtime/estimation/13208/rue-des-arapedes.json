@@ -1,0 +1,1 @@
+{"v":2,"code":"13208","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["5","rue des arapedes","2021-08-24",2021,"Appartement",55.0,315000.0,5727.272727272727,"A","13208|838|N|9"],["13","rue des arapedes","2023-03-02",2023,"Maison",60.0,859000.0,14316.666666666666,"A","13208|838|N|91"]]}

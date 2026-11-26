@@ -1,0 +1,1 @@
+{"v":2,"code":"13001","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","1","Rue  Calmette et Guérin","13100","Aix-en-Provence",5.43403,43.527248,"13001000CN0001"],["","4","Rue  Calmette et Guérin","13100","Aix-en-Provence",5.433738,43.527452,"13001000CP0011|13001000CP0010"]]}

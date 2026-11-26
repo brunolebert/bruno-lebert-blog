@@ -1,0 +1,1 @@
+{"v":2,"code":"13001","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","10","Avenue  Emile Gaujoux","13100","Aix-en-Provence",5.456104,43.533871,"13001000AY0115"],["","8","Avenue  Emile Gaujoux","13100","Aix-en-Provence",5.455968,43.533802,"13001000AY0115"]]}

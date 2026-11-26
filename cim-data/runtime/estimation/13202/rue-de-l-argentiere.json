@@ -1,0 +1,1 @@
+{"v":2,"code":"13202","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["4","rue de l argentiere","2021-02-15",2021,"Appartement",24.0,119850.0,4993.75,"A","13202|809|A|537"],["4","rue de l argentiere","2022-09-06",2022,"Appartement",35.0,262500.0,7500.0,"B","13202|809|A|537"]]}

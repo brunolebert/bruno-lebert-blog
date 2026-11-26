@@ -1,0 +1,1 @@
+{"v":2,"code":"13212","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["2","rue chicot","2024-10-03",2024,"Appartement",30.0,153000.0,5100.0,"B","13212|875|N|113"],["5","rue chicot","2021-07-21",2021,"Maison",76.0,660000.0,8684.21052631579,"B","13212|875|N|17"]]}

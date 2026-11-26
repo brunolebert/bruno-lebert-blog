@@ -1,0 +1,1 @@
+{"v":2,"code":"13001","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","1","Rue  Joseph Ravaisou","13100","Aix-en-Provence",5.440503,43.527887,"13001000AO0035"],["","2","Rue  Joseph Ravaisou","13100","Aix-en-Provence",5.4406,43.527905,"13001000AO0118"]]}

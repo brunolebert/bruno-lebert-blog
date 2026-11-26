@@ -1,0 +1,1 @@
+{"v":2,"code":"13205","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["15","rue de toulouse","2022-04-13",2022,"Appartement",31.0,135000.0,4354.8387096774195,"A","13205|821|A|82"],["5","rue de toulouse","2022-11-23",2022,"Appartement",30.0,132500.0,4416.666666666667,"A","13205|821|A|61"]]}

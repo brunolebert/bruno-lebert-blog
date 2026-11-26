@@ -1,0 +1,1 @@
+{"v":2,"code":"13001","fields":["id_ban_adresse","numero","nom_voie","code_postal","nom_commune","lon","lat","cad_parcelles"],"rows":[["","12","Avenue  Saint-John Perse","13090","Aix-en-Provence",5.423429,43.524051,"13001000PR0158|13001000PR0186|13001000PR0182|13001000PR0159"],["","2","Avenue  Saint-John Perse","13100","Aix-en-Provence",5.421103,43.525258,"13001000PO0061"]]}

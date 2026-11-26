@@ -1,0 +1,1 @@
+{"v":2,"code":"13210","fields":["numero_voie","voie","date_mutation","annee","type_local","surface_m2","valeur_eur","prix_m2","qualite","parcelle_key"],"rows":[["10","impasse lorrain","2021-04-21",2021,"Appartement",35.0,82500.0,2357.1428571428573,"A","13210|856|C|27"],["10","impasse lorrain","2024-04-15",2024,"Appartement",40.0,95000.0,2375.0,"A","13210|856|C|27"]]}
