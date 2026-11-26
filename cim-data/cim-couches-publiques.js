@@ -51,6 +51,7 @@ const CATEGORIES=[
 ];
 
 let layerPrix=null,layerPoi=null;
+let prixEnabled=true;
 let active=new Set();
 let version=0;
 let statusNode=null;
@@ -119,43 +120,122 @@ function init(){
  group.append(statusNode);
  menu.append(group);
 
- const legend=L.control({position:"bottomleft"});
- legend.onAdd=()=>{
-  const el=L.DomUtil.create("div","cim-prix-legend");
-  el.style.cssText=
-   "background:#ffffffeb;border:1px solid #cbd5e1;"+
-   "border-radius:8px;padding:9px 11px;"+
-   "font:11px/1.5 system-ui;box-shadow:0 2px 8px #0002";
-  const title=document.createElement("strong");
-  title.textContent="Prix médians indicatifs · €/m²";
-  el.append(title);
-  for(const [label,shade] of [
-   ["Moins de 2 000","#fee4a8"],
-   ["2 000 – 2 999","#ffc56b"],
-   ["3 000 – 3 999","#f99351"],
-   ["4 000 – 5 499","#e95743"],
-   ["5 500 et plus","#ae2648"],
-   ["Données insuffisantes","#9ca3af"]
-  ]){
+
+ const area=document.querySelector(".map-wrap");
+ if(!area)throw Error("Zone cartographique introuvable");
+
+ const overlay=document.createElement("aside");
+ overlay.id="cimLegendUnified2026";
+ overlay.setAttribute("aria-label","Légende cartographique");
+ overlay.style.cssText=[
+  "position:absolute",
+  "left:12px",
+  "bottom:18px",
+  "z-index:1100",
+  "background:rgba(255,255,255,.98)",
+  "border:2px solid #0A3A8F",
+  "box-shadow:0 3px 16px #0003",
+  "border-radius:11px",
+  "padding:11px 13px",
+  "font:12px/1.45 system-ui",
+  "color:#172b48",
+  "max-width:260px",
+  "max-height:65%",
+  "overflow:auto"
+ ].join(";");
+
+ const header=document.createElement("strong");
+ header.textContent="Légende de la carte";
+ header.style.cssText="display:block;font-size:14px;margin-bottom:8px";
+ overlay.append(header);
+
+ const label=document.createElement("label");
+ label.style.cssText=
+  "display:flex;gap:9px;align-items:center;cursor:pointer;"+
+  "font-weight:750;margin-bottom:7px";
+ const box=document.createElement("input");
+ box.id="cimPriceToggle";
+ box.type="checkbox";
+ box.checked=true;
+ box.style.cssText=
+  "width:20px;height:20px;accent-color:#0A3A8F;flex:none";
+ const caption=document.createElement("span");
+ caption.textContent="Afficher les prix territoriaux";
+ label.append(box,caption);
+ overlay.append(label);
+
+ const hint=document.createElement("div");
+ hint.id="cimPriceToggleHint";
+ hint.style.cssText="font-size:11px;color:#64748b;margin-bottom:8px";
+ overlay.append(hint);
+
+ function section(title,items){
+  const container=document.createElement("section");
+  container.style.cssText=
+   "border-top:1px solid #dbe3ed;padding-top:8px;margin-top:8px";
+  const heading=document.createElement("strong");
+  heading.textContent=title;
+  heading.style.cssText="display:block;margin-bottom:5px";
+  container.append(heading);
+  for(const [name,shade] of items){
    const row=document.createElement("div");
-   row.style.cssText="display:flex;align-items:center;gap:6px";
+   row.style.cssText="display:flex;align-items:center;gap:7px;margin:3px 0";
    const swatch=document.createElement("span");
    swatch.style.cssText=
-    "display:inline-block;width:11px;height:11px;"+
-    "background:"+shade+";border:1px solid #999;flex:none";
-   const t=document.createElement("span");
-   t.textContent=label;
-   row.append(swatch,t);
-   el.append(row);
+    "width:13px;height:13px;flex:none;"+
+    "background:"+shade+";border:1px solid #7d8795;border-radius:3px";
+   const text=document.createElement("span");
+   text.textContent=name;
+   row.append(swatch,text);
+   container.append(row);
   }
-  return el;
- };
- legend.addTo(map);
- const legendEl=document.querySelector(".cim-prix-legend");
+  return container;
+ }
+
+ const comparableLegend=section("Points des comparables · €/m²",[
+  ["Inférieur au 1er quartile","#377eb8"],
+  ["Du 1er quartile à la médiane","#55a868"],
+  ["De la médiane au 3e quartile","#e39c37"],
+  ["Supérieur au 3e quartile","#c44e52"]
+ ]);
+ overlay.append(comparableLegend);
+
+ const priceLegend=section("Prix médians territoriaux · €/m²",[
+  ["Moins de 2 000 €","#fee4a8"],
+  ["2 000 à 2 999 €","#ffc56b"],
+  ["3 000 à 3 999 €","#f99351"],
+  ["4 000 à 5 499 €","#e95743"],
+  ["5 500 € et plus","#ae2648"],
+  ["Données insuffisantes","#9ca3af"]
+ ]);
+ overlay.append(priceLegend);
+
+ const note=document.createElement("small");
+ note.textContent=
+  "Les couleurs du fond de carte ne représentent pas des prix.";
+ note.style.cssText="display:block;margin-top:8px;color:#64748b";
+ overlay.append(note);
+
+ area.append(overlay);
+ L.DomEvent.disableClickPropagation(overlay);
+ L.DomEvent.disableScrollPropagation(overlay);
+
+ box.addEventListener("change",()=>{
+  prixEnabled=box.checked;
+  priceVisibility();
+ });
 
  function priceVisibility(){
-  const show=map.getZoom()<=12;
-  if(legendEl)legendEl.hidden=!show;
+  const territorialZoom=map.getZoom()<=12;
+  const show=prixEnabled&&territorialZoom;
+  const hint=document.getElementById("cimPriceToggleHint");
+  if(hint)hint.textContent=!prixEnabled
+    ?"Couche des prix désactivée"
+    :territorialZoom
+     ?"Prix territoriaux affichés sur la carte"
+     :"Dézoomer pour voir les aplats de prix territoriaux";
+  const legend=document.getElementById("cimLegendUnified2026");
+  if(legend)legend.style.display="block";
   if(!layerPrix)return;
   if(show&&!map.hasLayer(layerPrix))layerPrix.addTo(map);
   else if(!show&&map.hasLayer(layerPrix))map.removeLayer(layerPrix);
