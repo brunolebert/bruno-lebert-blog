@@ -847,6 +847,14 @@ button:focus-visible,input:focus-visible{
 }
 </style>
 <link rel="stylesheet" href="cim-dossier-territorial.css">
+<style id="cimSiteNavigationStyle">
+.cim-site-nav{display:flex;gap:9px;align-items:center;flex-wrap:wrap;flex:none;margin-left:auto;order:3}
+.cim-site-link{display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;border:1px solid #d3e2f2;border-radius:9px;background:#f6faff;color:#0a3a8f;font-size:12px;font-weight:750;text-decoration:none;white-space:nowrap}
+.cim-site-link:hover{background:#e7f3ff;border-color:#a9c9e9}
+.cim-site-link:focus-visible{outline:3px solid #1b63c6;outline-offset:3px}
+@media(max-width:1150px){.topbar{flex-wrap:wrap}.cim-site-nav{margin-left:auto}}
+@media(max-width:760px){.cim-site-nav{order:1;width:100%;margin:0;justify-content:flex-start}.cim-site-link{flex:1;min-width:125px}.search-wrap{order:2;max-width:none;width:100%}}
+</style>
 </head>
 
 <body>
@@ -862,9 +870,11 @@ button:focus-visible,input:focus-visible{
        width="48" height="48" style="object-fit:contain;flex:none">
   <div>
     <h1 class="brand-title" style="margin:0">CIM Data</h1>
-    <div class="brand-sub">Bruno Lebert · Immobilier</div>
+    <div class="brand-sub">Prix immobiliers · Ventes signées · Comparables</div>
   </div>
 </div>
+
+ <nav class="cim-site-nav" aria-label="Navigation vers le site et les dossiers immobiliers"><a class="cim-site-link" href="../index.html">← Retour au site</a><a class="cim-site-link cim-site-guides" href="../bibliotheque-immobilier-marseille.html">Dossiers et conseils</a></nav>
 
  <div class="search-wrap">
    <input
