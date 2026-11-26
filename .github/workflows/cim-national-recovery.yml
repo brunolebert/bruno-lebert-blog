@@ -1,0 +1,64 @@
+name: CIM Data national recovery verification
+
+on:
+  push:
+    branches:
+      - integration/cim-data-public-20261113
+    paths:
+      - .github/workflows/cim-national-recovery.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-national-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download national SQLite from GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: brunolebert/bruno-lebert-blog
+        run: |
+          mkdir -p /tmp/cim-recovery
+          gh release download cim-data-snapshot-20261126             --repo "$GH_REPO"             --pattern "cim-national.sqlite"             --dir /tmp/cim-recovery
+
+      - name: Verify SHA256 and database integrity
+        run: |
+          python3 - <<'CHECK'
+          import hashlib, sqlite3
+          from pathlib import Path
+
+          db=Path("/tmp/cim-recovery/cim-national.sqlite")
+          assert db.is_file(), "REMOTE_DB_MISSING"
+
+          expected="bccaa9503e6bfdf23299433140c083cbe96ea8ac680fb7f59652bf77b70b1a6f"
+          h=hashlib.sha256()
+          with db.open("rb") as f:
+              while chunk:=f.read(8*1024*1024):
+                  h.update(chunk)
+          assert h.hexdigest()==expected, "SHA256_MISMATCH"
+
+          c=sqlite3.connect("file:"+str(db)+"?mode=ro",uri=True)
+          assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+
+          minimum={
+              "rnic":600000,
+              "dvf_prioritaire":1000000,
+              "arcep_communes_2026t2":100000,
+          }
+          for table,low in minimum.items():
+              count=c.execute("SELECT COUNT(*) FROM "+table).fetchone()[0]
+              assert count>=low,(table,count)
+              print(f"{table.upper()}={count}",flush=True)
+          c.close()
+
+          print("SOURCE=GITHUB_RELEASE",flush=True)
+          print("MAC_DEPENDENCY=NONE",flush=True)
+          print("REMOTE_RESTORE_VERIFIED=YES",flush=True)
+          CHECK
