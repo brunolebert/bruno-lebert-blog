@@ -94,12 +94,45 @@ async function show(address){
  if(!arcep){
   line(el,"Réseaux","Statistiques non disponibles");
  }else{
+  const d=arcep.donnees||{};
+  const first=key=>Array.isArray(d[key])?d[key][0]:null;
+  const fibre=first("FIBRE_TECHNO");
+  const dsl=first("DSL");
+  const debit=first("DEBITS_FILAIRES");
+  const locaux=Number(fibre?.nbr||dsl?.nbr||0);
+  const formatted=n=>Number(n).toLocaleString("fr-FR");
+  const measure=(label,count)=>{
+   const n=Number(count);
+   if(!Number.isFinite(n)||n<0||!locaux||n>locaux)return;
+   line(el,label,formatted(n)+" locaux · "+
+    (100*n/locaux).toLocaleString("fr-FR",{
+     maximumFractionDigits:1})+" %");
+  };
   line(el,"Période",arcep.periode);
-  line(el,"Périmètre","Commune entière");
-  line(el,"Jeux disponibles",
-   Object.keys(arcep.donnees||{}).join(", "));
-  line(el,"Éligibilité à cette adresse",
-   "Non vérifiée — données communales");
+  line(el,"Territoire statistique",
+   arcep.territoire_statistique||
+   (arcep.code_commune_source==="13055"
+    ?"Marseille, commune entière":"Commune entière"));
+  if(locaux){
+   line(el,"Locaux recensés",formatted(locaux));
+   measure("Fibre FTTH",fibre?.elig_ftth);
+   measure("Cuivre (DSL)",fibre?.elig_cu);
+   measure("ADSL · au moins 3 Mbit/s",dsl?.elig_hd3);
+   measure("Très haut débit filaire · au moins 100 Mbit/s",
+    debit?.elig_thd100);
+  }else{
+   line(el,"Réseaux","Statistiques indisponibles");
+  }
+  line(el,"Éligibilité au numéro de rue",
+   "Non vérifiée — statistiques de la commune entière");
+  const warning=document.createElement("small");
+  warning.textContent=
+   "Les technologies peuvent se cumuler : ne pas additionner "+
+   "les pourcentages. Le très haut débit filaire ne correspond "+
+   "pas exclusivement à la fibre FTTH. "+
+   "La 4G fixe ARCEP n'est pas une mesure de couverture mobile.";
+  warning.style.cssText="display:block;color:#64748b;margin-top:7px";
+  el.append(warning);
  }
  const note=document.createElement("small");
  note.textContent="RNIC : rapprocher l'adresse et confirmer le mandat. ARCEP : les statistiques communales ne prouvent pas l'éligibilité d'un immeuble.";
