@@ -6,7 +6,51 @@ const indexPromise=fetch(ROOT+"index.json").then(r=>{
   if(!r.ok)throw Error("Index HTTP "+r.status);
   return r.json();
 });
+
 const cache=new Map();
+// CIM_PUB03X13_PIECES
+// CIM_DATA_PIECES_TOUS_TERRITOIRES
+const allPiecesCache=new Map();
+function loadPiecesAny(code){
+  if(!allPiecesCache.has(code)){
+    const pending=fetch(ROOT+code+"-pieces.json")
+      .then(response=>{
+        if(!response.ok)
+          throw Error("Pièces DVF "+code+" : HTTP "+response.status);
+        return response.json();
+      })
+      .then(data=>{
+        if(data.code!==code||!Array.isArray(data.pieces))
+          throw Error("Pièces DVF "+code+" : index incompatible");
+        return data.pieces;
+      })
+      .catch(error=>{
+        allPiecesCache.delete(code);
+        throw error;
+      });
+    allPiecesCache.set(code,pending);
+  }
+  return allPiecesCache.get(code);
+}
+
+let pieces13205Promise=null;
+function loadPieces13205(){
+ if(!pieces13205Promise){
+  pieces13205Promise=fetch(ROOT+"13205-pieces.json")
+   .then(r=>{
+    if(!r.ok)throw Error("Index pièces indisponible");
+    return r.json();
+   })
+   .then(d=>{
+    if(!Array.isArray(d.pieces)||d.pieces.length!==5204)
+     throw Error("Index pièces incompatible");
+    return d.pieces;
+   })
+   .catch(e=>{pieces13205Promise=null;throw e;});
+ }
+ return pieces13205Promise;
+}
+
 let generation=0, radius=100, selectedKey=null;
 let layer=null, circle=null, selectedGroup=null;
 let visibleGroups=[], currentMatches=[];
@@ -77,7 +121,154 @@ medianBox.style.cssText=[
   "margin:10px 0 13px",
   "text-align:center"
 ].join(";");
-panel.append(title,controls,filters,filterHelp,status,medianBox,selected,list,note);
+panel.append(title,controls,filters,status,medianBox,selected,list);
+
+
+// CIM_PUB03X09_FILTERS — panneau unique et filtres DVF disponibles.
+let activePieces=new Set();
+const filterTrigger=document.createElement("button");
+filterTrigger.type="button";
+filterTrigger.textContent="☷ Filtres";
+filterTrigger.style.cssText="display:block;width:100%;padding:11px;margin:0 0 10px;background:#1685ed;color:white;border:0;border-radius:8px;font:700 15px system-ui;cursor:pointer";
+panel.insertBefore(filterTrigger,controls);
+filters.style.display="none";
+filterHelp.textContent="Critères appliqués aux comparables calculés. Les pièces nécessitent des données détaillées vérifiées.";
+
+const filterOverlay=document.createElement("div");
+filterOverlay.id="cimFilterOverlay";
+filterOverlay.hidden=true;
+filterOverlay.style.cssText="position:fixed;inset:0;z-index:99999;background:rgba(12,30,52,.38);overflow:auto;padding:15px;box-sizing:border-box";
+const filterDialog=document.createElement("section");
+filterDialog.setAttribute("role","dialog");
+filterDialog.setAttribute("aria-modal","true");
+filterDialog.setAttribute("aria-label","Filtres immobiliers");
+filterDialog.style.cssText="max-width:590px;margin:30px auto;background:#fff;border-radius:13px;padding:24px;color:#243047;box-shadow:0 16px 60px #0003;font:15px/1.5 system-ui";
+filterDialog.innerHTML=`
+<div style="display:flex;justify-content:space-between;align-items:center">
+ <strong style="font-size:24px">Filtres</strong>
+ <button type="button" data-filter-close aria-label="Fermer" style="font-size:25px;background:none;border:0;cursor:pointer">×</button>
+</div>
+<h3>Type de bien</h3>
+<div style="display:flex;flex-wrap:wrap;gap:20px">
+ <label><input type="checkbox" data-filter-type="Maison" checked> Maison</label>
+ <label><input type="checkbox" data-filter-type="Appartement" checked> Appartement</label>
+</div>
+<hr style="margin:23px 0;border:0;border-top:1px solid #ddd">
+<h3>Nombre de pièces</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+ <label><input type="checkbox" data-filter-pieces="1"> Studio</label>
+ <label><input type="checkbox" data-filter-pieces="2"> 2 pièces</label>
+ <label><input type="checkbox" data-filter-pieces="3"> 3 pièces</label>
+ <label><input type="checkbox" data-filter-pieces="4"> 4 pièces</label>
+ <label><input type="checkbox" data-filter-pieces="5+"> 5 pièces et +</label>
+</div>
+
+<hr style="margin:23px 0;border:0;border-top:1px solid #ddd">
+<h3>Prix de vente</h3>
+<div data-filter-price-label style="margin-bottom:8px"></div>
+<label style="display:block">Minimum
+ <input data-filter-price-min type="range" min="0" max="2000000" step="10000" value="0" style="display:block;width:100%">
+</label>
+<label style="display:block">Maximum
+ <input data-filter-price-max type="range" min="0" max="2000000" step="10000" value="2000000" style="display:block;width:100%">
+</label>
+<hr style="margin:23px 0;border:0;border-top:1px solid #ddd">
+<h3>Surface</h3>
+<div data-filter-surface-label style="margin-bottom:8px"></div>
+<label style="display:block">Minimum
+ <input data-filter-surface-min type="range" min="0" max="500" step="5" value="0" style="display:block;width:100%">
+</label>
+<label style="display:block">Maximum
+ <input data-filter-surface-max type="range" min="0" max="500" step="5" value="500" style="display:block;width:100%">
+</label>
+<div style="display:flex;justify-content:space-between;gap:12px;margin-top:25px">
+ <button type="button" data-filter-reset style="padding:12px;border:1px solid #b9c8db;border-radius:8px;background:white;cursor:pointer">Effacer</button>
+ <button type="button" data-filter-apply style="padding:12px 22px;border:0;border-radius:8px;background:#1685ed;color:white;font-weight:700;cursor:pointer">Appliquer</button>
+</div>`;
+filterOverlay.append(filterDialog);
+
+const filterQ=selector=>filterDialog.querySelector(selector);
+const priceLow=filterQ("[data-filter-price-min]");
+const priceHigh=filterQ("[data-filter-price-max]");
+const areaLow=filterQ("[data-filter-surface-min]");
+const areaHigh=filterQ("[data-filter-surface-max]");
+const money=v=>Number(v).toLocaleString("fr-FR")+" €";
+function renderFilterLabels(){
+ filterQ("[data-filter-price-label]").textContent=
+  (Number(priceLow.value)===0?"Prix minimum libre":money(priceLow.value))+
+  " — "+(Number(priceHigh.value)===2000000?"Prix maximum libre":money(priceHigh.value));
+ filterQ("[data-filter-surface-label]").textContent=
+  (Number(areaLow.value)===0?"Surface minimum libre":areaLow.value+" m²")+
+  " — "+(Number(areaHigh.value)===500?"Surface maximum libre":areaHigh.value+" m²");
+}
+function filterRange(a,b,changed){
+ if(Number(a.value)>Number(b.value)){
+  if(changed===a)b.value=a.value;else a.value=b.value;
+ }
+ renderFilterLabels();
+}
+priceLow.addEventListener("input",()=>filterRange(priceLow,priceHigh,priceLow));
+priceHigh.addEventListener("input",()=>filterRange(priceLow,priceHigh,priceHigh));
+areaLow.addEventListener("input",()=>filterRange(areaLow,areaHigh,areaLow));
+areaHigh.addEventListener("input",()=>filterRange(areaLow,areaHigh,areaHigh));
+
+function closeFilter(){
+ filterOverlay.hidden=true;
+ filterTrigger.focus();
+}
+filterTrigger.addEventListener("click",()=>{
+ const current=kind.value;
+ for(const box of filterDialog.querySelectorAll("[data-filter-type]")){
+  box.checked=current==="all"||box.dataset.filterType===current;
+ }
+ for(const box of filterDialog.querySelectorAll("[data-filter-pieces]"))
+  box.checked=activePieces.has(box.dataset.filterPieces);
+ priceLow.value=priceMin.value||0;
+ priceHigh.value=priceMax.value||2000000;
+ areaLow.value=surfaceMin.value||0;
+ areaHigh.value=surfaceMax.value||500;
+ renderFilterLabels();
+ filterOverlay.hidden=false;
+ filterQ("[data-filter-close]").focus();
+});
+filterQ("[data-filter-close]").addEventListener("click",closeFilter);
+filterOverlay.addEventListener("click",e=>{
+ if(e.target===filterOverlay)closeFilter();
+});
+filterOverlay.addEventListener("keydown",e=>{
+ if(e.key==="Escape")closeFilter();
+});
+filterQ("[data-filter-reset]").addEventListener("click",()=>{
+ for(const box of filterDialog.querySelectorAll("[data-filter-type]"))box.checked=true;
+ for(const box of filterDialog.querySelectorAll("[data-filter-pieces]"))
+  box.checked=false;
+ priceLow.value=0;priceHigh.value=2000000;
+ areaLow.value=0;areaHigh.value=500;
+ renderFilterLabels();
+});
+filterQ("[data-filter-apply]").addEventListener("click",()=>{
+ const checked=[...filterDialog.querySelectorAll("[data-filter-type]:checked")]
+  .map(box=>box.dataset.filterType);
+ if(!checked.length){
+  filterQ("[data-filter-price-label]").textContent="Sélectionnez au moins un type de bien.";
+  return;
+ }
+ kind.value=checked.length===2?"all":checked[0];
+ activePieces=new Set(
+  [...filterDialog.querySelectorAll("[data-filter-pieces]:checked")]
+   .map(box=>box.dataset.filterPieces)
+ );
+ priceMin.value=Number(priceLow.value)===0?"":priceLow.value;
+ priceMax.value=Number(priceHigh.value)===2000000?"":priceHigh.value;
+ surfaceMin.value=Number(areaLow.value)===0?"":areaLow.value;
+ surfaceMax.value=Number(areaHigh.value)===500?"":areaHigh.value;
+ const legacy=document.getElementById("typeFilter");
+ if(legacy)legacy.value=kind.value;
+ update();
+ closeFilter();
+});
+if(document.body)document.body.append(filterOverlay);
+else document.addEventListener("DOMContentLoaded",()=>document.body.append(filterOverlay),{once:true});
 
 function price(v){return Math.round(v).toLocaleString("fr-FR")+" €/m²";}
 function median(values){
@@ -154,33 +345,83 @@ function card(m){
   text(el,m.date+" · "+m.code+" · parcelle "+m.parcelle,
     "color:#637187;font-size:11px");
   el.addEventListener("click",()=>{
-    chooseGroup(visibleGroups.find(g=>g.items.includes(m)));
+    chooseSale(m,visibleGroups.find(g=>g.items.includes(m)));
   });
   return el;
 }
-function chooseGroup(group){
-  if(!group)return;
-  selectedGroup=group.id;
-  selected.replaceChildren();
+function placeSelection(){
   const right=document.querySelector(".right");
   const headNode=right?.querySelector(".right-head");
   if(headNode&&selected.parentElement!==right)
     headNode.insertAdjacentElement("afterend",selected);
-  const head=text(selected,
-    group.items.length+" comparable(s) sur cette position",
-    "font-weight:700;margin:8px 0");
-  for(const m of group.items)selected.append(cardSimple(m));
-  selected.style.cssText="margin-bottom:10px;padding:9px;border-left:3px solid #0A3A8F;background:#edf4ff";
+  selected.style.cssText=
+    "margin-bottom:10px;padding:9px;border-left:3px solid #0A3A8F;background:#edf4ff";
+}
+function comparableContext(){
+  const right=document.querySelector(".right");
+  const eyebrow=right?.querySelector(".right-head .eyebrow");
+  if(eyebrow)eyebrow.textContent="Adresse étudiée · comparables";
+  const heading=document.getElementById("detailTitle");
+  const searched=document.getElementById("search")?.value?.trim();
+  if(heading&&searched)heading.textContent=searched;
+  const subtitle=document.getElementById("detailSubtitle");
+  if(subtitle)subtitle.textContent=
+    "Vente comparable sélectionnée ci-dessous";
+  document.getElementById("detail")?.replaceChildren();
+}
+function chooseSale(m,group){
+  if(!m||!group)return;
+  selectedGroup=group.id;
+  comparableContext();
+  selected.replaceChildren();
+  placeSelection();
+  text(selected,"Vente comparable sélectionnée",
+    "font-weight:800;margin:8px 0");
+  text(selected,(m.numero+" "+m.voie).trim()+" · "+Math.round(m.d)+" m",
+    "font-weight:700;margin:4px 0");
+  text(selected,
+    (Number(m.value)>0
+      ?Math.round(Number(m.value)).toLocaleString("fr-FR")+" € · ":"")+
+    price(m.price)+" · "+m.type+
+    (Number(m.surface)>0?" · "+m.surface+" m²":""),
+    "font-weight:700;color:#0A3A8F");
+  text(selected,"Date : "+m.date+
+    " · Code : "+m.code+" · Parcelle : "+m.parcelle,
+    "font-size:11px;color:#637187;margin-top:5px");
+  text(selected,"Transaction comparable : ce prix ne constitue pas une estimation du bien étudié.",
+    "font-size:11px;color:#637187;margin-top:6px");
   if(group.marker)group.marker.bringToFront();
 }
-function cardSimple(m){
-  const item=document.createElement("div");
-  item.style.cssText="margin:5px 0;padding-bottom:5px;border-bottom:1px solid #d4dfeb";
-  text(item,(m.numero+" "+m.voie).trim()+" · "+Math.round(m.d)+" m","font-weight:600");
-  text(item,(Number(m.value)>0?Math.round(Number(m.value)).toLocaleString("fr-FR")+" € · ":"")+
+function chooseGroup(group){
+  if(!group)return;
+  if(group.items.length===1){
+    chooseSale(group.items[0],group);
+    return;
+  }
+  selectedGroup=group.id;
+  comparableContext();
+  selected.replaceChildren();
+  placeSelection();
+  text(selected,group.items.length+
+    " ventes sur cette position — choisissez une transaction",
+    "font-weight:700;margin:8px 0");
+  for(const m of group.items)selected.append(cardSimple(m,group));
+  if(group.marker)group.marker.bringToFront();
+}
+function cardSimple(m,group){
+  const item=document.createElement("button");
+  item.type="button";
+  item.style.cssText=
+    "display:block;width:100%;text-align:left;background:white;color:#172b48;cursor:pointer;margin:5px 0;padding:7px;border:1px solid #d4dfeb;border-radius:5px";
+  text(item,(m.numero+" "+m.voie).trim()+" · "+Math.round(m.d)+" m",
+    "font-weight:600");
+  text(item,(Number(m.value)>0
+    ?Math.round(Number(m.value)).toLocaleString("fr-FR")+" € · ":"")+
     price(m.price)+" · "+m.type+
-    (m.surface?" · "+m.surface+" m²":""));
-  text(item,m.date+" · parcelle "+m.parcelle,"font-size:11px;color:#637187");
+    (Number(m.surface)>0?" · "+m.surface+" m²":""));
+  text(item,m.date+" · parcelle "+m.parcelle,
+    "font-size:11px;color:#637187");
+  item.addEventListener("click",()=>chooseSale(m,group));
   return item;
 }
 const buttons=[];
@@ -260,10 +501,21 @@ async function update(){
       .filter(([c,t])=>overlaps(t.bbox,lon,lat,radius))
       .map(([c])=>c);
     const sets=await Promise.all(codes.map(load));
+    const piecesByCode=activePieces.size
+     ?await Promise.all(codes.map(code=>
+       loadPiecesAny(code)))
+     :codes.map(()=>null);
     if(serial!==generation)return;
     const matches=[];
     for(let i=0;i<sets.length;i++){
-      for(const r of sets[i]){
+      for(let ri=0;ri<sets[i].length;ri++){
+        const r=sets[i][ri];
+        const nbPieces=piecesByCode[i]?.[ri]??null;
+        if(activePieces.size){
+         if(!Number.isInteger(nbPieces)||nbPieces<1)continue;
+         const category=nbPieces>=5?"5+":String(nbPieces);
+         if(!activePieces.has(category))continue;
+        }
         const d=distance(lon,lat,Number(r[0]),Number(r[1]));
         const p=Number(r[8]);
         if(d>radius||!Number.isFinite(p)||p<=0)continue;
@@ -374,6 +626,11 @@ window.addEventListener("cim:territory-selected",()=>{
   if(count)count.textContent="Vue territoriale";
 });
 
+window.addEventListener("cim:parcel-map-selected",()=>{
+  selectedGroup=null;
+  selected.replaceChildren();
+  if(selected.parentElement!==panel)panel.insertBefore(selected,list);
+});
 window.addEventListener("cim:ready",init);
 window.addEventListener("cim:address-selected",e=>{
   selectedKey=e.detail?.key??null;update();

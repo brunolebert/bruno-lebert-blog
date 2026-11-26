@@ -58,6 +58,7 @@ async function initialize(){
   }
 
   const parcelLayer=L.featureGroup().addTo(map);
+  window.CIMParcelLayer=parcelLayer;
   const parcels=new Map();
   let selected=null;
   let pendingAddress=null;
@@ -133,8 +134,9 @@ async function initialize(){
 
     const info=document.createElement("div");
     info.textContent=numbers.length
-      ? "Adresse(s) BAN associée(s) : "+numbers.join(", ")
-      : "Aucune adresse BAN du boulevard Chave associée";
+      ? "Adresse(s) identifiée(s) : "+
+        numbers.map(n=>n+" boulevard Chave, 13005 Marseille").join(" · ")
+      : "Aucune adresse BAN associée dans les données disponibles";
 
     const note=document.createElement("small");
     note.textContent="Une parcelle peut correspondre à plusieurs "+
@@ -160,19 +162,24 @@ async function initialize(){
     numbers.sort((a,b)=>a.localeCompare(b,"fr",{numeric:true}));
 
     if(fromMap){
-      const address=numbers
-        .map(n=>data.addresses.find(a=>
-          normalizeNumber(a.key)===n))
-        .find(Boolean);
-      if(address){
-        window.CIMSelectAddress(address.key,false);
-      }else{
-        document.getElementById("detailTitle").textContent=
-          "Parcelle "+entry.idu;
-        document.getElementById("detailSubtitle").textContent=
-          "Parcelle cadastrale · aucune adresse liée dans ce témoin";
-        document.getElementById("detail").replaceChildren();
-      }
+      const detail=document.getElementById("detail");
+      detail?.replaceChildren();
+      const right=document.querySelector(".right");
+      const eyebrow=right?.querySelector(".right-head .eyebrow");
+      if(eyebrow)eyebrow.textContent="Parcelle sélectionnée";
+      const title=document.getElementById("detailTitle");
+      if(title)title.textContent=numbers.length
+        ? numbers.map(n=>n+" boulevard Chave, 13005 Marseille").join(" · ")
+        : "Parcelle cadastrale "+entry.idu;
+      const subtitle=document.getElementById("detailSubtitle");
+      if(subtitle)subtitle.textContent=numbers.length
+        ? "Parcelle cadastrale "+entry.idu+" · "+
+          numbers.length+" adresse(s) BAN associée(s)"
+        : "Référence cadastrale "+entry.idu+
+          " · aucune adresse BAN associée dans ce témoin";
+      window.dispatchEvent(new CustomEvent("cim:parcel-map-selected",{
+        detail:{key,idu:entry.idu}
+      }));
     }
     updateCard(key);
     status("Parcelle sélectionnée : "+entry.idu);

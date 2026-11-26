@@ -35,6 +35,11 @@ const territoryPromise=fetch(
 }).then(j=>window.CIMTerritorySearch.createIndex(j))
 .catch(()=>null);
 
+const postalIndexPromise=fetch(root+"index-codes-postaux.json")
+ .then(response=>{
+  if(!response.ok)throw Error("Index postal indisponible");
+  return response.json();
+ });
 const banCache=new Map();
 let serial=0,activeStreet=null,selectedMarker=null;
 let initialized=false;
@@ -176,15 +181,6 @@ function displayAddress(a,s){
  leaveTerritory();
  clear();
  input.value=addressLabel(a);
- const isPilot=s.code==="13205"&&s.slug==="boulevard-chave";
- if(isPilot&&window.CIMSelectAddress&&
-    window.CIMData?.addresses?.some(x=>x.key===String(a.numero))){
-   window.CIMExternalAddress=null;
-   document.body.classList.remove("cim-universal-mode");
-   window.CIMSelectAddress(String(a.numero),true);
-   if(selectedMarker){map.removeLayer(selectedMarker);selectedMarker=null;}
-   return;
- }
  const id="universal:"+s.code+":"+s.slug+":"+String(a.numero);
  const external={
    key:id,latitude:lat,longitude:lon,label:addressLabel(a),
@@ -225,10 +221,6 @@ function displayAddress(a,s){
  line("Commune",s.commune);
  line("Parcelle(s) référencée(s)",
    external.parcelles||"Non renseignée dans ce fichier BAN");
- const note=document.createElement("p");
- note.textContent="Dossier métier en cours de raccordement : copropriété, syndic, immatriculation, DPE, urbanisme, risques et historique DVF ne sont pas encore certifiés pour cette adresse.";
- note.style.cssText="padding:10px;background:#edf3fc;border-radius:8px";
- dossier.append(note);
 
  window.dispatchEvent(new CustomEvent("cim:address-selected",{
    detail:{key:id,external:true,address:external}
@@ -278,6 +270,37 @@ async function suggest(){
       option(t.commune,"Commune · "+t.code,
         ()=>displayTerritory(t));
   }
+
+
+   // CIM_POSTAL_GLOBAL_V3
+   if(/^\d{5}$/.test(q)){
+    const indexPostal=await postalIndexPromise;
+    if(token!==serial)return;
+    const accepted=new Set(indexPostal[q]||[]);
+    const byCode=new Map();
+
+    for(const street of all){
+     if(accepted.has(street.code)&&!byCode.has(street.code))
+      byCode.set(street.code,street);
+    }
+
+    for(const [code,street] of byCode){
+     const territory=territorial?.exact(street.commune)
+      ?.find(t=>String(t.code)===code);
+
+     option(
+      street.commune+" · "+q,
+      "Commune ou arrondissement",
+      ()=>territory
+       ?displayTerritory(territory)
+       :(activeStreet=street,renderStreet(street,null,++serial))
+     );
+    }
+
+    if(!byCode.size)
+     message("Aucune commune couverte pour ce code postal");
+    return;
+   }
 
   const found=matches(q,all);
   if(!found.length){
@@ -353,7 +376,7 @@ function init(){
  style.textContent=`
  body.cim-universal-mode .right .tabs,
  body.cim-universal-mode .right #detail,
- body.cim-universal-mode .right .cim-fold,
+
  body.cim-universal-mode .left .cim-fold{display:none!important}
  #cimUniversalDossier{border-top:1px solid #dce4ef}
 

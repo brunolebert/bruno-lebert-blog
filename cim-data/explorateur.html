@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
+<link rel="icon" type="image/png" href="assets/logo-bruno-lebert.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
@@ -848,20 +849,20 @@ button:focus-visible,input:focus-visible{
 
 <body>
 
-<div role="status" style="background:#0A3A8F;color:white;padding:9px 18px;text-align:center;font:600 13px system-ui">
-  CIM Data · Explorateur immobilier ·
-  Comparables calculés (distincts des mutations DVF) · Non publié
-</div>
 
 
 <div class="app">
 
 <header class="topbar">
 
- <div class="brand">
-   <div class="brand-title">Explorateur immobilier</div>
-   <div class="brand-sub">CIM Data · Explorateur immobilier</div>
- </div>
+ <div class="brand" style="display:flex;align-items:center;gap:10px">
+  <img src="assets/logo-bruno-lebert.png" alt="Symbole Bruno Lebert"
+       width="48" height="48" style="object-fit:contain;flex:none">
+  <div>
+    <div class="brand-title">CIM Data</div>
+    <div class="brand-sub">Bruno Lebert · Immobilier</div>
+  </div>
+</div>
 
  <div class="search-wrap">
    <input
@@ -879,9 +880,6 @@ button:focus-visible,input:focus-visible{
    <div id="suggestions" class="suggestions"></div>
  </div>
 
- <div class="source-chip">
-   BAN · DVF · Comparables 2021–2025
- </div>
 
 </header>
 
@@ -938,7 +936,7 @@ button:focus-visible,input:focus-visible{
 
    <div style="height:10px"></div>
 
-   <select id="typeFilter" class="type-select">
+   <select id="typeFilter" class="type-select" style="display:none" aria-hidden="true" tabindex="-1">
      <option value="all">Tous types</option>
      <option value="Appartement">Appartement</option>
      <option value="Maison">Maison</option>
@@ -2216,12 +2214,12 @@ left.append(advanced);
 const dossier=document.createElement("div");
 dossier.className="cim-dossier";
 const entries=[
-  ["Immeuble","Informations de l'immeuble : consulter l'historique disponible ci-dessous. Enrichissement à poursuivre."],
-  ["Cadastre","Parcelles consultables directement sur la carte. Les correspondances adresse/parcelle restent à contrôler pour chaque bien."],
-  ["Syndic et copropriété","Données du syndic et de la copropriété non encore intégrées et certifiées pour cette adresse."],
-  ["DPE","DPE individualisé non encore intégré et certifié pour cette adresse."],
-  ["Urbanisme","PLU et règles d'urbanisme à raccorder à la parcelle et à contrôler."],
-  ["Risques","Risques réglementaires et environnementaux à raccorder et à contrôler à l'adresse."]
+  ["Immeuble","Informations disponibles à consolider à l'adresse."],
+  ["Cadastre","Références et adresses associées accessibles par la carte."],
+  ["Syndic et copropriété","Données RNIC à collecter et à relier à l'immeuble."],
+  ["DPE","Diagnostics ADEME à collecter et à rapprocher."],
+  ["Urbanisme","Règles PLU et zonage à relier aux parcelles."],
+  ["Risques","Risques réglementaires et environnementaux à relier à l'adresse."]
 ];
 for(const [name,description] of entries){
   const details=document.createElement("details");
@@ -2260,6 +2258,7 @@ window.CIMMap?.invalidateSize();
 <script src="cim-navigation-territoriale.js"></script>
 <script src="cim-recherche-universelle.js"></script>
 <script src="cim-couches-cartographiques.js"></script>
+<script src="cim-couches-publiques.js"></script>
 <script src="cim-dossier-territorial.js"></script>
 </body>
 </html>
