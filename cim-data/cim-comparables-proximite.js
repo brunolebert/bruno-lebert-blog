@@ -54,6 +54,7 @@ function loadPieces13205(){
 let generation=0, radius=100, selectedKey=null;
 let layer=null, circle=null, selectedGroup=null;
 let visibleGroups=[], currentMatches=[];
+let cimFocusedSaleMarker=null;
 
 const panel=document.createElement("section");
 panel.id="cimNearbyComparables";
@@ -314,6 +315,11 @@ function text(parent,value,css){
   return el;
 }
 function clear(){
+  if(cimFocusedSaleMarker&&window.CIMMap){
+    window.CIMMap.removeLayer(cimFocusedSaleMarker);
+    cimFocusedSaleMarker=null;
+  }
+  window.CIMSelectedComparablePosition=null;
   if(layer)layer.clearLayers();
   if(circle){window.CIMMap?.removeLayer(circle);circle=null;}
   selected.replaceChildren();
@@ -333,6 +339,22 @@ function mountMap(){
   }
   return true;
 }
+function saleKey(m){
+ return [m.code,m.parcelle,m.date,m.value,
+         m.surface,m.lon,m.lat].join("|");
+}
+function markSelectedCard(m){
+ const key=m?saleKey(m):null;
+ for(const button of list.querySelectorAll(
+  "button[data-cim-sale-key]")){
+  const active=key!==null&&button.dataset.cimSaleKey===key;
+  button.style.border=active
+   ?"3px solid #0A3A8F":"1px solid #dce4ee";
+  button.style.background=active?"#e8f0ff":"white";
+  button.style.boxShadow=active?"0 0 0 2px #b7d3ff":"none";
+  button.setAttribute("aria-pressed",String(active));
+ }
+}
 function card(m){
   const el=document.createElement("button");
   el.type="button";
@@ -344,6 +366,7 @@ function card(m){
     "font-weight:600;color:#0A3A8F");
   text(el,m.date+" · "+m.code+" · parcelle "+m.parcelle,
     "color:#637187;font-size:11px");
+  el.dataset.cimSaleKey=saleKey(m);
   el.addEventListener("click",()=>{
     chooseSale(m,visibleGroups.find(g=>g.items.includes(m)));
   });
@@ -355,7 +378,45 @@ function placeSelection(){
   if(headNode&&selected.parentElement!==right)
     headNode.insertAdjacentElement("afterend",selected);
   selected.style.cssText=
-    "margin-bottom:10px;padding:9px;border-left:3px solid #0A3A8F;background:#edf4ff";
+    "margin-bottom:13px;padding:15px;border-left:5px solid #0A3A8F;"+
+    "background:#edf4ff;box-shadow:0 2px 9px #0A3A8F24";
+}
+function focusComparableOnMap(group){
+ const map=window.CIMMap;
+ if(!map||!window.L||!group)return;
+ if(cimFocusedSaleMarker){
+  map.removeLayer(cimFocusedSaleMarker);
+  cimFocusedSaleMarker=null;
+ }
+ const point=[group.lat,group.lon];
+ cimFocusedSaleMarker=L.circleMarker(point,{
+  radius:24,color:"#dc2626",weight:6,
+  fillColor:"#fff176",fillOpacity:.35,
+  opacity:1,interactive:false,pane:"markerPane"
+ }).addTo(map);
+ cimFocusedSaleMarker.bringToFront();
+ cimFocusedSaleMarker.bindTooltip(
+  "VENTE SÉLECTIONNÉE",{
+   permanent:true,direction:"top",offset:[0,-28],
+   opacity:1,className:"cim-sale-focus-tooltip"
+  }
+ ).openTooltip();
+ const styleId="cim-sale-focus-style";
+ if(!document.getElementById(styleId)){
+  const style=document.createElement("style");
+  style.id=styleId;
+  style.textContent=
+   ".cim-sale-focus-tooltip{background:#dc2626!important;"+
+   "color:white!important;border:2px solid white!important;"+
+   "box-shadow:0 2px 12px #0007!important;"+
+   "font:bold 12px system-ui!important;"+
+   "padding:6px 10px!important}";
+  document.head.append(style);
+ }
+ map.panTo(point,{animate:true,duration:.65});
+ window.CIMSelectedComparablePosition={
+  latitude:group.lat,longitude:group.lon,id:group.id
+ };
 }
 function comparableContext(){
   const right=document.querySelector(".right");
@@ -375,8 +436,9 @@ function chooseSale(m,group){
   comparableContext();
   selected.replaceChildren();
   placeSelection();
+  markSelectedCard(m);
   text(selected,"Vente comparable sélectionnée",
-    "font-weight:800;margin:8px 0");
+    "font-weight:850;font-size:19px;margin:8px 0");
   text(selected,(m.numero+" "+m.voie).trim()+" · "+Math.round(m.d)+" m",
     "font-weight:700;margin:4px 0");
   text(selected,
@@ -391,6 +453,7 @@ function chooseSale(m,group){
   text(selected,"Transaction comparable : ce prix ne constitue pas une estimation du bien étudié.",
     "font-size:11px;color:#637187;margin-top:6px");
   if(group.marker)group.marker.bringToFront();
+  focusComparableOnMap(group);
 }
 function chooseGroup(group){
   if(!group)return;
@@ -402,11 +465,13 @@ function chooseGroup(group){
   comparableContext();
   selected.replaceChildren();
   placeSelection();
+  markSelectedCard(null);
   text(selected,group.items.length+
     " ventes sur cette position — choisissez une transaction",
     "font-weight:700;margin:8px 0");
   for(const m of group.items)selected.append(cardSimple(m,group));
   if(group.marker)group.marker.bringToFront();
+  focusComparableOnMap(group);
 }
 function cardSimple(m,group){
   const item=document.createElement("button");
