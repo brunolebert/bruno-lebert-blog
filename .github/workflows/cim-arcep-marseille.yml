@@ -1,0 +1,98 @@
+name: CIM Data ARCEP Marseille arrondissement exports
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - integration/cim-data-public-20261113
+    paths:
+      - .github/workflows/cim-arcep-marseille.yml
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: integration/cim-data-public-20261113
+          persist-credentials: true
+
+      - name: Restore verified national base
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: brunolebert/bruno-lebert-blog
+        run: |
+          mkdir -p /tmp/cim-national
+          gh release download cim-data-snapshot-20261126             --repo "$GH_REPO" --pattern cim-national.sqlite             --dir /tmp/cim-national
+          echo "bccaa9503e6bfdf23299433140c083cbe96ea8ac680fb7f59652bf77b70b1a6f  /tmp/cim-national/cim-national.sqlite" | sha256sum -c -
+
+      - name: Generate and validate Marseille commune statistics
+        run: |
+          python3 - <<'GEN'
+          import sqlite3,json
+          from pathlib import Path
+          db="/tmp/cim-national/cim-national.sqlite"
+          con=sqlite3.connect("file:"+db+"?mode=ro",uri=True)
+          rows=con.execute(
+              "SELECT source,donnees_json FROM arcep_communes_2026t2 WHERE code_commune=?",
+              ("13055",)
+          ).fetchall()
+          con.close()
+          groups={}
+          for source,raw in rows:
+              parsed=json.loads(raw)
+              if not isinstance(parsed,dict):
+                  raise RuntimeError("ARCEP_ROW_INVALID")
+              groups.setdefault(source,[]).append(parsed)
+          required={"DSL","FIBRE_TECHNO","DEBITS_FILAIRES","LOCAUX"}
+          if not required.issubset(groups):
+              raise RuntimeError("MARSEILLE_ARCEP_MISSING:"+str(sorted(groups)))
+
+          folder=Path("cim-data/runtime/enrichissement-national/reseaux")
+          folder.mkdir(parents=True,exist_ok=True)
+          targets=["13055"]+[f"132{i:02d}" for i in range(1,17)]
+          count=0
+          for code in targets:
+              record={
+                  "code":code,
+                  "code_commune_source":"13055",
+                  "territoire_statistique":"Marseille (commune entière)",
+                  "granularite":"COMMUNE",
+                  "eligibilite_adresse_certifiee":False,
+                  "periode":"2026 T2",
+                  "source":"ARCEP Ma connexion internet",
+                  "statut":"OFFICIAL",
+                  "donnees":groups
+              }
+              output=folder/(code+".json")
+              payload=json.dumps(record,ensure_ascii=False,
+                                 sort_keys=True,separators=(",",":"))+"\n"
+              if output.exists() and output.read_text("utf-8")!=payload:
+                  raise RuntimeError("EXISTING_FILE_DIFFERS:"+str(output))
+              if not output.exists():
+                  output.write_text(payload,encoding="utf-8")
+                  count+=1
+          print("MARSEILLE_ARCEP_GROUPS="+str(sorted(groups)))
+          print("ARCEP_STATISTICAL_AREA=MARSEILLE_COMMUNE")
+          print("ADDRESS_ELIGIBILITY_VERIFIED=NO")
+          print("FILES_CREATED="+str(count))
+          print("FILES_AVAILABLE="+str(len(targets)))
+          GEN
+
+      - name: Commit the verified exports on technical branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- cim-data/runtime/enrichissement-national/reseaux/
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "ARCEP_EXPORT_STATUS=ALREADY_PRESENT"
+          else
+            git commit -m "CIM Data: ARCEP Marseille commune data for arrondissement views"
+            git push origin HEAD:integration/cim-data-public-20261113
+            echo "ARCEP_EXPORT_STATUS=COMMITTED_ON_TECHNICAL_BRANCH"
+          fi
