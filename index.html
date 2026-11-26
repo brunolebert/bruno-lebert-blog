@@ -142,8 +142,8 @@
     .hero-cim-caption{font-size:13px;letter-spacing:.01em;color:rgba(255,255,255,.72);margin:17px 0 0;max-width:640px}.cim-entry{padding:70px 0;background:#e9dfd1;border-bottom:1px solid rgba(17,36,58,.15)}.cim-entry-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:clamp(32px,7vw,110px);align-items:end}.cim-entry h2{font-size:clamp(52px,7vw,94px);margin:10px 0 0}.cim-entry-subtitle{display:block;font-size:clamp(22px,3vw,35px);font-weight:500;letter-spacing:-.035em;margin-top:13px}.cim-entry-copy>p:first-child{font-size:clamp(21px,2.5vw,29px);line-height:1.24;font-weight:700;margin:0 0 14px}.cim-entry-detail{font-size:15px;line-height:1.65;color:#4b5a6a;max-width:46ch}.cim-entry-link{display:inline-block;margin-top:15px;padding-bottom:7px;border-bottom:2px solid currentColor;font-weight:900;font-size:16px}.territory-wide-link{display:inline-block;border-bottom:1px solid currentColor;padding-bottom:4px;font-weight:800;color:inherit}.local-section .territory-wide-link{color:#fff}
     @media(max-width:768px){.cim-entry{padding:52px 0}.cim-entry-layout{grid-template-columns:1fr;gap:22px}.cim-entry h2{font-size:clamp(48px,10vw,76px)}.hero-cim-caption{font-size:12px;line-height:1.5}}
     @media(max-width:480px){.header-cim-link{font-size:11px;padding:9px 6px}.header-actions{gap:4px}.site-brand{font-size:13px;max-width:37vw;white-space:normal;line-height:1.1}.cim-entry{padding:42px 0}.cim-entry h2{font-size:49px}.cim-entry-subtitle{font-size:23px}}
-    /* Statut temporaire : CIM Data visible, sans interaction vers une route non publique */
-    .cim-pending{cursor:default;user-select:text}.header-cim-link.cim-pending{border-bottom:0;color:var(--v4-ink);font-weight:850}.cim-pending-note{font-size:11px;font-weight:500;color:#647386}.hero .cim-pending-hero{background:rgba(247,239,228,.14);border:1px solid rgba(247,239,228,.4);color:#f7efe4;box-shadow:none;transform:none}.cim-pending-section{border-bottom:0;color:#5b6470;font-weight:700;font-size:14px;margin-top:15px;padding:0}.header-cim-link.cim-pending:hover{color:var(--v4-ink);border-color:transparent}@media(max-width:640px){.cim-pending-note{display:none}}
+    /* Entrée estimation : promesse lisible et chemin direct vers CIM Data */
+    .site-brand{gap:10px}.site-brand img{display:block;border-radius:10px}.hero{padding:clamp(46px,5vw,68px) 0 54px}.hero-grid{max-width:980px}.hero h1{font-size:clamp(43px,5.1vw,69px);line-height:1.03;max-width:950px;letter-spacing:-.047em}.hero .hero-lead{font-size:clamp(19px,2.1vw,25px);line-height:1.35;max-width:820px;font-weight:540}.hero-actions .btn{min-height:52px;display:inline-flex;align-items:center;justify-content:center;gap:9px;text-align:center}.hero-entry-steps{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:23px;color:rgba(255,255,255,.85);font-size:13px}.hero-entry-steps strong{color:#f1c58b;margin-right:4px}.hero-cim-caption{max-width:780px}.cim-entry-copy .cim-entry-link{color:#173c6d}.cim-entry-copy .cim-entry-link:hover{text-decoration:underline}@media(max-width:640px){.site-brand{gap:7px;font-size:13px;white-space:normal}.site-brand img{width:32px;height:32px}.hero .hero-lead{font-size:19px}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .btn{width:100%;font-size:14px}.hero-entry-steps{font-size:12px}.hero h1{font-size:clamp(39px,9vw,54px)}}
     /* Recherche compacte : desktop et fenêtres intermédiaires */
     @media (min-width:769px){
       .site-header-inner{
@@ -179,7 +179,7 @@
 <body>
   <header class="site-header">
     <div class="container site-header-inner">
-      <a class="site-brand" href="index.html" aria-label="Accueil Conseil immobilier Marseille">Conseil immobilier Marseille</a>
+      <a class="site-brand" href="index.html" aria-label="Accueil Conseil immobilier Marseille"><img src="cim-data/assets/logo-bruno-lebert.png" alt="" width="42" height="42" style="object-fit:contain;flex:none"><span>Conseil immobilier Marseille</span></a>
       <nav class="desktop-nav" aria-label="Navigation principale" hidden>
         <a href="demander-estimation-marseille.html">Estimer</a>
         <a href="prix-m2-marseille-par-arrondissement.html">Comprendre les prix</a>
@@ -193,7 +193,7 @@
         <div class="header-search-box"><label class="sr-only" for="home-search-input">Rechercher dans le blog immobilier</label><form id="home-search-form" class="header-search-row" action="bibliotheque-immobilier-marseille.html" method="get"><input id="home-search-input" name="q" type="search" autocomplete="off" placeholder="Sujet, lieu, question…" aria-describedby="home-search-status"><button id="home-search-submit" type="submit">Rechercher</button></form><p id="home-search-status" class="header-search-status" aria-live="polite">Recherche dans la bibliothèque complète.</p><div id="home-search-results" class="header-search-results"></div></div>
       </div>
       <div class="header-actions">
-      <span class="header-cim-link cim-pending" aria-label="CIM Data, mise en ligne en cours">CIM Data <span class="cim-pending-note">· mise en ligne en cours</span></span>
+      <a class="header-cim-link" href="cim-data/explorateur.html" aria-label="Explorer les prix et ventes immobilières avec CIM Data">CIM Data <span aria-hidden="true">↗</span></a>
       <button id="mobile-search-toggle" class="mobile-search-toggle" type="button" aria-label="Ouvrir la recherche" aria-expanded="false" aria-controls="header-search">⌕</button>
       <button id="mobile-nav-toggle" class="mobile-nav-toggle" type="button" aria-label="Ouvrir la navigation" aria-expanded="false" aria-controls="mobile-nav-panel">
         <span class="burger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -212,11 +212,12 @@
   <header class="hero" id="top">
     <div class="container">
       <div class="hero-grid">
-        <div class="eyebrow">Immobilier · Marseille · Données · Décision</div>
-        <h1>Comprendre l’immobilier, de Marseille aux territoires de Provence, avant de décider.</h1>
-        <p class="hero-lead">Un lieu, un prix, une décision : explorez les données d’une adresse ou demandez une lecture humaine de votre bien.</p>
-        <div class="hero-actions"><span class="btn btn-primary cim-pending cim-pending-hero" aria-label="CIM Data, mise en ligne en cours">Mise en ligne en cours</span><a class="btn btn-secondary" href="demander-estimation-marseille.html">Demander une estimation</a></div>
-        <p class="hero-cim-caption">CIM Data · Le bien dans son marché · Prix, ventes et comparables autour d’une adresse.</p>
+        <div class="eyebrow">Estimation immobilière · Marseille & Provence</div>
+        <h1>Combien vaut votre appartement ou votre maison ?</h1>
+        <p class="hero-lead">Explorez les ventes réalisées près de votre adresse, comparez les prix au m² et préparez une estimation adaptée à votre bien.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="cim-data/explorateur.html">Explorer les prix autour de mon adresse <span aria-hidden="true">→</span></a><a class="btn btn-secondary" href="demander-estimation-marseille.html">Demander une estimation personnalisée</a></div>
+        <p class="hero-cim-caption">CIM Data : carte, données historiques et ventes comparables. <strong>Un repère de marché, pas un prix automatique de votre logement.</strong></p>
+        <div class="hero-entry-steps" aria-label="Parcours en trois étapes"><span><strong>01</strong> Rechercher un lieu</span><span><strong>02</strong> Comparer les ventes</span><span><strong>03</strong> Faire estimer son bien</span></div>
       </div>
     </div>
   </header>
@@ -238,7 +239,7 @@
     <section class="cim-entry" aria-labelledby="cim-entry-title">
       <div class="container cim-entry-layout">
         <div><div class="eyebrow">01 / Explorer</div><h2 id="cim-entry-title">CIM Data<span class="cim-entry-subtitle">Le bien dans son marché</span></h2></div>
-        <div class="cim-entry-copy"><p>Prix, ventes et comparables autour d’une adresse.</p><p class="cim-entry-detail">Rechercher une adresse, consulter les ventes réalisées et confronter des comparables : des repères pour mieux comprendre, pas une estimation automatique.</p><span class="cim-entry-link cim-pending cim-pending-section">Mise en ligne en cours</span></div>
+        <div class="cim-entry-copy"><p>Prix, ventes et comparables autour d’une adresse.</p><p class="cim-entry-detail">Accédez à la carte des transactions, recherchez un lieu et examinez les comparables disponibles. Les ventes passées donnent un repère ; <a href="demander-estimation-marseille.html">une estimation personnalisée</a> tient compte du bien réel.</p><a class="cim-entry-link" href="cim-data/explorateur.html">Consulter les ventes sur la carte <span aria-hidden="true">→</span></a></div>
       </div>
     </section>
     <section id="intentions">
