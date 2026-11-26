@@ -5,7 +5,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>CIM Data — Explorateur immobilier</title>
+<title>CIM Data : ventes immobilières et prix au m² à Marseille et en Provence</title>
+<meta name="description" content="Avec CIM Data, recherchez une adresse ou un code postal à Marseille et en Provence. Explorez les ventes immobilières historiques, les prix au m² et les comparables géolocalisés selon leur disponibilité.">
+<link rel="canonical" href="https://conseil-immobilier-marseille.fr/cim-data/explorateur.html">
 
 <link
  rel="stylesheet"
@@ -845,6 +847,14 @@ button:focus-visible,input:focus-visible{
 }
 </style>
 <link rel="stylesheet" href="cim-dossier-territorial.css">
+<style id="cimSiteNavigationStyle">
+.cim-site-nav{display:flex;gap:9px;align-items:center;flex-wrap:wrap;flex:none;margin-left:auto;order:3}
+.cim-site-link{display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;border:1px solid #d3e2f2;border-radius:9px;background:#f6faff;color:#0a3a8f;font-size:12px;font-weight:750;text-decoration:none;white-space:nowrap}
+.cim-site-link:hover{background:#e7f3ff;border-color:#a9c9e9}
+.cim-site-link:focus-visible{outline:3px solid #1b63c6;outline-offset:3px}
+@media(max-width:1150px){.topbar{flex-wrap:wrap}.cim-site-nav{margin-left:auto}}
+@media(max-width:760px){.cim-site-nav{order:1;width:100%;margin:0;justify-content:flex-start}.cim-site-link{flex:1;min-width:125px}.search-wrap{order:2;max-width:none;width:100%}}
+</style>
 </head>
 
 <body>
@@ -859,10 +869,12 @@ button:focus-visible,input:focus-visible{
   <img src="assets/logo-bruno-lebert.png" alt="Symbole Bruno Lebert"
        width="48" height="48" style="object-fit:contain;flex:none">
   <div>
-    <div class="brand-title">CIM Data</div>
-    <div class="brand-sub">Bruno Lebert · Immobilier</div>
+    <h1 class="brand-title" style="margin:0">CIM Data</h1>
+    <div class="brand-sub">Prix immobiliers · Ventes signées · Comparables</div>
   </div>
 </div>
+
+ <nav class="cim-site-nav" aria-label="Navigation vers le site et les dossiers immobiliers"><a class="cim-site-link" href="../index.html">← Retour au site</a><a class="cim-site-link cim-site-guides" href="../bibliotheque-immobilier-marseille.html">Dossiers et conseils</a></nav>
 
  <div class="search-wrap">
    <input
